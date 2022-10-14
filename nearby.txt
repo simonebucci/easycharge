@@ -1,0 +1,856 @@
+
+{
+   "html_attributions" : [],
+   "next_page_token" : "AcYSjRhkkcyClQzPnt8YNRb8TsKHTiY8wZvH62jCCET0uOUqZrZi6c2_ZK-wQQA8ZKPuBzDNCiuXQj3W-NNHubsILBhLvaJjKEjbrknxUwpdTfudwbQHdJV0IjoOqT4_Z6uCfOqFc2ZXUtKO2-QgwxRdgSkQy8BvM65poCaw0EOUDoRGUkaKmVaLbnPLChBEGeDp1Da5_frSIhxkfSJ6_5lk6kWQJvGWw8v3rC8J56elTRhDycoOyVVuwFiVHVaMamhNkQYBXVUtM_p51bOLj2hxkDgZe2hFs3jVUu3IXUZatVZoNhbxfu4PzOkUlvX6cq6FTS4XM1B8ZnTCWr-hgDWTDEfMCXiykuRb-4Xlk261myON00iQETrq767o8hDrUwrpbxzBxMAzaNS9SiL0xOD4SPEauhwLZ-MxEOqEtuF0LyHJ-Xa0d_Xglref-SJSU_vLKA6cRbnIUngnC653MxdtavZmIVdsf728xcy44GW0U1NkGplI",
+   "results" : [
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.8688845,
+               "lng" : 12.5277161
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.87025422989272,
+                  "lng" : 12.52903032989272
+               },
+               "southwest" : {
+                  "lat" : 41.86755457010728,
+                  "lng" : 12.52633067010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Acea Charging Station",
+         "photos" : [
+            {
+               "height" : 1920,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/105446995099875378780\"\u003eGiuseppe Marzilli\u003c/a\u003e"
+               ],
+               "photo_reference" : "AcYSjRgxH1DcSEI1L6D4I6m6atQgeUJZamWsRo43bhK4-1LtXj79pvsxL-yuF3fkX001IuirR9usk2R5BPa9HC5u54MvksWMG7a16YEMLSPNV8hjPOYeTRL_W7DZ7NJu26N5MxK9Q3uXNxC_vrVOEFaRRRHZAwbMvQYR6NhoxoX3u8dVxehs",
+               "width" : 1080
+            }
+         ],
+         "place_id" : "ChIJVWU6cFphLxMRiGJn5cMD9s8",
+         "plus_code" : {
+            "compound_code" : "VG9H+H3 Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJVG9H+H3"
+         },
+         "rating" : 0,
+         "reference" : "ChIJVWU6cFphLxMRiGJn5cMD9s8",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 0,
+         "vicinity" : "Via Mario Menghini, 51, Roma"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.8702665,
+               "lng" : 12.4908595
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.87161867989273,
+                  "lng" : 12.49215727989272
+               },
+               "southwest" : {
+                  "lat" : 41.86891902010728,
+                  "lng" : 12.48945762010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "ACEA Charging Station",
+         "photos" : [
+            {
+               "height" : 2304,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/102315191108175037019\"\u003eUmberto d&#39;Agnone\u003c/a\u003e"
+               ],
+               "photo_reference" : "AcYSjRguzB-FBr7aVQ1LOcU7W_X4sOgyI1AQmlZmz0C6fn-RM2nudQoNONzU7Tk3PtVEkuwfhxGQaSrVeoW_L8vWg9ezHYku_acu9snW7gPE15iR76mwaDv-Vg0NtbZgAC37uA3UH7L_fSPE5QFj4Vxi2EWleKVcu7blhNQQsL-Q9fW5GkKD",
+               "width" : 3456
+            }
+         ],
+         "place_id" : "ChIJ9Yme4EphLxMRfeIcw3HY-fk",
+         "plus_code" : {
+            "compound_code" : "VFCR+48 Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJVFCR+48"
+         },
+         "rating" : 1,
+         "reference" : "ChIJ9Yme4EphLxMRfeIcw3HY-fk",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 1,
+         "vicinity" : "Via Bartolomeo Diaz, 36, Roma"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.9089913,
+               "lng" : 12.5211972
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.91033007989272,
+                  "lng" : 12.52252667989272
+               },
+               "southwest" : {
+                  "lat" : 41.90763042010728,
+                  "lng" : 12.51982702010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Enel X Charging Station",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 4128,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/105446995099875378780\"\u003eGiuseppe Marzilli\u003c/a\u003e"
+               ],
+               "photo_reference" : "AcYSjRhSDI9Yk1fr3M-da82RJ0HnzYLkSOelenz9FJFWO_T0i-gt_MwfPlnTRkwZlNR05ETVHuM4-RhKoqb7dEv3_Oq3Kb3gnQNuOIxhDxsmITejxOx5We4FtOJiR6MtxnIrwSmgk_7pWTbMYhOrsn-sPx4sFsVHM6Ypw7Hed0cYF2hSp27f",
+               "width" : 3096
+            }
+         ],
+         "place_id" : "ChIJIQaqLHphLxMRbGIKmFG6vxY",
+         "plus_code" : {
+            "compound_code" : "WG5C+HF Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJWG5C+HF"
+         },
+         "rating" : 2.8,
+         "reference" : "ChIJIQaqLHphLxMRbGIKmFG6vxY",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 6,
+         "vicinity" : "Viale delle Provincie, 132, Roma"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.8832436,
+               "lng" : 12.5147202
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.88459812989272,
+                  "lng" : 12.51600017989272
+               },
+               "southwest" : {
+                  "lat" : 41.88189847010728,
+                  "lng" : 12.51330052010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "ENEL X Charging Station",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 1080,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/105446995099875378780\"\u003eGiuseppe Marzilli\u003c/a\u003e"
+               ],
+               "photo_reference" : "AcYSjRiJ9m1G1jJANW0XIvsdbfOOD51Q3KKP65HvVEZfZXmuoGfQt3rZ8kpdzTScMgL3iXvI-X3ZaFpsNJZ_AycsCkEOF_vM1xD8qup60jUpLp70daMx1I9F08sZ8dm1-kAlmVJIenAUBMNuA5uQi-XBwP44mtCtPOrTI69sXSrXV10lkhxq",
+               "width" : 1920
+            }
+         ],
+         "place_id" : "ChIJrzKB5exhLxMRNPcKpR24PfY",
+         "plus_code" : {
+            "compound_code" : "VGM7+7V Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJVGM7+7V"
+         },
+         "rating" : 3.5,
+         "reference" : "ChIJrzKB5exhLxMRNPcKpR24PfY",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 2,
+         "vicinity" : "Via Aosta, 40, Roma"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.9089874,
+               "lng" : 12.5348363
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.91033882989272,
+                  "lng" : 12.53615392989272
+               },
+               "southwest" : {
+                  "lat" : 41.90763917010727,
+                  "lng" : 12.53345427010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Enel X Charging Station",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 1600,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/116755565976769078764\"\u003eMarco Ghisi\u003c/a\u003e"
+               ],
+               "photo_reference" : "AcYSjRgsgdwDJ9JoI-eepgg7ygy5FiKdv6DAUgNtG8h4g4BAbBeqcprsg-y1gTFdhRcXTKzDkHVvbywDfjoBbt8ckRZmMs7IcFrMLWiuLN4eB2ZU_2sHdlMDjBluEEuOxWBefpmg9b_pVmeqgRY5Q9neUhpMoJnS7lN__D2BW2z-l1cSY90G",
+               "width" : 900
+            }
+         ],
+         "place_id" : "ChIJSSk3xbljLxMR56ttMaarDQs",
+         "plus_code" : {
+            "compound_code" : "WG5M+HW Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJWG5M+HW"
+         },
+         "rating" : 4,
+         "reference" : "ChIJSSk3xbljLxMR56ttMaarDQs",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 2,
+         "vicinity" : "Largo Camesena, 23, Roma"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.9038379,
+               "lng" : 12.5024104
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.90522002989272,
+                  "lng" : 12.50371077989272
+               },
+               "southwest" : {
+                  "lat" : 41.90252037010728,
+                  "lng" : 12.50101112010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Colonnina Ricarica Enel Indipendenza",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 2048,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/107144582481396160844\"\u003eJon Bekkevoll\u003c/a\u003e"
+               ],
+               "photo_reference" : "AcYSjRi126HHd1-zFMCZQC5_30TeS-Dhl0tZ2Eo_Felb0dprorJjDJHovF8NiYmo0pzmQ1NM4wCOrSBZbje2-DwzJ46irDjlgn6kkxaX0RWV9uWXIUFS2dZtWn91o9aAiAJ8HQubawHNVtNqQaARXo6DhNr4vPQqQi9VIZKkYcmWfr5IQocX",
+               "width" : 1536
+            }
+         ],
+         "place_id" : "ChIJU1Ra3KBhLxMRI5-_27a0UfI",
+         "plus_code" : {
+            "compound_code" : "WG32+GX Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJWG32+GX"
+         },
+         "rating" : 2,
+         "reference" : "ChIJU1Ra3KBhLxMRI5-_27a0UfI",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 1,
+         "vicinity" : "Piazza dell'Indipendenza, 13, Roma"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.8937117,
+               "lng" : 12.5151067
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.89507697989272,
+                  "lng" : 12.51642142989272
+               },
+               "southwest" : {
+                  "lat" : 41.89237732010727,
+                  "lng" : 12.51372177010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Enel X Charging Station",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "place_id" : "ChIJ730bjJBhLxMRZ2aV_poZiMk",
+         "plus_code" : {
+            "compound_code" : "VGV8+F2 Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJVGV8+F2"
+         },
+         "rating" : 1,
+         "reference" : "ChIJ730bjJBhLxMRZ2aV_poZiMk",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 1,
+         "vicinity" : "Via dei Bruzi, 11a, Roma"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.8824136,
+               "lng" : 12.5133281
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.88378072989272,
+                  "lng" : 12.51470232989272
+               },
+               "southwest" : {
+                  "lat" : 41.88108107010728,
+                  "lng" : 12.51200267010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Axpo Charging Station",
+         "place_id" : "ChIJa6oQY-xhLxMRUuF5D2LG9mo",
+         "plus_code" : {
+            "compound_code" : "VGJ7+X8 Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJVGJ7+X8"
+         },
+         "rating" : 0,
+         "reference" : "ChIJa6oQY-xhLxMRUuF5D2LG9mo",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 0,
+         "vicinity" : "Via Appia Nuova, Roma"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.8690542,
+               "lng" : 12.5304741
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.87041917989272,
+                  "lng" : 12.53185032989272
+               },
+               "southwest" : {
+                  "lat" : 41.86771952010728,
+                  "lng" : 12.52915067010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Electric Vehicle Charging Station",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 1984,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/105446995099875378780\"\u003eGiuseppe Marzilli\u003c/a\u003e"
+               ],
+               "photo_reference" : "AcYSjRjYlvjCX-AEYWlRp22zVfp5t94ssnGSCML0qpntB6-tCPFnf9gzNiUEY6UbX-QbQoWsDzai1cXPXzchhr_f8CiCj2Pu1PtWFRLgfg3c5YOVA723GCjBaMgQf_tLP71PN1nGGSa0e3i62i3z5MB2rqz1MT4MJOiCip0eU9KI1BQ6c1eX",
+               "width" : 3968
+            }
+         ],
+         "place_id" : "ChIJ5zZx3kNjLxMRAIuXSFIRfwk",
+         "plus_code" : {
+            "compound_code" : "VG9J+J5 Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJVG9J+J5"
+         },
+         "rating" : 0,
+         "reference" : "ChIJ5zZx3kNjLxMRAIuXSFIRfwk",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 0,
+         "vicinity" : "Via dei Colli Albani, 6, Roma"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.8748402,
+               "lng" : 12.5233566
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.87620392989272,
+                  "lng" : 12.52469137989272
+               },
+               "southwest" : {
+                  "lat" : 41.87350427010728,
+                  "lng" : 12.52199172010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Colonnina di ricarica Enel",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "place_id" : "ChIJL6pCbOVhLxMRODH8uDzXLDo",
+         "plus_code" : {
+            "compound_code" : "VGFF+W8 Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJVGFF+W8"
+         },
+         "rating" : 4,
+         "reference" : "ChIJL6pCbOVhLxMRODH8uDzXLDo",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 1,
+         "vicinity" : "Viale Furio Camillo, 20, Roma"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.91091340000001,
+               "lng" : 12.4991665
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.91223117989272,
+                  "lng" : 12.50048592989272
+               },
+               "southwest" : {
+                  "lat" : 41.90953152010727,
+                  "lng" : 12.49778627010727
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Colonnina Ricarica Enel Piazza Fiume",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 2288,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/102315191108175037019\"\u003eUmberto d&#39;Agnone\u003c/a\u003e"
+               ],
+               "photo_reference" : "AcYSjRhl0Zutpif49sgtU1ccjBmDTsNRkrVGSLDXLRq9s5HneD0Q-ku016AieFlU0xbn4lSxUmcJPVt2K9LjlSzXod4IlUUftqcFMEJOZ0AEgmKouo9tr9gmTQW90j_dOdoPQ8nRI85Rn4T-jGD9g4XxU-4gd3t4Gs3adyThidqCIBPrwNID",
+               "width" : 4576
+            }
+         ],
+         "place_id" : "ChIJCS72LglhLxMRTQga1De5zww",
+         "plus_code" : {
+            "compound_code" : "WF6X+9M Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJWF6X+9M"
+         },
+         "rating" : 3.5,
+         "reference" : "ChIJCS72LglhLxMRTQga1De5zww",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 4,
+         "vicinity" : "Corso d'Italia, 82, Roma"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.8800394,
+               "lng" : 12.5045388
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.88138877989272,
+                  "lng" : 12.50586502989272
+               },
+               "southwest" : {
+                  "lat" : 41.87868912010727,
+                  "lng" : 12.50316537010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Enel X Charging Station",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "place_id" : "ChIJuWSrN8JhLxMRkdpV_fE4aPw",
+         "plus_code" : {
+            "compound_code" : "VGJ3+2R Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJVGJ3+2R"
+         },
+         "rating" : 0,
+         "reference" : "ChIJuWSrN8JhLxMRkdpV_fE4aPw",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 0,
+         "vicinity" : "Via Pandosia, 21, Roma"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.8882225,
+               "lng" : 12.495435
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.88955897989272,
+                  "lng" : 12.49678062989272
+               },
+               "southwest" : {
+                  "lat" : 41.88685932010728,
+                  "lng" : 12.49408097010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "ENEL X Charging Station",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "place_id" : "ChIJFQTmH7hhLxMREL1dUivm-cI",
+         "plus_code" : {
+            "compound_code" : "VFQW+75 Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJVFQW+75"
+         },
+         "rating" : 0,
+         "reference" : "ChIJFQTmH7hhLxMREL1dUivm-cI",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 0,
+         "vicinity" : "Via Marco Aurelio, 35/c, Roma"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.9111199,
+               "lng" : 12.51445
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.91237112989271,
+                  "lng" : 12.51582027989272
+               },
+               "southwest" : {
+                  "lat" : 41.90967147010727,
+                  "lng" : 12.51312062010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Be Charge Charging Station",
+         "place_id" : "ChIJ7byQEXFhLxMRpqTYKz0YTBY",
+         "plus_code" : {
+            "compound_code" : "WG67+CQ Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJWG67+CQ"
+         },
+         "rating" : 0,
+         "reference" : "ChIJ7byQEXFhLxMRpqTYKz0YTBY",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 0,
+         "vicinity" : "Via Bari, 5, Roma"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.8675338,
+               "lng" : 12.4945502
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.86888382989272,
+                  "lng" : 12.49588052989272
+               },
+               "southwest" : {
+                  "lat" : 41.86618417010727,
+                  "lng" : 12.49318087010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Enel X Charging Station",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 3456,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/102315191108175037019\"\u003eUmberto d&#39;Agnone\u003c/a\u003e"
+               ],
+               "photo_reference" : "AcYSjRiF9PqxYjLtoDHl6c6Kpv9_0WsZyu9w3WnAdEJXJHAenmdIAw_rvhtv6FIg3dW3P6gtybBKr1FHlt-kYMiz2dYvxmabGy1Roqo4raIpyZXNmqCxgtwBBs1NcXcYFDI_QVefR4EjW_6S4Ykuv7XcwijrSVMQ-j4C3tIZUJ6tNW-uneKP",
+               "width" : 3456
+            }
+         ],
+         "place_id" : "ChIJZ1ZQCHiKJRMR2Vg03sMO6yc",
+         "plus_code" : {
+            "compound_code" : "VF9V+2R Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJVF9V+2R"
+         },
+         "rating" : 0,
+         "reference" : "ChIJZ1ZQCHiKJRMR2Vg03sMO6yc",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 0,
+         "vicinity" : "Via Antoniotto Usodimare, 14, Roma"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.91273229999999,
+               "lng" : 12.5208811
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.91407997989272,
+                  "lng" : 12.52220017989272
+               },
+               "southwest" : {
+                  "lat" : 41.91138032010728,
+                  "lng" : 12.51950052010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Enel X Charging Station",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 1538,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/118384294178312667815\"\u003ePaolo Lai\u003c/a\u003e"
+               ],
+               "photo_reference" : "AcYSjRhdbDejHryffhjs8JJZ08aIIcsAZt8CwvLG4FC0zS6WlG0lhryJtp1t4CcEQKNel61DMPXTejRIhHnV714yO6JfwIosvpOBl5i5RN__T9NZyxE9h6og27mMZ-hfWq_pfB7Lc24MdE1W2Ni7kBQFgAAhu_2a6ikVUuDEaUssBYXbNe2V",
+               "width" : 1440
+            }
+         ],
+         "place_id" : "ChIJ-9VC2XphLxMR4eihduf615Y",
+         "plus_code" : {
+            "compound_code" : "WG7C+39 Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJWG7C+39"
+         },
+         "rating" : 4,
+         "reference" : "ChIJ-9VC2XphLxMR4eihduf615Y",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 2,
+         "vicinity" : "Viale delle Provincie, 1, Roma"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.9042188,
+               "lng" : 12.4858332
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.90557757989272,
+                  "lng" : 12.48714742989272
+               },
+               "southwest" : {
+                  "lat" : 41.90287792010728,
+                  "lng" : 12.48444777010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Enel X Charging Station",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "place_id" : "ChIJOUzDE6thLxMRfaExBDSQv1s",
+         "plus_code" : {
+            "compound_code" : "WF3P+M8 Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJWF3P+M8"
+         },
+         "rating" : 2.5,
+         "reference" : "ChIJOUzDE6thLxMRfaExBDSQv1s",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 2,
+         "vicinity" : "Via Francesco Crispi, 30, Roma"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.9182458,
+               "lng" : 12.5117566
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.91960697989272,
+                  "lng" : 12.51311777989272
+               },
+               "southwest" : {
+                  "lat" : 41.91690732010727,
+                  "lng" : 12.51041812010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Enel X Charging Station",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 2592,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/112272676272149232477\"\u003eRoberto Lai\u003c/a\u003e"
+               ],
+               "photo_reference" : "AcYSjRjNndUOZZqc2ytWOQPhFQbrspFsHt8mNgL-AMGbED2YN_OvmO-3hYnzzgQyqIoJA4wK_OtIxqGSKetTfjhp-IePwIWPEex2OepeyjR7Cem8EP7cQff24PKmKgc0XBue0jBUUOtvm0wpMdMT0VO1qPc-DZ5uhoR_T6-5E4-05nRD_5u0",
+               "width" : 1458
+            }
+         ],
+         "place_id" : "ChIJHyliPWxhLxMR8Iztqml1L2M",
+         "plus_code" : {
+            "compound_code" : "WG96+7P Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJWG96+7P"
+         },
+         "rating" : 2,
+         "reference" : "ChIJHyliPWxhLxMR8Iztqml1L2M",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 1,
+         "vicinity" : "Viale Pola, 25, Roma"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.884473,
+               "lng" : 12.5094516
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.88583627989272,
+                  "lng" : 12.51074512989272
+               },
+               "southwest" : {
+                  "lat" : 41.88313662010728,
+                  "lng" : 12.50804547010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "Enel X Charging Station",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "photos" : [
+            {
+               "height" : 720,
+               "html_attributions" : [
+                  "\u003ca href=\"https://maps.google.com/maps/contrib/118384294178312667815\"\u003ePaolo Lai\u003c/a\u003e"
+               ],
+               "photo_reference" : "AcYSjRgIg34_JUVmDdJ3QeMICQ89Ri2mC94QZ3EqLE6oRTQ1YujENpIERPyzWsyxxYFgZCBB362ShterzTJ6-xB__-2dgH8nxjZpXCl_pj0gGS1JB54kaqALKfrwp7vDN6EaajCfKq_ffdmJ36049om8oBccCK75rbeAHXl9oLyJebhFvZF1",
+               "width" : 1280
+            }
+         ],
+         "place_id" : "ChIJ9wKU3uphLxMRXVRJNLm61xM",
+         "plus_code" : {
+            "compound_code" : "VGM5+QQ Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJVGM5+QQ"
+         },
+         "rating" : 3.5,
+         "reference" : "ChIJ9wKU3uphLxMRXVRJNLm61xM",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 2,
+         "vicinity" : "Via Magnagrecia, 35, Roma"
+      },
+      {
+         "business_status" : "OPERATIONAL",
+         "geometry" : {
+            "location" : {
+               "lat" : 41.9077701,
+               "lng" : 12.5167947
+            },
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.90915792989272,
+                  "lng" : 12.51824387989272
+               },
+               "southwest" : {
+                  "lat" : 41.90645827010728,
+                  "lng" : 12.51554422010728
+               }
+            }
+         },
+         "icon" : "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+         "icon_background_color" : "#7B9EB0",
+         "icon_mask_base_uri" : "https://maps.gstatic.com/mapfiles/place_api/icons/v2/generic_pinlet",
+         "name" : "ENEL X Charging Station",
+         "opening_hours" : {
+            "open_now" : true
+         },
+         "place_id" : "ChIJUTYeFXdhLxMR83kwiwgBooI",
+         "plus_code" : {
+            "compound_code" : "WG58+4P Rome, Metropolitan City of Rome",
+            "global_code" : "8FHJWG58+4P"
+         },
+         "rating" : 0,
+         "reference" : "ChIJUTYeFXdhLxMR83kwiwgBooI",
+         "scope" : "GOOGLE",
+         "types" : [ "point_of_interest", "establishment" ],
+         "user_ratings_total" : 0,
+         "vicinity" : "Via Giovanni Mingazzini, 12, Roma"
+      }
+   ],
+   "status" : "OK"
+}

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ecteam.easycharge.controller.RegisterController">
+    <top>
+        <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #66ABEA;" BorderPane.alignment="CENTER">
+            <items>
+                <ImageView fitHeight="40.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/title.png" />
+                    </image>
+                </ImageView>
+                <HBox>
+                    <children>
+                        <Button fx:id="homeBtn" mnemonicParsing="false" onMouseClicked="#onHomeClick" style="-fx-background-color: #66ABEA;" text="Home" textFill="WHITE">
+                            <HBox.margin>
+                                <Insets right="10.0" />
+                            </HBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                        </Button>
+                        <Button fx:id="routeBtn" mnemonicParsing="false" onMouseClicked="#onRouteClick" style="-fx-background-color: #66ABEA;" text="Route planning" textFill="WHITE">
+                            <HBox.margin>
+                                <Insets right="10.0" />
+                            </HBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                        </Button>
+                    </children>
+                    <padding>
+                        <Insets right="10.0" />
+                    </padding>
+                </HBox>
+                <Pane HBox.hgrow="ALWAYS" />
+                <HBox alignment="CENTER_RIGHT">
+                    <children>
+                        <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#onLoginClick" onMouseClicked="#onLoginClick" style="-fx-background-color: #FFFFFF;" text="Login" textFill="#66abea">
+                            <HBox.margin>
+                                <Insets right="10.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Button>
+                    </children>
+                    <padding>
+                        <Insets right="10.0" />
+                    </padding>
+                    <opaqueInsets>
+                        <Insets left="100.0" />
+                    </opaqueInsets>
+                </HBox>
+            </items>
+        </ToolBar>
+    </top>
+   <center>
+        <AnchorPane BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="registerLabel" alignment="BOTTOM_LEFT" layoutX="294.0" layoutY="105.0" style="-fx-font-weight: bold;" text="Register" textAlignment="CENTER" textFill="#66abea" textOverrun="WORD_ELLIPSIS">
+                    <font>
+                        <Font size="17.0" />
+                    </font></Label>
+                <VBox layoutX="293.0" layoutY="180.0" spacing="20.0">
+                    <children>
+                        <TextField fx:id="emailTextField" prefHeight="26.0" prefWidth="448.0" promptText="Email" />
+                        <TextField fx:id="usernameTextField" prefHeight="26.0" prefWidth="448.0" promptText="Username" />
+                        <PasswordField fx:id="passwordPasswordField" prefHeight="26.0" prefWidth="448.0" promptText="Password" />
+                        <TextField fx:id="carTextField" prefHeight="26.0" prefWidth="448.0" promptText="Car model" />
+                        <TextField fx:id="batteryTextField" prefHeight="26.0" prefWidth="448.0" promptText="Battery capacity (kWh)" />
+                        <TextField fx:id="rangeTextField" prefHeight="26.0" prefWidth="448.0" promptText="Electric Range (Km)" />
+                  <TextField fx:id="acTextField" promptText="AC charging speed (kWh)" />
+                  <TextField fx:id="dcTextField" promptText="DC charging speed (kWh)" />
+                        <VBox prefHeight="123.0" prefWidth="448.0">
+                            <children>
+                                <Label prefHeight="32.0" prefWidth="273.0" style="-fx-font-weight: bold; -fx-font-size: 13; -fx-font-style: italic;" text="Choose a profile picture:" />
+                                <HBox prefHeight="53.0" prefWidth="448.0" spacing="10.0">
+                                    <children>
+                                        <Button mnemonicParsing="false" onAction="#selectImage" prefHeight="18.0" prefWidth="103.0" text="Select image" />
+                                        <Label fx:id="imageLabel" prefHeight="26.0" prefWidth="318.0" text="No image selected">
+                                            <font>
+                                                <Font size="18.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </HBox>
+                                <Label prefHeight="32.0" prefWidth="144.0" style="-fx-font-weight: bold; -fx-font-size: 13; -fx-font-style: italic;" text="Type of user" />
+                                <ComboBox fx:id="userType" onMouseClicked="#onUserTypeClick" prefHeight="28.0" prefWidth="448.0" />
+                            </children>
+                        </VBox>
+                  <Label fx:id="registerMessageLabel" textFill="RED" />
+                        <Button fx:id="registerBtn" mnemonicParsing="false" onAction="#onRegisterClick" style="-fx-text-fill: white; -fx-background-color: #66ABEA;" text="Register" />
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+   </center>
+</BorderPane>
