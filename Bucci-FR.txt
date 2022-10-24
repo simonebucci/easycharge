@@ -1,0 +1,5 @@
+The system shall provide a list of the charging services operators and the related costs in kw/h ordered by price and distance
+
+The system shall advertise registered merchants’ business to the selected charging stations
+
+The system shall display in a map the charging stations within a specified range

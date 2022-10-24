@@ -1,0 +1,5 @@
+As a user, I want a list of which operator provides the recharge and the cost in kw/h,  so that I can choose the cheapest operator
+
+As a merchant, I want to advertise my business to charging stations of my choice, so that I can increase the number of my customers
+
+As a user,  I want to know where the charging stations are in a chosen range, so that I can recharge my car in case of emergency
