@@ -1,0 +1,5 @@
+The system shall provide the charging stations along a chosen route.
+
+The system shall provide commercial activities in a chosen range from the charging station selected by the user.
+
+The system shall report out of service charging stations.
