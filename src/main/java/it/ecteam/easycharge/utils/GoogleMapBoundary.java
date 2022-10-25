@@ -17,7 +17,7 @@ import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 
 public class GoogleMapBoundary {
 	
-	private static final String GOOGLEAPI = "AIzaSyDMIX9Bb7__E4QHG19h9jzH-SDEbN7IE5k";
+	private static final String GOOGLEAPI = "";
 	
 	public GoogleMapBoundary(){
 		
