@@ -1,12 +1,10 @@
 package it.ecteam.easycharge.controller;
 
 import it.ecteam.easycharge.MainApplication;
-import it.ecteam.easycharge.exceptions.FileNotFoundException;
+import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 import it.ecteam.easycharge.utils.FileManager;
-import it.ecteam.easycharge.utils.GoogleMapBoundary;
-import it.ecteam.easycharge.utils.JsonParser;
-import it.ecteam.easycharge.utils.JsonRequest;
+import it.ecteam.easycharge.utils.MapBoundary;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,7 +15,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import org.json.simple.parser.ParseException;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -103,20 +100,15 @@ public class MainController extends StackPane implements Initializable  {
             String name = file.readFile("user");
             userLabel.setText(name);
         }
+        webMap.getEngine().load("https://www.google.it/maps/search/ev+charging+stations/");
+        //webMap.getEngine().load("https://www.google.com/maps/search/?api=1&map_action=map&query=ev+charging+stations");
+        //UserDao.createUser("spillo","spillo","spillo@miao.it");
 
-        //webMap.getEngine().load("https://www.google.it/maps/search/ev+charging+stations/");
-        webMap.getEngine().load("https://www.google.com/maps/search/?api=1&map_action=map&query=ev+charging+stations");
-/*        try {
-            System.out.println(GoogleMapBoundary.locateAddress("via fosso acqua mariana 97"));
-        } catch (IOException | ParseException | LocationNotFoundException | org.json.simple.parser.ParseException e) {
-            e.printStackTrace();
-        }*/
         try {
-            GoogleMapBoundary.getNearby(4000);
-        } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException e) {
+            MapBoundary.getNearby(4000);
+        } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
             e.printStackTrace();
         }
-
 /*        try {
             JsonRequest.getNearby(4000);
         } catch (IOException | java.text.ParseException | LocationNotFoundException | ParseException e) {

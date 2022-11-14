@@ -14,8 +14,8 @@ public class JsonRequest {
         String jsonString;
         StringBuilder str = new StringBuilder();
         //Request to the geocoding service
-        URL geocodingUrl = new URL("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+GoogleMapBoundary.getLocation()+"&radius="+radius+"&type=ev_charging_station&keyword=colonnina+ricarica+elettrica"
-                + "&key=" + GoogleMapBoundary.getAPI());
+        URL geocodingUrl = new URL("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+ MapBoundary.getLocation()+"&radius="+radius+"&type=ev_charging_station&keyword=colonnina+ricarica+elettrica"
+                + "&key=" + MapBoundary.getAPI());
         URLConnection geocoding = geocodingUrl.openConnection();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(

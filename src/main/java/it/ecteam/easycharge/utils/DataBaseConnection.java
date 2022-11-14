@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DataBaseConnection {
-    public Connection databaseLink;
+    private static Connection databaseLink;
 
-    public Connection getConnection(){
-        String databaseName = "sys";
+    public static Connection getConnection(){
+        String databaseName = "easycharge";
         String databaseUser = "root";
         String databasePassword = "spillo";
         String url = "jdbc:mysql://localhost/" + databaseName;

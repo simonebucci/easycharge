@@ -11,7 +11,6 @@ import java.io.IOException;
 
 public class AuthController extends MainApplication {
     private Stage stage = new Stage();
-    private FXMLLoader fxmlLoader = new FXMLLoader();
 
     @FXML
     private Button loginBtn;

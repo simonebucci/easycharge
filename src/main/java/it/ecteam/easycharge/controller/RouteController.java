@@ -3,7 +3,7 @@ package it.ecteam.easycharge.controller;
 import it.ecteam.easycharge.MainApplication;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 import it.ecteam.easycharge.utils.FileManager;
-import it.ecteam.easycharge.utils.GoogleMapBoundary;
+import it.ecteam.easycharge.utils.MapBoundary;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -76,7 +76,7 @@ public class RouteController extends StackPane implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            webMap.getEngine().load("https://www.google.com/maps/dir/?api=1&origin="+ GoogleMapBoundary.getLocation() +"&destination=Milan,italy&travelmode=driving&waypoint_place_ids=ChIJ5zZx3kNjLxMRAIuXSFIRfwk%ChIJL6pCbOVhLxMRODH8uDzXLDo");
+            webMap.getEngine().load("https://www.google.com/maps/dir/?api=1&origin="+ MapBoundary.getLocation() +"&destination=Milan,italy&travelmode=driving&waypoint_place_ids=ChIJ5zZx3kNjLxMRAIuXSFIRfwk%ChIJL6pCbOVhLxMRODH8uDzXLDo");
         } catch (IOException | LocationNotFoundException | ParseException e) {
             e.printStackTrace();
         }
