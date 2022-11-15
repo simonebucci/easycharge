@@ -36,7 +36,6 @@ public class MainController extends StackPane implements Initializable  {
 
     @FXML
     protected void onLoginClick() throws IOException {
-        //fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login-view.fxml")));
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("login-view.fxml"));
         stage = (Stage) loginBtn.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
@@ -45,7 +44,6 @@ public class MainController extends StackPane implements Initializable  {
 
     @FXML
     protected void onRegisterClick() throws IOException {
-        //fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login-view.fxml")));
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("register-view.fxml"));
         stage = (Stage) loginBtn.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
@@ -86,8 +84,8 @@ public class MainController extends StackPane implements Initializable  {
 
     @FXML
     protected void onRouteClick() throws IOException{
-        //FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("auth-view.fxml"));
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("route-logged-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("auth-view.fxml"));
+        //FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("route-logged-view.fxml"));
         stage = (Stage) routeBtn.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
         stage.setScene(scene);
@@ -109,17 +107,7 @@ public class MainController extends StackPane implements Initializable  {
         } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
             e.printStackTrace();
         }
-/*        try {
-            JsonRequest.getNearby(4000);
-        } catch (IOException | java.text.ParseException | LocationNotFoundException | ParseException e) {
-            e.printStackTrace();
-        }
 
-        try {
-            JsonParser.parseNearby(0);
-        } catch (LocationNotFoundException | ParseException | FileNotFoundException e) {
-            e.printStackTrace();
-        }*/
     }
 
 }

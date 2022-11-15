@@ -14,7 +14,7 @@ public class UserDao extends DaoTemplate {
     public Boolean createUser(final String username, final String password, final String email) {
         return this.execute(() -> {
             Connection con = DataBaseConnection.getConnection();
-            String sql = "call easycharge.add_user(?, ?, ?);\r\n";
+            String sql = "call easycharge.add_user(?, ?, ?, ?);\r\n";
             Throwable var3 = null;
             Object var4 = null;
 

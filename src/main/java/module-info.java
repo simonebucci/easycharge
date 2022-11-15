@@ -14,6 +14,7 @@ module it.ecteam.easycharge {
     requires json.simple;
     requires jxmapviewer2;
     requires java.desktop;
+    requires mysql.connector.java;
 
     opens it.ecteam.easycharge to javafx.fxml;
     exports it.ecteam.easycharge;

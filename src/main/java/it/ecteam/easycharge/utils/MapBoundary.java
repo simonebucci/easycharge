@@ -3,21 +3,18 @@ package it.ecteam.easycharge.utils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.ParseException;
-
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject; 
 import org.json.simple.parser.*;
-
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 
 public class MapBoundary {
 	
-	private static final String GOOGLEAPI = "";
+	private static final String APIKEY = "";
 	
 	public MapBoundary(){
 		
@@ -27,7 +24,7 @@ public class MapBoundary {
         String jsonString;
         StringBuilder str = new StringBuilder();
         //Request to the geocoding service
-        URL geocodingUrl = new URL("https://api.tomtom.com/search/2/nearbySearch/.json?"+getLocation()+"&radius="+radius+"&categorySet=7309&view=Unified&key=csPBICaGiqrDG1YIKGXg4alunzBPez4I");
+        URL geocodingUrl = new URL("https://api.tomtom.com/search/2/nearbySearch/.json?"+getLocation()+"&radius="+radius+"&categorySet=7309&view=Unified&key="+getAPI());
         URLConnection geocoding = geocodingUrl.openConnection();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(
@@ -120,14 +117,14 @@ public class MapBoundary {
     }
 
 	public static String getAPI() {
-		return MapBoundary.GOOGLEAPI;
+		return MapBoundary.APIKEY;
 	}
 
     public static void getChargingAvailability(String id) throws IOException, org.json.simple.parser.ParseException, ChargingStationNotFoundException {
         String jsonString;
         StringBuilder str = new StringBuilder();
         //Request to the geocoding service
-        URL geocodingUrl = new URL("https://api.tomtom.com/search/2/chargingAvailability.json?key=csPBICaGiqrDG1YIKGXg4alunzBPez4I&chargingAvailability="+id);
+        URL geocodingUrl = new URL("https://api.tomtom.com/search/2/chargingAvailability.json?key="+getAPI()+"&chargingAvailability="+id);
         URLConnection geocoding = geocodingUrl.openConnection();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(
@@ -169,5 +166,6 @@ public class MapBoundary {
         System.out.println("Reserved="+reserved);
         System.out.println("Unknown="+unknown);
         System.out.println("Out of service="+outOfService);
+
     }
 }
