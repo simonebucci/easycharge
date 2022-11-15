@@ -13,10 +13,8 @@ public abstract class DaoTemplate {
     protected final <T> T execute(DaoAction<T> da) {
         try {
             return da.act();
-        } catch (SQLException var3) {
+        } catch (SQLException | ClassNotFoundException var3) {
             logger.log(Level.WARNING, var3.toString());
-        } catch (ClassNotFoundException var4) {
-            logger.log(Level.WARNING, var4.toString());
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }

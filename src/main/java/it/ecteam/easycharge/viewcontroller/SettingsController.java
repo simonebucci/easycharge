@@ -1,4 +1,4 @@
-package it.ecteam.easycharge.controller;
+package it.ecteam.easycharge.viewcontroller;
 
 import it.ecteam.easycharge.MainApplication;
 import it.ecteam.easycharge.utils.FileManager;

@@ -18,8 +18,8 @@ module it.ecteam.easycharge {
 
     opens it.ecteam.easycharge to javafx.fxml;
     exports it.ecteam.easycharge;
-    exports it.ecteam.easycharge.controller;
-    opens it.ecteam.easycharge.controller to javafx.fxml;
+    exports it.ecteam.easycharge.viewcontroller;
+    opens it.ecteam.easycharge.viewcontroller to javafx.fxml;
     exports it.ecteam.easycharge.exceptions;
     opens it.ecteam.easycharge.exceptions to javafx.fxml;
 }

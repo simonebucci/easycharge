@@ -1,4 +1,4 @@
-package it.ecteam.easycharge.utils;
+package it.ecteam.easycharge.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,13 +12,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 
-public class MapBoundary {
+public class MapController {
 	
-	private static final String APIKEY = "";
-	
-	public MapBoundary(){
-		
-	}
+	private static final String APIKEY = "csPBICaGiqrDG1YIKGXg4alunzBPez4I";
 
     public static void getNearby(int radius) throws IOException, ParseException, LocationNotFoundException, org.json.simple.parser.ParseException, ChargingStationNotFoundException {
         String jsonString;
@@ -117,7 +113,7 @@ public class MapBoundary {
     }
 
 	public static String getAPI() {
-		return MapBoundary.APIKEY;
+		return MapController.APIKEY;
 	}
 
     public static void getChargingAvailability(String id) throws IOException, org.json.simple.parser.ParseException, ChargingStationNotFoundException {

@@ -7,18 +7,12 @@ import java.sql.SQLException;
 
 public class UserDao extends DaoTemplate {
 
-    public UserDao() {
 
-    }
-
-    public Boolean createUser(final String username, final String password, final String email) {
+    public Boolean createUser(String username, String password, String email) {
         return this.execute(() -> {
             Connection con = DataBaseConnection.getConnection();
             String sql = "call easycharge.add_user(?, ?, ?, ?);\r\n";
-            Throwable var3 = null;
-            Object var4 = null;
 
-            try {
 
                 try (PreparedStatement stm = con.prepareStatement(sql)) {
                     stm.setString(1, username);
@@ -26,13 +20,9 @@ public class UserDao extends DaoTemplate {
                     stm.setString(3, password);
                     stm.executeUpdate();
                 }
-            } catch (Throwable var11) {
-                var3 = var11;
-
-                throw var3;
-            }
 
             return true;
-        }) != null;
+            }) != null;
+            }
     }
-}
+
