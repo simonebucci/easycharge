@@ -10,7 +10,6 @@ module it.ecteam.easycharge {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.sql;
-    requires GMapsFX;
     requires json.simple;
     requires jxmapviewer2;
     requires java.desktop;

@@ -111,22 +111,24 @@ public class RegisterViewController extends MainApplication implements Initializ
     }
 
     public void validateRegister(){
-        DataBaseConnection connectNow = new DataBaseConnection();
+        /*DataBaseConnection connectNow = new DataBaseConnection();
         Connection connectDB = connectNow.getConnection();
 
         String verifyRegister = "insert into useraccounts (username, password) values ('" + usernameTextField.getText() + "' , '" + passwordPasswordField.getText() + "')";
         String verifyUsername = "select count(1) from UserAccounts where username = ('" + usernameTextField.getText() + "')";
         String insertNewUser = "insert into users (username, password, email, type, car, ac, dc, rng, capacity) values ('" + usernameTextField.getText() + "' , '" + passwordPasswordField.getText() +"' , '" + emailTextField.getText() + "' , '" + userType.getSelectionModel().getSelectedItem() + "' , '" + carTextField.getText() + "' , '" + dcTextField.getText() + "' , '" + acTextField.getText() + "' , '" + batteryTextField.getText() + "' , '" + rangeTextField.getText() +"')";
-        //String getUsername = "select count(1) from UserAccounts where username = '" + usernameTextField.getText() + "'";
+        //String getUsername = "select count(1) from UserAccounts where username = '" + usernameTextField.getText() + "'";*/
 
         UserBean user = new UserBean();
         user.setUsername(usernameTextField.getText());
+        user.setPassword(passwordPasswordField.getText());
+        user.setEmail(emailTextField.getText());
 
         RegisterController registerController = new RegisterController();
         registerController.createUser(user);
 
 
-        try{
+        /*try{
             Statement statement = connectDB.createStatement();
             ResultSet queryUserResult = statement.executeQuery(verifyUsername);
 
@@ -145,7 +147,7 @@ public class RegisterViewController extends MainApplication implements Initializ
             }
         }catch (Exception e){
             e.printStackTrace();
-        }
+        }*/
     }
 
 }

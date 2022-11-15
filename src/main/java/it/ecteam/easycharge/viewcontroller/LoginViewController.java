@@ -17,7 +17,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class LoginController extends MainApplication {
+public class LoginViewController extends MainApplication {
     private Stage stage = new Stage();
 
     @FXML

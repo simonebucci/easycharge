@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SettingsController extends MainApplication implements Initializable {
+public class SettingsViewController extends MainApplication implements Initializable {
     private Stage stage = new Stage();
 
     @FXML

@@ -13,8 +13,8 @@ import org.json.simple.parser.*;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 
 public class MapController {
-	
-	private static final String APIKEY = "csPBICaGiqrDG1YIKGXg4alunzBPez4I";
+
+	private static final String APIKEY = "";
 
     public static void getNearby(int radius) throws IOException, ParseException, LocationNotFoundException, org.json.simple.parser.ParseException, ChargingStationNotFoundException {
         String jsonString;
@@ -83,7 +83,7 @@ public class MapController {
         StringBuilder str = new StringBuilder();
 
         //Request to the geocoding service
-        URL locationUrl = new URL("https://ipgeolocation.abstractapi.com/v1/?api_key=01c233c3ae9c4e8aad50179916b11dd8");
+        URL locationUrl = new URL("https://ipgeolocation.abstractapi.com/v1/?api_key=");
         URLConnection location = locationUrl.openConnection();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(
@@ -111,10 +111,6 @@ public class MapController {
 
         return "lat="+lat+"&lon="+lng;
     }
-
-	public static String getAPI() {
-		return MapController.APIKEY;
-	}
 
     public static void getChargingAvailability(String id) throws IOException, org.json.simple.parser.ParseException, ChargingStationNotFoundException {
         String jsonString;
@@ -163,5 +159,9 @@ public class MapController {
         System.out.println("Unknown="+unknown);
         System.out.println("Out of service="+outOfService);
 
+    }
+
+    public static String getAPI() {
+        return MapController.APIKEY;
     }
 }

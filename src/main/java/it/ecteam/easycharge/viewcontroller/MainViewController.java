@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainController extends StackPane implements Initializable  {
+public class MainViewController extends StackPane implements Initializable  {
     private Stage stage = new Stage();
 
     @FXML
@@ -99,8 +99,6 @@ public class MainController extends StackPane implements Initializable  {
             userLabel.setText(name);
         }
         webMap.getEngine().load("https://www.google.it/maps/search/ev+charging+stations/");
-        //webMap.getEngine().load("https://www.google.com/maps/search/?api=1&map_action=map&query=ev+charging+stations");
-
 
         try {
             MapController.getNearby(4000);

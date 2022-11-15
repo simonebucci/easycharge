@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class RouteController extends StackPane implements Initializable {
+public class RouteViewController extends StackPane implements Initializable {
     private Stage stage = new Stage();
 
     @FXML

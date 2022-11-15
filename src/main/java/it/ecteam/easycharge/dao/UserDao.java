@@ -11,7 +11,7 @@ public class UserDao extends DaoTemplate {
     public Boolean createUser(String username, String password, String email) {
         return this.execute(() -> {
             Connection con = DataBaseConnection.getConnection();
-            String sql = "call easycharge.add_user(?, ?, ?, ?);\r\n";
+            String sql = "call easycharge.add_user(?, ?, ?);\r\n";
 
 
                 try (PreparedStatement stm = con.prepareStatement(sql)) {

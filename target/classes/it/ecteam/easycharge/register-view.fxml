@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ecteam.easycharge.controller.RegisterController">
+<BorderPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ecteam.easycharge.viewcontroller.RegisterViewController">
     <top>
         <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #66ABEA;" BorderPane.alignment="CENTER">
             <items>
