@@ -14,7 +14,7 @@ import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 
 public class MapController {
 
-	private static final String APIKEY = "";
+	private static final String APIKEY = "csPBICaGiqrDG1YIKGXg4alunzBPez4I";
 
     public static void getNearby(int radius) throws IOException, ParseException, LocationNotFoundException, org.json.simple.parser.ParseException, ChargingStationNotFoundException {
         String jsonString;
@@ -83,7 +83,7 @@ public class MapController {
         StringBuilder str = new StringBuilder();
 
         //Request to the geocoding service
-        URL locationUrl = new URL("https://ipgeolocation.abstractapi.com/v1/?api_key=");
+        URL locationUrl = new URL("https://ipgeolocation.abstractapi.com/v1/?api_key=01c233c3ae9c4e8aad50179916b11dd8");
         URLConnection location = locationUrl.openConnection();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(

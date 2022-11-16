@@ -1,6 +1,9 @@
 package it.ecteam.easycharge.viewcontroller;
 
 import it.ecteam.easycharge.MainApplication;
+import it.ecteam.easycharge.bean.UserBean;
+import it.ecteam.easycharge.controller.LoginController;
+import it.ecteam.easycharge.exceptions.LoginEmptyFieldException;
 import it.ecteam.easycharge.utils.DataBaseConnection;
 import it.ecteam.easycharge.utils.FileManager;
 import javafx.event.ActionEvent;
@@ -51,68 +54,44 @@ public class LoginViewController extends MainApplication {
     }
 
     @FXML
-    protected void onLoginClick(ActionEvent e) {
+    protected void onLoginClick(ActionEvent actionEvent) {
 
-        if(!usernameTextField.getText().isBlank() && !passwordPasswordField.getText().isBlank()){
-            validateLogin();
-        }else{
-            loginMessageLabel.setText("Please enter username and password.");
-        }
-    }
+        UserBean gub = new UserBean();
+        gub.setUsername(this.usernameTextField.getText());
+        gub.setPassword(this.passwordPasswordField.getText());
 
-    public void validateLogin(){
-        DataBaseConnection connectNow = new DataBaseConnection();
-        Connection connectDB = connectNow.getConnection();
+        LoginController controller = new LoginController();
+        UserBean gu;
+        try {
+            gu=controller.login(gub);
+            if(gu==null) {
+                this.loginMessageLabel.setText("Wrong username or password");
+                this.usernameTextField.setText("");
+                this.passwordPasswordField.setText("");
+            }else {
+                String role=gu.getRole();
 
-        String verifyLogin = "select count(1) from users where username = '" + usernameTextField.getText() + "' and password = '" + passwordPasswordField.getText() + "'";
+                /*//SET SESSION GENERAL USER
+                SessionUser su=SessionUser.getInstance();
+                su.setSession(gu);
 
-        try{
-            Statement statement = connectDB.createStatement();
-            ResultSet queryResult = statement.executeQuery(verifyLogin);
-
-            while(queryResult.next()) {
-                if(queryResult.getInt(1) == 1){
-                    FileManager file = new FileManager();
-                    if(!file.fileExists("user")){
-                        file.createFile("user");
-                        file.writeToFile("user",usernameTextField.getText());
-                    }
-                    getID();
-                    FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-logged-view.fxml"));
-                    stage = (Stage) loginBtn.getScene().getWindow();
-                    Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-                    stage.setScene(scene);
-                }else{
-                    loginMessageLabel.setText("Invalid login!");
-                }
-
+                switch(role) {
+                    case "user":
+                        UserGraphicChange.getInstance().toHomepage(this.usernameTextField.getScene());
+                        break;
+                    case "artist":
+                        //set artist homepage controller
+                        ArtistGraphicChange.getInstance().toHomepage(this.usernameTextField.getScene());
+                        break;
+                    default:
+                        break;
+                }*/
             }
-        }catch (Exception e){
-            e.printStackTrace();
         }
+        catch(LoginEmptyFieldException e) {
+            this.loginMessageLabel.setText(e.getMessage());
+        }
+
     }
 
-    public void getID(){
-        DataBaseConnection connectNow = new DataBaseConnection();
-        Connection connectDB = connectNow.getConnection();
-
-        String getID = "select idusers from users where username = '" + usernameTextField.getText() + "' and password = '" + passwordPasswordField.getText() + "'";
-
-        try{
-            Statement statement = connectDB.createStatement();
-            ResultSet queryResult = statement.executeQuery(getID);
-
-            while(queryResult.next()) {
-                    FileManager file = new FileManager();
-                    if(!file.fileExists("userid")){
-                        file.createFile("userid");
-                    }
-                   int id = queryResult.getInt(1);
-                //file.writeToFile("userid",id);
-                System.out.println(id);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 }

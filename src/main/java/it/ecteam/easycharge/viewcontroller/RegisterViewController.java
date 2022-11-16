@@ -2,8 +2,7 @@ package it.ecteam.easycharge.viewcontroller;
 
 import it.ecteam.easycharge.MainApplication;
 import it.ecteam.easycharge.bean.UserBean;
-import it.ecteam.easycharge.controller.RegisterController;
-import it.ecteam.easycharge.utils.DataBaseConnection;
+import it.ecteam.easycharge.controller.LoginController;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,9 +13,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class RegisterViewController extends MainApplication implements Initializable {
@@ -101,9 +97,15 @@ public class RegisterViewController extends MainApplication implements Initializ
     }
 
     @FXML
-    protected void onRegisterClick() throws IOException {
+    protected void onRegisterClick() {
         if(!usernameTextField.getText().isBlank() && !passwordPasswordField.getText().isBlank() && !emailTextField.getText().isBlank() && !carTextField.getText().isBlank() && !dcTextField.getText().isBlank() && !acTextField.getText().isBlank() && !batteryTextField.getText().isBlank() && !rangeTextField.getText().isBlank()){
-            validateRegister();
+            UserBean user = new UserBean();
+            user.setUsername(usernameTextField.getText());
+            user.setPassword(passwordPasswordField.getText());
+            user.setEmail(emailTextField.getText());
+
+            LoginController loginController = new LoginController();
+            loginController.createUser(user);
         }else{
             registerMessageLabel.setText("Please enter all required data.");
         }
@@ -111,23 +113,7 @@ public class RegisterViewController extends MainApplication implements Initializ
     }
 
     public void validateRegister(){
-        /*DataBaseConnection connectNow = new DataBaseConnection();
-        Connection connectDB = connectNow.getConnection();
-
-        String verifyRegister = "insert into useraccounts (username, password) values ('" + usernameTextField.getText() + "' , '" + passwordPasswordField.getText() + "')";
-        String verifyUsername = "select count(1) from UserAccounts where username = ('" + usernameTextField.getText() + "')";
-        String insertNewUser = "insert into users (username, password, email, type, car, ac, dc, rng, capacity) values ('" + usernameTextField.getText() + "' , '" + passwordPasswordField.getText() +"' , '" + emailTextField.getText() + "' , '" + userType.getSelectionModel().getSelectedItem() + "' , '" + carTextField.getText() + "' , '" + dcTextField.getText() + "' , '" + acTextField.getText() + "' , '" + batteryTextField.getText() + "' , '" + rangeTextField.getText() +"')";
-        //String getUsername = "select count(1) from UserAccounts where username = '" + usernameTextField.getText() + "'";*/
-
-        UserBean user = new UserBean();
-        user.setUsername(usernameTextField.getText());
-        user.setPassword(passwordPasswordField.getText());
-        user.setEmail(emailTextField.getText());
-
-        RegisterController registerController = new RegisterController();
-        registerController.createUser(user);
-
-
+        //String insertNewUser = "insert into users (username, password, email, type, car, ac, dc, rng, capacity) values ('" + usernameTextField.getText() + "' , '" + passwordPasswordField.getText() +"' , '" + emailTextField.getText() + "' , '" + userType.getSelectionModel().getSelectedItem() + "' , '" + carTextField.getText() + "' , '" + dcTextField.getText() + "' , '" + acTextField.getText() + "' , '" + batteryTextField.getText() + "' , '" + rangeTextField.getText() +"')";
         /*try{
             Statement statement = connectDB.createStatement();
             ResultSet queryUserResult = statement.executeQuery(verifyUsername);
