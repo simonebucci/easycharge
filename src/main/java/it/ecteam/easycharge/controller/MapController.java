@@ -14,6 +14,10 @@ import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 
 public class MapController {
 
+    private MapController() {
+
+    }
+
 	private static final String APIKEY = "";
 
     public static void getNearby(int radius) throws IOException, ParseException, LocationNotFoundException, org.json.simple.parser.ParseException, ChargingStationNotFoundException {
