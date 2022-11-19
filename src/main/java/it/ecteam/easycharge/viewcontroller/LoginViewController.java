@@ -4,9 +4,6 @@ import it.ecteam.easycharge.MainApplication;
 import it.ecteam.easycharge.bean.UserBean;
 import it.ecteam.easycharge.controller.LoginController;
 import it.ecteam.easycharge.exceptions.LoginEmptyFieldException;
-import it.ecteam.easycharge.utils.DataBaseConnection;
-import it.ecteam.easycharge.utils.FileManager;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,9 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+
 
 public class LoginViewController extends MainApplication {
     private Stage stage = new Stage();
@@ -54,7 +49,7 @@ public class LoginViewController extends MainApplication {
     }
 
     @FXML
-    protected void onLoginClick(ActionEvent actionEvent) {
+    protected void onLoginClick() {
 
         UserBean gub = new UserBean();
         gub.setUsername(this.usernameTextField.getText());
@@ -69,9 +64,9 @@ public class LoginViewController extends MainApplication {
                 this.usernameTextField.setText("");
                 this.passwordPasswordField.setText("");
             }else {
-                String role=gu.getRole();
+                /*/String role=gu.getRole();
 
-                /*//SET SESSION GENERAL USER
+                /SET SESSION GENERAL USER
                 SessionUser su=SessionUser.getInstance();
                 su.setSession(gu);
 
@@ -79,16 +74,20 @@ public class LoginViewController extends MainApplication {
                     case "user":
                         UserGraphicChange.getInstance().toHomepage(this.usernameTextField.getScene());
                         break;
-                    case "artist":
-                        //set artist homepage controller
+                    case "business":
+                        //set business homepage controller
                         ArtistGraphicChange.getInstance().toHomepage(this.usernameTextField.getScene());
                         break;
                     default:
                         break;
                 }*/
+                FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-logged-view.fxml"));
+                stage = (Stage) loginBtn.getScene().getWindow();
+                Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
+                stage.setScene(scene);
             }
         }
-        catch(LoginEmptyFieldException e) {
+        catch(LoginEmptyFieldException | IOException e) {
             this.loginMessageLabel.setText(e.getMessage());
         }
 

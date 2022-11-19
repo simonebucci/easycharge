@@ -8,7 +8,7 @@ import it.ecteam.easycharge.exceptions.LoginEmptyFieldException;
 public class LoginController {
 
     public UserBean login(UserBean userBean) throws LoginEmptyFieldException {
-        UserDao gud = new UserDao();
+        UserDao ud = new UserDao();
 
         if(userBean.getUsername().equals("")) {
             throw new LoginEmptyFieldException("Username necessary");
@@ -17,21 +17,21 @@ public class LoginController {
             throw new LoginEmptyFieldException("Password necessary");
         }
 
-        User result = gud.findUser(userBean.getUsername(), userBean.getPassword());
+        User result = ud.findUser(userBean.getUsername(), userBean.getPassword());
         if (result == null)	{
             return null;
         } else {
-            UserBean gu = new UserBean();
-            gu.setUsername(result.getUsername());
-            gu.setPassword(result.getPassword());
-            gu.setRole(result.getRole());
-            return gu;
+            UserBean u = new UserBean();
+            u.setUsername(result.getUsername());
+            u.setPassword(result.getPassword());
+            u.setRole(result.getRole());
+            return u;
         }
     }
 
-    public void createUser(UserBean user){
+    public boolean createUser(UserBean user){
         UserDao userDao = new UserDao();
 
-        userDao.createUser(user.getUsername(), user.getPassword(), user.getEmail());
+        return userDao.createUser(user.getUsername(), user.getPassword(), user.getEmail());
     }
 }

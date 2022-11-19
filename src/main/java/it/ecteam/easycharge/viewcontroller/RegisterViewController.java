@@ -10,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -93,47 +92,35 @@ public class RegisterViewController extends MainApplication implements Initializ
     public void initialize(URL url, ResourceBundle rb){
         this.userType.setItems(FXCollections.observableArrayList("Normal User", "Business User"));
 
-
     }
 
     @FXML
-    protected void onRegisterClick() {
-        if(!usernameTextField.getText().isBlank() && !passwordPasswordField.getText().isBlank() && !emailTextField.getText().isBlank() && !carTextField.getText().isBlank() && !dcTextField.getText().isBlank() && !acTextField.getText().isBlank() && !batteryTextField.getText().isBlank() && !rangeTextField.getText().isBlank()){
-            UserBean user = new UserBean();
-            user.setUsername(usernameTextField.getText());
-            user.setPassword(passwordPasswordField.getText());
-            user.setEmail(emailTextField.getText());
+    protected void onRegisterClick() throws IOException {
+        LoginController loginController = new LoginController();
+        boolean regResult;
 
-            LoginController loginController = new LoginController();
-            loginController.createUser(user);
-        }else{
-            registerMessageLabel.setText("Please enter all required data.");
-        }
+            if (!usernameTextField.getText().isBlank() && !passwordPasswordField.getText().isBlank() && !emailTextField.getText().isBlank() && !carTextField.getText().isBlank() && !dcTextField.getText().isBlank() && !acTextField.getText().isBlank() && !batteryTextField.getText().isBlank() && !rangeTextField.getText().isBlank()) {
+                UserBean user = new UserBean();
+                user.setUsername(usernameTextField.getText());
+                user.setPassword(passwordPasswordField.getText());
+                user.setEmail(emailTextField.getText());
 
-    }
 
-    public void validateRegister(){
-        //String insertNewUser = "insert into users (username, password, email, type, car, ac, dc, rng, capacity) values ('" + usernameTextField.getText() + "' , '" + passwordPasswordField.getText() +"' , '" + emailTextField.getText() + "' , '" + userType.getSelectionModel().getSelectedItem() + "' , '" + carTextField.getText() + "' , '" + dcTextField.getText() + "' , '" + acTextField.getText() + "' , '" + batteryTextField.getText() + "' , '" + rangeTextField.getText() +"')";
-        /*try{
-            Statement statement = connectDB.createStatement();
-            ResultSet queryUserResult = statement.executeQuery(verifyUsername);
-
-            while(queryUserResult.next()) {
-                if(queryUserResult.getInt(1) == 1){
-                    registerMessageLabel.setText("Username already in use, please choose a different one!");
-                }else{
-
-                    //statement.executeUpdate(verifyRegister);
-                    statement.executeUpdate(insertNewUser);
+                regResult = loginController.createUser(user);
+                if(Boolean.TRUE.equals(regResult)) {
+                    this.registerMessageLabel.setText("Registration successfull");
                     FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-logged-view.fxml"));
                     stage = (Stage) registerBtn.getScene().getWindow();
                     Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
                     stage.setScene(scene);
+                }else{
+                    this.registerMessageLabel.setText("Registration unsuccessfull! Username already in use, please choose a different one!");
+                }
+
+            } else {
+                registerMessageLabel.setText("Please enter all required data.");
             }
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }*/
+
     }
 
 }

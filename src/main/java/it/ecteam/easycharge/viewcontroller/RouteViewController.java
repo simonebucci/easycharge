@@ -14,7 +14,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import org.json.simple.parser.ParseException;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
