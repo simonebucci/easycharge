@@ -6,6 +6,10 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import it.ecteam.easycharge.bean.ChargingStationBean;
+import it.ecteam.easycharge.bean.ConnectorBean;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject; 
@@ -20,7 +24,9 @@ public class MapController {
 
 	private static final String APIKEY = "";
 
-    public static void getNearby(int radius) throws IOException, ParseException, LocationNotFoundException, org.json.simple.parser.ParseException, ChargingStationNotFoundException {
+    public static List<ChargingStationBean> getNearby(int radius) throws IOException, ParseException, LocationNotFoundException, org.json.simple.parser.ParseException, ChargingStationNotFoundException {
+
+        List<ChargingStationBean> chargingStationList= new ArrayList<>();
         String jsonString;
         StringBuilder str = new StringBuilder();
         //Request to the geocoding service
@@ -47,8 +53,11 @@ public class MapController {
             throw new LocationNotFoundException("No EV charging station found");
         }
 
+        //Entering data into a ChargingStationBean list
         int i;
-        for(i=0;i<10;i++) {
+        for(i=0;i<resultsArray.size();i++) {
+            ChargingStationBean chargingStation = new ChargingStationBean();
+
             JSONObject results = (JSONObject) resultsArray.get(i);
             JSONObject poi = (JSONObject) results.get("poi");
             JSONObject address = (JSONObject) results.get("address");
@@ -57,29 +66,29 @@ public class MapController {
             JSONArray connectors = (JSONArray) chargingPark.get("connectors");
 
             String name = (String) poi.get("name");
+            chargingStation.setName(name);
             String id = (String) results.get("id");
+            chargingStation.setId(id);
             String addressString = (String) address.get("freeformAddress");
-
-            System.out.println(name);
-            System.out.println(id);
-            System.out.println(addressString);
-
-            int k;
-            for(k=0;k<1;k++){
-                JSONObject cResults = (JSONObject) connectors.get(k);
-                String cType = (String) cResults.get("connectorType");
-                System.out.println(cType);
-            }
-
-            getChargingAvailability(id);
-
+            chargingStation.setFreeformAddress(addressString);
             double lat = (double) position.get("lat");
             double lon = (double) position.get("lon");
+            chargingStation.setLatitude(lat);
+            chargingStation.setLongitude(lon);
 
-            System.out.println(lat);
-            System.out.println(lon);
-            System.out.println("fine dati \n");
+            chargingStationList.add(chargingStation);
+
+            int k;
+            for(k=0;k < connectors.size();k++){
+                JSONObject cResults = (JSONObject) connectors.get(k);
+                String cType = (String) cResults.get("connectorType");
+                //System.out.println(cType);
+            }
+
+            //getChargingAvailability(id);
+
         }
+        return chargingStationList;
     }
 
     public static String getLocation() throws IOException, LocationNotFoundException, org.json.simple.parser.ParseException {
@@ -116,7 +125,8 @@ public class MapController {
         return "lat="+lat+"&lon="+lng;
     }
 
-    public static void getChargingAvailability(String id) throws IOException, org.json.simple.parser.ParseException, ChargingStationNotFoundException {
+    public static List<ConnectorBean> getChargingAvailability(String id) throws IOException, org.json.simple.parser.ParseException, ChargingStationNotFoundException {
+        List<ConnectorBean> connectorList= new ArrayList<>();
         String jsonString;
         StringBuilder str = new StringBuilder();
         //Request to the geocoding service
@@ -143,26 +153,30 @@ public class MapController {
             throw new ChargingStationNotFoundException("No EV charging station availability found");
         }
 
-        JSONObject results = (JSONObject) resultsArray.get(0);
-        JSONObject availability = (JSONObject) results.get("availability");
-        JSONObject current = (JSONObject) availability.get("current");
-        String type = (String) results.get("type");
-        Long total = (Long) results.get("total");
-        Long available = (Long) current.get("available");
-        Long occupied = (Long) current.get("occupied");
-        Long reserved = (Long) current.get("reserved");
-        Long unknown = (Long) current.get("unknown");
-        Long outOfService = (Long) current.get("outOfService");
+        int i;
+        for(i=0; i < resultsArray.size(); i++) {
+            ConnectorBean connectorBean = new ConnectorBean();
+            JSONObject results = (JSONObject) resultsArray.get(i);
+            JSONObject availability = (JSONObject) results.get("availability");
+            JSONObject current = (JSONObject) availability.get("current");
+            String type = (String) results.get("type");
+            connectorBean.setType(type);
+            Long total = (Long) results.get("total");
+            connectorBean.setTotal(total);
+            Long available = (Long) current.get("available");
+            connectorBean.setAvailable(available);
+            Long occupied = (Long) current.get("occupied");
+            connectorBean.setOccupied(occupied);
+            Long reserved = (Long) current.get("reserved");
+            connectorBean.setReserved(reserved);
+            Long unknown = (Long) current.get("unknown");
+            connectorBean.setUnknown(unknown);
+            Long outOfService = (Long) current.get("outOfService");
+            connectorBean.setOutOfService(outOfService);
 
-        System.out.println("Charging Availability");
-        System.out.println(type);
-        System.out.println("Total:"+total);
-        System.out.println("Available="+available);
-        System.out.println("Occupied="+occupied);
-        System.out.println("Reserved="+reserved);
-        System.out.println("Unknown="+unknown);
-        System.out.println("Out of service="+outOfService);
-
+            connectorList.add(connectorBean);
+        }
+        return connectorList;
     }
 
     public static String getAPI() {

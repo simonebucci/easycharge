@@ -79,7 +79,7 @@
                                  <Font size="18.0" />
                               </font>
                            </Label>
-                           <Label text="AC charging speed:" textFill="#909090">
+                           <Label text="Connector Type:" textFill="#909090">
                               <font>
                                  <Font size="18.0" />
                               </font>
@@ -87,23 +87,7 @@
                                  <Insets top="10.0" />
                               </VBox.margin>
                            </Label>
-                           <Label fx:id="acLabel">
-                              <VBox.margin>
-                                 <Insets />
-                              </VBox.margin>
-                              <font>
-                                 <Font size="18.0" />
-                              </font>
-                           </Label>
-                           <Label text="DC charging speed:" textFill="#909090">
-                              <font>
-                                 <Font size="18.0" />
-                              </font>
-                              <VBox.margin>
-                                 <Insets top="10.0" />
-                              </VBox.margin>
-                           </Label>
-                           <Label fx:id="dcLabel">
+                           <Label fx:id="cTypeLabel">
                               <VBox.margin>
                                  <Insets />
                               </VBox.margin>
@@ -157,12 +141,7 @@
                                  <Font size="18.0" />
                               </font>
                            </TextField>
-                                <TextField fx:id="acTF" prefHeight="26.0" prefWidth="448.0" promptText="AC charging speed (kWh)">
-                              <font>
-                                 <Font size="18.0" />
-                              </font>
-                           </TextField>
-                           <TextField fx:id="dcTF" promptText="DC charging speed (kWh)">
+                                <TextField fx:id="cTypeTF" prefHeight="26.0" prefWidth="448.0" promptText="AC charging speed (kWh)">
                               <font>
                                  <Font size="18.0" />
                               </font>

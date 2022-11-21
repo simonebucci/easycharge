@@ -1,6 +1,8 @@
 package it.ecteam.easycharge.viewcontroller;
 
 import it.ecteam.easycharge.MainApplication;
+import it.ecteam.easycharge.bean.ChargingStationBean;
+import it.ecteam.easycharge.bean.ConnectorBean;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 import it.ecteam.easycharge.utils.FileManager;
@@ -11,12 +13,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainViewController extends StackPane implements Initializable  {
@@ -32,7 +37,8 @@ public class MainViewController extends StackPane implements Initializable  {
     private Button routeBtn;
     @FXML
     private WebView webMap;
-
+    @FXML
+    private ListView listView;
 
     @FXML
     protected void onLoginClick() throws IOException {
@@ -93,6 +99,9 @@ public class MainViewController extends StackPane implements Initializable  {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        List<ChargingStationBean> chargingStationList = new ArrayList<>();
+        List<ConnectorBean> connectorBeansList = new ArrayList<>();
+
         FileManager file = new FileManager();
         if(file.fileExists("user")) {
             String name = file.readFile("user");
@@ -101,7 +110,28 @@ public class MainViewController extends StackPane implements Initializable  {
         webMap.getEngine().load("https://www.google.it/maps/search/ev+charging+stations/");
 
         try {
-            MapController.getNearby(4000);
+            chargingStationList = MapController.getNearby(4000);
+            int i;
+            for(i=0; i<chargingStationList.size(); i++){
+                System.out.println(chargingStationList.get(i).getName());
+                System.out.println(chargingStationList.get(i).getId());
+                System.out.println(chargingStationList.get(i).getFreeformAddress());
+                System.out.println(chargingStationList.get(i).getLatitude());
+                System.out.println(chargingStationList.get(i).getLongitude());
+                connectorBeansList = MapController.getChargingAvailability(chargingStationList.get(i).getId());
+                int k;
+                for(k=0; k < connectorBeansList.size(); k++) {
+                    System.out.println("Type:"+ connectorBeansList.get(k).getType());
+                    System.out.println("Total:"+ connectorBeansList.get(k).getTotal());
+                    System.out.println("Available:"+ connectorBeansList.get(k).getAvailable());
+                    System.out.println("Occupied:"+ connectorBeansList.get(k).getOccupied());
+                    System.out.println("Reserved:"+ connectorBeansList.get(k).getReserved());
+                    System.out.println("Unknown:"+ connectorBeansList.get(k).getUnknown());
+                    System.out.println("OutOfService:"+ connectorBeansList.get(k).getOutOfService());
+                    System.out.println("-----");
+                }
+                System.out.println("--------------");
+            }
         } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
             e.printStackTrace();
         }

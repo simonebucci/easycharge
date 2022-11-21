@@ -10,9 +10,9 @@ public class ChargingStationBean implements Serializable {
     private double latitude;
     private double longitude;
 
-    public void setId(int id) {
+    public void setId(String id) {
 
-        this.id = "" + id;
+        this.id = id;
     }
 
     public String getId() {

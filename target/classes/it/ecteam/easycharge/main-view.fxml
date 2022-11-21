@@ -77,7 +77,7 @@
       </AnchorPane>
    </center>
       <right>
-         <ListView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
       </right>
 </BorderPane>
 </AnchorPane>
