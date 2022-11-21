@@ -62,8 +62,6 @@ public class MapController {
             JSONObject poi = (JSONObject) results.get("poi");
             JSONObject address = (JSONObject) results.get("address");
             JSONObject position = (JSONObject) results.get("position");
-            JSONObject chargingPark = (JSONObject) results.get("chargingPark");
-            JSONArray connectors = (JSONArray) chargingPark.get("connectors");
 
             String name = (String) poi.get("name");
             chargingStation.setName(name);
@@ -77,16 +75,6 @@ public class MapController {
             chargingStation.setLongitude(lon);
 
             chargingStationList.add(chargingStation);
-
-            int k;
-            for(k=0;k < connectors.size();k++){
-                JSONObject cResults = (JSONObject) connectors.get(k);
-                String cType = (String) cResults.get("connectorType");
-                //System.out.println(cType);
-            }
-
-            //getChargingAvailability(id);
-
         }
         return chargingStationList;
     }
