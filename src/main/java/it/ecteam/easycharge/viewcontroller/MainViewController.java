@@ -100,34 +100,29 @@ public class MainViewController extends StackPane implements Initializable  {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<ChargingStationBean> chargingStationList = new ArrayList<>();
-        List<ConnectorBean> connectorBeansList = new ArrayList<>();
+        List<ConnectorBean> connectorBeanList = new ArrayList<>();
 
-        FileManager file = new FileManager();
-        if(file.fileExists("user")) {
-            String name = file.readFile("user");
-            userLabel.setText(name);
-        }
         webMap.getEngine().load("https://www.google.it/maps/search/ev+charging+stations/");
 
         try {
-            chargingStationList = MapController.getNearby(4000);
+            chargingStationList = MapController.getNearby(4000); //radius range 1 to 50000
             int i;
-            for(i=0; i<chargingStationList.size(); i++){
+            for(i=0; i < chargingStationList.size(); i++){
                 System.out.println(chargingStationList.get(i).getName());
                 System.out.println(chargingStationList.get(i).getId());
                 System.out.println(chargingStationList.get(i).getFreeformAddress());
                 System.out.println(chargingStationList.get(i).getLatitude());
                 System.out.println(chargingStationList.get(i).getLongitude());
-                connectorBeansList = MapController.getChargingAvailability(chargingStationList.get(i).getId());
+                connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(i).getId());
                 int k;
-                for(k=0; k < connectorBeansList.size(); k++) {
-                    System.out.println("Type:"+ connectorBeansList.get(k).getType());
-                    System.out.println("Total:"+ connectorBeansList.get(k).getTotal());
-                    System.out.println("Available:"+ connectorBeansList.get(k).getAvailable());
-                    System.out.println("Occupied:"+ connectorBeansList.get(k).getOccupied());
-                    System.out.println("Reserved:"+ connectorBeansList.get(k).getReserved());
-                    System.out.println("Unknown:"+ connectorBeansList.get(k).getUnknown());
-                    System.out.println("OutOfService:"+ connectorBeansList.get(k).getOutOfService());
+                for(k=0; k < connectorBeanList.size(); k++) {
+                    System.out.println("Type:"+ connectorBeanList.get(k).getType());
+                    System.out.println("Total:"+ connectorBeanList.get(k).getTotal());
+                    System.out.println("Available:"+ connectorBeanList.get(k).getAvailable());
+                    System.out.println("Occupied:"+ connectorBeanList.get(k).getOccupied());
+                    System.out.println("Reserved:"+ connectorBeanList.get(k).getReserved());
+                    System.out.println("Unknown:"+ connectorBeanList.get(k).getUnknown());
+                    System.out.println("OutOfService:"+ connectorBeanList.get(k).getOutOfService());
                     System.out.println("-----");
                 }
                 System.out.println("--------------");

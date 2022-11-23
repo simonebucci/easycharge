@@ -51,20 +51,20 @@ public class LoginViewController extends MainApplication {
     @FXML
     protected void onLoginClick() {
 
-        UserBean gub = new UserBean();
-        gub.setUsername(this.usernameTextField.getText());
-        gub.setPassword(this.passwordPasswordField.getText());
+        UserBean ub = new UserBean();
+        ub.setUsername(this.usernameTextField.getText());
+        ub.setPassword(this.passwordPasswordField.getText());
 
         LoginController controller = new LoginController();
-        UserBean gu;
+        UserBean u;
         try {
-            gu=controller.login(gub);
-            if(gu==null) {
+            u=controller.login(ub);
+            if(u==null) {
                 this.loginMessageLabel.setText("Wrong username or password");
                 this.usernameTextField.setText("");
                 this.passwordPasswordField.setText("");
             }else {
-                /*/String role=gu.getRole();
+                /*/String role=u.getRole();
 
                 /SET SESSION GENERAL USER
                 SessionUser su=SessionUser.getInstance();

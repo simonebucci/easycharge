@@ -63,15 +63,15 @@
       <left>
          <VBox BorderPane.alignment="CENTER">
             <children>
-               <TextField promptText="Start position">
+               <TextField fx:id="startField" promptText="Start position">
                   <VBox.margin>
                      <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
                   </VBox.margin></TextField>
-               <TextField layoutX="10.0" layoutY="10.0" promptText="Destination">
+               <TextField fx:id="destField" layoutX="10.0" layoutY="10.0" promptText="Destination">
                   <VBox.margin>
                      <Insets bottom="10.0" left="5.0" right="10.0" />
                   </VBox.margin></TextField>
-               <Button fx:id="homeBtn1" mnemonicParsing="false" onMouseClicked="#onHomeLoggedClick" style="-fx-background-color: #66ABEA;" text="Find a Route" textFill="WHITE">
+               <Button fx:id="routeBtn" mnemonicParsing="false" onAction="#onRouteClick" onMouseClicked="#onHomeLoggedClick" style="-fx-background-color: #66ABEA;" text="Find a Route" textFill="WHITE">
                   <font>
                      <Font size="16.0" />
                   </font>

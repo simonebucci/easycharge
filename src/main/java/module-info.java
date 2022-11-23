@@ -14,6 +14,8 @@ module it.ecteam.easycharge {
     requires jxmapviewer2;
     requires java.desktop;
     requires mysql.connector.java;
+    requires org.apache.httpcomponents.httpcore;
+    requires org.apache.httpcomponents.httpclient;
 
     opens it.ecteam.easycharge to javafx.fxml;
     exports it.ecteam.easycharge;

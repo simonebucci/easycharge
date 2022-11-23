@@ -1,6 +1,5 @@
 package it.ecteam.easycharge;
 
-import it.ecteam.easycharge.dao.UserDao;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
