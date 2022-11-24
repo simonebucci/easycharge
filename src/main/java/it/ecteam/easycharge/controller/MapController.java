@@ -3,15 +3,12 @@ package it.ecteam.easycharge.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 import it.ecteam.easycharge.bean.ChargingStationBean;
 import it.ecteam.easycharge.bean.ConnectorBean;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
@@ -42,7 +39,7 @@ public class MapController {
         List<ChargingStationBean> chargingStationList = new ArrayList<>();
         String jsonString;
         StringBuilder str = new StringBuilder();
-        //Request to the geocoding service
+        //Request to the tomtom service
         URL geocodingUrl = new URL("https://api.tomtom.com/search/2/nearbySearch/.json?"+getLocation()+"&radius="+radius+"&categorySet=7309&view=Unified&key="+getAPI());
         URLConnection geocoding = geocodingUrl.openConnection();
         BufferedReader in = new BufferedReader(
@@ -56,39 +53,7 @@ public class MapController {
         in.close();
 
         jsonString = str.toString();
-        JSONParser parser = new JSONParser();
-
-        //Get coordinates from JSON string
-        JSONObject object = (JSONObject) parser.parse(jsonString);
-        JSONArray resultsArray = (JSONArray) object.get("results");
-
-        if(resultsArray.isEmpty()) {
-            throw new LocationNotFoundException("No EV charging station found");
-        }
-
-        //Entering data into a ChargingStationBean list
-        int i;
-        for(i=0;i<resultsArray.size();i++) {
-            ChargingStationBean chargingStation = new ChargingStationBean();
-
-            JSONObject results = (JSONObject) resultsArray.get(i);
-            JSONObject poi = (JSONObject) results.get("poi");
-            JSONObject address = (JSONObject) results.get("address");
-            JSONObject position = (JSONObject) results.get("position");
-
-            String name = (String) poi.get("name");
-            chargingStation.setName(name);
-            String id = (String) results.get("id");
-            chargingStation.setId(id);
-            String addressString = (String) address.get("freeformAddress");
-            chargingStation.setFreeformAddress(addressString);
-            double lat = (double) position.get("lat");
-            double lon = (double) position.get("lon");
-            chargingStation.setLatitude(lat);
-            chargingStation.setLongitude(lon);
-
-            chargingStationList.add(chargingStation);
-        }
+        chargingStationList = MapController.chargingStationParse(jsonString);
         return chargingStationList;
     }
 
@@ -130,7 +95,7 @@ public class MapController {
         List<ConnectorBean> connectorList= new ArrayList<>();
         String jsonString;
         StringBuilder str = new StringBuilder();
-        //Request to the geocoding service
+        //Request to the tomtom service
         URL geocodingUrl = new URL("https://api.tomtom.com/search/2/chargingAvailability.json?key="+getAPI()+"&chargingAvailability="+id);
         URLConnection geocoding = geocodingUrl.openConnection();
         BufferedReader in = new BufferedReader(
@@ -185,8 +150,8 @@ public class MapController {
 
         String jsonString;
         StringBuilder str = new StringBuilder();
-        //Request to the geocoding service
-        URL geocodingUrl = new URL("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input="+string+"&inputtype=textquery&fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&key="+getGAPI());
+        //Request to the google service
+        URL geocodingUrl = new URL("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input="+string.replaceAll("\\s","%20")+"&inputtype=textquery&fields=formatted_address%2Cname%2Crating%2Copening_hours%2Cgeometry&key="+getGAPI());
         URLConnection geocoding = geocodingUrl.openConnection();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(
@@ -237,20 +202,18 @@ public class MapController {
                     "  \"route\": {\r\n" +
                     "  \"points\": [\r\n" +
                     "  {\r\n" +
-                    "  \"lat\": "+start.get(0)+",\r\n" +
-                    "  \"lon\": "+start.get(1)+"\r\n" +
+                    "  \"lat\": " + start.get(0) + ",\r\n" +
+                    "  \"lon\": " + start.get(1) + "\r\n" +
                     "  },\r\n" +
                     "  {\r\n" +
-                    "  \"lat\": "+end.get(0)+",\r\n" +
-                    "  \"lon\": "+end.get(1)+"\r\n" +
+                    "  \"lat\": " + end.get(0) + ",\r\n" +
+                    "  \"lon\": " + end.get(1) + "\r\n" +
                     "  }\r\n" +
                     "  ]\r\n" +
                     "  }\r\n" +
                     "}";
             StringEntity stringEntity = new StringEntity(json);
             httpPost.setEntity(stringEntity);
-
-            System.out.println("Executing request " + httpPost.getRequestLine());
 
             // Create a custom response handler
             ResponseHandler<String> responseHandler = response -> {
@@ -264,47 +227,52 @@ public class MapController {
             };
 
             String responseBody = httpclient.execute(httpPost, responseHandler);
-            System.out.println("----------------------------------------");
-            System.out.println(responseBody);
+            chargingStationList = MapController.chargingStationParse(responseBody);
 
-            JSONParser parser = new JSONParser();
-
-            //Get coordinates from JSON string
-            JSONObject object = (JSONObject) parser.parse(responseBody);
-            JSONArray resultsArray = (JSONArray) object.get("results");
-
-            if (resultsArray.isEmpty()) {
-                throw new ChargingStationNotFoundException("No EV charging station availability found");
-            }
-
-            int i;
-            for(i=0;i<resultsArray.size();i++) {
-                ChargingStationBean chargingStation = new ChargingStationBean();
-
-                JSONObject results = (JSONObject) resultsArray.get(i);
-                JSONObject poi = (JSONObject) results.get("poi");
-                JSONObject address = (JSONObject) results.get("address");
-                JSONObject position = (JSONObject) results.get("position");
-
-                String name = (String) poi.get("name");
-                chargingStation.setName(name);
-                String id = (String) results.get("id");
-                chargingStation.setId(id);
-                String addressString = (String) address.get("freeformAddress");
-                chargingStation.setFreeformAddress(addressString);
-                double lat = (double) position.get("lat");
-                double lon = (double) position.get("lon");
-                chargingStation.setLatitude(lat);
-                chargingStation.setLongitude(lon);
-
-                chargingStationList.add(chargingStation);
-            }
-
-
-        } catch (ChargingStationNotFoundException | org.json.simple.parser.ParseException | IOException e) {
+        } catch (IOException | org.json.simple.parser.ParseException | LocationNotFoundException e) {
             e.printStackTrace();
         }
         return chargingStationList;
+    }
+
+    public static List<ChargingStationBean> chargingStationParse(String jsonString) throws org.json.simple.parser.ParseException, LocationNotFoundException {
+        List<ChargingStationBean> chargingStationList = new ArrayList<>();
+
+        JSONParser parser = new JSONParser();
+
+        //Get data from JSON string
+        JSONObject object = (JSONObject) parser.parse(jsonString);
+        JSONArray resultsArray = (JSONArray) object.get("results");
+
+        if(resultsArray.isEmpty()) {
+            throw new LocationNotFoundException("No EV charging station found");
+        }
+
+        //Entering data into a ChargingStationBean list
+        int i;
+        for(i=0;i<resultsArray.size();i++) {
+            ChargingStationBean chargingStation = new ChargingStationBean();
+
+            JSONObject results = (JSONObject) resultsArray.get(i);
+            JSONObject poi = (JSONObject) results.get("poi");
+            JSONObject address = (JSONObject) results.get("address");
+            JSONObject position = (JSONObject) results.get("position");
+
+            String name = (String) poi.get("name");
+            chargingStation.setName(name);
+            String id = (String) results.get("id");
+            chargingStation.setId(id);
+            String addressString = (String) address.get("freeformAddress");
+            chargingStation.setFreeformAddress(addressString);
+            double lat = (double) position.get("lat");
+            double lon = (double) position.get("lon");
+            chargingStation.setLatitude(lat);
+            chargingStation.setLongitude(lon);
+
+            chargingStationList.add(chargingStation);
+        }
+        return chargingStationList;
+
     }
 
         public static String getAPI() {
