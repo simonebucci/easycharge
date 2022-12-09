@@ -32,6 +32,12 @@ public class UserController {
         }
     }
 
+    public boolean changeCar(String username, String model){
+        UserDao userDao = new UserDao();
+
+        return userDao.changeUserCar(username, model);
+    }
+
     public boolean setFavorite(String username, String csid){
         UserDao userDao = new UserDao();
 

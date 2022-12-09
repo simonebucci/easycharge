@@ -1,7 +1,9 @@
 package it.ecteam.easycharge.controller;
 
+import it.ecteam.easycharge.bean.BusinessUserBean;
 import it.ecteam.easycharge.bean.CarBean;
 import it.ecteam.easycharge.bean.UserBean;
+import it.ecteam.easycharge.dao.BusinessUserDao;
 import it.ecteam.easycharge.dao.CarDao;
 import it.ecteam.easycharge.dao.UserDao;
 import it.ecteam.easycharge.entity.Car;
@@ -36,10 +38,18 @@ public class LoginController {
         }
     }
 
+
+
     public boolean createUser(UserBean user){
         UserDao userDao = new UserDao();
 
         return userDao.createUser(user.getUsername(), user.getPassword(), user.getEmail(), user.getRole(), user.getCar());
+    }
+
+    public boolean createBusinessUser(BusinessUserBean user){
+        BusinessUserDao businessUserDao = new BusinessUserDao();
+
+        return businessUserDao.createBusinessUser(user.getUsername(), user.getPassword(), user.getEmail(), user.getRole(), user.getBusiness());
     }
 
     public static List<CarBean> getCar() {

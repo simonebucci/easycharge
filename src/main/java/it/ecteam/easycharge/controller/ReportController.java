@@ -7,6 +7,7 @@ import it.ecteam.easycharge.entity.Report;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ReportController {
@@ -22,8 +23,9 @@ public class ReportController {
 
         List<Report> result = reportDao.getReport(station);
         List<ReportBean> rbl = new ArrayList<>();
-        if(result == null){
-            return null;
+
+        if(result.isEmpty()){
+            return Collections.emptyList();
         }else{
             int i;
             for(i=0; i < result.size(); i++) {

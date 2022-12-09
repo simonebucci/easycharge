@@ -1,11 +1,14 @@
 package it.ecteam.easycharge.viewcontroller;
 
 import it.ecteam.easycharge.MainApplication;
+import it.ecteam.easycharge.bean.BusinessUserBean;
 import it.ecteam.easycharge.bean.CarBean;
 import it.ecteam.easycharge.bean.UserBean;
 import it.ecteam.easycharge.controller.LoginController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class RegisterViewController implements Initializable {
@@ -36,6 +40,8 @@ public class RegisterViewController implements Initializable {
     private TextField usernameTextField;
     @FXML
     private TextField emailTextField;
+    @FXML
+    private TextField businessTextField;
     @FXML
     private PasswordField passwordPasswordField;
     @FXML
@@ -68,7 +74,13 @@ public class RegisterViewController implements Initializable {
 
     @FXML
     protected void onUserTypeClick() {
-
+        if(userType.getValue() == "business" && userType.getValue() != null){
+            modelBox.setVisible(false);
+            businessTextField.setVisible(true);
+        }else{
+            modelBox.setVisible(true);
+            businessTextField.setVisible(false);
+        }
     }
 
     @FXML
@@ -93,6 +105,68 @@ public class RegisterViewController implements Initializable {
     }
 
     @FXML
+    protected void onRegisterClick() throws IOException {
+        LoginController loginController = new LoginController();
+        boolean regResult = false;
+        String email = "";
+        String username = "";
+        String password = "";
+        String userRole = "";
+        if ((Objects.equals(userType.getValue(), null) || usernameTextField.getText().isBlank() || passwordPasswordField.getText().isBlank() || emailTextField.getText().isBlank())){
+            registerMessageLabel.setText("Please enter all required data.");
+        }else{
+            username = usernameTextField.getText();
+            password = passwordPasswordField.getText();
+            email = emailTextField.getText();
+            userRole = userType.getValue();
+
+            if(userRole.equals("user") && Objects.equals(modelBox.getValue(), null)){
+                registerMessageLabel.setText("Please enter all required data.");
+            }else if(userRole.equals("business") && businessTextField.getText().isBlank()){
+                registerMessageLabel.setText("Please enter all required data.");
+            }else{
+
+                if (userRole.equals("user")) {
+                    UserBean u = new UserBean();
+                    u.setUsername(username);
+                    u.setPassword(password);
+                    u.setEmail(email);
+                    u.setRole(userRole);
+                    u.setCar(modelBox.getValue());
+                    regResult = loginController.createUser(u);
+                } else if (userRole.equals("business")) {
+                    BusinessUserBean bu = new BusinessUserBean();
+                    bu.setUsername(username);
+                    bu.setPassword(password);
+                    bu.setRole(userRole);
+                    bu.setBusiness(businessTextField.getText());
+                    bu.setEmail(email);
+                    regResult = loginController.createBusinessUser(bu);
+                }
+
+                if (Boolean.TRUE.equals(regResult)) {
+                    this.registerMessageLabel.setText("Registration successfull");
+                    switch (userRole) {
+                        case "user":
+                            stage = (Stage) homeBtn.getScene().getWindow();
+                            UserGraphicChange.getInstance().toLoggedHome(stage);
+                            break;
+                        case "business":
+                            //set business homepage controller
+                            //BusinessGraphicChange.getInstance().toHomepage(this.usernameTextField.getScene());
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    this.registerMessageLabel.setText("Registration unsuccessfull! Username already in use, please choose a different one!");
+                }
+            }
+        }
+    }
+
+
+    @FXML
     public void initialize(URL url, ResourceBundle rb){
         this.ugc = UserGraphicChange.getInstance();
 
@@ -104,42 +178,10 @@ public class RegisterViewController implements Initializable {
             oal.add(cb.get(i).getName());
         }
         this.modelBox.setItems(oal);
-
         this.userType.setItems(FXCollections.observableArrayList("user", "business"));
+        this.businessTextField.setVisible(false);
     }
 
-    @FXML
-    protected void onRegisterClick() throws IOException {
-        LoginController loginController = new LoginController();
-        boolean regResult;
-
-            if (!usernameTextField.getText().isBlank() && !passwordPasswordField.getText().isBlank() && !emailTextField.getText().isBlank() && !modelBox.getValue().isBlank() && !userType.getValue().isBlank()) {
-                UserBean user = new UserBean();
-                user.setUsername(usernameTextField.getText());
-                user.setPassword(passwordPasswordField.getText());
-                user.setEmail(emailTextField.getText());
-                user.setRole(userType.getValue());
-                user.setCar(modelBox.getValue());
-
-
-                regResult = loginController.createUser(user);
-                if(Boolean.TRUE.equals(regResult)) {
-                    this.registerMessageLabel.setText("Registration successfull");
-                    /*FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("logged-view.fxml"));
-                    stage = (Stage) registerBtn.getScene().getWindow();
-                    Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-                    stage.setScene(scene);*/
-                    stage = (Stage) homeBtn.getScene().getWindow();
-                    UserGraphicChange.getInstance().toLoggedHome(stage);
-                }else{
-                    this.registerMessageLabel.setText("Registration unsuccessfull! Username already in use, please choose a different one!");
-                }
-
-            } else {
-                registerMessageLabel.setText("Please enter all required data.");
-            }
-
-    }
     public void init() {
 
     }

@@ -126,11 +126,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                                <TextField fx:id="carTF" prefHeight="26.0" prefWidth="448.0" promptText="Car model">
-                              <font>
-                                 <Font size="18.0" />
-                              </font>
-                           </TextField>
+                           <ComboBox fx:id="modelComboBox" prefWidth="150.0" promptText="Change your car model" />
                                 <VBox prefHeight="123.0" prefWidth="448.0">
                                     <children>
                                         <Label prefHeight="32.0" prefWidth="273.0" style="-fx-font-weight: bold; -fx-font-size: 13; -fx-font-style: italic;" text="Choose a profile picture:" />

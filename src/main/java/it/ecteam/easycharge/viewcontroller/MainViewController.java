@@ -1,10 +1,7 @@
 package it.ecteam.easycharge.viewcontroller;
 
 import it.ecteam.easycharge.MainApplication;
-import it.ecteam.easycharge.bean.ChargingStationBean;
-import it.ecteam.easycharge.bean.ConnectorBean;
-import it.ecteam.easycharge.bean.ReportBean;
-import it.ecteam.easycharge.bean.UserBean;
+import it.ecteam.easycharge.bean.*;
 import it.ecteam.easycharge.controller.ReportController;
 import it.ecteam.easycharge.controller.UserController;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
@@ -77,8 +74,11 @@ public class MainViewController extends StackPane implements Initializable  {
     private Pane reportPane;
     @FXML
     private Pane issuePane;
+    @FXML
+    private CheckBox connectorBox;
 
     private UserGraphicChange ugc;
+    private UserBean ub = SessionUser.getInstance().getSession();
 
     private List<ChargingStationBean> chargingStationList = new ArrayList<>();
     private List<ConnectorBean> connectorBeanList = new ArrayList<>();
@@ -113,12 +113,6 @@ public class MainViewController extends StackPane implements Initializable  {
     protected void onUserClick() throws IOException {
         stage = (Stage) homeBtn.getScene().getWindow();
         this.ugc.toUser(stage);
-        /*FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("settings-view.fxml"));
-        stage = (Stage) homeBtn.getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-        stage.setScene(scene);
-        SettingsViewController svc = new SettingsViewController();
-        svc.init();*/
     }
 
     @FXML
@@ -140,13 +134,58 @@ public class MainViewController extends StackPane implements Initializable  {
 
     @FXML
     protected void onSliderRelease() {
+        UserController uc = new UserController();
+
         rangeLabel.setText(((int) slider.getValue())/1000 + "km");
         listView.getItems().clear();
+
         try {
             chargingStationList = MapController.getNearby((int) slider.getValue()); //radius range 1 to 50000
-            int i;
-            for (i = 0; i < chargingStationList.size(); i++) {
-                listView.getItems().add(i+1+". "+chargingStationList.get(i).getName()+"\n"+chargingStationList.get(i).getFreeformAddress()+"\n     ");
+            if(connectorBox != null && connectorBox.isSelected()){
+                CarBean cb = uc.getCar(userMainLabel.getText());
+                int i;
+                for (i = 0; i < chargingStationList.size(); i++) {
+                    connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(i).getId());
+                    int k;
+                    for(k = 0; k < connectorBeanList.size(); k++) {
+                        if (Objects.equals(connectorBeanList.get(k).getType(), cb.getConnectorType()))
+                            listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + "\n     ");
+                    }
+                }
+            }else{
+                int i;
+                for (i = 0; i < chargingStationList.size(); i++) {
+                    listView.getItems().add(i+1+". "+chargingStationList.get(i).getName()+"\n"+chargingStationList.get(i).getFreeformAddress()+"\n     ");
+                }
+            }
+
+        } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    protected void onCheckBox() {
+        listView.getItems().clear();
+        UserController uc = new UserController();
+        CarBean cb = uc.getCar(userMainLabel.getText());
+        try {
+            chargingStationList = MapController.getNearby((int) slider.getValue()); //radius range 1 to 50000
+            if(!connectorBox.isSelected()){
+                int i;
+                for (i = 0; i < chargingStationList.size(); i++) {
+                    listView.getItems().add(i+1+". "+chargingStationList.get(i).getName()+"\n"+chargingStationList.get(i).getFreeformAddress()+"\n     ");
+                }
+            }else{
+                int i;
+                for (i = 0; i < chargingStationList.size(); i++) {
+                    connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(i).getId());
+                    int k;
+                    for(k = 0; k < connectorBeanList.size(); k++) {
+                        if (Objects.equals(connectorBeanList.get(k).getType(), cb.getConnectorType()))
+                            listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + "\n     ");
+                    }
+                }
             }
         } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
             e.printStackTrace();
@@ -280,9 +319,8 @@ public class MainViewController extends StackPane implements Initializable  {
     @FXML
     protected void onFavoriteOffBtnClick(){
         UserController uc = new UserController();
-        UserBean ub = SessionUser.getInstance().getSession();
 
-        uc.setFavorite(ub.getUsername(), csid);
+        uc.setFavorite(userMainLabel.getText(), csid);
         favoriteOnBtn.setVisible(true);
         favoriteOffBtn.setVisible(false);
     }
@@ -317,7 +355,7 @@ public class MainViewController extends StackPane implements Initializable  {
 
         this.ugc = UserGraphicChange.getInstance();
         //init nameBar
-        UserBean ub = SessionUser.getInstance().getSession();
+
         if (ub != null) {
             userMainLabel.setText(ub.getUsername());
             reportPane.setVisible(false);

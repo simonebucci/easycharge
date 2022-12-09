@@ -69,12 +69,10 @@
                     </font></Label>
                 <VBox layoutX="293.0" layoutY="180.0" spacing="20.0">
                     <children>
-                        <TextField fx:id="emailTextField" prefHeight="26.0" prefWidth="448.0" promptText="Email" />
-                        <TextField fx:id="usernameTextField" prefHeight="26.0" prefWidth="448.0" promptText="Username" />
-                        <PasswordField fx:id="passwordPasswordField" prefHeight="26.0" prefWidth="448.0" promptText="Password" />
-                  <ComboBox fx:id="modelBox" onMouseClicked="#onCarModelClick" prefWidth="150.0" promptText="Car model" />
                         <VBox prefHeight="123.0" prefWidth="448.0">
                             <children>
+                                <Label prefHeight="32.0" prefWidth="144.0" style="-fx-font-weight: bold; -fx-font-size: 13; -fx-font-style: italic;" text="Type of user" />
+                                <ComboBox fx:id="userType" onAction="#onUserTypeClick" prefHeight="28.0" prefWidth="448.0" />
                                 <Label prefHeight="32.0" prefWidth="273.0" style="-fx-font-weight: bold; -fx-font-size: 13; -fx-font-style: italic;" text="Choose a profile picture:" />
                                 <HBox prefHeight="53.0" prefWidth="448.0" spacing="10.0">
                                     <children>
@@ -86,11 +84,21 @@
                                         </Label>
                                     </children>
                                 </HBox>
-                                <Label prefHeight="32.0" prefWidth="144.0" style="-fx-font-weight: bold; -fx-font-size: 13; -fx-font-style: italic;" text="Type of user" />
-                                <ComboBox fx:id="userType" onMouseClicked="#onUserTypeClick" prefHeight="28.0" prefWidth="448.0" />
                             </children>
                         </VBox>
-                  <Label fx:id="registerMessageLabel" textFill="RED" />
+                        <TextField fx:id="emailTextField" prefHeight="26.0" prefWidth="448.0" promptText="Email" />
+                        <TextField fx:id="usernameTextField" prefHeight="26.0" prefWidth="448.0" promptText="Username" />
+                        <PasswordField fx:id="passwordPasswordField" prefHeight="26.0" prefWidth="448.0" promptText="Password" />
+                  <Pane prefHeight="0.0" prefWidth="448.0">
+                     <children>
+                        <ComboBox fx:id="modelBox" onMouseClicked="#onCarModelClick" prefWidth="150.0" promptText="Car model" />
+                        <TextField fx:id="businessTextField" prefHeight="26.0" prefWidth="448.0" promptText="Business name" />
+                     </children>
+                  </Pane>
+                  <Label fx:id="registerMessageLabel" textFill="RED">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin></Label>
                         <Button fx:id="registerBtn" mnemonicParsing="false" onAction="#onRegisterClick" style="-fx-text-fill: white; -fx-background-color: #66ABEA;" text="Register" />
                     </children>
                 </VBox>

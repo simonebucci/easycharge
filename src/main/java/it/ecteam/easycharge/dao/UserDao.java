@@ -136,5 +136,21 @@ public class UserDao extends DaoTemplate {
 
         return Collections.emptyList();
     }
+
+    public Boolean changeUserCar(String username, String model) {
+        return this.execute(() -> {
+            Connection con = DataBaseConnection.getConnection();
+            String sql = "call easycharge.change_car(?, ?);\r\n";
+
+
+            try (PreparedStatement stm = con.prepareStatement(sql)) {
+                stm.setString(1, username);
+                stm.setString(2, model);
+                stm.executeUpdate();
+            }
+
+            return true;
+        }) != null;
+    }
     }
 
