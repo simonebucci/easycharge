@@ -52,7 +52,7 @@
                                       <Font size="16.0" />
                                   </font>
                               </Button>
-                              <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#onRegisterClick" style="-fx-background-color: #66ABEA;" text="Register" textFill="WHITE">
+                              <Button fx:id="registerBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onRegisterClick" onMouseClicked="#onRegisterClick" style="-fx-background-color: #66ABEA;" text="Register" textFill="WHITE">
                                   <font>
                                       <Font size="16.0" />
                                   </font>
@@ -73,11 +73,73 @@
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
             <WebView fx:id="webMap" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+             <Pane fx:id="issuePane" layoutX="485.0" layoutY="191.0" prefHeight="237.0" prefWidth="310.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="242.0" AnchorPane.rightAnchor="5.0">
+                 <children>
+                     <VBox prefHeight="200.0" prefWidth="306.0">
+                         <children>
+                             <HBox prefHeight="36.0" prefWidth="306.0">
+                                 <children>
+                                     <Label text="Reported issues:">
+                                         <font>
+                                             <Font size="16.0" />
+                                         </font>
+                                         <HBox.margin>
+                                             <Insets top="5.0" />
+                                         </HBox.margin>
+                                     </Label>
+                                     <Button mnemonicParsing="false" onAction="#onCloseIssueClick" style="-fx-background-color: #66ABEA;" text="X" textFill="WHITE">
+                                         <HBox.margin>
+                                             <Insets bottom="5.0" left="160.0" top="5.0" />
+                                         </HBox.margin>
+                                     </Button>
+                                 </children>
+                                 <VBox.margin>
+                                     <Insets left="5.0" />
+                                 </VBox.margin>
+                             </HBox>
+                             <ListView fx:id="riView" prefHeight="200.0" prefWidth="200.0" />
+                         </children>
+                     </VBox>
+                 </children>
+             </Pane>
          </children>
       </AnchorPane>
    </center>
       <right>
-         <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+          <VBox prefHeight="670.0" prefWidth="280.0" BorderPane.alignment="CENTER">
+              <children>
+                  <Label fx:id="rangeLabel" style="-fx-font-weight: BOLD;">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+                  <padding>
+                     <Insets left="5.0" />
+                  </padding></Label>
+                  <Slider fx:id="slider" max="50000.0" min="1.0" onMouseDragged="#onSliderMove" onMouseReleased="#onSliderRelease" value="4000.0" />
+               <ListView fx:id="listView" onMouseClicked="#onItemSelected" prefHeight="521.0" prefWidth="265.0" />
+                  <HBox>
+                      <children>
+                          <Label fx:id="csLabel" style="-fx-font-weight: BOLD;">
+                              <font>
+                                  <Font size="16.0" />
+                              </font>
+                              <padding>
+                                  <Insets top="5.0" />
+                              </padding>
+                          </Label>
+                          <Button fx:id="issueBtn" mnemonicParsing="false" onAction="#onIssueClick" prefHeight="14.0" prefWidth="23.0" style="-fx-background-color: #c90000;" text="!" textFill="WHITE">
+                              <HBox.margin>
+                                  <Insets bottom="5.0" top="5.0" />
+                              </HBox.margin>
+                          </Button>
+                      </children>
+                  </HBox>
+               <ListView fx:id="connectorView" />
+              </children>
+            <BorderPane.margin>
+               <Insets />
+            </BorderPane.margin>
+          </VBox>
       </right>
 </BorderPane>
 </AnchorPane>

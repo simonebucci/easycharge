@@ -2,7 +2,9 @@ package it.ecteam.easycharge.viewcontroller;
 
 import it.ecteam.easycharge.MainApplication;
 import it.ecteam.easycharge.bean.CarBean;
+import it.ecteam.easycharge.bean.UserBean;
 import it.ecteam.easycharge.controller.UserController;
+import it.ecteam.easycharge.utils.SessionUser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,7 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SettingsViewController extends MainApplication implements Initializable {
+public class SettingsViewController implements Initializable {
     private Stage stage = new Stage();
 
     @FXML
@@ -24,43 +26,36 @@ public class SettingsViewController extends MainApplication implements Initializ
     @FXML
     private TextField carTF;
     @FXML
-    private TextField capacityTF;
-    @FXML
-    private TextField rangeTF;
-    @FXML
-    private TextField cTypeTF;
-    @FXML
     private VBox settingsVB;
     @FXML
-    private Label carLabel;
+    private Label carLabel = new Label();
     @FXML
-    private Label capacityLabel;
+    private Label capacityLabel = new Label();
     @FXML
-    private Label rangeLabel;
+    private Label rangeLabel = new Label();
     @FXML
-    private Label cTypeLabel;
+    private Label cTypeLabel = new Label();
     @FXML
-    private Label usernameLabel;
+    private Label usernameLabel = new Label();;
     @FXML
     private Label userLabel;
     @FXML
     private Button modifyBtn;
+    @FXML
+    private Button logoutBtn;
+
+    private UserGraphicChange ugc;
 
     @FXML
-    protected void onHomeLoggedClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-logged-view.fxml"));
+    protected void onHomeLoggedClick() {
         stage = (Stage) homeBtn.getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-        stage.setScene(scene);
+        this.ugc.toLoggedHome(stage);
     }
 
     @FXML
     protected void saveAction() {
         settingsVB.setVisible(false);
-        carLabel.setText(carTF.getText());
-        capacityLabel.setText(capacityTF.getText());
-        rangeLabel.setText(rangeTF.getText());
-        cTypeLabel.setText(cTypeTF.getText());
+
         modifyBtn.setVisible(true);
 
     }
@@ -71,15 +66,31 @@ public class SettingsViewController extends MainApplication implements Initializ
         modifyBtn.setVisible(false);
     }
 
+    @FXML
+    protected void onLogoutClick(){
+        SessionUser.getInstance().closeSession();
+        stage = (Stage) logoutBtn.getScene().getWindow();
+        this.ugc.toLogin(stage);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        UserController userController = new UserController();
-        CarBean cb = new CarBean();
+        this.ugc = UserGraphicChange.getInstance();
+        UserBean ub = SessionUser.getInstance().getSession();
 
-        cb = userController.getCar("niko");
+        this.usernameLabel.setText(ub.getUsername());
+
+        UserController userController = new UserController();
+        CarBean cb = userController.getCar(ub.getUsername());;
+
         this.carLabel.setText(cb.getName());
-        this.capacityLabel.setText(cb.getCapacity());
-        this.rangeLabel.setText(cb.getRange());
+        this.capacityLabel.setText(cb.getCapacity()+"kWh");
+        this.rangeLabel.setText(cb.getRange()+"Km");
         this.cTypeLabel.setText(cb.getConnectorType());
     }
+
+    public void init() {
+
+    }
+
 }

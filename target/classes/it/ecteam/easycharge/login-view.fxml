@@ -38,7 +38,7 @@
             <Pane HBox.hgrow="ALWAYS" />
             <HBox alignment="CENTER_RIGHT">
                <children>
-                  <Button mnemonicParsing="false" style="-fx-background-color: #66ABEA;" text="Register" textFill="WHITE">
+                  <Button fx:id="registerBtn" mnemonicParsing="false" onAction="#onRegisterClick" style="-fx-background-color: #66ABEA;" text="Register" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>

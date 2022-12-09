@@ -1,5 +1,6 @@
 package it.ecteam.easycharge;
 
+import it.ecteam.easycharge.viewcontroller.MainViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,6 +18,8 @@ public class MainApplication extends Application {
         stage.setTitle("EasyCharge");
         stage.setMinWidth(1080);
         stage.setMinHeight(720);
+        MainViewController mvc = fxmlLoader.getController();
+        mvc.init();
         stage.setScene(scene);
         stage.show();
     }

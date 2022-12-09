@@ -31,8 +31,8 @@ public class MapController {
 
     }
 
-	private static final String APIKEY = "";
-    private static final String GAPIKEY = "";
+    private static final String APIKEY = "csPBICaGiqrDG1YIKGXg4alunzBPez4I";
+    private static final String GAPIKEY = "AIzaSyDMIX9Bb7__E4QHG19h9jzH-SDEbN7IE5k";
 
     public static List<ChargingStationBean> getNearby(int radius) throws IOException, ParseException, LocationNotFoundException, org.json.simple.parser.ParseException, ChargingStationNotFoundException {
 
@@ -62,7 +62,7 @@ public class MapController {
         StringBuilder str = new StringBuilder();
 
         //Request to the geocoding service
-        URL locationUrl = new URL("https://ipgeolocation.abstractapi.com/v1/?api_key=");
+        URL locationUrl = new URL("https://ipgeolocation.abstractapi.com/v1/?api_key=01c233c3ae9c4e8aad50179916b11dd8");
         URLConnection location = locationUrl.openConnection();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(
@@ -85,8 +85,6 @@ public class MapController {
 
         double lat = (double) object.get("latitude");
         double lng = (double) object.get("longitude");
-
-        System.out.println(lat+" "+lng);
 
         return "lat="+lat+"&lon="+lng;
     }
@@ -187,7 +185,7 @@ public class MapController {
 
             coord.add(lat);
             coord.add(lng);
-            System.out.println(lat+","+lng);
+
             return coord;
         }
 

@@ -13,6 +13,10 @@ public class Car {
         this.connectorType = cType;
     }
 
+    public Car(String name){
+        this.name = name;
+    }
+
     public String getName(){ return name; }
     public String getCapacity(){ return capacity; }
     public String getRange(){ return range; }

@@ -1,9 +1,11 @@
 package it.ecteam.easycharge.viewcontroller;
 
 import it.ecteam.easycharge.MainApplication;
+import it.ecteam.easycharge.bean.CarBean;
 import it.ecteam.easycharge.bean.UserBean;
 import it.ecteam.easycharge.controller.LoginController;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,9 +14,10 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class RegisterViewController extends MainApplication implements Initializable {
+public class RegisterViewController implements Initializable {
     private Stage stage = new Stage();
 
     @FXML
@@ -26,25 +29,21 @@ public class RegisterViewController extends MainApplication implements Initializ
     @FXML
     private ComboBox<String> userType;
     @FXML
+    private ComboBox<String> modelBox;
+    @FXML
     private Button routeBtn;
     @FXML
     private TextField usernameTextField;
     @FXML
     private TextField emailTextField;
     @FXML
-    private TextField acTextField;
-    @FXML
-    private TextField dcTextField;
-    @FXML
-    private TextField carTextField;
-    @FXML
-    private TextField batteryTextField;
-    @FXML
-    private TextField rangeTextField;
-    @FXML
     private PasswordField passwordPasswordField;
     @FXML
     private Label registerMessageLabel;
+
+    private UserGraphicChange ugc;
+
+    private static CarBean carBean = new CarBean();
 
     @FXML
     protected void onLoginClick() throws IOException {
@@ -73,8 +72,13 @@ public class RegisterViewController extends MainApplication implements Initializ
     }
 
     @FXML
+    protected void onCarModelClick() {
+
+    }
+
+    @FXML
     protected void onRegisterButtonClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-logged-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("logged-view.fxml"));
         stage = (Stage) registerBtn.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
         stage.setScene(scene);
@@ -90,8 +94,18 @@ public class RegisterViewController extends MainApplication implements Initializ
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
-        this.userType.setItems(FXCollections.observableArrayList("Normal User", "Business User"));
+        this.ugc = UserGraphicChange.getInstance();
 
+        List<CarBean> cb = LoginController.getCar();
+
+        ObservableList<String> oal = FXCollections.observableArrayList();
+        int i;
+        for(i=0; i<cb.size(); i++){
+            oal.add(cb.get(i).getName());
+        }
+        this.modelBox.setItems(oal);
+
+        this.userType.setItems(FXCollections.observableArrayList("user", "business"));
     }
 
     @FXML
@@ -99,20 +113,24 @@ public class RegisterViewController extends MainApplication implements Initializ
         LoginController loginController = new LoginController();
         boolean regResult;
 
-            if (!usernameTextField.getText().isBlank() && !passwordPasswordField.getText().isBlank() && !emailTextField.getText().isBlank() && !carTextField.getText().isBlank() && !dcTextField.getText().isBlank() && !acTextField.getText().isBlank() && !batteryTextField.getText().isBlank() && !rangeTextField.getText().isBlank()) {
+            if (!usernameTextField.getText().isBlank() && !passwordPasswordField.getText().isBlank() && !emailTextField.getText().isBlank() && !modelBox.getValue().isBlank() && !userType.getValue().isBlank()) {
                 UserBean user = new UserBean();
                 user.setUsername(usernameTextField.getText());
                 user.setPassword(passwordPasswordField.getText());
                 user.setEmail(emailTextField.getText());
+                user.setRole(userType.getValue());
+                user.setCar(modelBox.getValue());
 
 
                 regResult = loginController.createUser(user);
                 if(Boolean.TRUE.equals(regResult)) {
                     this.registerMessageLabel.setText("Registration successfull");
-                    FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-logged-view.fxml"));
+                    /*FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("logged-view.fxml"));
                     stage = (Stage) registerBtn.getScene().getWindow();
                     Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-                    stage.setScene(scene);
+                    stage.setScene(scene);*/
+                    stage = (Stage) homeBtn.getScene().getWindow();
+                    UserGraphicChange.getInstance().toLoggedHome(stage);
                 }else{
                     this.registerMessageLabel.setText("Registration unsuccessfull! Username already in use, please choose a different one!");
                 }
@@ -120,6 +138,9 @@ public class RegisterViewController extends MainApplication implements Initializ
             } else {
                 registerMessageLabel.setText("Please enter all required data.");
             }
+
+    }
+    public void init() {
 
     }
 

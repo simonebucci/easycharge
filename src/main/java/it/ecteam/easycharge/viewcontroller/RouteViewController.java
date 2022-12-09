@@ -3,9 +3,11 @@ package it.ecteam.easycharge.viewcontroller;
 import it.ecteam.easycharge.MainApplication;
 import it.ecteam.easycharge.bean.ChargingStationBean;
 import it.ecteam.easycharge.bean.ConnectorBean;
+import it.ecteam.easycharge.bean.UserBean;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 import it.ecteam.easycharge.controller.MapController;
+import it.ecteam.easycharge.utils.SessionUser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,6 +43,8 @@ public class RouteViewController extends StackPane implements Initializable {
     @FXML
     private WebView webMap;
 
+    private UserGraphicChange ugc;
+
     @FXML
     protected void onLoginClick() throws IOException {
         //fxmlLoader = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login-view.fxml")));
@@ -61,15 +65,13 @@ public class RouteViewController extends StackPane implements Initializable {
 
     @FXML
     protected void onHomeClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
         stage = (Stage) homeBtn.getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-        stage.setScene(scene);
+        this.ugc.toLoggedHome(stage);
     }
 
     @FXML
     protected void onHomeLoggedClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-logged-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("logged-view.fxml"));
         stage = (Stage) homeBtn.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
         stage.setScene(scene);
@@ -119,10 +121,21 @@ public class RouteViewController extends StackPane implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.ugc = UserGraphicChange.getInstance();
+
         try {
             webMap.getEngine().load("https://www.google.com/maps/dir/?api=1&origin="+ MapController.getLocation() +"&destination=Milan,italy&travelmode=driving&waypoint_place_ids=ChIJ5zZx3kNjLxMRAIuXSFIRfwk%ChIJL6pCbOVhLxMRODH8uDzXLDo");
         } catch (IOException | LocationNotFoundException | ParseException e) {
             e.printStackTrace();
         }
+
+        //init nameBar
+        UserBean ub = SessionUser.getInstance().getSession();
+
+        userLabel.setText(ub.getUsername());
+    }
+
+    public void init() {
+
     }
 }

@@ -10,6 +10,7 @@ public class UserBean implements Serializable {
     protected String password;
     protected String email;
     protected String role;
+    protected String car;
     protected String profilePicture;
 
     public void setUsername(String username) {
@@ -36,12 +37,20 @@ public class UserBean implements Serializable {
         return this.email;
     }
 
-    public void setRole(String name) {
-        this.role = name;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getRole() {
         return this.role;
+    }
+
+    public void setCar(String car) {
+        this.car = car;
+    }
+
+    public String getCar() {
+        return this.car;
     }
 
     public void setProfilePicture(String name) {

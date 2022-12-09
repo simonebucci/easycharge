@@ -1,9 +1,16 @@
 package it.ecteam.easycharge.controller;
 
+import it.ecteam.easycharge.bean.CarBean;
 import it.ecteam.easycharge.bean.UserBean;
+import it.ecteam.easycharge.dao.CarDao;
 import it.ecteam.easycharge.dao.UserDao;
+import it.ecteam.easycharge.entity.Car;
 import it.ecteam.easycharge.entity.User;
 import it.ecteam.easycharge.exceptions.LoginEmptyFieldException;
+import it.ecteam.easycharge.utils.Controller;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginController {
 
@@ -32,6 +39,27 @@ public class LoginController {
     public boolean createUser(UserBean user){
         UserDao userDao = new UserDao();
 
-        return userDao.createUser(user.getUsername(), user.getPassword(), user.getEmail());
+        return userDao.createUser(user.getUsername(), user.getPassword(), user.getEmail(), user.getRole(), user.getCar());
+    }
+
+    public static List<CarBean> getCar() {
+        CarDao cd = new CarDao();
+
+        List<Car> result = cd.getModel();
+
+        if (result == null)	{
+            return null;
+        } else {
+            List<CarBean> lcb = new ArrayList<>();
+
+            int i;
+            for(i=0; i < result.size(); i++) {
+                CarBean cb = new CarBean();
+                cb.setName(result.get(i).getName());
+                lcb.add(cb);
+            }
+
+            return lcb;
+        }
     }
 }

@@ -3,26 +3,34 @@ package it.ecteam.easycharge.viewcontroller;
 import it.ecteam.easycharge.MainApplication;
 import it.ecteam.easycharge.bean.ChargingStationBean;
 import it.ecteam.easycharge.bean.ConnectorBean;
+import it.ecteam.easycharge.bean.ReportBean;
+import it.ecteam.easycharge.bean.UserBean;
+import it.ecteam.easycharge.controller.ReportController;
+import it.ecteam.easycharge.controller.UserController;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 import it.ecteam.easycharge.utils.FileManager;
 import it.ecteam.easycharge.controller.MapController;
+import it.ecteam.easycharge.utils.SessionUser;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.*;
 
 public class MainViewController extends StackPane implements Initializable  {
     private Stage stage = new Stage();
@@ -30,107 +38,295 @@ public class MainViewController extends StackPane implements Initializable  {
     @FXML
     private Button loginBtn;
     @FXML
+    private Button registerBtn;
+    @FXML
     private Button homeBtn;
     @FXML
-    private Label userLabel;
+    private Button reportBtn;
+    @FXML
+    private Button issueBtn;
+    @FXML
+    private Button favoriteOnBtn;
+    @FXML
+    private Button favoriteOffBtn;
+    @FXML
+    private Label userMainLabel = new Label();
     @FXML
     private Button routeBtn;
     @FXML
     private WebView webMap;
     @FXML
     private ListView listView;
+    @FXML
+    private ListView connectorView;
+    @FXML
+    private ListView riView;
+    @FXML
+    private Slider slider;
+    @FXML
+    private Label rangeLabel;
+    @FXML
+    private Label csLabel;
+    @FXML
+    private Label alertLabel;
+    @FXML
+    private Label pointLabel;
+    @FXML
+    private TextArea reportTextArea;
+    @FXML
+    private Pane reportPane;
+    @FXML
+    private Pane issuePane;
+
+    private UserGraphicChange ugc;
+
+    private List<ChargingStationBean> chargingStationList = new ArrayList<>();
+    private List<ConnectorBean> connectorBeanList = new ArrayList<>();
+    private List<ReportBean> report = new ArrayList<>();
+    private String csid;
 
     @FXML
-    protected void onLoginClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("login-view.fxml"));
+    protected void onLoginClick() {
         stage = (Stage) loginBtn.getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-        stage.setScene(scene);
+        this.ugc.toLogin(stage);
     }
 
     @FXML
-    protected void onRegisterClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("register-view.fxml"));
-        stage = (Stage) loginBtn.getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-        stage.setScene(scene);
+    protected void onRegisterClick() {
+        stage = (Stage) registerBtn.getScene().getWindow();
+        this.ugc.toRegister(stage);
     }
 
     @FXML
-    protected void onHomeClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
+    protected void onHomeClick() {
+        stage = (Stage) homeBtn.getScene().getWindow();
+        this.ugc.toHome(stage);
+    }
+
+    @FXML
+    protected void onHomeLoggedClick() {
+        stage = (Stage) homeBtn.getScene().getWindow();
+        this.ugc.toLoggedHome(stage);
+    }
+
+    @FXML
+    protected void onUserClick() throws IOException {
+        stage = (Stage) homeBtn.getScene().getWindow();
+        this.ugc.toUser(stage);
+        /*FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("settings-view.fxml"));
         stage = (Stage) homeBtn.getScene().getWindow();
         Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
         stage.setScene(scene);
+        SettingsViewController svc = new SettingsViewController();
+        svc.init();*/
     }
 
     @FXML
-    protected void onHomeLoggedClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-logged-view.fxml"));
+    protected void onRouteLoggedClick() {
         stage = (Stage) homeBtn.getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-        stage.setScene(scene);
+        this.ugc.toRoute(stage);
     }
 
     @FXML
-    protected void onUserClick() throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("settings-view.fxml"));
-        stage = (Stage) userLabel.getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-        stage.setScene(scene);
+    protected void onRouteClick() throws IOException {
+        stage = (Stage) homeBtn.getScene().getWindow();
+        this.ugc.toAuth(stage);
     }
 
     @FXML
-    protected void onRouteLoggedClick() throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("route-logged-view.fxml"));
-        stage = (Stage) userLabel.getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-        stage.setScene(scene);
+    protected void onSliderMove() {
+        rangeLabel.setText(((int) slider.getValue())/1000 + "km");
     }
 
     @FXML
-    protected void onRouteClick() throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("auth-view.fxml"));
-        //FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("route-logged-view.fxml"));
-        stage = (Stage) routeBtn.getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-        stage.setScene(scene);
+    protected void onSliderRelease() {
+        rangeLabel.setText(((int) slider.getValue())/1000 + "km");
+        listView.getItems().clear();
+        try {
+            chargingStationList = MapController.getNearby((int) slider.getValue()); //radius range 1 to 50000
+            int i;
+            for (i = 0; i < chargingStationList.size(); i++) {
+                listView.getItems().add(i+1+". "+chargingStationList.get(i).getName()+"\n"+chargingStationList.get(i).getFreeformAddress()+"\n     ");
+            }
+        } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    protected void onItemSelected(){
+        connectorView.getItems().clear();
+        riView.getItems().clear();
+        issuePane.setVisible(false);
+
+        String selected = listView.getSelectionModel().getSelectedItems().toString();
+        int id;
+        if (selected.charAt(2) == '.'){
+            id = Integer.parseInt(String.valueOf(selected.charAt(1)));
+        }else{
+            id = Integer.parseInt(selected.substring(1, 3));
+        }
+        report = ReportController.getUserReport(String.valueOf(chargingStationList.get(id-1).getId()));
+        csid = chargingStationList.get(id-1).getId();
+
+        UserBean ub = SessionUser.getInstance().getSession();
+        if (ub != null) {
+            reportBtn.setVisible(true);
+            reportPane.setVisible(false);
+            favoriteOffBtn.setVisible(true);
+            favoriteOnBtn.setVisible(false);
+
+            List<ChargingStationBean> favoriteCSB = UserController.getFavorite(ub.getUsername());
+            int i;
+            for(i=0; i<favoriteCSB.size(); i++){
+                if(Objects.equals(favoriteCSB.get(i).getId(), csid)){
+                    favoriteOnBtn.setVisible(true);
+                    favoriteOffBtn.setVisible(false);
+
+                }
+            }
+
+        }
+
+        csLabel.setText(chargingStationList.get(id-1).getName());
+        webMap.getEngine().load("https://www.google.it/maps/place/"+chargingStationList.get(id-1).getLatitude()+","+chargingStationList.get(id-1).getLongitude());
+        int i;
+        try {
+            connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(id-1).getId());
+        } catch (IOException | ChargingStationNotFoundException | ParseException e) {
+            e.printStackTrace();
+        }
+
+        for(i=0; i < connectorBeanList.size(); i++) {
+            connectorView.getItems().add("Type:"+ connectorBeanList.get(i).getType() + "\nTotal: " + connectorBeanList.get(i).getTotal() + "\nAvailable: " + connectorBeanList.get(i).getAvailable() + "\nOccupied: " + connectorBeanList.get(i).getOccupied() + "\nReserved: " + connectorBeanList.get(i).getReserved() + "\nUnknown: " + connectorBeanList.get(i).getUnknown() + "\nOutOfService: " + connectorBeanList.get(i).getOutOfService() + "\n     ");
+        }
+
+        issueBtn.setVisible(!report.isEmpty());
+    }
+
+    @FXML
+    protected void onSendReportClick() {
+        ReportController reportController = new ReportController();
+        String selected = listView.getSelectionModel().getSelectedItems().toString();
+        int id = Integer.parseInt(String.valueOf(selected.charAt(1)));
+
+        reportController.reportCS(chargingStationList.get(id-1).getId(), userMainLabel.getText(), reportTextArea.getText());
+
+        alertLabel.setText("Report sent, thank you!");
+        alertLabel.setVisible(true);
+        reportTextArea.clear();
+
+    }
+
+    @FXML
+    protected void onReportClick(){
+        reportPane.setVisible(true);
+        reportBtn.setVisible(false);
+    }
+
+    @FXML
+    protected void onCloseClick(){
+        reportPane.setVisible(false);
+        reportTextArea.clear();
+        reportBtn.setVisible(true);
+        alertLabel.setText("");
+    }
+    @FXML
+    protected void onCloseIssueClick(){
+        issuePane.setVisible(false);
+    }
+
+    @FXML
+    protected void onIssueClick(){
+        issuePane.setVisible(true);
+        riView.getItems().clear();
+        pointLabel.setText("");
+        int i;
+        for(i=0; i < report.size(); i++) {
+            riView.getItems().add(report.get(i).getUsername() + "\nsaid: " + report.get(i).getComment() + "\nDate: " + report.get(i).getDate()+ "\nLikes: " + report.get(i).getPoint() +"\n     ");
+        }
+    }
+
+    @FXML
+    protected void onPointBtnClick(){
+        ReportController rc = new ReportController();
+        UserBean ub = SessionUser.getInstance().getSession();
+
+        String selected = riView.getSelectionModel().getSelectedItems().toString();
+        if(!Objects.equals(selected, "[]")) {
+            String[] arrOfStr = selected.split("\n");
+
+            String username = arrOfStr[0];
+            username = username.replace("[", "");
+
+            String date = arrOfStr[2];
+            date = date.replace("Date: ", "");
+            Date dateFormatted = java.sql.Date.valueOf(date);
+
+            if (Objects.equals(ub.getUsername(), username)) {
+                pointLabel.setText("You can't give a like to your self.");
+                pointLabel.setTextFill(Color.RED);
+            } else {
+                rc.givePointToUser(username, csid, dateFormatted);
+                pointLabel.setText("You liked the selected report!");
+                pointLabel.setTextFill(Color.GREEN);
+            }
+        }else{
+            pointLabel.setText("You must select a report.");
+            pointLabel.setTextFill(Color.RED);
+        }
+    }
+
+    @FXML
+    protected void onFavoriteOffBtnClick(){
+        UserController uc = new UserController();
+        UserBean ub = SessionUser.getInstance().getSession();
+
+        uc.setFavorite(ub.getUsername(), csid);
+        favoriteOnBtn.setVisible(true);
+        favoriteOffBtn.setVisible(false);
+    }
+
+    @FXML
+    protected void onFavoriteOnBtnClick(){
+        UserController uc = new UserController();
+        UserBean ub = SessionUser.getInstance().getSession();
+
+        uc.deleteFavorite(ub.getUsername(), csid);
+        favoriteOnBtn.setVisible(false);
+        favoriteOffBtn.setVisible(true);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        List<ChargingStationBean> chargingStationList = new ArrayList<>();
-        List<ConnectorBean> connectorBeanList = new ArrayList<>();
+        issuePane.setVisible(false);
+        issueBtn.setVisible(false);
 
-        webMap.getEngine().load("https://www.google.it/maps/search/ev+charging+stations/");
+        webMap.getEngine().load("https://www.google.it/maps/");
+        rangeLabel.setText(((int) slider.getValue())/1000 + "km");
 
         try {
-            chargingStationList = MapController.getNearby(4000); //radius range 1 to 50000
+            chargingStationList = MapController.getNearby((int)slider.getValue()); //radius range 1 to 50000
             int i;
             for(i=0; i < chargingStationList.size(); i++){
-                System.out.println(chargingStationList.get(i).getName());
-                System.out.println(chargingStationList.get(i).getId());
-                System.out.println(chargingStationList.get(i).getFreeformAddress());
-                System.out.println(chargingStationList.get(i).getLatitude());
-                System.out.println(chargingStationList.get(i).getLongitude());
-                connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(i).getId());
-                int k;
-                for(k=0; k < connectorBeanList.size(); k++) {
-                    System.out.println("Type:"+ connectorBeanList.get(k).getType());
-                    System.out.println("Total:"+ connectorBeanList.get(k).getTotal());
-                    System.out.println("Available:"+ connectorBeanList.get(k).getAvailable());
-                    System.out.println("Occupied:"+ connectorBeanList.get(k).getOccupied());
-                    System.out.println("Reserved:"+ connectorBeanList.get(k).getReserved());
-                    System.out.println("Unknown:"+ connectorBeanList.get(k).getUnknown());
-                    System.out.println("OutOfService:"+ connectorBeanList.get(k).getOutOfService());
-                    System.out.println("-----");
-                }
-                System.out.println("--------------");
+                listView.getItems().add(i+1+". "+chargingStationList.get(i).getName()+"\n"+chargingStationList.get(i).getFreeformAddress()+"\n     ");
             }
         } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
             e.printStackTrace();
         }
 
+        this.ugc = UserGraphicChange.getInstance();
+        //init nameBar
+        UserBean ub = SessionUser.getInstance().getSession();
+        if (ub != null) {
+            userMainLabel.setText(ub.getUsername());
+            reportPane.setVisible(false);
+            reportBtn.setVisible(false);
+            favoriteOnBtn.setVisible(false);
+            favoriteOffBtn.setVisible(false);
+        }
     }
 
+    public void init() {
+    }
 }

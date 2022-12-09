@@ -72,11 +72,7 @@
                         <TextField fx:id="emailTextField" prefHeight="26.0" prefWidth="448.0" promptText="Email" />
                         <TextField fx:id="usernameTextField" prefHeight="26.0" prefWidth="448.0" promptText="Username" />
                         <PasswordField fx:id="passwordPasswordField" prefHeight="26.0" prefWidth="448.0" promptText="Password" />
-                        <TextField fx:id="carTextField" prefHeight="26.0" prefWidth="448.0" promptText="Car model" />
-                        <TextField fx:id="batteryTextField" prefHeight="26.0" prefWidth="448.0" promptText="Battery capacity (kWh)" />
-                        <TextField fx:id="rangeTextField" prefHeight="26.0" prefWidth="448.0" promptText="Electric Range (Km)" />
-                  <TextField fx:id="acTextField" promptText="AC charging speed (kWh)" />
-                  <TextField fx:id="dcTextField" promptText="DC charging speed (kWh)" />
+                  <ComboBox fx:id="modelBox" onMouseClicked="#onCarModelClick" prefWidth="150.0" promptText="Car model" />
                         <VBox prefHeight="123.0" prefWidth="448.0">
                             <children>
                                 <Label prefHeight="32.0" prefWidth="273.0" style="-fx-font-weight: bold; -fx-font-size: 13; -fx-font-style: italic;" text="Choose a profile picture:" />

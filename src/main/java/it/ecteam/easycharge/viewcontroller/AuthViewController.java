@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-public class AuthViewController extends MainApplication {
+public class AuthViewController {
     private Stage stage = new Stage();
 
     @FXML

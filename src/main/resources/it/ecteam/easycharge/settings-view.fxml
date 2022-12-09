@@ -131,21 +131,6 @@
                                  <Font size="18.0" />
                               </font>
                            </TextField>
-                                <TextField fx:id="capacityTF" prefHeight="26.0" prefWidth="448.0" promptText="Battery Capacity (kWh)">
-                              <font>
-                                 <Font size="18.0" />
-                              </font>
-                           </TextField>
-                                <TextField fx:id="rangeTF" prefHeight="26.0" prefWidth="448.0" promptText="Electric range (km)">
-                              <font>
-                                 <Font size="18.0" />
-                              </font>
-                           </TextField>
-                                <TextField fx:id="cTypeTF" prefHeight="26.0" prefWidth="448.0" promptText="AC charging speed (kWh)">
-                              <font>
-                                 <Font size="18.0" />
-                              </font>
-                           </TextField>
                                 <VBox prefHeight="123.0" prefWidth="448.0">
                                     <children>
                                         <Label prefHeight="32.0" prefWidth="273.0" style="-fx-font-weight: bold; -fx-font-size: 13; -fx-font-style: italic;" text="Choose a profile picture:" />
@@ -210,19 +195,15 @@
                       </HBox>
                       <Pane HBox.hgrow="ALWAYS" />
                   <HBox alignment="CENTER_RIGHT">
-                     <children>
-                        <Label fx:id="userLabel" alignment="CENTER" textFill="WHITE">
-                              <font>
-                                 <Font size="16.0" />
-                              </font>
-                              <HBox.margin>
-                                 <Insets />
-                              </HBox.margin>
-                               </Label>
-                     </children>
                         <padding>
                            <Insets right="10.0" />
                         </padding>
+                        <children>
+                           <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#onLogoutClick" prefHeight="38.0" prefWidth="86.0" style="-fx-background-color: #FFFFFF;" text="Logout" textFill="#66abea">
+                              <font>
+                                 <Font size="16.0" />
+                              </font></Button>
+                        </children>
                   </HBox>
                   </items>
               </ToolBar>

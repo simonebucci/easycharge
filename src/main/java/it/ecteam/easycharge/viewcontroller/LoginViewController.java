@@ -4,6 +4,7 @@ import it.ecteam.easycharge.MainApplication;
 import it.ecteam.easycharge.bean.UserBean;
 import it.ecteam.easycharge.controller.LoginController;
 import it.ecteam.easycharge.exceptions.LoginEmptyFieldException;
+import it.ecteam.easycharge.utils.SessionUser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,11 +16,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class LoginViewController extends MainApplication {
+public class LoginViewController {
     private Stage stage = new Stage();
 
     @FXML
     private Button loginBtn;
+    @FXML
+    private Button registerBtn;
     @FXML
     private Button homeBtn;
     @FXML
@@ -31,21 +34,24 @@ public class LoginViewController extends MainApplication {
     @FXML
     private Label loginMessageLabel;
 
+    private UserGraphicChange ugc;
 
     @FXML
     protected void onHomeClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
-        stage = (Stage) homeBtn.getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-        stage.setScene(scene);
+        stage = (Stage) registerBtn.getScene().getWindow();
+        this.ugc.toHome(stage);
     }
 
     @FXML
     protected void onRouteClick() throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("auth-view.fxml"));
-        stage = (Stage) routeBtn.getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-        stage.setScene(scene);
+        stage = (Stage) registerBtn.getScene().getWindow();
+        this.ugc.toAuth(stage);
+    }
+
+    @FXML
+    protected void onRegisterClick() {
+        stage = (Stage) registerBtn.getScene().getWindow();
+        this.ugc.toRegister(stage);
     }
 
     @FXML
@@ -64,33 +70,37 @@ public class LoginViewController extends MainApplication {
                 this.usernameTextField.setText("");
                 this.passwordPasswordField.setText("");
             }else {
-                /*/String role=u.getRole();
+                String role=u.getRole();
 
-                /SET SESSION GENERAL USER
+                //SET SESSION GENERAL USER
                 SessionUser su=SessionUser.getInstance();
-                su.setSession(gu);
+                su.setSession(u);
 
                 switch(role) {
                     case "user":
-                        UserGraphicChange.getInstance().toHomepage(this.usernameTextField.getScene());
+                        stage = (Stage) homeBtn.getScene().getWindow();
+                        UserGraphicChange.getInstance().toLoggedHome(stage);
                         break;
                     case "business":
                         //set business homepage controller
-                        ArtistGraphicChange.getInstance().toHomepage(this.usernameTextField.getScene());
+                        //BusinessGraphicChange.getInstance().toHomepage(this.usernameTextField.getScene());
                         break;
                     default:
                         break;
-                }*/
-                FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-logged-view.fxml"));
-                stage = (Stage) loginBtn.getScene().getWindow();
-                Scene scene = new Scene(fxmlLoader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-                stage.setScene(scene);
+                }
+
             }
         }
-        catch(LoginEmptyFieldException | IOException e) {
+        catch(LoginEmptyFieldException e) {
             this.loginMessageLabel.setText(e.getMessage());
+
         }
 
     }
+
+    public void init() {
+        this.ugc = UserGraphicChange.getInstance();
+    }
+
 
 }
