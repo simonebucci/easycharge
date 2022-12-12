@@ -31,9 +31,9 @@ public class MapController {
 
     }
 
-    private static final String APIKEY = "csPBICaGiqrDG1YIKGXg4alunzBPez4I";
-    private static final String GAPIKEY = "AIzaSyDMIX9Bb7__E4QHG19h9jzH-SDEbN7IE5k";
-    private static final String LAPIKEY = "01c233c3ae9c4e8aad50179916b11dd8";
+    private static final String APIKEY = "";
+    private static final String GAPIKEY = "";
+    private static final String LAPIKEY = "";
 
     public static List<ChargingStationBean> getNearby(int radius) throws IOException, ParseException, LocationNotFoundException, org.json.simple.parser.ParseException, ChargingStationNotFoundException {
 
