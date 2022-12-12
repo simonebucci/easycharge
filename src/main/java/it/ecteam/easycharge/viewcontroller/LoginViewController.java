@@ -1,14 +1,11 @@
 package it.ecteam.easycharge.viewcontroller;
 
-import it.ecteam.easycharge.MainApplication;
 import it.ecteam.easycharge.bean.UserBean;
 import it.ecteam.easycharge.controller.LoginController;
 import it.ecteam.easycharge.exceptions.LoginEmptyFieldException;
 import it.ecteam.easycharge.utils.SessionUser;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -86,7 +83,8 @@ public class LoginViewController implements Initializable {
                         break;
                     case "business":
                         //set business homepage controller
-                        //BusinessGraphicChange.getInstance().toHomepage(this.usernameTextField.getScene());
+                        stage = (Stage) homeBtn.getScene().getWindow();
+                        BusinessGraphicChange.getInstance().toLoggedHome(stage);
                         break;
                     default:
                         break;

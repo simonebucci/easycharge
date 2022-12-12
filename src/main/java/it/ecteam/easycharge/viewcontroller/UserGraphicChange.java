@@ -35,6 +35,7 @@ public class UserGraphicChange extends GraphicChangeTemplate {
             }
         });
     }
+
     public void toUser(Stage stage){
         this.catcher(new GraphicChangeAction() {
             @Override

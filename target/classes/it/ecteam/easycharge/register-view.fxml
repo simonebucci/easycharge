@@ -95,6 +95,11 @@
                         <TextField fx:id="businessTextField" prefHeight="26.0" prefWidth="448.0" promptText="Business name" />
                      </children>
                   </Pane>
+                  <TextField fx:id="baddressTextField" prefHeight="26.0" prefWidth="448.0" promptText="Business address">
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin>
+                  </TextField>
                   <Label fx:id="registerMessageLabel" textFill="RED">
                      <VBox.margin>
                         <Insets top="10.0" />

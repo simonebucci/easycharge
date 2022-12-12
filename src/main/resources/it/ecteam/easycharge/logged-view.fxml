@@ -167,7 +167,7 @@
                 <ListView fx:id="listView" onMouseClicked="#onItemSelected" prefHeight="521.0" prefWidth="265.0" />
                <HBox>
                   <children>
-                      <Label fx:id="csLabel" style="-fx-font-weight: BOLD;">
+                      <Label fx:id="csLabel" style="-fx-font-weight: BOLD;" wrapText="true">
                           <font>
                               <Font size="16.0" />
                           </font>

@@ -1,22 +1,15 @@
 package it.ecteam.easycharge.viewcontroller;
 
-import it.ecteam.easycharge.MainApplication;
 import it.ecteam.easycharge.bean.*;
 import it.ecteam.easycharge.controller.ReportController;
 import it.ecteam.easycharge.controller.UserController;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
-import it.ecteam.easycharge.utils.FileManager;
 import it.ecteam.easycharge.controller.MapController;
 import it.ecteam.easycharge.utils.SessionUser;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -26,7 +19,6 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.*;
 
 public class MainViewController extends StackPane implements Initializable  {

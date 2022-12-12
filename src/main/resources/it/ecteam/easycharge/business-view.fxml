@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
+
+<AnchorPane fx:id="anchorPane" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ecteam.easycharge.viewcontroller.BusinessViewController">
+    <BorderPane minHeight="720.0" minWidth="1080.0" prefHeight="668.0" prefWidth="993.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <top><AnchorPane>
+            <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #66ABEA;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER">
+                <items>
+                    <ImageView fitHeight="40.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@images/title.png" />
+                        </image>
+                    </ImageView>
+
+                    <HBox alignment="CENTER_LEFT">
+                        <children>
+                            <Button fx:id="homeBtn" mnemonicParsing="false" onMouseClicked="#onHomeClick" style="-fx-background-color: #66ABEA;" text="Home" textFill="WHITE">
+                                <HBox.margin>
+                                    <Insets right="10.0" />
+                                </HBox.margin>
+                                <font>
+                                    <Font size="16.0" />
+                                </font>
+                            </Button>
+                            <Button fx:id="routeBtn" alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: #66ABEA;" text="Route planning" textFill="WHITE">
+                                <HBox.margin>
+                                    <Insets right="10.0" />
+                                </HBox.margin>
+                                <font>
+                                    <Font size="16.0" />
+                                </font>
+                            </Button>
+                        </children>
+                        <padding>
+                            <Insets right="10.0" />
+                        </padding>
+                    </HBox>
+                    <Pane HBox.hgrow="ALWAYS" />
+                    <HBox alignment="CENTER_RIGHT">
+                        <children>
+                            <Label fx:id="userMainLabel" onMouseClicked="#onUserLabelClick" prefHeight="38.0" prefWidth="63.0" text="User" textFill="WHITE">
+                                <font>
+                                    <Font size="16.0" />
+                                </font>
+                            </Label>
+                        </children>
+                    </HBox>
+                </items>
+            </ToolBar>
+        </AnchorPane>
+        </top>
+        <center>
+            <AnchorPane BorderPane.alignment="CENTER">
+                <children>
+                    <WebView fx:id="webMap" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               <Pane fx:id="paymentPane" prefHeight="400.0" prefWidth="427.0" style="-fx-background-color: #ffffff;" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="100.0">
+                  <children>
+                     <HBox prefHeight="32.0" prefWidth="338.0">
+                        <children>
+                           <Button mnemonicParsing="false" onAction="#onPaymentClose" style="-fx-background-color: #66ABEA;" text="X" textFill="WHITE">
+                              <HBox.margin>
+                                 <Insets left="400.0" right="5.0" top="5.0" />
+                              </HBox.margin>
+                           </Button>
+                        </children>
+                     </HBox>
+                     <VBox layoutY="32.0" prefHeight="369.0" prefWidth="428.0">
+                        <children>
+                           <Label text="PAGAH">
+                              <font>
+                                 <Font size="47.0" />
+                              </font>
+                              <VBox.margin>
+                                 <Insets left="130.0" top="100.0" />
+                              </VBox.margin>
+                           </Label>
+                           <Button fx:id="paymentBtn" mnemonicParsing="false" onAction="#onConfirmationClick" style="-fx-background-color: #66ABEA;" text="Confirm and pay" textFill="WHITE">
+                              <VBox.margin>
+                                 <Insets bottom="5.0" left="155.0" top="150.0" />
+                              </VBox.margin>
+                           </Button>
+                        </children>
+                     </VBox>
+                  </children></Pane>
+                </children>
+            </AnchorPane>
+        </center>
+        <right>
+            <VBox prefHeight="670.0" prefWidth="280.0" BorderPane.alignment="CENTER">
+                <children>
+                    <Label fx:id="rangeLabel" style="-fx-font-weight: BOLD;">
+                        <font>
+                            <Font size="16.0" />
+                        </font>
+                        <padding>
+                            <Insets left="5.0" />
+                        </padding>
+                    </Label>
+                    <Slider fx:id="slider" max="50000.0" min="1.0" onMouseDragged="#onSliderMove" onMouseReleased="#onSliderRelease" value="4000.0" />
+                    <ListView fx:id="listView" onMouseClicked="#onItemSelected" prefHeight="521.0" prefWidth="265.0" />
+                    <HBox>
+                        <children>
+                            <Label fx:id="csLabel" style="-fx-font-weight: BOLD;">
+                                <font>
+                                    <Font size="16.0" />
+                                </font>
+                                <padding>
+                                    <Insets top="5.0" />
+                                </padding>
+                            </Label>
+                            <Pane prefHeight="35.0" prefWidth="36.0">
+                                <children>
+                                    <Button fx:id="favoriteOffBtn" mnemonicParsing="false" prefHeight="18.0" prefWidth="16.0" style="-fx-background-color: ffffff;" />
+                                    <Button fx:id="favoriteOnBtn" mnemonicParsing="false" prefHeight="18.0" prefWidth="16.0" style="-fx-background-color: ffffff;" />
+                                </children>
+                                <HBox.margin>
+                                    <Insets bottom="5.0" right="5.0" top="5.0" />
+                                </HBox.margin>
+                            </Pane>
+                        </children>
+                    </HBox>
+               <VBox prefHeight="200.0" prefWidth="100.0">
+                  <children>
+                     <Label fx:id="addressLabel" wrapText="true" />
+                     <Label fx:id="distanceLabel" wrapText="true" />
+                     <Label fx:id="desLabel" prefHeight="41.0" prefWidth="280.0" text="Advertise your Business to this charging station's users for only 4,99€/month" wrapText="true" />
+                          <Button fx:id="buyBtn" mnemonicParsing="false" onAction="#onBuyClicked" style="-fx-background-color: #66ABEA;" text="Buy AD" textFill="WHITE">
+                              <VBox.margin>
+                                  <Insets top="5.0" />
+                              </VBox.margin>
+                     </Button>
+                  </children>
+               </VBox>
+                </children>
+                <BorderPane.margin>
+                    <Insets />
+                </BorderPane.margin>
+            </VBox>
+        </right>
+    </BorderPane>
+</AnchorPane>

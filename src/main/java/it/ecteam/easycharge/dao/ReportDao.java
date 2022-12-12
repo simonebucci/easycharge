@@ -38,8 +38,7 @@ public class ReportDao extends DaoTemplate{
                 try {
                     conn = DataBaseConnection.getConnection();
                     sql = "call easycharge.get_report(?);\r\n";
-                    stm = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE,
-                            ResultSet.CONCUR_UPDATABLE);
+                    stm = conn.prepareStatement(sql);
                     stm.setString(1, station);
                     try (ResultSet rs = stm.executeQuery()) {
 

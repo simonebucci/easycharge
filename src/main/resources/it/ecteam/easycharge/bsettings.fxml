@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="anchorPane" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ecteam.easycharge.viewcontroller.BusinessSettingsViewController">
+    <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <center>
+            <AnchorPane BorderPane.alignment="CENTER">
+                <children>
+                    <HBox prefHeight="566.0" prefWidth="938.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="100.0">
+                        <children>
+                            <VBox prefHeight="566.0" prefWidth="226.0">
+                                <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@images/profile.png" />
+                                        </image>
+                                    </ImageView>
+                                    <Label fx:id="usernameLabel" alignment="CENTER" style="-fx-font-weight: bold;" text="User">
+                                        <opaqueInsets>
+                                            <Insets />
+                                        </opaqueInsets>
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                        <VBox.margin>
+                                            <Insets bottom="20.0" left="55.0" top="10.0" />
+                                        </VBox.margin>
+                                    </Label>
+                                    <Label text="Car model:" textFill="#909090">
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                    </Label>
+                                    <Label fx:id="carLabel">
+                                        <opaqueInsets>
+                                            <Insets />
+                                        </opaqueInsets>
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                        <VBox.margin>
+                                            <Insets />
+                                        </VBox.margin>
+                                    </Label>
+                                    <Label text="Battery Capacity:" textFill="#909090">
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                        <VBox.margin>
+                                            <Insets top="10.0" />
+                                        </VBox.margin>
+                                    </Label>
+                                    <Label fx:id="capacityLabel">
+                                        <VBox.margin>
+                                            <Insets />
+                                        </VBox.margin>
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                    </Label>
+                                    <Label text="Electric range:" textFill="#909090">
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                        <VBox.margin>
+                                            <Insets top="10.0" />
+                                        </VBox.margin>
+                                    </Label>
+                                    <Label fx:id="rangeLabel">
+                                        <VBox.margin>
+                                            <Insets />
+                                        </VBox.margin>
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                    </Label>
+                                    <Label text="Connector Type:" textFill="#909090">
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                        <VBox.margin>
+                                            <Insets top="10.0" />
+                                        </VBox.margin>
+                                    </Label>
+                                    <Label fx:id="cTypeLabel">
+                                        <VBox.margin>
+                                            <Insets />
+                                        </VBox.margin>
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                    </Label>
+                                    <Button fx:id="modifyBtn" mnemonicParsing="false" onAction="#modifyAction" style="-fx-background-color: #66ABEA; -fx-text-fill: white;" text="Modify">
+                                        <VBox.margin>
+                                            <Insets top="10.0" />
+                                        </VBox.margin>
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                    </Button>
+                                </children>
+                                <opaqueInsets>
+                                    <Insets />
+                                </opaqueInsets>
+                                <padding>
+                                    <Insets left="10.0" />
+                                </padding>
+                            </VBox>
+                            <ImageView fitHeight="543.0" fitWidth="702.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@images/ec.png" />
+                                </image>
+                                <HBox.margin>
+                                    <Insets left="200.0" right="200.0" top="100.0" />
+                                </HBox.margin>
+                            </ImageView>
+                            <VBox fx:id="settingsVB" prefHeight="502.0" prefWidth="448.0" spacing="20.0" visible="false">
+                                <children>
+                                    <Label style="-fx-font-weight: bold;" text="Profile settings">
+                                        <font>
+                                            <Font size="16.0" />
+                                        </font>
+                                    </Label>
+                                    <ComboBox fx:id="modelComboBox" prefWidth="150.0" promptText="Change your car model" />
+                                    <VBox prefHeight="123.0" prefWidth="448.0">
+                                        <children>
+                                            <Label prefHeight="32.0" prefWidth="273.0" style="-fx-font-weight: bold; -fx-font-size: 13; -fx-font-style: italic;" text="Choose a profile picture:" />
+                                            <HBox prefHeight="53.0" prefWidth="448.0" spacing="10.0">
+                                                <children>
+                                                    <Button mnemonicParsing="false" prefHeight="18.0" prefWidth="103.0" text="Select image" />
+                                                    <Label fx:id="imageLabel" prefHeight="26.0" prefWidth="318.0" text="No image selected">
+                                                        <font>
+                                                            <Font size="18.0" />
+                                                        </font>
+                                                    </Label>
+                                                </children>
+                                            </HBox>
+                                        </children>
+                                    </VBox>
+                                    <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveAction" style="-fx-text-fill: white; -fx-background-color: #66ABEA;" text="Save">
+                                        <VBox.margin>
+                                            <Insets />
+                                        </VBox.margin>
+                                        <font>
+                                            <Font size="18.0" />
+                                        </font>
+                                    </Button>
+                                </children>
+                            </VBox>
+                        </children>
+                    </HBox>
+                </children></AnchorPane>
+        </center>
+        <top>
+            <AnchorPane BorderPane.alignment="CENTER">
+                <children>
+                    <ToolBar style="-fx-background-color: #66ABEA;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <items>
+                            <ImageView fitHeight="40.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@images/title.png" />
+                                </image>
+                            </ImageView>
+                            <HBox alignment="CENTER">
+                                <children>
+                                    <Button fx:id="homeBtn" mnemonicParsing="false" onMouseClicked="#onHomeLoggedClick" style="-fx-background-color: #66ABEA;" text="Home" textFill="WHITE">
+                                        <HBox.margin>
+                                            <Insets right="10.0" />
+                                        </HBox.margin>
+                                        <font>
+                                            <Font size="16.0" />
+                                        </font>
+                                    </Button>
+                                    <Button mnemonicParsing="false" style="-fx-background-color: #66ABEA;" text="Route planning" textFill="WHITE">
+                                        <HBox.margin>
+                                            <Insets right="10.0" />
+                                        </HBox.margin>
+                                        <font>
+                                            <Font size="16.0" />
+                                        </font>
+                                    </Button>
+                                </children>
+                                <padding>
+                                    <Insets right="10.0" />
+                                </padding>
+                            </HBox>
+                            <Pane HBox.hgrow="ALWAYS" />
+                            <HBox alignment="CENTER_RIGHT">
+                                <padding>
+                                    <Insets right="10.0" />
+                                </padding>
+                                <children>
+                                    <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#onLogoutClick" prefHeight="38.0" prefWidth="86.0" style="-fx-background-color: #FFFFFF;" text="Logout" textFill="#66abea">
+                                        <font>
+                                            <Font size="16.0" />
+                                        </font></Button>
+                                </children>

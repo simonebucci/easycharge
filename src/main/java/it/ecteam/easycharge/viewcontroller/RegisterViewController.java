@@ -1,14 +1,12 @@
 package it.ecteam.easycharge.viewcontroller;
 
 import it.ecteam.easycharge.MainApplication;
-import it.ecteam.easycharge.bean.BusinessUserBean;
+import it.ecteam.easycharge.bean.BusinessBean;
 import it.ecteam.easycharge.bean.CarBean;
 import it.ecteam.easycharge.bean.UserBean;
 import it.ecteam.easycharge.controller.LoginController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -42,6 +40,8 @@ public class RegisterViewController implements Initializable {
     private TextField emailTextField;
     @FXML
     private TextField businessTextField;
+    @FXML
+    private TextField baddressTextField;
     @FXML
     private PasswordField passwordPasswordField;
     @FXML
@@ -77,9 +77,11 @@ public class RegisterViewController implements Initializable {
         if(userType.getValue() == "business" && userType.getValue() != null){
             modelBox.setVisible(false);
             businessTextField.setVisible(true);
+            this.baddressTextField.setVisible(true);
         }else{
             modelBox.setVisible(true);
             businessTextField.setVisible(false);
+            this.baddressTextField.setVisible(false);
         }
     }
 
@@ -135,28 +137,28 @@ public class RegisterViewController implements Initializable {
                     u.setCar(modelBox.getValue());
                     regResult = loginController.createUser(u);
                 } else if (userRole.equals("business")) {
-                    BusinessUserBean bu = new BusinessUserBean();
+                    BusinessBean bu = new BusinessBean();
                     bu.setUsername(username);
                     bu.setPassword(password);
                     bu.setRole(userRole);
                     bu.setBusiness(businessTextField.getText());
                     bu.setEmail(email);
+                    bu.setAddress(baddressTextField.getText());
                     regResult = loginController.createBusinessUser(bu);
                 }
 
                 if (Boolean.TRUE.equals(regResult)) {
                     this.registerMessageLabel.setText("Registration successfull");
                     switch (userRole) {
-                        case "user":
+                        case "user" -> {
                             stage = (Stage) homeBtn.getScene().getWindow();
                             UserGraphicChange.getInstance().toLoggedHome(stage);
-                            break;
-                        case "business":
-                            //set business homepage controller
-                            //BusinessGraphicChange.getInstance().toHomepage(this.usernameTextField.getScene());
-                            break;
-                        default:
-                            break;
+                        }
+                        case "business" ->
+                                //set business homepage controller
+                                BusinessGraphicChange.getInstance().toLoggedHome(stage);
+                        default -> {
+                        }
                     }
                 } else {
                     this.registerMessageLabel.setText("Registration unsuccessfull! Username already in use, please choose a different one!");
@@ -180,6 +182,7 @@ public class RegisterViewController implements Initializable {
         this.modelBox.setItems(oal);
         this.userType.setItems(FXCollections.observableArrayList("user", "business"));
         this.businessTextField.setVisible(false);
+        this.baddressTextField.setVisible(false);
     }
 
     public void init() {

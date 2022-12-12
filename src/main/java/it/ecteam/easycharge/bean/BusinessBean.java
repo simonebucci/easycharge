@@ -1,12 +1,14 @@
 package it.ecteam.easycharge.bean;
 
-public class BusinessUserBean {
+public class BusinessBean {
 
     protected String username;
     protected String password;
     protected String email;
     protected String role;
     protected String business;
+    protected String address;
+    protected String id;
 
     public void setUsername(String username) {
         this.username = username;
@@ -46,5 +48,21 @@ public class BusinessUserBean {
 
     public String getBusiness() {
         return this.business;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getAddress() {
+        return this.address;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return this.id;
     }
 }

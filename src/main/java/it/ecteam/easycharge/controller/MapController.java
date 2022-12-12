@@ -31,9 +31,9 @@ public class MapController {
 
     }
 
-    private static final String APIKEY = "";
-    private static final String GAPIKEY = "";
-    private static final String LAPIKEY = "";
+    private static final String APIKEY = "csPBICaGiqrDG1YIKGXg4alunzBPez4I";
+    private static final String GAPIKEY = "AIzaSyDMIX9Bb7__E4QHG19h9jzH-SDEbN7IE5k";
+    private static final String LAPIKEY = "01c233c3ae9c4e8aad50179916b11dd8";
 
     public static List<ChargingStationBean> getNearby(int radius) throws IOException, ParseException, LocationNotFoundException, org.json.simple.parser.ParseException, ChargingStationNotFoundException {
 
@@ -179,7 +179,6 @@ public class MapController {
             JSONObject location = (JSONObject) geometry.get("location");
 
             String formattedAddress = (String) results.get("formatted_address");
-            System.out.println(formattedAddress);
 
             Double lat = (Double) location.get("lat");
             Double lng = (Double) location.get("lng");
@@ -189,6 +188,46 @@ public class MapController {
 
             return coord;
         }
+
+    public static Long getDistance(String pos1, String pos2) throws IOException, org.json.simple.parser.ParseException, LocationNotFoundException {
+
+        List<Double> start = getCoordinates(pos1);
+        List<Double> end = getCoordinates(pos2);
+
+        String jsonString;
+        StringBuilder str = new StringBuilder();
+        //Request to the tomtom service
+        URL geocodingUrl = new URL("https://api.tomtom.com/routing/1/calculateRoute/"+start.get(0)+"%2C"+start.get(1)+"%3A"+end.get(0)+"%2C"+end.get(1)+"/json?key="+getAPI());
+        URLConnection geocoding = geocodingUrl.openConnection();
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(
+                        geocoding.getInputStream()));
+        String inputLine;
+
+        //Create a JSON string from the response
+        while ((inputLine = in.readLine()) != null)
+            str.append("\n").append(inputLine);
+        in.close();
+
+        jsonString = str.toString();
+        JSONParser parser = new JSONParser();
+
+        //Get coordinates from JSON string
+        JSONObject object = (JSONObject) parser.parse(jsonString);
+        JSONArray resultsArray = (JSONArray) object.get("routes");
+
+
+        if(resultsArray.isEmpty()) {
+            throw new LocationNotFoundException("No route found for this locations");
+        }
+
+        JSONObject results = (JSONObject) resultsArray.get(0);
+        JSONObject summary = (JSONObject) results.get("summary");
+
+        Long distance = (Long) summary.get("lengthInMeters");
+
+        return distance;
+    }
 
 
     public static List<ChargingStationBean> getOnRoute(List<Double> start, List<Double> end) {
