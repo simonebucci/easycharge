@@ -146,7 +146,7 @@ public class BusinessDao extends DaoTemplate{
                         do{
                             String name = rs.getString("business_name");
                             String address = rs.getString("business_address");
-                            String id = rs.getString("idbusiness");
+                            String id = rs.getString("business_idbusiness");
                             b.add(new Business(name, address, id));
                         } while (rs.next());
                     }

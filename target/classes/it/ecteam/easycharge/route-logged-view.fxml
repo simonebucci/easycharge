@@ -12,7 +12,46 @@
     <center>
         <AnchorPane fx:id="anchorPane" BorderPane.alignment="CENTER">
             <children>
-               <WebView fx:id="webMap" minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                <WebView fx:id="webMap" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               <Pane fx:id="alertPane" prefHeight="38.0" prefWidth="436.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="10.0">
+                  <children>
+                     <Label fx:id="alertLabel" />
+                  </children>
+               </Pane>
+                <Pane fx:id="issuePane" layoutX="485.0" layoutY="191.0" prefHeight="237.0" prefWidth="310.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="242.0" AnchorPane.rightAnchor="5.0">
+                    <children>
+                        <VBox prefHeight="200.0" prefWidth="306.0">
+                            <children>
+                                <HBox prefHeight="36.0" prefWidth="306.0">
+                                    <children>
+                                        <Label text="Reported issues:">
+                                            <font>
+                                                <Font size="16.0" />
+                                            </font>
+                                            <HBox.margin>
+                                                <Insets top="5.0" />
+                                            </HBox.margin>
+                                        </Label>
+                                        <Button mnemonicParsing="false" onAction="#onCloseIssueClick" style="-fx-background-color: #66ABEA;" text="X" textFill="WHITE">
+                                            <HBox.margin>
+                                                <Insets bottom="5.0" left="160.0" top="5.0" />
+                                            </HBox.margin>
+                                        </Button>
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets left="5.0" />
+                                    </VBox.margin>
+                                </HBox>
+                                <ListView fx:id="riView" prefHeight="200.0" prefWidth="200.0" />
+                                <Label fx:id="pointLabel">
+                                    <VBox.margin>
+                                        <Insets top="5.0" />
+                                    </VBox.margin>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </children>
+                </Pane>
             </children>
         </AnchorPane>
     </center>
@@ -26,7 +65,7 @@
                 </ImageView>
                 <HBox alignment="CENTER">
                     <children>
-                        <Button fx:id="homeBtn" mnemonicParsing="false" onMouseClicked="#onHomeLoggedClick" style="-fx-background-color: #66ABEA;" text="Home" textFill="WHITE">
+                        <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#onHomeLoggedClick" style="-fx-background-color: #66ABEA;" text="Home" textFill="WHITE">
                             <HBox.margin>
                                 <Insets right="10.0" />
                             </HBox.margin>
@@ -71,7 +110,7 @@
                   <VBox.margin>
                      <Insets bottom="10.0" left="5.0" right="10.0" />
                   </VBox.margin></TextField>
-               <Button fx:id="routeBtn" mnemonicParsing="false" onAction="#onRouteClick" onMouseClicked="#onHomeLoggedClick" style="-fx-background-color: #66ABEA;" text="Find a Route" textFill="WHITE">
+               <Button fx:id="routeBtn" mnemonicParsing="false" onAction="#onSearchRouteClick" style="-fx-background-color: #66ABEA;" text="Find a Route" textFill="WHITE">
                   <font>
                      <Font size="16.0" />
                   </font>
@@ -82,5 +121,68 @@
             </children>
          </VBox>
       </left>
+    <right>
+        <VBox prefHeight="670.0" prefWidth="280.0" BorderPane.alignment="CENTER">
+            <children>
+                <CheckBox fx:id="connectorBox" mnemonicParsing="false" onAction="#onCheckBox" text="Filter by my connector">
+                    <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" top="5.0" />
+                    </VBox.margin>
+                </CheckBox>
+               <CheckBox fx:id="perfectBox" mnemonicParsing="false" onAction="#onPerfectBox" text="Perfect Route based on my vehicle">
+                  <VBox.margin>
+                     <Insets bottom="5.0" left="5.0" />
+                  </VBox.margin>
+               </CheckBox>
+                <ListView fx:id="listView" onMouseClicked="#onItemSelected" prefHeight="521.0" prefWidth="265.0" />
+                <HBox>
+                    <children>
+                        <Label fx:id="csLabel" style="-fx-font-weight: BOLD;" wrapText="true">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                            <padding>
+                                <Insets top="5.0" />
+                            </padding>
+                        </Label>
+                        <Pane prefHeight="35.0" prefWidth="36.0">
+                            <children>
+                                <Button fx:id="favoriteOffBtn" mnemonicParsing="false" onAction="#onFavoriteOffBtnClick" prefHeight="18.0" prefWidth="16.0" style="-fx-background-color: ffffff;">
+                                    <graphic>
+                                        <ImageView fitHeight="35.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/star-off.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button fx:id="favoriteOnBtn" mnemonicParsing="false" onAction="#onFavoriteOnBtnClick" prefHeight="18.0" prefWidth="16.0" style="-fx-background-color: ffffff;">
+                                    <graphic>
+                                        <ImageView fitHeight="35.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@images/star-on.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                            </children>
+                            <HBox.margin>
+                                <Insets bottom="5.0" right="5.0" top="5.0" />
+                            </HBox.margin>
+                        </Pane>
+                        <Button fx:id="issueBtn" mnemonicParsing="false" onAction="#onIssueClick" prefHeight="14.0" prefWidth="23.0" style="-fx-background-color: #c90000;" text="!" textFill="WHITE">
+                            <HBox.margin>
+                                <Insets bottom="5.0" left="5.0" top="5.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                </HBox>
+                <ListView fx:id="connectorView" />
+            </children>
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
+        </VBox>
+    </right>
 </BorderPane>
 </AnchorPane>

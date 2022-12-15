@@ -102,6 +102,15 @@
                      </VBox>
                  </children>
              </Pane>
+               <Pane fx:id="adsPane" layoutX="175.0" layoutY="585.0" prefHeight="71.0" prefWidth="451.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0">
+                  <children>
+                     <Label fx:id="adsLabel" layoutX="74.0" layoutY="27.0">
+                        <font>
+                           <Font size="18.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </Pane>
          </children>
       </AnchorPane>
    </center>

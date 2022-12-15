@@ -189,10 +189,7 @@ public class MapController {
             return coord;
         }
 
-    public static Long getDistance(String pos1, String pos2) throws IOException, org.json.simple.parser.ParseException, LocationNotFoundException {
-
-        List<Double> start = getCoordinates(pos1);
-        List<Double> end = getCoordinates(pos2);
+    public static Long getDistance(List<Double>  start, List<Double>  end) throws IOException, org.json.simple.parser.ParseException, LocationNotFoundException {
 
         String jsonString;
         StringBuilder str = new StringBuilder();

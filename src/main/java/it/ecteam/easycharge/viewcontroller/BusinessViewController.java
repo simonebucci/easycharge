@@ -111,7 +111,7 @@ public class BusinessViewController implements Initializable {
         assert businessList != null;
         addressLabel.setText(businessList.get(0).getAddress());
         try {
-            Long distance = MapController.getDistance(businessList.get(0).getAddress(), chargingStationList.get(id - 1).getFreeformAddress());
+            Long distance = MapController.getDistance(MapController.getCoordinates((businessList.get(0).getAddress())), MapController.getCoordinates(chargingStationList.get(id - 1).getFreeformAddress()));
             distanceLabel.setText("This charging station is "+(distance)/1000+"km from your business");
             List<ChargingStationBean> chargingStationAds = BusinessController.getBusinessAds(businessList.get(0).getId());
             int i;

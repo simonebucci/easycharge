@@ -1,11 +1,12 @@
 package it.ecteam.easycharge.viewcontroller;
 
 import it.ecteam.easycharge.bean.*;
+import it.ecteam.easycharge.controller.BusinessController;
+import it.ecteam.easycharge.controller.MapController;
 import it.ecteam.easycharge.controller.ReportController;
 import it.ecteam.easycharge.controller.UserController;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
-import it.ecteam.easycharge.controller.MapController;
 import it.ecteam.easycharge.utils.SessionUser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,10 +17,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import org.json.simple.parser.ParseException;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
 public class MainViewController extends StackPane implements Initializable  {
     private Stage stage = new Stage();
@@ -59,13 +64,17 @@ public class MainViewController extends StackPane implements Initializable  {
     @FXML
     private Label alertLabel;
     @FXML
-    private Label pointLabel;
+    private Label pointLabel = new Label();
+    @FXML
+    private Label adsLabel;
     @FXML
     private TextArea reportTextArea;
     @FXML
     private Pane reportPane;
     @FXML
     private Pane issuePane;
+    @FXML
+    private Pane adsPane;
     @FXML
     private CheckBox connectorBox;
 
@@ -189,6 +198,7 @@ public class MainViewController extends StackPane implements Initializable  {
         connectorView.getItems().clear();
         riView.getItems().clear();
         issuePane.setVisible(false);
+        adsLabel.setText("");
 
         String selected = listView.getSelectionModel().getSelectedItems().toString();
         int id;
@@ -197,7 +207,7 @@ public class MainViewController extends StackPane implements Initializable  {
         }else{
             id = Integer.parseInt(selected.substring(1, 3));
         }
-        report = ReportController.getUserReport(String.valueOf(chargingStationList.get(id-1).getId()));
+        report = ReportController.getUserReport(String.valueOf(chargingStationList.get(id - 1).getId()));
         csid = chargingStationList.get(id-1).getId();
 
         UserBean ub = SessionUser.getInstance().getSession();
@@ -224,6 +234,7 @@ public class MainViewController extends StackPane implements Initializable  {
         int i;
         try {
             connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(id-1).getId());
+
         } catch (IOException | ChargingStationNotFoundException | ParseException e) {
             e.printStackTrace();
         }
@@ -233,6 +244,15 @@ public class MainViewController extends StackPane implements Initializable  {
         }
 
         issueBtn.setVisible(!report.isEmpty());
+
+        List<BusinessBean> chargingStationAds = BusinessController.getCSAds(csid);
+        assert chargingStationAds != null;
+        if (!chargingStationAds.isEmpty()) {
+            adsPane.setVisible(true);
+            for(i=0; i < Objects.requireNonNull(chargingStationAds).size(); i++) {
+                adsLabel.setText("While you are charging try "+ chargingStationAds.get(i).getBusiness() + " " + chargingStationAds.get(i).getAddress());
+            }
+        }
     }
 
     @FXML
@@ -331,6 +351,7 @@ public class MainViewController extends StackPane implements Initializable  {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         issuePane.setVisible(false);
         issueBtn.setVisible(false);
+        adsPane.setVisible(false);
 
         webMap.getEngine().load("https://www.google.it/maps/");
         rangeLabel.setText(((int) slider.getValue())/1000 + "km");

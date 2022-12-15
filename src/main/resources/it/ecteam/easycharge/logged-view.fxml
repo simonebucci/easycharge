@@ -28,7 +28,7 @@
                                 <Font size="16.0" />
                             </font>
                         </Button>
-                        <Button fx:id="routeBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#onRouteClick" style="-fx-background-color: #66ABEA;" text="Route planning" textFill="WHITE">
+                        <Button fx:id="routeBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onRouteLoggedClick" onMouseClicked="#onRouteClick" style="-fx-background-color: #66ABEA;" text="Route planning" textFill="WHITE">
                             <HBox.margin>
                                 <Insets right="10.0" />
                             </HBox.margin>
@@ -59,6 +59,15 @@
         <AnchorPane BorderPane.alignment="CENTER">
             <children>
                 <WebView fx:id="webMap" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                <Pane fx:id="adsPane" layoutX="175.0" layoutY="585.0" prefHeight="71.0" prefWidth="451.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0">
+                    <children>
+                        <Label fx:id="adsLabel" layoutX="74.0" layoutY="27.0">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </Pane>
                <Pane fx:id="reportPane" layoutX="453.0" layoutY="419.0" prefHeight="237.0" prefWidth="310.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
                   <children>
                      <VBox prefHeight="200.0" prefWidth="306.0">
