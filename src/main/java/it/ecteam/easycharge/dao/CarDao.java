@@ -4,8 +4,6 @@ import it.ecteam.easycharge.entity.Car;
 import it.ecteam.easycharge.utils.DataBaseConnection;
 
 import java.sql.*;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

@@ -2,7 +2,6 @@ package it.ecteam.easycharge.commandlineinterface;
 
 import it.ecteam.easycharge.bean.UserBean;
 import it.ecteam.easycharge.utils.SessionUser;
-import it.ecteam.easycharge.viewcontroller.UserGraphicChange;
 
 import java.util.Scanner;
 

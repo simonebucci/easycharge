@@ -4,7 +4,6 @@ public class ChargingStation {
     private String id;
     private String name;
     private String freeformAddress;
-    private String CAID;
     private double latitude;
     private double longitude;
 
@@ -14,7 +13,6 @@ public class ChargingStation {
 
     public String getId(){ return id; }
     public String getName(){ return name; }
-    public String getCAID() { return CAID; }
     public String getFreeformAddress(){ return freeformAddress; }
     public double getLatitude(){ return latitude; }
     public double getLongitude(){ return longitude; }

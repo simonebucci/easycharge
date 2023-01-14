@@ -1,7 +1,6 @@
 package it.ecteam.easycharge.dao;
 
 import it.ecteam.easycharge.entity.Report;
-import it.ecteam.easycharge.entity.User;
 import it.ecteam.easycharge.utils.DataBaseConnection;
 
 import java.sql.*;

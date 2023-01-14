@@ -1,20 +1,15 @@
 package it.ecteam.easycharge.viewcontroller;
 
 import it.ecteam.easycharge.bean.BusinessBean;
-import it.ecteam.easycharge.bean.CarBean;
 import it.ecteam.easycharge.bean.UserBean;
 import it.ecteam.easycharge.controller.BusinessController;
-import it.ecteam.easycharge.controller.LoginController;
 import it.ecteam.easycharge.controller.UserController;
 import it.ecteam.easycharge.utils.SessionUser;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 

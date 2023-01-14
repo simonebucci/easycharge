@@ -2,7 +2,6 @@ package it.ecteam.easycharge.controller;
 
 import it.ecteam.easycharge.bean.ReportBean;
 import it.ecteam.easycharge.dao.ReportDao;
-import it.ecteam.easycharge.dao.UserDao;
 import it.ecteam.easycharge.entity.Report;
 
 import java.sql.Date;

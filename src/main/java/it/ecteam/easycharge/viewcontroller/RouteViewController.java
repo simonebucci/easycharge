@@ -1,15 +1,12 @@
 package it.ecteam.easycharge.viewcontroller;
 
-import it.ecteam.easycharge.MainApplication;
 import it.ecteam.easycharge.bean.*;
 import it.ecteam.easycharge.controller.*;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 import it.ecteam.easycharge.utils.SessionUser;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
