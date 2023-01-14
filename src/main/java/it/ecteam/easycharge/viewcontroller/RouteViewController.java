@@ -18,10 +18,7 @@ import javafx.stage.Stage;
 import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class RouteViewController extends StackPane implements Initializable {
     private Stage stage = new Stage();
@@ -59,15 +56,11 @@ public class RouteViewController extends StackPane implements Initializable {
     @FXML
     private Label csLabel;
     @FXML
-    private Label alertLabel;
-    @FXML
     private Label pointLabel = new Label();
     @FXML
     private Label adsLabel;
     @FXML
     private Pane issuePane;
-    @FXML
-    private Pane alertPane;
     @FXML
     private Pane adsPane;
     @FXML
@@ -77,11 +70,12 @@ public class RouteViewController extends StackPane implements Initializable {
 
     private UserGraphicChange ugc;
     private List<ChargingStationBean> chargingStationList = new ArrayList<>();
+    private List<ChargingStationBean> perfectRouteList = new ArrayList<>();
     private List<ConnectorBean> connectorBeanList = new ArrayList<>();
     private List<ReportBean> report = new ArrayList<>();
-    List<Double> start = new ArrayList<>();
-    List<Double> end = new ArrayList<>();
-    CarBean cb = new CarBean();
+    private List<Double> start = new ArrayList<>();
+    private List<Double> end = new ArrayList<>();
+    private CarBean cb = new CarBean();
     private String csid;
 
     @FXML
@@ -118,35 +112,19 @@ public class RouteViewController extends StackPane implements Initializable {
     protected void onSearchRouteClick() throws IOException, ParseException, LocationNotFoundException {
         start = MapController.getCoordinates(startField.getText());
         end = MapController.getCoordinates(destField.getText());
+        listView.getItems().clear();
 
         try {
             chargingStationList = MapController.getOnRoute(start, end);
             int i;
             for(i=0; i < chargingStationList.size(); i++){
                 listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + "\n     ");
-                System.out.println(chargingStationList.get(i).getName());
-                System.out.println(chargingStationList.get(i).getId());
-                System.out.println(chargingStationList.get(i).getFreeformAddress());
-                System.out.println(chargingStationList.get(i).getLatitude());
-                System.out.println(chargingStationList.get(i).getLongitude());
                 connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(i).getId());
-                int k;
-                for(k=0; k < connectorBeanList.size(); k++) {
-                    System.out.println("Type:"+ connectorBeanList.get(k).getType());
-                    System.out.println("Total:"+ connectorBeanList.get(k).getTotal());
-                    System.out.println("Available:"+ connectorBeanList.get(k).getAvailable());
-                    System.out.println("Occupied:"+ connectorBeanList.get(k).getOccupied());
-                    System.out.println("Reserved:"+ connectorBeanList.get(k).getReserved());
-                    System.out.println("Unknown:"+ connectorBeanList.get(k).getUnknown());
-                    System.out.println("OutOfService:"+ connectorBeanList.get(k).getOutOfService());
-                    System.out.println("-----");
-                }
-                System.out.println("--------------");
             }
         } catch (IOException | ParseException | ChargingStationNotFoundException e) {
             e.printStackTrace();
         }
-        webMap.getEngine().load("https://www.google.com/maps/dir/?api=1&origin="+ startField.getText().replaceAll("%20","\\s") +"&destination="+destField.getText().replaceAll("%20"," ")+"&travelmode=driving&waypoint_place_ids=ChIJ5zZx3kNjLxMRAIuXSFIRfwk%ChIJL6pCbOVhLxMRODH8uDzXLDo");
+        webMap.getEngine().load("https://www.google.com/maps/dir/?api=1&origin="+ startField.getText().replaceAll("\\s","+") +"&destination="+destField.getText().replaceAll("\\s","+")+"&travelmode=driving&waypoint_place_ids=ChIJ5zZx3kNjLxMRAIuXSFIRfwk%ChIJL6pCbOVhLxMRODH8uDzXLDo");
     }
 
     @FXML
@@ -185,11 +163,12 @@ public class RouteViewController extends StackPane implements Initializable {
     }
 
     @FXML
-    protected void onCheckBox() throws IOException, ParseException, LocationNotFoundException {
+    protected void onCheckBox() {
         listView.getItems().clear();
+        csLabel.setText("");
 
         try {
-            chargingStationList = MapController.getOnRoute(start, end);
+            //chargingStationList = MapController.getOnRoute(start, end);
             if(!connectorBox.isSelected()){
                 int i;
                 for (i = 0; i < chargingStationList.size(); i++) {
@@ -201,59 +180,68 @@ public class RouteViewController extends StackPane implements Initializable {
                     connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(i).getId());
                     int k;
                     for(k = 0; k < connectorBeanList.size(); k++) {
-                        if (Objects.equals(connectorBeanList.get(k).getType(), cb.getConnectorType()))
+                        if(Objects.equals(connectorBeanList.get(k).getType(), "Chademo")){
+                            if (Objects.equals(connectorBeanList.get(k).getType(), cb.getConnectorType())){
+                                listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + "\n     ");
+                                k = connectorBeanList.size();
+                            }
+                        }else if(Objects.equals(connectorBeanList.get(k).getType().substring(0, 13), cb.getConnectorType().substring(0, 13))){
                             listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + "\n     ");
+                            k = connectorBeanList.size();
+                        }
                     }
                 }
             }
         } catch (IOException | ParseException | ChargingStationNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
     @FXML
-    protected void onPerfectBox() throws LocationNotFoundException {
+    protected void onPerfectBox() throws LocationNotFoundException, ChargingStationNotFoundException, IOException, ParseException {
+
+        if(!perfectBox.isSelected()){
+            listView.getItems().clear();
+            int i;
+            for(i=0; i < chargingStationList.size(); i++){
+                listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + "\n     ");
+            }
+            return;
+        }
         listView.getItems().clear();
+        csLabel.setText("");
 
         try {
-            chargingStationList = MapController.getOnRoute(start, end);
-            chargingStationList = RouteController.getPerfectRoute(chargingStationList, start, end, Integer.parseInt(cb.getRange()));
-            if(!chargingStationList.isEmpty()) {
+            perfectRouteList = RouteController.getPerfectRoute(chargingStationList, start, end, Integer.parseInt(cb.getRange()), cb.getConnectorType());
+            if(!perfectRouteList.isEmpty()) {
                 int i;
-                for (i = 0; i < chargingStationList.size(); i++) {
-                    connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(i).getId());
-                    int k;
-                    for (k = 0; k < connectorBeanList.size(); k++) {
-                        if (Objects.equals(connectorBeanList.get(k).getType(), cb.getConnectorType()))
-                            listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + "\n     ");
-                    }
+                for (i = 0; i < perfectRouteList.size(); i++) {
+                    listView.getItems().add(i + 1 + ". " + perfectRouteList.get(i).getName() + "\n" + perfectRouteList.get(i).getFreeformAddress() + "\n     ");
                 }
             }else{
-                alertPane.setVisible(true);
-                alertLabel.setText("Your car can reach the destination without any recharge.");
-                /*wait(3000);
-                alertPane.setVisible(false);*/
+                listView.getItems().add("Your car can reach the destination without any recharge.");
+                connectorView.getItems().clear();
             }
         } catch (IOException | ParseException | ChargingStationNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
     @FXML
-    protected void onItemSelected() throws IOException, ParseException, LocationNotFoundException {
+    protected void onItemSelected() {
         connectorView.getItems().clear();
         riView.getItems().clear();
         issuePane.setVisible(false);
-        //adsLabel.setText("");
+        adsLabel.setText("");
 
         String selected = listView.getSelectionModel().getSelectedItems().toString();
         int id;
         if (selected.charAt(2) == '.'){
             id = Integer.parseInt(String.valueOf(selected.charAt(1)));
-        }else{
+        }else if(selected.charAt(3) == '.'){
             id = Integer.parseInt(selected.substring(1, 3));
+        }else{
+            return;
         }
         report = ReportController.getUserReport(String.valueOf(chargingStationList.get(id - 1).getId()));
         csid = chargingStationList.get(id-1).getId();
@@ -271,15 +259,19 @@ public class RouteViewController extends StackPane implements Initializable {
                     favoriteOffBtn.setVisible(false);
                 }
             }
-
         }
 
-        csLabel.setText(chargingStationList.get(id-1).getName());
-        webMap.getEngine().load("https://www.google.it/maps/place/"+chargingStationList.get(id-1).getLatitude()+","+chargingStationList.get(id-1).getLongitude());
         int i;
         try {
-            connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(id-1).getId());
-
+            if(!perfectBox.isSelected()) {
+                connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(id - 1).getId());
+                csLabel.setText(chargingStationList.get(id-1).getName());
+                webMap.getEngine().load("https://www.google.it/maps/place/"+chargingStationList.get(id-1).getLatitude()+","+chargingStationList.get(id-1).getLongitude());
+            }else{
+                connectorBeanList = MapController.getChargingAvailability(perfectRouteList.get(id - 1).getId());
+                csLabel.setText(perfectRouteList.get(id-1).getName());
+                webMap.getEngine().load("https://www.google.it/maps/place/"+perfectRouteList.get(id-1).getLatitude()+","+perfectRouteList.get(id-1).getLongitude());
+            }
         } catch (IOException | ChargingStationNotFoundException | ParseException e) {
             e.printStackTrace();
         }
@@ -290,30 +282,25 @@ public class RouteViewController extends StackPane implements Initializable {
 
         issueBtn.setVisible(!report.isEmpty());
 
-        /*List<BusinessBean> chargingStationAds = BusinessController.getCSAds(csid);
+        List<BusinessBean> chargingStationAds = BusinessController.getCSAds(csid);
         assert chargingStationAds != null;
         if (!chargingStationAds.isEmpty()) {
             adsPane.setVisible(true);
             for(i=0; i < Objects.requireNonNull(chargingStationAds).size(); i++) {
                 adsLabel.setText("While you are charging try "+ chargingStationAds.get(i).getBusiness() + " " + chargingStationAds.get(i).getAddress());
             }
-        }*/
-        RouteController.getPerfectRoute(chargingStationList, start, end, Integer.parseInt(cb.getRange()));
+        }
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.ugc = UserGraphicChange.getInstance();
 
-        try {
-            webMap.getEngine().load("https://www.google.com/maps/dir/?api=1&origin="+ MapController.getLocation() +"&destination=Milan,italy&travelmode=driving&waypoint_place_ids=ChIJ5zZx3kNjLxMRAIuXSFIRfwk%ChIJL6pCbOVhLxMRODH8uDzXLDo");
-        } catch (IOException | LocationNotFoundException | ParseException e) {
-            e.printStackTrace();
-        }
+        webMap.getEngine().load("https://www.google.com/maps/dir/?api=1&origin=&destination=&travelmode=driving&waypoint_place_ids=ChIJ5zZx3kNjLxMRAIuXSFIRfwk%ChIJL6pCbOVhLxMRODH8uDzXLDo");
 
         //init nameBar
         UserBean ub = SessionUser.getInstance().getSession();
-
 
         UserController uc = new UserController();
         userMainLabel.setText(ub.getUsername());
@@ -324,10 +311,9 @@ public class RouteViewController extends StackPane implements Initializable {
         issueBtn.setVisible(false);
         favoriteOnBtn.setVisible(false);
         favoriteOffBtn.setVisible(false);
-        alertPane.setVisible(false);
+        adsPane.setVisible(false);
     }
 
     public void init() {
-
     }
 }

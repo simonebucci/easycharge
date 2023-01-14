@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
 
-<AnchorPane fx:id="anchorPane" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ecteam.easycharge.viewcontroller.BusinessViewController">
+<AnchorPane fx:id="anchorPane" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ecteam.easycharge.viewcontroller.MyBusinessViewController">
     <BorderPane minHeight="720.0" minWidth="1080.0" prefHeight="668.0" prefWidth="993.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <top><AnchorPane>
             <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #66ABEA;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER">
@@ -28,7 +28,7 @@
                                     <Font size="16.0" />
                                 </font>
                             </Button>
-                            <Button fx:id="businessBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onMyBusinessClick" style="-fx-background-color: #66ABEA;" text="My business" textFill="WHITE">
+                            <Button fx:id="routeBtn" alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: #66ABEA;" text="My business" textFill="WHITE">
                                 <HBox.margin>
                                     <Insets right="10.0" />
                                 </HBox.margin>
@@ -59,44 +59,6 @@
             <AnchorPane BorderPane.alignment="CENTER">
                 <children>
                     <WebView fx:id="webMap" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-               <Pane fx:id="paymentPane" prefHeight="400.0" prefWidth="427.0" style="-fx-background-color: #ffffff;" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="100.0">
-                  <children>
-                     <HBox prefHeight="32.0" prefWidth="338.0">
-                        <children>
-                           <Button mnemonicParsing="false" onAction="#onPaymentClose" style="-fx-background-color: #66ABEA;" text="X" textFill="WHITE">
-                              <HBox.margin>
-                                 <Insets left="400.0" right="5.0" top="5.0" />
-                              </HBox.margin>
-                           </Button>
-                        </children>
-                     </HBox>
-                     <VBox layoutY="32.0" prefHeight="369.0" prefWidth="428.0">
-                        <children>
-                           <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                              <VBox.margin>
-                                 <Insets bottom="50.0" left="100.0" right="100.0" top="10.0" />
-                              </VBox.margin>
-                              <image>
-                                 <Image url="@images/Paypal-Logo.png" />
-                              </image></ImageView>
-                           <TextField promptText="email">
-                              <VBox.margin>
-                                 <Insets bottom="10.0" left="80.0" right="80.0" />
-                              </VBox.margin>
-                           </TextField>
-                           <PasswordField promptText="password">
-                              <VBox.margin>
-                                 <Insets left="80.0" right="80.0" />
-                              </VBox.margin>
-                           </PasswordField>
-                           <Button fx:id="paymentBtn" mnemonicParsing="false" onAction="#onConfirmationClick" style="-fx-background-color: #66ABEA;" text="Confirm and pay" textFill="WHITE">
-                              <VBox.margin>
-                                 <Insets bottom="5.0" left="155.0" top="30.0" />
-                              </VBox.margin>
-                           </Button>
-                        </children>
-                     </VBox>
-                  </children></Pane>
                 </children>
             </AnchorPane>
         </center>
@@ -111,7 +73,6 @@
                             <Insets left="5.0" />
                         </padding>
                     </Label>
-                    <Slider fx:id="slider" max="50000.0" min="1.0" onMouseDragged="#onSliderMove" onMouseReleased="#onSliderRelease" value="4000.0" />
                     <ListView fx:id="listView" onMouseClicked="#onItemSelected" prefHeight="521.0" prefWidth="265.0" />
                     <HBox>
                         <children>
@@ -134,19 +95,7 @@
                             </Pane>
                         </children>
                     </HBox>
-               <VBox prefHeight="200.0" prefWidth="100.0">
-                  <children>
-                     <Label fx:id="addressLabel" wrapText="true" />
-                     <Label fx:id="distanceLabel" wrapText="true" />
-                     <Label fx:id="desLabel" prefHeight="41.0" prefWidth="280.0" text="Advertise your Business to this charging station's users for only 4,99€/month" wrapText="true" />
-                          <Button fx:id="buyBtn" mnemonicParsing="false" onAction="#onBuyClicked" style="-fx-background-color: #66ABEA;" text="Buy AD" textFill="WHITE">
-                              <VBox.margin>
-                                  <Insets top="5.0" />
-                              </VBox.margin>
-                     </Button>
-                     <Label fx:id="bLabel" text="Thank you for your purchase, your business is advertised to this charging station's users." wrapText="true" />
-                  </children>
-               </VBox>
+               <ListView fx:id="csView" layoutX="10.0" layoutY="35.0" onMouseClicked="#onCSSelected" prefHeight="521.0" prefWidth="265.0" />
                 </children>
                 <BorderPane.margin>
                     <Insets />

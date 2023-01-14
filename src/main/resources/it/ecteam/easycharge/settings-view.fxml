@@ -176,7 +176,7 @@
                                  <Font size="16.0" />
                               </font>
                               </Button>
-                              <Button mnemonicParsing="false" style="-fx-background-color: #66ABEA;" text="Route planning" textFill="WHITE">
+                              <Button fx:id="routeBtn" mnemonicParsing="false" onAction="#onRouteLoggedClick" style="-fx-background-color: #66ABEA;" text="Route planning" textFill="WHITE">
                                   <HBox.margin>
                                       <Insets right="10.0" />
                                   </HBox.margin>

@@ -9,6 +9,7 @@ public class ChargingStationBean implements Serializable {
     private String freeformAddress;
     private double latitude;
     private double longitude;
+    private String CAID;
 
     public void setId(String id) {
 
@@ -34,5 +35,9 @@ public class ChargingStationBean implements Serializable {
     public void setLongitude(double longitude){ this.longitude = longitude; }
 
     public double getLongitude(){ return longitude; }
+
+    public String getCAID() { return CAID; }
+
+    public void setCAID(String CAID) { this.CAID = CAID; }
 
 }

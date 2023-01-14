@@ -18,7 +18,7 @@
             </ImageView>
                 <HBox alignment="CENTER">
                     <children>
-                        <Button fx:id="mainBtn" mnemonicParsing="false" onAction="#onHomeClick" style="-fx-background-color: #66ABEA;" text="Home" textFill="WHITE">
+                        <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#onHomeClick" style="-fx-background-color: #66ABEA;" text="Home" textFill="WHITE">
                             <HBox.margin>
                                 <Insets right="10.0" />
                             </HBox.margin>

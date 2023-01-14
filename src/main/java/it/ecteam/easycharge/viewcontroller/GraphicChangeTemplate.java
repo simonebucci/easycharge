@@ -67,10 +67,10 @@ public  abstract class GraphicChangeTemplate {
             @Override
             public void act() throws IOException {
                 FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("auth-view.fxml"));
-                //RouteViewController rvc = new RouteViewController();
+                RouteViewController rvc = new RouteViewController();
                 Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
                 stage.setScene(scene);
-                //rvc.init();
+                rvc.init();
             }
         });
     }

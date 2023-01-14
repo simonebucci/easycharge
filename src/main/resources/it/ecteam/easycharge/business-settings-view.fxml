@@ -31,12 +31,12 @@
                                             <Insets bottom="20.0" left="55.0" top="10.0" />
                                         </VBox.margin>
                                     </Label>
-                                    <Label text="Car model:" textFill="#909090">
+                                    <Label text="Business name:" textFill="#909090">
                                         <font>
                                             <Font size="18.0" />
                                         </font>
                                     </Label>
-                                    <Label fx:id="carLabel">
+                                    <Label fx:id="businessLabel">
                                         <opaqueInsets>
                                             <Insets />
                                         </opaqueInsets>
@@ -47,7 +47,7 @@
                                             <Insets />
                                         </VBox.margin>
                                     </Label>
-                                    <Label text="Battery Capacity:" textFill="#909090">
+                                    <Label text="Business address:" textFill="#909090">
                                         <font>
                                             <Font size="18.0" />
                                         </font>
@@ -55,39 +55,7 @@
                                             <Insets top="10.0" />
                                         </VBox.margin>
                                     </Label>
-                                    <Label fx:id="capacityLabel">
-                                        <VBox.margin>
-                                            <Insets />
-                                        </VBox.margin>
-                                        <font>
-                                            <Font size="18.0" />
-                                        </font>
-                                    </Label>
-                                    <Label text="Electric range:" textFill="#909090">
-                                        <font>
-                                            <Font size="18.0" />
-                                        </font>
-                                        <VBox.margin>
-                                            <Insets top="10.0" />
-                                        </VBox.margin>
-                                    </Label>
-                                    <Label fx:id="rangeLabel">
-                                        <VBox.margin>
-                                            <Insets />
-                                        </VBox.margin>
-                                        <font>
-                                            <Font size="18.0" />
-                                        </font>
-                                    </Label>
-                                    <Label text="Connector Type:" textFill="#909090">
-                                        <font>
-                                            <Font size="18.0" />
-                                        </font>
-                                        <VBox.margin>
-                                            <Insets top="10.0" />
-                                        </VBox.margin>
-                                    </Label>
-                                    <Label fx:id="cTypeLabel">
+                                    <Label fx:id="addressLabel">
                                         <VBox.margin>
                                             <Insets />
                                         </VBox.margin>
@@ -111,12 +79,12 @@
                                     <Insets left="10.0" />
                                 </padding>
                             </VBox>
-                            <ImageView fitHeight="543.0" fitWidth="702.0" pickOnBounds="true" preserveRatio="true">
+                            <ImageView fitHeight="543.0" fitWidth="559.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@images/ec.png" />
+                                    <Image url="@images/coffee_shop_generated.jpg" />
                                 </image>
                                 <HBox.margin>
-                                    <Insets left="200.0" right="200.0" top="100.0" />
+                                    <Insets bottom="200.0" left="200.0" right="200.0" top="100.0" />
                                 </HBox.margin>
                             </ImageView>
                             <VBox fx:id="settingsVB" prefHeight="502.0" prefWidth="448.0" spacing="20.0" visible="false">
@@ -126,7 +94,6 @@
                                             <Font size="16.0" />
                                         </font>
                                     </Label>
-                                    <ComboBox fx:id="modelComboBox" prefWidth="150.0" promptText="Change your car model" />
                                     <VBox prefHeight="123.0" prefWidth="448.0">
                                         <children>
                                             <Label prefHeight="32.0" prefWidth="273.0" style="-fx-font-weight: bold; -fx-font-size: 13; -fx-font-style: italic;" text="Choose a profile picture:" />
@@ -176,7 +143,7 @@
                                             <Font size="16.0" />
                                         </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" style="-fx-background-color: #66ABEA;" text="Route planning" textFill="WHITE">
+                                    <Button fx:id="mybusinessBtn" mnemonicParsing="false" onAction="#onMyBusinessClick" style="-fx-background-color: #66ABEA;" text="My business" textFill="WHITE">
                                         <HBox.margin>
                                             <Insets right="10.0" />
                                         </HBox.margin>
@@ -200,3 +167,11 @@
                                             <Font size="16.0" />
                                         </font></Button>
                                 </children>
+                            </HBox>
+                        </items>
+                    </ToolBar>
+                </children>
+            </AnchorPane>
+        </top>
+    </BorderPane>
+</AnchorPane>

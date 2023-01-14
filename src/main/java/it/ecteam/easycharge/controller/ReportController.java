@@ -43,10 +43,31 @@ public class ReportController {
         }
     }
 
-    public boolean givePointToUser(String user, String station, Date date){
+    public boolean givePointToUser(String user, String station, Date date, String giver){
         ReportDao reportDao = new ReportDao();
 
-        return reportDao.givePoint(user, station, date);
+        return reportDao.givePoint(user, station, date, giver);
+    }
+
+    public static List<ReportBean> getPointGiver(String username, String csID, Date date){
+        ReportDao reportDao = new ReportDao();
+
+        List<Report> result = reportDao.getPointGiver(username, csID, date);
+        List<ReportBean> rbl = new ArrayList<>();
+
+        if(result.isEmpty()){
+            return Collections.emptyList();
+        }else{
+            int i;
+            for(i=0; i < result.size(); i++) {
+                ReportBean rb = new ReportBean();
+                Report r = result.get(i);
+
+                rb.setUsername(r.getUsername());
+                rbl.add(rb);
+            }
+            return rbl;
+        }
     }
 
 }

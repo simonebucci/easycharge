@@ -1,7 +1,9 @@
 package it.ecteam.easycharge.viewcontroller;
 
+import it.ecteam.easycharge.bean.BusinessBean;
 import it.ecteam.easycharge.bean.CarBean;
 import it.ecteam.easycharge.bean.UserBean;
+import it.ecteam.easycharge.controller.BusinessController;
 import it.ecteam.easycharge.controller.LoginController;
 import it.ecteam.easycharge.controller.UserController;
 import it.ecteam.easycharge.utils.SessionUser;
@@ -12,13 +14,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class SettingsViewController implements Initializable {
+public class BusinessSettingsViewController implements Initializable {
     private Stage stage = new Stage();
 
     @FXML
@@ -26,15 +30,11 @@ public class SettingsViewController implements Initializable {
     @FXML
     private VBox settingsVB;
     @FXML
-    private Label carLabel = new Label();
+    private Label businessLabel = new Label();
     @FXML
-    private Label capacityLabel = new Label();
+    private Label addressLabel = new Label();
     @FXML
-    private Label rangeLabel = new Label();
-    @FXML
-    private Label cTypeLabel = new Label();
-    @FXML
-    private Label usernameLabel = new Label();;
+    private Label usernameLabel = new Label();
     @FXML
     private Label userLabel;
     @FXML
@@ -44,17 +44,18 @@ public class SettingsViewController implements Initializable {
     @FXML
     private ComboBox modelComboBox;
 
-    private UserGraphicChange ugc;
+    private BusinessGraphicChange ugc;
 
     @FXML
     protected void onHomeLoggedClick() {
         stage = (Stage) homeBtn.getScene().getWindow();
         this.ugc.toLoggedHome(stage);
     }
+
     @FXML
-    protected void onRouteLoggedClick() {
+    protected void onMyBusinessClick() {
         stage = (Stage) homeBtn.getScene().getWindow();
-        this.ugc.toRoute(stage);
+        this.ugc.toMyBusiness(stage);
     }
 
     @FXML
@@ -62,17 +63,10 @@ public class SettingsViewController implements Initializable {
         UserController uc = new UserController();
 
         settingsVB.setVisible(false);
-        if(modelComboBox.getValue() != null) {
+        if (modelComboBox.getValue() != null) {
             uc.changeCar(usernameLabel.getText(), modelComboBox.getValue().toString());
         }
         modifyBtn.setVisible(true);
-
-        UserBean ub = SessionUser.getInstance().getSession();
-        CarBean cb = uc.getCar(ub.getUsername());
-        this.carLabel.setText(cb.getName());
-        this.capacityLabel.setText(cb.getCapacity()+"kWh");
-        this.rangeLabel.setText(cb.getRange()+"Km");
-        this.cTypeLabel.setText(cb.getConnectorType());
 
     }
 
@@ -83,7 +77,7 @@ public class SettingsViewController implements Initializable {
     }
 
     @FXML
-    protected void onLogoutClick(){
+    protected void onLogoutClick() {
         SessionUser.getInstance().closeSession();
         stage = (Stage) logoutBtn.getScene().getWindow();
         this.ugc.toLogin(stage);
@@ -91,32 +85,20 @@ public class SettingsViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.ugc = UserGraphicChange.getInstance();
+        this.ugc = BusinessGraphicChange.getInstance();
         UserBean ub = SessionUser.getInstance().getSession();
 
         this.usernameLabel.setText(ub.getUsername());
 
-        UserController userController = new UserController();
-        CarBean cb = userController.getCar(ub.getUsername());
+        BusinessController businessController = new BusinessController();
+        List<BusinessBean> bb = businessController.getBusiness(ub.getUsername());
 
-        this.carLabel.setText(cb.getName());
-        this.capacityLabel.setText(cb.getCapacity()+"kWh");
-        this.rangeLabel.setText(cb.getRange()+"Km");
-        this.cTypeLabel.setText(cb.getConnectorType());
-
-        List<CarBean> modelb = LoginController.getCar();
-
-        ObservableList<String> oal = FXCollections.observableArrayList();
-        int i;
-        for(i=0; i<modelb.size(); i++){
-            oal.add(modelb.get(i).getName());
-        }
-        this.modelComboBox.setItems(oal);
-
+        this.businessLabel.setText(bb.get(0).getBusiness());
+        this.addressLabel.setText(bb.get(0).getAddress());
     }
 
     public void init() {
 
     }
-
 }
+

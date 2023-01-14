@@ -1,9 +1,6 @@
 package it.ecteam.easycharge.dao;
 
-import it.ecteam.easycharge.bean.ReportBean;
-import it.ecteam.easycharge.entity.Car;
 import it.ecteam.easycharge.entity.ChargingStation;
-import it.ecteam.easycharge.entity.Report;
 import it.ecteam.easycharge.entity.User;
 import it.ecteam.easycharge.utils.DataBaseConnection;
 

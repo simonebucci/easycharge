@@ -183,8 +183,15 @@ public class MainViewController extends StackPane implements Initializable  {
                     connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(i).getId());
                     int k;
                     for(k = 0; k < connectorBeanList.size(); k++) {
-                        if (Objects.equals(connectorBeanList.get(k).getType(), cb.getConnectorType()))
+                        if(Objects.equals(connectorBeanList.get(k).getType(), "Chademo")){
+                            if (Objects.equals(connectorBeanList.get(k).getType(), cb.getConnectorType())){
+                                listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + "\n     ");
+                                k = connectorBeanList.size();
+                            }
+                        }else if(Objects.equals(connectorBeanList.get(k).getType().substring(0, 13), cb.getConnectorType().substring(0, 13))){
                             listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + "\n     ");
+                            k = connectorBeanList.size();
+                        }
                     }
                 }
             }
@@ -198,6 +205,7 @@ public class MainViewController extends StackPane implements Initializable  {
         connectorView.getItems().clear();
         riView.getItems().clear();
         issuePane.setVisible(false);
+        adsPane.setVisible(false);
         adsLabel.setText("");
 
         String selected = listView.getSelectionModel().getSelectedItems().toString();
@@ -226,7 +234,6 @@ public class MainViewController extends StackPane implements Initializable  {
 
                 }
             }
-
         }
 
         csLabel.setText(chargingStationList.get(id-1).getName());
@@ -249,9 +256,11 @@ public class MainViewController extends StackPane implements Initializable  {
         assert chargingStationAds != null;
         if (!chargingStationAds.isEmpty()) {
             adsPane.setVisible(true);
-            for(i=0; i < Objects.requireNonNull(chargingStationAds).size(); i++) {
+            /*for(i=0; i < Objects.requireNonNull(chargingStationAds).size(); i++) {
                 adsLabel.setText("While you are charging try "+ chargingStationAds.get(i).getBusiness() + " " + chargingStationAds.get(i).getAddress());
-            }
+            }*/
+            int n=(int)(Math.random()*(((chargingStationAds).size()-1)+1));
+            adsLabel.setText("While you are charging try "+ chargingStationAds.get(n).getBusiness() + " located in " + chargingStationAds.get(n).getAddress());
         }
     }
 
@@ -266,7 +275,6 @@ public class MainViewController extends StackPane implements Initializable  {
         alertLabel.setText("Report sent, thank you!");
         alertLabel.setVisible(true);
         reportTextArea.clear();
-
     }
 
     @FXML
@@ -313,12 +321,24 @@ public class MainViewController extends StackPane implements Initializable  {
             String date = arrOfStr[2];
             date = date.replace("Date: ", "");
             Date dateFormatted = java.sql.Date.valueOf(date);
+            List<ReportBean> rb = ReportController.getPointGiver(username, csid, dateFormatted);
 
+            int i;
+            int verify = 0;
+            for(i=0; i<rb.size(); i++){
+                if(Objects.equals(rb.get(i).getUsername(), ub.getUsername())){
+                    verify = 1;
+                }
+            }
             if (Objects.equals(ub.getUsername(), username)) {
                 pointLabel.setText("You can't give a like to your self.");
                 pointLabel.setTextFill(Color.RED);
-            } else {
-                rc.givePointToUser(username, csid, dateFormatted);
+            } else if(verify == 1){
+                pointLabel.setText("You already gave a like to this report.");
+                pointLabel.setTextFill(Color.RED);
+            }
+            else{
+                rc.givePointToUser(username, csid, dateFormatted, ub.getUsername());
                 pointLabel.setText("You liked the selected report!");
                 pointLabel.setTextFill(Color.GREEN);
             }

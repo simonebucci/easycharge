@@ -1,6 +1,7 @@
 package it.ecteam.easycharge.dao;
 
 import it.ecteam.easycharge.entity.Report;
+import it.ecteam.easycharge.entity.User;
 import it.ecteam.easycharge.utils.DataBaseConnection;
 
 import java.sql.*;
@@ -69,16 +70,17 @@ public class ReportDao extends DaoTemplate{
         return Collections.emptyList();
     }
 
-    public Boolean givePoint(String username, String csID, Date date) {
+    public Boolean givePoint(String username, String csID, Date date, String giver) {
         return this.execute(() -> {
             Connection con = DataBaseConnection.getConnection();
-            String sql = "call easycharge.give_point(?, ?, ?);\r\n";
+            String sql = "call easycharge.give_point(?, ?, ?, ?);\r\n";
 
 
             try (PreparedStatement stm = con.prepareStatement(sql)) {
                 stm.setString(1, username);
                 stm.setString(2, csID);
                 stm.setDate(3, date);
+                stm.setString(4, giver);
                 stm.executeUpdate();
             }
 
@@ -86,6 +88,45 @@ public class ReportDao extends DaoTemplate{
         }) != null;
     }
 
+    public List<Report> getPointGiver(String username, String csID, Date date){
+        List<Report> ret = this.execute(new DaoAction<List<Report>>() {
+            @Override
+            public List<Report> act() throws ClassNotFoundException, SQLException {
+                Connection conn = null;
+                String sql = null;
+                PreparedStatement stm = null;
+                List<Report> r = new ArrayList<>();
+                try {
+                    conn = DataBaseConnection.getConnection();
+                    sql = "call easycharge.get_point(?, ?, ?);\r\n";
+                    stm = conn.prepareStatement(sql);
+                    stm.setString(1, username);
+                    stm.setString(2, csID);
+                    stm.setDate(3, date);
+                    try (ResultSet rs = stm.executeQuery()) {
+
+                        //if (!rs.first()) // rs not empty
+                        //return Collections.emptyList();	//return empty list
+                        if(rs.next()){
+                            do{
+                                String user = rs.getString("giver_username");
+                                r.add(new Report(user));
+                            } while (rs.next());
+                        }else{
+                            return Collections.emptyList();	//return empty list
+                        }
+                    }
+                } finally {
+                    stm.close();
+                }
+                return r;
+            }
+        });
+        if (ret != null)
+            return ret;
+
+        return Collections.emptyList();
+    }
 
 
 }

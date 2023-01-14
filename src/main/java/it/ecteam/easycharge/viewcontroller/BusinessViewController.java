@@ -47,6 +47,8 @@ public class BusinessViewController implements Initializable {
     @FXML
     private Label desLabel;
     @FXML
+    private Label bLabel;
+    @FXML
     private Pane paymentPane;
 
 
@@ -62,6 +64,12 @@ public class BusinessViewController implements Initializable {
     protected void onHomeClick() {
         stage = (Stage) homeBtn.getScene().getWindow();
         this.bgc.toLoggedHome(stage);
+    }
+
+    @FXML
+    protected void onMyBusinessClick() {
+        stage = (Stage) homeBtn.getScene().getWindow();
+        this.bgc.toMyBusiness(stage);
     }
 
     @FXML
@@ -95,6 +103,7 @@ public class BusinessViewController implements Initializable {
     protected void onItemSelected() {
         buyBtn.setVisible(true);
         desLabel.setVisible(true);
+        bLabel.setVisible(false);
 
         String selected = listView.getSelectionModel().getSelectedItems().toString();
         int id;
@@ -119,6 +128,7 @@ public class BusinessViewController implements Initializable {
                 if(Objects.equals(chargingStationAds.get(i).getId(), csid)){
                     buyBtn.setVisible(false);
                     desLabel.setVisible(false);
+                    bLabel.setVisible(true);
                 }
             }
         }catch(IOException | ParseException | LocationNotFoundException e){
@@ -142,6 +152,8 @@ public class BusinessViewController implements Initializable {
         bc.businessAd(businessList.get(0).getId(), csid);
         paymentPane.setVisible(false);
         buyBtn.setVisible(false);
+        desLabel.setVisible(false);
+        bLabel.setVisible(true);
     }
 
     @Override
@@ -152,6 +164,7 @@ public class BusinessViewController implements Initializable {
         paymentPane.setVisible(false);
         buyBtn.setVisible(false);
         desLabel.setVisible(false);
+        bLabel.setVisible(false);
 
         try{
             chargingStationList = MapController.getNearby((int)slider.getValue()); //radius range 1 to 50000

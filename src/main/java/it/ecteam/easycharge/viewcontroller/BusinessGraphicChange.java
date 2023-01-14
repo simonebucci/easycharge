@@ -5,7 +5,6 @@ import it.ecteam.easycharge.utils.Roles;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class BusinessGraphicChange extends GraphicChangeTemplate{
@@ -40,7 +39,7 @@ public class BusinessGraphicChange extends GraphicChangeTemplate{
         this.catcher(new GraphicChangeAction() {
             @Override
             public void act() throws IOException {
-                FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("bsettings-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("business-settings-view.fxml"));
                 SettingsViewController svc = new SettingsViewController();
                 Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
                 stage.setScene(scene);
@@ -48,4 +47,16 @@ public class BusinessGraphicChange extends GraphicChangeTemplate{
             }
         });
     }
+
+    public void toMyBusiness(Stage stage) {
+        this.catcher(new GraphicChangeAction() {
+            @Override
+            public void act() throws IOException {
+                FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("mybusiness-view.fxml"));
+                Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
+                stage.setScene(scene);
+            }
+        });
+    }
+
 }
