@@ -27,7 +27,6 @@ public class BusinessGraphicChange extends GraphicChangeTemplate{
             @Override
             public void act() throws IOException {
                 FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("business-view.fxml"));
-                BusinessViewController bvc = new BusinessViewController();
                 Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
                 stage.setScene(scene);
             }

@@ -34,7 +34,7 @@ public class SettingsViewController implements Initializable {
     @FXML
     private Label cTypeLabel = new Label();
     @FXML
-    private Label usernameLabel = new Label();;
+    private Label usernameLabel = new Label();
     @FXML
     private Label userLabel;
     @FXML

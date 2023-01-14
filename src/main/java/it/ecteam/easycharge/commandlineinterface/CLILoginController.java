@@ -11,7 +11,7 @@ import static it.ecteam.easycharge.commandlineinterface.CommandLineInterface.*;
 
 
 public class CLILoginController {
-    final String b = "business";
+    final static String b = "business";
     public void init() {
         Scanner input = new Scanner(System.in);
         menu(input);
@@ -95,7 +95,7 @@ public class CLILoginController {
 
     private void register(Scanner input) {
         UserBean ub = new UserBean();
-        boolean regResult = false;
+        boolean regResult;
 
         System.out.println("---Register a new account---");
 

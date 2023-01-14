@@ -160,8 +160,6 @@ public class RegisterViewController implements Initializable {
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
-        UserGraphicChange ugc = UserGraphicChange.getInstance();
-
         List<CarBean> cb = LoginController.getCar();
 
         ObservableList<String> oal = FXCollections.observableArrayList();

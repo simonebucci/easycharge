@@ -222,9 +222,7 @@ public class MapController {
         JSONObject results = (JSONObject) resultsArray.get(0);
         JSONObject summary = (JSONObject) results.get("summary");
 
-        Long distance = (Long) summary.get("lengthInMeters");
-
-        return distance;
+        return (Long) summary.get("lengthInMeters");
     }
 
 

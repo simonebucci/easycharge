@@ -21,10 +21,7 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class MainViewController extends StackPane implements Initializable  {
     private Stage stage = new Stage();
@@ -260,8 +257,9 @@ public class MainViewController extends StackPane implements Initializable  {
             /*for(i=0; i < Objects.requireNonNull(chargingStationAds).size(); i++) {
                 adsLabel.setText("While you are charging try "+ chargingStationAds.get(i).getBusiness() + " " + chargingStationAds.get(i).getAddress());
             }*/
-            int n=(int)(Math.random()*(((chargingStationAds).size()-1)+1));
-            adsLabel.setText("While you are charging try "+ chargingStationAds.get(n).getBusiness() + " located in " + chargingStationAds.get(n).getAddress());
+            Random r = new Random();
+            int rand = r.nextInt((chargingStationAds).size());
+            adsLabel.setText("While you are charging try "+ chargingStationAds.get(rand).getBusiness() + " located in " + chargingStationAds.get(rand).getAddress());
         }
     }
 
