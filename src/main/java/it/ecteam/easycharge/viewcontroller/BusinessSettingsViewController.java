@@ -96,9 +96,5 @@ public class BusinessSettingsViewController implements Initializable {
         this.businessLabel.setText(bb.get(0).getBusiness());
         this.addressLabel.setText(bb.get(0).getAddress());
     }
-
-    public void init() {
-
-    }
 }
 

@@ -313,7 +313,4 @@ public class RouteViewController extends StackPane implements Initializable {
         favoriteOffBtn.setVisible(false);
         adsPane.setVisible(false);
     }
-
-    public void init() {
-    }
 }

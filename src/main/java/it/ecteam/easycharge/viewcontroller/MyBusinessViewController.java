@@ -116,7 +116,4 @@ public class MyBusinessViewController implements Initializable {
             userMainLabel.setText(ub.getUsername());
         }
     }
-    public void init() {
-
-    }
 }

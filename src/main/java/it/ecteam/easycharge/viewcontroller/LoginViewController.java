@@ -102,8 +102,4 @@ public class LoginViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.ugc = UserGraphicChange.getInstance();
     }
-    public void init() {
-    }
-
-
 }

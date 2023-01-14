@@ -397,7 +397,4 @@ public class MainViewController extends StackPane implements Initializable  {
             favoriteOffBtn.setVisible(false);
         }
     }
-
-    public void init() {
-    }
 }

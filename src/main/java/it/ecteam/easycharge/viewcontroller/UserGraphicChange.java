@@ -28,10 +28,9 @@ public class UserGraphicChange extends GraphicChangeTemplate {
             @Override
             public void act() throws IOException {
                 FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("logged-view.fxml"));
-                MainViewController mvc = new MainViewController();
                 Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
                 stage.setScene(scene);
-                mvc.init();
+
             }
         });
     }
@@ -41,10 +40,8 @@ public class UserGraphicChange extends GraphicChangeTemplate {
             @Override
             public void act() throws IOException {
                 FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("settings-view.fxml"));
-                SettingsViewController svc = new SettingsViewController();
                 Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
                 stage.setScene(scene);
-                svc.init();
             }
         });
     }
@@ -54,10 +51,8 @@ public class UserGraphicChange extends GraphicChangeTemplate {
             @Override
             public void act() throws IOException {
                 FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("route-logged-view.fxml"));
-                RouteViewController rvc = new RouteViewController();
                 Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
                 stage.setScene(scene);
-                rvc.init();
             }
         });
     }

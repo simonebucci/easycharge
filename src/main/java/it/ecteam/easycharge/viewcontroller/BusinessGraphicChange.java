@@ -30,7 +30,6 @@ public class BusinessGraphicChange extends GraphicChangeTemplate{
                 BusinessViewController bvc = new BusinessViewController();
                 Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
                 stage.setScene(scene);
-                bvc.init();
             }
         });
     }
@@ -40,10 +39,8 @@ public class BusinessGraphicChange extends GraphicChangeTemplate{
             @Override
             public void act() throws IOException {
                 FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("business-settings-view.fxml"));
-                SettingsViewController svc = new SettingsViewController();
                 Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
                 stage.setScene(scene);
-                svc.init();
             }
         });
     }

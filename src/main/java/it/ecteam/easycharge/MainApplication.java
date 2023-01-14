@@ -18,8 +18,6 @@ public class MainApplication extends Application {
         stage.setTitle("EasyCharge");
         stage.setMinWidth(1080);
         stage.setMinHeight(720);
-        MainViewController mvc = fxmlLoader.getController();
-        mvc.init();
         stage.setScene(scene);
         stage.show();
     }

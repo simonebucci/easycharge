@@ -28,10 +28,8 @@ public  abstract class GraphicChangeTemplate {
             @Override
             public void act() throws IOException {
                 FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("login-view.fxml"));
-                LoginViewController lvc = new LoginViewController();
                 Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
                 stage.setScene(scene);
-                lvc.init();
             }
         });
     }
@@ -41,10 +39,8 @@ public  abstract class GraphicChangeTemplate {
             @Override
             public void act() throws IOException {
                 FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("register-view.fxml"));
-                RegisterViewController lvc = new RegisterViewController();
                 Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
                 stage.setScene(scene);
-                lvc.init();
             }
         });
     }
@@ -54,10 +50,8 @@ public  abstract class GraphicChangeTemplate {
             @Override
             public void act() throws IOException {
                 FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
-                MainViewController mvc = new MainViewController();
                 Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
                 stage.setScene(scene);
-                mvc.init();
             }
         });
     }
@@ -67,10 +61,8 @@ public  abstract class GraphicChangeTemplate {
             @Override
             public void act() throws IOException {
                 FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("auth-view.fxml"));
-                RouteViewController rvc = new RouteViewController();
                 Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
                 stage.setScene(scene);
-                rvc.init();
             }
         });
     }

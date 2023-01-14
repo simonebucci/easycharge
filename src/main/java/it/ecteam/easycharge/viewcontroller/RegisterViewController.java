@@ -184,9 +184,4 @@ public class RegisterViewController implements Initializable {
         this.businessTextField.setVisible(false);
         this.baddressTextField.setVisible(false);
     }
-
-    public void init() {
-
-    }
-
 }

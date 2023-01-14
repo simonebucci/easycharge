@@ -20,7 +20,7 @@
 
                 <HBox alignment="CENTER_LEFT">
                     <children>
-                        <Button fx:id="homeBtn" mnemonicParsing="false" onMouseClicked="#onHomeClick" style="-fx-background-color: #66ABEA;" text="Home" textFill="WHITE">
+                        <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#onHomeLoggedClick" style="-fx-background-color: #66ABEA;" text="Home" textFill="WHITE">
                             <HBox.margin>
                                 <Insets right="10.0" />
                             </HBox.margin>

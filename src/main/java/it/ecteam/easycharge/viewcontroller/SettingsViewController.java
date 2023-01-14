@@ -114,9 +114,4 @@ public class SettingsViewController implements Initializable {
         this.modelComboBox.setItems(oal);
 
     }
-
-    public void init() {
-
-    }
-
 }
