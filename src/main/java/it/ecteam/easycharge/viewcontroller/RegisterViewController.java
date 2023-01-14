@@ -47,7 +47,7 @@ public class RegisterViewController implements Initializable {
     @FXML
     private Label registerMessageLabel;
 
-    final String b = "business";
+    static final String b = "business";
 
     @FXML
     protected void onLoginClick() throws IOException {
