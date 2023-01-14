@@ -82,7 +82,7 @@ public class MainViewController extends StackPane implements Initializable  {
     private List<ConnectorBean> connectorBeanList = new ArrayList<>();
     private List<ReportBean> report = new ArrayList<>();
     private String csid;
-    private static final String space = "\n     ";
+    private static final String SPACE = "\n     ";
     private final Random r = new Random();
 
     @FXML
@@ -149,13 +149,13 @@ public class MainViewController extends StackPane implements Initializable  {
                     int k;
                     for(k = 0; k < connectorBeanList.size(); k++) {
                         if (Objects.equals(connectorBeanList.get(k).getType(), cb.getConnectorType()))
-                            listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + space);
+                            listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + SPACE);
                     }
                 }
             }else{
                 int i;
                 for (i = 0; i < chargingStationList.size(); i++) {
-                    listView.getItems().add(i+1+". "+chargingStationList.get(i).getName()+"\n"+chargingStationList.get(i).getFreeformAddress()+space);
+                    listView.getItems().add(i+1+". "+chargingStationList.get(i).getName()+"\n"+chargingStationList.get(i).getFreeformAddress()+ SPACE);
                 }
             }
 
@@ -174,7 +174,7 @@ public class MainViewController extends StackPane implements Initializable  {
             if(!connectorBox.isSelected()){
                 int i;
                 for (i = 0; i < chargingStationList.size(); i++) {
-                    listView.getItems().add(i+1+". "+chargingStationList.get(i).getName() + "\n"+ chargingStationList.get(i).getFreeformAddress() + space);
+                    listView.getItems().add(i+1+". "+chargingStationList.get(i).getName() + "\n"+ chargingStationList.get(i).getFreeformAddress() + SPACE);
                 }
             }else{
                 int i;
@@ -184,11 +184,11 @@ public class MainViewController extends StackPane implements Initializable  {
                     for(k = 0; k < connectorBeanList.size(); k++) {
                         if(Objects.equals(connectorBeanList.get(k).getType(), "Chademo")){
                             if (Objects.equals(connectorBeanList.get(k).getType(), cb.getConnectorType())){
-                                listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + space);
+                                listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + SPACE);
                                 k = connectorBeanList.size();
                             }
                         }else if(Objects.equals(connectorBeanList.get(k).getType().substring(0, 13), cb.getConnectorType().substring(0, 13))){
-                            listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + space);
+                            listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + SPACE);
                             k = connectorBeanList.size();
                         }
                     }
@@ -246,7 +246,7 @@ public class MainViewController extends StackPane implements Initializable  {
         }
 
         for(i=0; i < connectorBeanList.size(); i++) {
-            connectorView.getItems().add("Type:"+ connectorBeanList.get(i).getType() + "\nTotal: " + connectorBeanList.get(i).getTotal() + "\nAvailable: " + connectorBeanList.get(i).getAvailable() + "\nOccupied: " + connectorBeanList.get(i).getOccupied() + "\nReserved: " + connectorBeanList.get(i).getReserved() + "\nUnknown: " + connectorBeanList.get(i).getUnknown() + "\nOutOfService: " + connectorBeanList.get(i).getOutOfService() + space);
+            connectorView.getItems().add("Type:"+ connectorBeanList.get(i).getType() + "\nTotal: " + connectorBeanList.get(i).getTotal() + "\nAvailable: " + connectorBeanList.get(i).getAvailable() + "\nOccupied: " + connectorBeanList.get(i).getOccupied() + "\nReserved: " + connectorBeanList.get(i).getReserved() + "\nUnknown: " + connectorBeanList.get(i).getUnknown() + "\nOutOfService: " + connectorBeanList.get(i).getOutOfService() + SPACE);
         }
 
         issueBtn.setVisible(!report.isEmpty());
@@ -301,7 +301,7 @@ public class MainViewController extends StackPane implements Initializable  {
         pointLabel.setText("");
         int i;
         for(i=0; i < report.size(); i++) {
-            riView.getItems().add(report.get(i).getUsername() + "\nsaid: " + report.get(i).getComment() + "\nDate: " + report.get(i).getDate()+ "\nLikes: " + report.get(i).getPoint() +space);
+            riView.getItems().add(report.get(i).getUsername() + "\nsaid: " + report.get(i).getComment() + "\nDate: " + report.get(i).getDate()+ "\nLikes: " + report.get(i).getPoint() + SPACE);
         }
     }
 
@@ -379,7 +379,7 @@ public class MainViewController extends StackPane implements Initializable  {
             chargingStationList = MapController.getNearby((int)slider.getValue()); //radius range 1 to 50000
             int i;
             for(i=0; i < chargingStationList.size(); i++){
-                listView.getItems().add(i+1+". "+chargingStationList.get(i).getName()+"\n"+chargingStationList.get(i).getFreeformAddress()+space);
+                listView.getItems().add(i+1+". "+chargingStationList.get(i).getName()+"\n"+chargingStationList.get(i).getFreeformAddress()+ SPACE);
             }
         } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
             e.printStackTrace();

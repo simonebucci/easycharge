@@ -47,7 +47,7 @@ public class RegisterViewController implements Initializable {
     @FXML
     private Label registerMessageLabel;
 
-    static final String b = "business";
+    static final String B = "business";
 
     @FXML
     protected void onLoginClick() throws IOException {
@@ -67,7 +67,7 @@ public class RegisterViewController implements Initializable {
 
     @FXML
     protected void onUserTypeClick() {
-        if(Objects.equals(userType.getValue(), b) && userType.getValue() != null){
+        if(Objects.equals(userType.getValue(), B) && userType.getValue() != null){
             modelBox.setVisible(false);
             businessTextField.setVisible(true);
             this.baddressTextField.setVisible(true);
@@ -114,7 +114,7 @@ public class RegisterViewController implements Initializable {
 
             if(userRole.equals("user") && Objects.equals(modelBox.getValue(), null)){
                 registerMessageLabel.setText(dataError);
-            }else if(userRole.equals(b) && businessTextField.getText().isBlank()){
+            }else if(userRole.equals(B) && businessTextField.getText().isBlank()){
                 registerMessageLabel.setText(dataError);
             }else{
 
@@ -126,7 +126,7 @@ public class RegisterViewController implements Initializable {
                     u.setRole(userRole);
                     u.setCar(modelBox.getValue());
                     regResult = loginController.createUser(u);
-                } else if (userRole.equals(b)) {
+                } else if (userRole.equals(B)) {
                     BusinessBean bu = new BusinessBean();
                     bu.setUsername(username);
                     bu.setPassword(password);
@@ -144,7 +144,7 @@ public class RegisterViewController implements Initializable {
                             stage = (Stage) homeBtn.getScene().getWindow();
                             UserGraphicChange.getInstance().toLoggedHome(stage);
                         }
-                        case b ->
+                        case B ->
                                 //set business homepage controller
                                 BusinessGraphicChange.getInstance().toLoggedHome(stage);
                         default -> {
@@ -168,7 +168,7 @@ public class RegisterViewController implements Initializable {
             oal.add(cb.get(i).getName());
         }
         this.modelBox.setItems(oal);
-        this.userType.setItems(FXCollections.observableArrayList("user", b));
+        this.userType.setItems(FXCollections.observableArrayList("user", B));
         this.businessTextField.setVisible(false);
         this.baddressTextField.setVisible(false);
     }
