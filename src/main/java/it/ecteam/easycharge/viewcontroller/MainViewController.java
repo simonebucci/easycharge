@@ -82,7 +82,8 @@ public class MainViewController extends StackPane implements Initializable  {
     private List<ConnectorBean> connectorBeanList = new ArrayList<>();
     private List<ReportBean> report = new ArrayList<>();
     private String csid;
-    private String space = "\n     ";
+    private final String space = "\n     ";
+    private final Random r = new Random();
 
     @FXML
     protected void onLoginClick() {
@@ -257,7 +258,6 @@ public class MainViewController extends StackPane implements Initializable  {
             /*for(i=0; i < Objects.requireNonNull(chargingStationAds).size(); i++) {
                 adsLabel.setText("While you are charging try "+ chargingStationAds.get(i).getBusiness() + " " + chargingStationAds.get(i).getAddress());
             }*/
-            Random r = new Random();
             int rand = r.nextInt((chargingStationAds).size());
             adsLabel.setText("While you are charging try "+ chargingStationAds.get(rand).getBusiness() + " located in " + chargingStationAds.get(rand).getAddress());
         }
