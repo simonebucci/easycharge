@@ -305,19 +305,13 @@ public class MapController {
         JSONObject poi = (JSONObject) results.get("poi");
         JSONObject address = (JSONObject) results.get("address");
         JSONObject position = (JSONObject) results.get("position");
-        //JSONObject dataSources = (JSONObject) results.get("dataSources");
-        //JSONObject chargingAvailability = (JSONObject) dataSources.get("chargingAvailability");
 
         String name = (String) poi.get("name");
         chargingStation.setName(name);
-        //String id = (String) results.get("id");
-        //chargingStation.setId(id);
         String id = (String) results.get("info");
         chargingStation.setId(id.replace("search:ev:",""));
         String addressString = (String) address.get("freeformAddress");
         chargingStation.setFreeformAddress(addressString);
-        //String caID = (String) chargingAvailability.get("id");
-        //chargingStation.setCAID(caID);
         double lat = (double) position.get("lat");
         double lon = (double) position.get("lon");
         chargingStation.setLatitude(lat);
@@ -349,19 +343,13 @@ public class MapController {
             JSONObject poi = (JSONObject) results.get("poi");
             JSONObject address = (JSONObject) results.get("address");
             JSONObject position = (JSONObject) results.get("position");
-            //JSONObject dataSources = (JSONObject) results.get("dataSources");
-            //JSONObject chargingAvailability = (JSONObject) dataSources.get("chargingAvailability");
 
             String name = (String) poi.get("name");
             chargingStation.setName(name);
-            //String id = (String) results.get("id");
-            //chargingStation.setId(id);
             String id = (String) results.get("info");
             chargingStation.setId(id.replace("search:ev:",""));
             String addressString = (String) address.get("freeformAddress");
             chargingStation.setFreeformAddress(addressString);
-            //String caID = (String) chargingAvailability.get("id");
-            //chargingStation.setCAID(caID);
             double lat = (double) position.get("lat");
             double lon = (double) position.get("lon");
             chargingStation.setLatitude(lat);

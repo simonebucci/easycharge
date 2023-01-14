@@ -47,9 +47,7 @@ public class RegisterViewController implements Initializable {
     @FXML
     private Label registerMessageLabel;
 
-    private UserGraphicChange ugc;
-
-    private static CarBean carBean = new CarBean();
+    final String b = "business";
 
     @FXML
     protected void onLoginClick() throws IOException {
@@ -68,13 +66,8 @@ public class RegisterViewController implements Initializable {
     }
 
     @FXML
-    protected void selectImage() throws IOException {
-
-    }
-
-    @FXML
     protected void onUserTypeClick() {
-        if(userType.getValue() == "business" && userType.getValue() != null){
+        if(Objects.equals(userType.getValue(), b) && userType.getValue() != null){
             modelBox.setVisible(false);
             businessTextField.setVisible(true);
             this.baddressTextField.setVisible(true);
@@ -83,11 +76,6 @@ public class RegisterViewController implements Initializable {
             businessTextField.setVisible(false);
             this.baddressTextField.setVisible(false);
         }
-    }
-
-    @FXML
-    protected void onCarModelClick() {
-
     }
 
     @FXML
@@ -114,8 +102,10 @@ public class RegisterViewController implements Initializable {
         String username = "";
         String password = "";
         String userRole = "";
+        String dataError = "Please enter all required data.";
+
         if ((Objects.equals(userType.getValue(), null) || usernameTextField.getText().isBlank() || passwordPasswordField.getText().isBlank() || emailTextField.getText().isBlank())){
-            registerMessageLabel.setText("Please enter all required data.");
+            registerMessageLabel.setText(dataError);
         }else{
             username = usernameTextField.getText();
             password = passwordPasswordField.getText();
@@ -123,9 +113,9 @@ public class RegisterViewController implements Initializable {
             userRole = userType.getValue();
 
             if(userRole.equals("user") && Objects.equals(modelBox.getValue(), null)){
-                registerMessageLabel.setText("Please enter all required data.");
-            }else if(userRole.equals("business") && businessTextField.getText().isBlank()){
-                registerMessageLabel.setText("Please enter all required data.");
+                registerMessageLabel.setText(dataError);
+            }else if(userRole.equals(b) && businessTextField.getText().isBlank()){
+                registerMessageLabel.setText(dataError);
             }else{
 
                 if (userRole.equals("user")) {
@@ -136,7 +126,7 @@ public class RegisterViewController implements Initializable {
                     u.setRole(userRole);
                     u.setCar(modelBox.getValue());
                     regResult = loginController.createUser(u);
-                } else if (userRole.equals("business")) {
+                } else if (userRole.equals(b)) {
                     BusinessBean bu = new BusinessBean();
                     bu.setUsername(username);
                     bu.setPassword(password);
@@ -154,7 +144,7 @@ public class RegisterViewController implements Initializable {
                             stage = (Stage) homeBtn.getScene().getWindow();
                             UserGraphicChange.getInstance().toLoggedHome(stage);
                         }
-                        case "business" ->
+                        case b ->
                                 //set business homepage controller
                                 BusinessGraphicChange.getInstance().toLoggedHome(stage);
                         default -> {
@@ -170,7 +160,7 @@ public class RegisterViewController implements Initializable {
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
-        this.ugc = UserGraphicChange.getInstance();
+        UserGraphicChange ugc = UserGraphicChange.getInstance();
 
         List<CarBean> cb = LoginController.getCar();
 
@@ -180,7 +170,7 @@ public class RegisterViewController implements Initializable {
             oal.add(cb.get(i).getName());
         }
         this.modelBox.setItems(oal);
-        this.userType.setItems(FXCollections.observableArrayList("user", "business"));
+        this.userType.setItems(FXCollections.observableArrayList("user", b));
         this.businessTextField.setVisible(false);
         this.baddressTextField.setVisible(false);
     }

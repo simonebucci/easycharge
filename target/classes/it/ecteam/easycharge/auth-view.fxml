@@ -50,7 +50,7 @@
                                 <Font size="16.0" />
                             </font>
                         </Button>
-                        <Button fx:id="registerBtn" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#onRegisterClick" style="-fx-background-color: #66ABEA;" text="Register" textFill="WHITE">
+                        <Button fx:id="registerBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onRegisterClick" onMouseClicked="#onRegisterClick" style="-fx-background-color: #66ABEA;" text="Register" textFill="WHITE">
                             <font>
                                 <Font size="16.0" />
                             </font>

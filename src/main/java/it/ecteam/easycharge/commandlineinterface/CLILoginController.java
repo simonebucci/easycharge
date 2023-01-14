@@ -11,6 +11,7 @@ import static it.ecteam.easycharge.commandlineinterface.CommandLineInterface.*;
 
 
 public class CLILoginController {
+    final String b = "business";
     public void init() {
         Scanner input = new Scanner(System.in);
         menu(input);
@@ -78,7 +79,7 @@ public class CLILoginController {
                         CLIUserHomeController uhc = new CLIUserHomeController();
                         uhc.init();
                     }
-                    case "business" -> {
+                    case b -> {
                         CLIBusinessHomeController bhc = new CLIBusinessHomeController();
                         bhc.init();
                     }
@@ -133,7 +134,7 @@ public class CLILoginController {
                 System.out.println("Business address:");
                 String baddress = input.nextLine();
                 System.out.flush();
-                ub.setRole("business");
+                ub.setRole(b);
             }
             default -> System.out.println("Role not found\n");
         }
@@ -162,7 +163,7 @@ public class CLILoginController {
                     CLIUserHomeController uhc = new CLIUserHomeController();
                     uhc.init();
                 }
-                case "business" -> {
+                case b -> {
                     CLIBusinessHomeController bhc = new CLIBusinessHomeController();
                     bhc.init();
                 }

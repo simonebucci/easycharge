@@ -76,7 +76,7 @@
                                 <Label prefHeight="32.0" prefWidth="273.0" style="-fx-font-weight: bold; -fx-font-size: 13; -fx-font-style: italic;" text="Choose a profile picture:" />
                                 <HBox prefHeight="53.0" prefWidth="448.0" spacing="10.0">
                                     <children>
-                                        <Button mnemonicParsing="false" onAction="#selectImage" prefHeight="18.0" prefWidth="103.0" text="Select image" />
+                                        <Button mnemonicParsing="false" prefHeight="18.0" prefWidth="103.0" text="Select image" />
                                         <Label fx:id="imageLabel" prefHeight="26.0" prefWidth="318.0" text="No image selected">
                                             <font>
                                                 <Font size="18.0" />
@@ -91,7 +91,7 @@
                         <PasswordField fx:id="passwordPasswordField" prefHeight="26.0" prefWidth="448.0" promptText="Password" />
                   <Pane prefHeight="0.0" prefWidth="448.0">
                      <children>
-                        <ComboBox fx:id="modelBox" onMouseClicked="#onCarModelClick" prefWidth="150.0" promptText="Car model" />
+                        <ComboBox fx:id="modelBox" prefWidth="150.0" promptText="Car model" />
                         <TextField fx:id="businessTextField" prefHeight="26.0" prefWidth="448.0" promptText="Business name" />
                      </children>
                   </Pane>
