@@ -20,6 +20,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.SecureRandom;
 import java.sql.Date;
 import java.util.*;
 
@@ -83,7 +84,7 @@ public class MainViewController extends StackPane implements Initializable  {
     private List<ReportBean> report = new ArrayList<>();
     private String csid;
     private static final String SPACE = "\n     ";
-    private final Random r = new Random();
+    private final SecureRandom r = new SecureRandom();
 
     @FXML
     protected void onLoginClick() {
