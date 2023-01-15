@@ -2,9 +2,13 @@ package it.ecteam.easycharge.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.function.Supplier;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DataBaseConnection {
     private static Connection databaseLink;
+    protected static final Logger logger = Logger.getLogger("db");
 
     public static Connection getConnection(){
 
@@ -17,7 +21,7 @@ public class DataBaseConnection {
             Class.forName("com.mysql.cj.jdbc.Driver");
             databaseLink = DriverManager.getConnection(url, databaseUser, databasePassword);
         }catch (Exception e){
-            e.printStackTrace();
+            logger.log(Level.WARNING, (Supplier<String>) e);
         }
 
         return databaseLink;
