@@ -5,20 +5,23 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.function.Supplier;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FileManager {
-
+    protected static final Logger logger = Logger.getLogger("FileManager");
     public void createFile(String name) {
         try {
             File myObj = new File(name + ".txt");
             if (myObj.createNewFile()) {
-                System.out.println("File created: " + myObj.getName());
+                logger.log(Level.INFO, "File created: " + myObj.getName());
             } else {
-                System.out.println("File already exists.");
+                logger.log(Level.INFO, "File already exists.");
             }
         } catch (IOException e) {
-            System.out.println("An error occurred creating the file.");
-            e.printStackTrace();
+            logger.log(Level.INFO, "An error occurred creating the file.");
+            logger.log(Level.WARNING, (Supplier<String>) e);
         }
     }
 
@@ -27,10 +30,9 @@ public class FileManager {
             FileWriter myWriter = new FileWriter(filename + ".txt");
             myWriter.write(data);
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
+            logger.log(Level.INFO, "Successfully wrote to the file.");
         } catch (IOException e) {
-            System.out.println("An error occurred writing to the file.");
-            e.printStackTrace();
+            logger.log(Level.WARNING, (Supplier<String>) e);
         }
     }
 
@@ -41,12 +43,11 @@ public class FileManager {
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 data = myReader.nextLine();
-                System.out.println(data);
+                logger.log(Level.INFO, data);
             }
             myReader.close();
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred reading the file.");
-            e.printStackTrace();
+            logger.log(Level.WARNING, (Supplier<String>) e);
         }
         return data;
     }
@@ -54,10 +55,10 @@ public class FileManager {
     public boolean fileExists(String filename) {
         File myObj = new File(filename + ".txt");
         if (myObj.exists()) {
-            System.out.println("File exists: " + myObj.getName());
+            logger.log(Level.INFO, "File exists: " + myObj.getName());
             return true;
         } else {
-            System.out.println("File doesn't exists.");
+            logger.log(Level.INFO, "File doesn't exists.");
             return false;
         }
     }

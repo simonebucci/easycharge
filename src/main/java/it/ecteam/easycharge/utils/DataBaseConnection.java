@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 public class DataBaseConnection {
     private static Connection databaseLink;
 
-
     public static Connection getConnection(){
 
         String databaseName = "easycharge";
