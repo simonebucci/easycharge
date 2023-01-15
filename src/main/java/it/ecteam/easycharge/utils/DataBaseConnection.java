@@ -7,6 +7,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DataBaseConnection {
+
+    protected DataBaseConnection(){}
+
     private static Connection databaseLink;
     protected static final Logger logger = Logger.getLogger("db");
 

@@ -147,8 +147,6 @@ public class RegisterViewController implements Initializable {
                         case B ->
                                 //set business homepage controller
                                 BusinessGraphicChange.getInstance().toLoggedHome(stage);
-                        default -> {
-                        }
                     }
                 } else {
                     this.registerMessageLabel.setText("Registration unsuccessfull! Username already in use, please choose a different one!");

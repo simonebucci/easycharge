@@ -13,6 +13,9 @@ import java.util.Objects;
 
 public class RouteController {
 
+    private RouteController() {
+    }
+
     public static List<ChargingStationBean> getPerfectRoute(List<ChargingStationBean> csOnRoute, List<Double> start, List<Double> end, int range, String cType) throws IOException, ParseException, LocationNotFoundException, ChargingStationNotFoundException {
         List<ChargingStationBean> perfectRoute = new ArrayList<>();
         List<ConnectorBean> connectorBeanList = new ArrayList<>();

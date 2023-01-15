@@ -83,8 +83,6 @@ public class CLILoginController {
                         CLIBusinessHomeController bhc = new CLIBusinessHomeController();
                         bhc.init();
                     }
-                    default -> {
-                    }
                 }
             }
 
@@ -166,8 +164,6 @@ public class CLILoginController {
                 case B -> {
                     CLIBusinessHomeController bhc = new CLIBusinessHomeController();
                     bhc.init();
-                }
-                default -> {
                 }
             }
         }

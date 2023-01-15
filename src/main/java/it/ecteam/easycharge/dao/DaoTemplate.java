@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 public abstract class DaoTemplate {
     protected static final Logger logger = Logger.getLogger("Dao");
 
-    public DaoTemplate() {
+    protected DaoTemplate() {
     }
 
     protected final <T> T execute(DaoAction<T> da) {
