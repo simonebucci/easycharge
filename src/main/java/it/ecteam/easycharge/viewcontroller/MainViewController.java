@@ -80,7 +80,7 @@ public class MainViewController extends StackPane implements Initializable  {
     private List<ConnectorBean> connectorBeanList = new ArrayList<>();
     private List<ReportBean> report = new ArrayList<>();
     private String csid;
-    private static final String SPACE = "\n     ";
+    private final static String SPACE = "\n     ";
     private final SecureRandom r = new SecureRandom();
 
     @FXML

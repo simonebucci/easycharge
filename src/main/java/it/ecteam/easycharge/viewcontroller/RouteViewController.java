@@ -75,7 +75,7 @@ public class RouteViewController extends StackPane implements Initializable {
     private List<Double> end = new ArrayList<>();
     private CarBean cb = new CarBean();
     private String csid;
-    private final static String space = "\n     ";
+    private final static String SPACE = "\n     ";
     private final SecureRandom r = new SecureRandom();
 
     @FXML
@@ -118,7 +118,7 @@ public class RouteViewController extends StackPane implements Initializable {
             chargingStationList = MapController.getOnRoute(start, end);
             int i;
             for(i=0; i < chargingStationList.size(); i++){
-                listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + space);
+                listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + SPACE);
                 connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(i).getId());
             }
         } catch (IOException | ParseException | ChargingStationNotFoundException e) {
@@ -158,7 +158,7 @@ public class RouteViewController extends StackPane implements Initializable {
         pointLabel.setText("");
         int i;
         for(i=0; i < report.size(); i++) {
-            riView.getItems().add(report.get(i).getUsername() + "\nsaid: " + report.get(i).getComment() + "\nDate: " + report.get(i).getDate()+ "\nLikes: " + report.get(i).getPoint() + space);
+            riView.getItems().add(report.get(i).getUsername() + "\nsaid: " + report.get(i).getComment() + "\nDate: " + report.get(i).getDate()+ "\nLikes: " + report.get(i).getPoint() + SPACE);
         }
     }
 
@@ -167,7 +167,7 @@ public class RouteViewController extends StackPane implements Initializable {
         listView.getItems().clear();
         csLabel.setText("");
 
-        StationsController.filterByConnector(connectorBox, chargingStationList, listView, space, cb);
+        StationsController.filterByConnector(connectorBox, chargingStationList, listView, SPACE, cb);
     }
 
     @FXML
@@ -177,7 +177,7 @@ public class RouteViewController extends StackPane implements Initializable {
             listView.getItems().clear();
             int i;
             for(i=0; i < chargingStationList.size(); i++){
-                listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + space);
+                listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + SPACE);
             }
             return;
         }
@@ -189,7 +189,7 @@ public class RouteViewController extends StackPane implements Initializable {
             if(!perfectRouteList.isEmpty()) {
                 int i;
                 for (i = 0; i < perfectRouteList.size(); i++) {
-                    listView.getItems().add(i + 1 + ". " + perfectRouteList.get(i).getName() + "\n" + perfectRouteList.get(i).getFreeformAddress() + space);
+                    listView.getItems().add(i + 1 + ". " + perfectRouteList.get(i).getName() + "\n" + perfectRouteList.get(i).getFreeformAddress() + SPACE);
                 }
             }else{
                 listView.getItems().add("Your car can reach the destination without any recharge.");
@@ -250,7 +250,7 @@ public class RouteViewController extends StackPane implements Initializable {
         }
 
         for(i=0; i < connectorBeanList.size(); i++) {
-            connectorView.getItems().add("Type:"+ connectorBeanList.get(i).getType() + "\nTotal: " + connectorBeanList.get(i).getTotal() + "\nAvailable: " + connectorBeanList.get(i).getAvailable() + "\nOccupied: " + connectorBeanList.get(i).getOccupied() + "\nReserved: " + connectorBeanList.get(i).getReserved() + "\nUnknown: " + connectorBeanList.get(i).getUnknown() + "\nOutOfService: " + connectorBeanList.get(i).getOutOfService() + space);
+            connectorView.getItems().add("Type:"+ connectorBeanList.get(i).getType() + "\nTotal: " + connectorBeanList.get(i).getTotal() + "\nAvailable: " + connectorBeanList.get(i).getAvailable() + "\nOccupied: " + connectorBeanList.get(i).getOccupied() + "\nReserved: " + connectorBeanList.get(i).getReserved() + "\nUnknown: " + connectorBeanList.get(i).getUnknown() + "\nOutOfService: " + connectorBeanList.get(i).getOutOfService() + SPACE);
         }
 
         issueBtn.setVisible(!report.isEmpty());
