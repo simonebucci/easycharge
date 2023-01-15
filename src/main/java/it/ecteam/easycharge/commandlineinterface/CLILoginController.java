@@ -6,6 +6,7 @@ import it.ecteam.easycharge.controller.LoginController;
 import it.ecteam.easycharge.exceptions.EmptyFieldException;
 import it.ecteam.easycharge.utils.SessionUser;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 import static it.ecteam.easycharge.commandlineinterface.CommandLineInterface.*;
 
@@ -118,7 +119,7 @@ public class CLILoginController {
                 System.out.println("Car model:");
                 List<CarBean> cb = LoginController.getCar();
                 int i;
-                for(i=0; i<cb.size(); i++){
+                for(i=0; i< Objects.requireNonNull(cb).size(); i++){
                     System.out.println(i+1+". "+cb.get(i).getName());
                 }
                 String car = input.nextLine();

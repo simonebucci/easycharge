@@ -166,12 +166,15 @@ public class MainViewController extends StackPane implements Initializable  {
     }
 
     @FXML
-    protected void onCheckBox() {
+    protected void onCheckBox() throws ChargingStationNotFoundException, IOException, ParseException {
         listView.getItems().clear();
         UserController uc = new UserController();
         CarBean cb = uc.getCar(userMainLabel.getText());
         try {
             chargingStationList = MapController.getNearby((int) slider.getValue()); //radius range 1 to 50000
+        } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
+            e.printStackTrace();
+        }
             if(!connectorBox.isSelected()){
                 int i;
                 for (i = 0; i < chargingStationList.size(); i++) {
@@ -180,7 +183,7 @@ public class MainViewController extends StackPane implements Initializable  {
             }else{
                 int i;
                 for (i = 0; i < chargingStationList.size(); i++) {
-                    connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(i).getId());
+                        connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(i).getId());
                     int k;
                     for(k = 0; k < connectorBeanList.size(); k++) {
                         if(Objects.equals(connectorBeanList.get(k).getType(), "Chademo")){
@@ -195,9 +198,7 @@ public class MainViewController extends StackPane implements Initializable  {
                     }
                 }
             }
-        } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @FXML
