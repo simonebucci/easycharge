@@ -14,10 +14,10 @@ import java.util.Objects;
 
 public class StationsController {
 
-    public static void filterByConnector(CheckBox connectorBox, List<ChargingStationBean> chargingStationList, ListView listView, String SPACE, CarBean cb) throws ChargingStationNotFoundException, IOException, ParseException {
+    public static void filterByConnector(CheckBox connectorBox, List<ChargingStationBean> chargingStationList, ListView listView, String space, CarBean cb) throws ChargingStationNotFoundException, IOException, ParseException {
         for (int i = 0; i < chargingStationList.size(); i++) {
             if (!connectorBox.isSelected() || checkConnectorAvailability(chargingStationList.get(i).getId(), cb)) {
-                listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + SPACE);
+                listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + space);
             }
         }
     }
