@@ -22,14 +22,9 @@ public class CLIHomeController {
             int i;
             for(i=0; i < chargingStationList.size(); i++){
                 System.out.println(i+1+". "+chargingStationList.get(i).getName()+", "+chargingStationList.get(i).getFreeformAddress());
+
+                connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(i).getId());
                 int k;
-                try {
-                    connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(i).getId());
-
-                } catch (IOException | ChargingStationNotFoundException | ParseException e) {
-                    e.printStackTrace();
-                }
-
                 for(k=0; k < connectorBeanList.size(); k++) {
                     System.out.println("Type:"+ connectorBeanList.get(k).getType() + "\nTotal: " + connectorBeanList.get(k).getTotal() + "\nAvailable: " + connectorBeanList.get(k).getAvailable() + "\nOccupied: " + connectorBeanList.get(k).getOccupied() + "\nReserved: " + connectorBeanList.get(k).getReserved() + "\nUnknown: " + connectorBeanList.get(k).getUnknown() + "\nOutOfService: " + connectorBeanList.get(k).getOutOfService() + "\n     ");
                 }
