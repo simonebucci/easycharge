@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.net.URL;
+import java.security.SecureRandom;
 import java.util.*;
 
 public class RouteViewController extends StackPane implements Initializable {
@@ -75,6 +76,7 @@ public class RouteViewController extends StackPane implements Initializable {
     private CarBean cb = new CarBean();
     private String csid;
     private String space = "\n     ";
+    private final SecureRandom r = new SecureRandom();
 
     @FXML
     protected void onLoginClick() throws IOException {
@@ -284,9 +286,8 @@ public class RouteViewController extends StackPane implements Initializable {
         assert chargingStationAds != null;
         if (!chargingStationAds.isEmpty()) {
             adsPane.setVisible(true);
-            for(i=0; i < Objects.requireNonNull(chargingStationAds).size(); i++) {
-                adsLabel.setText("While you are charging try "+ chargingStationAds.get(i).getBusiness() + " " + chargingStationAds.get(i).getAddress());
-            }
+            int rand = r.nextInt((chargingStationAds).size());
+            adsLabel.setText("While you are charging try "+ chargingStationAds.get(rand).getBusiness() + " located in " + chargingStationAds.get(rand).getAddress());
         }
 
     }
