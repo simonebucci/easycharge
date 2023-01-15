@@ -75,7 +75,7 @@ public class RouteViewController extends StackPane implements Initializable {
     private List<Double> end = new ArrayList<>();
     private CarBean cb = new CarBean();
     private String csid;
-    private final static String SPACE = "\n     ";
+    private static final  String SPACE = "\n     ";
     private final SecureRandom r = new SecureRandom();
 
     @FXML
