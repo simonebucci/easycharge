@@ -1,10 +1,7 @@
 package it.ecteam.easycharge.viewcontroller;
 
 import it.ecteam.easycharge.bean.*;
-import it.ecteam.easycharge.controller.BusinessController;
-import it.ecteam.easycharge.controller.MapController;
-import it.ecteam.easycharge.controller.ReportController;
-import it.ecteam.easycharge.controller.UserController;
+import it.ecteam.easycharge.controller.*;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 import it.ecteam.easycharge.utils.SessionUser;
@@ -175,29 +172,7 @@ public class MainViewController extends StackPane implements Initializable  {
         } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
             e.printStackTrace();
         }
-            if(!connectorBox.isSelected()){
-                int i;
-                for (i = 0; i < chargingStationList.size(); i++) {
-                    listView.getItems().add(i+1+". "+chargingStationList.get(i).getName() + "\n"+ chargingStationList.get(i).getFreeformAddress() + SPACE);
-                }
-            }else{
-                int i;
-                for (i = 0; i < chargingStationList.size(); i++) {
-                        connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(i).getId());
-                    int k;
-                    for(k = 0; k < connectorBeanList.size(); k++) {
-                        if(Objects.equals(connectorBeanList.get(k).getType(), "Chademo")){
-                            if (Objects.equals(connectorBeanList.get(k).getType(), cb.getConnectorType())){
-                                listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + SPACE);
-                                k = connectorBeanList.size();
-                            }
-                        }else if(Objects.equals(connectorBeanList.get(k).getType().substring(0, 13), cb.getConnectorType().substring(0, 13))){
-                            listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + SPACE);
-                            k = connectorBeanList.size();
-                        }
-                    }
-                }
-            }
+        StationsController.filterByConnector(connectorBox, chargingStationList, connectorBeanList, listView, SPACE, cb);
 
     }
 
