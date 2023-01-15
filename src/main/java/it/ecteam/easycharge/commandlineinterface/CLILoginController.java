@@ -83,6 +83,7 @@ public class CLILoginController {
                         CLIBusinessHomeController bhc = new CLIBusinessHomeController();
                         bhc.init();
                     }
+                    default -> System.out.println("Something went wrong, try again!\n");
                 }
             }
 
@@ -165,6 +166,7 @@ public class CLILoginController {
                     CLIBusinessHomeController bhc = new CLIBusinessHomeController();
                     bhc.init();
                 }
+                default -> System.out.println("Something went wrong, try again!\n");
             }
         }
 

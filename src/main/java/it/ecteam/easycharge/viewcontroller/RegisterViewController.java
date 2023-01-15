@@ -18,6 +18,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RegisterViewController implements Initializable {
     private Stage stage = new Stage();
@@ -48,6 +50,7 @@ public class RegisterViewController implements Initializable {
     private Label registerMessageLabel;
 
     static final String B = "business";
+    protected static final Logger logger = Logger.getLogger("gui");
 
     @FXML
     protected void onLoginClick() throws IOException {
@@ -147,6 +150,7 @@ public class RegisterViewController implements Initializable {
                         case B ->
                                 //set business homepage controller
                                 BusinessGraphicChange.getInstance().toLoggedHome(stage);
+                        default -> logger.log(Level.WARNING, "Something went wrong, try again!");
                     }
                 } else {
                     this.registerMessageLabel.setText("Registration unsuccessfull! Username already in use, please choose a different one!");
