@@ -14,29 +14,23 @@ import java.util.Objects;
 
 public class StationsController {
 
-    public static void filterByConnector(CheckBox connectorBox, List<ChargingStationBean> chargingStationList, List<ConnectorBean> connectorBeanList, ListView listView, String SPACE, CarBean cb) throws ChargingStationNotFoundException, IOException, ParseException {
-        if(!connectorBox.isSelected()){
-            int i;
-            for (i = 0; i < chargingStationList.size(); i++) {
-                listView.getItems().add(i+1+". "+chargingStationList.get(i).getName() + "\n"+ chargingStationList.get(i).getFreeformAddress() + SPACE);
-            }
-        }else{
-            int i;
-            for (i = 0; i < chargingStationList.size(); i++) {
-                connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(i).getId());
-                int k;
-                for(k = 0; k < connectorBeanList.size(); k++) {
-                    if(Objects.equals(connectorBeanList.get(k).getType(), "Chademo")){
-                        if (Objects.equals(connectorBeanList.get(k).getType(), cb.getConnectorType())){
-                            listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + SPACE);
-                            k = connectorBeanList.size();
-                        }
-                    }else if(Objects.equals(connectorBeanList.get(k).getType().substring(0, 13), cb.getConnectorType().substring(0, 13))){
-                        listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + SPACE);
-                        k = connectorBeanList.size();
-                    }
-                }
+    public static void filterByConnector(CheckBox connectorBox, List<ChargingStationBean> chargingStationList, ListView listView, String SPACE, CarBean cb) throws ChargingStationNotFoundException, IOException, ParseException {
+        for (int i = 0; i < chargingStationList.size(); i++) {
+            if (!connectorBox.isSelected() || checkConnectorAvailability(chargingStationList.get(i).getId(), cb)) {
+                listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + SPACE);
             }
         }
+    }
+
+    public static boolean checkConnectorAvailability(String chargingStationId, CarBean cb) throws ChargingStationNotFoundException, IOException, ParseException {
+        List<ConnectorBean> connectorBeanList = MapController.getChargingAvailability(chargingStationId);
+        for(int k = 0; k < connectorBeanList.size(); k++) {
+            if (Objects.equals(connectorBeanList.get(k).getType(), "Chademo")) {
+                return Objects.equals(connectorBeanList.get(k).getType(), cb.getConnectorType());
+            } else if (Objects.equals(connectorBeanList.get(k).getType().substring(0, 13), cb.getConnectorType().substring(0, 13))) {
+                return true;
+            }
+        }
+        return false;
     }
 }

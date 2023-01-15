@@ -172,7 +172,7 @@ public class MainViewController extends StackPane implements Initializable  {
         } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
             e.printStackTrace();
         }
-        StationsController.filterByConnector(connectorBox, chargingStationList, connectorBeanList, listView, SPACE, cb);
+        StationsController.filterByConnector(connectorBox, chargingStationList, listView, SPACE, cb);
 
     }
 

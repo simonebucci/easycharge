@@ -167,7 +167,7 @@ public class RouteViewController extends StackPane implements Initializable {
         listView.getItems().clear();
         csLabel.setText("");
 
-        StationsController.filterByConnector(connectorBox, chargingStationList, connectorBeanList, listView, SPACE, cb);
+        StationsController.filterByConnector(connectorBox, chargingStationList, listView, SPACE, cb);
     }
 
     @FXML
