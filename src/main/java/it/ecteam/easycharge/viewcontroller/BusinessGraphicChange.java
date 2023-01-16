@@ -6,9 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.function.Supplier;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BusinessGraphicChange extends GraphicChangeTemplate{
     private static BusinessGraphicChange myInstance=null;
+    protected static final Logger logger = Logger.getLogger("gc");
 
     private BusinessGraphicChange() {
         whoAmI = Roles.BUSINESS;
@@ -27,7 +31,7 @@ public class BusinessGraphicChange extends GraphicChangeTemplate{
             Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
             stage.setScene(scene);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, (Supplier<String>) e);
         }
     }
 
