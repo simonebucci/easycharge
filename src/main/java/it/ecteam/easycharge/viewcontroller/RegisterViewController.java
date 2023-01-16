@@ -107,20 +107,19 @@ public class RegisterViewController implements Initializable {
         String userRole = "";
         String dataError = "Please enter all required data.";
 
-        if ((Objects.equals(userType.getValue(), null) || usernameTextField.getText().isBlank() || passwordPasswordField.getText().isBlank() || emailTextField.getText().isBlank())){
+        if (Objects.equals(userType.getValue(), null) || usernameTextField.getText().isBlank() || passwordPasswordField.getText().isBlank() || emailTextField.getText().isBlank()) {
             registerMessageLabel.setText(dataError);
-        }else{
+        } else {
             username = usernameTextField.getText();
             password = passwordPasswordField.getText();
             email = emailTextField.getText();
             userRole = userType.getValue();
 
-            if(userRole.equals("user") && Objects.equals(modelBox.getValue(), null)){
+            if (userRole.equals("user") && Objects.equals(modelBox.getValue(), null)) {
                 registerMessageLabel.setText(dataError);
-            }else if(userRole.equals(B) && businessTextField.getText().isBlank()){
+            } else if (userRole.equals(B) && businessTextField.getText().isBlank()) {
                 registerMessageLabel.setText(dataError);
-            }else{
-
+            } else {
                 if (userRole.equals("user")) {
                     UserBean u = new UserBean();
                     u.setUsername(username);
@@ -139,18 +138,13 @@ public class RegisterViewController implements Initializable {
                     bu.setAddress(baddressTextField.getText());
                     regResult = loginController.createBusinessUser(bu);
                 }
-
                 if (Boolean.TRUE.equals(regResult)) {
                     this.registerMessageLabel.setText("Registration successfull");
-                    switch (userRole) {
-                        case "user" -> {
-                            stage = (Stage) homeBtn.getScene().getWindow();
-                            UserGraphicChange.getInstance().toLoggedHome(stage);
-                        }
-                        case B ->
-                                //set business homepage controller
-                                BusinessGraphicChange.getInstance().toLoggedHome(stage);
-                        default -> logger.log(Level.WARNING, "Something went wrong, try again!");
+                    stage = (Stage) homeBtn.getScene().getWindow();
+                    if (userRole.equals("user")) {
+                        UserGraphicChange.getInstance().toLoggedHome(stage);
+                    } else {
+                        BusinessGraphicChange.getInstance().toLoggedHome(stage);
                     }
                 } else {
                     this.registerMessageLabel.setText("Registration unsuccessfull! Username already in use, please choose a different one!");
@@ -158,7 +152,6 @@ public class RegisterViewController implements Initializable {
             }
         }
     }
-
 
     @FXML
     public void initialize(URL url, ResourceBundle rb){
