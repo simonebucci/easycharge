@@ -7,13 +7,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.function.Supplier;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class UserGraphicChange extends GraphicChangeTemplate {
     private static UserGraphicChange myInstance=null;
-    protected static final Logger logger = Logger.getLogger("gc");
 
     private UserGraphicChange() {
         whoAmI = Roles.USER;
@@ -32,7 +29,7 @@ public class UserGraphicChange extends GraphicChangeTemplate {
             Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
             stage.setScene(scene);
         } catch (IOException e) {
-            logger.log(Level.WARNING, (Supplier<String>) e);
+            logger.log(Level.WARNING, e.toString());
         }
     }
 
