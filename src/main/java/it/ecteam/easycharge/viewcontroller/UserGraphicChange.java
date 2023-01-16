@@ -22,38 +22,27 @@ public class UserGraphicChange extends GraphicChangeTemplate {
         return myInstance;
     }
 
+    private void changeScene(String fxmlFile, Stage stage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource(fxmlFile));
+            Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void toLoggedHome(Stage stage){
-        this.catcher(new GraphicChangeAction() {
-            @Override
-            public void act() throws IOException {
-                FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("logged-view.fxml"));
-                Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-                stage.setScene(scene);
-
-            }
-        });
+        changeScene("logged-view.fxml", stage);
     }
 
     public void toUser(Stage stage){
-        this.catcher(new GraphicChangeAction() {
-            @Override
-            public void act() throws IOException {
-                FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("settings-view.fxml"));
-                Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-                stage.setScene(scene);
-            }
-        });
+        changeScene("settings-view.fxml", stage);
     }
 
     public void toRoute(Stage stage){
-        this.catcher(new GraphicChangeAction() {
-            @Override
-            public void act() throws IOException {
-                FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("route-logged-view.fxml"));
-                Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-                stage.setScene(scene);
-            }
-        });
+        changeScene("route-logged-view.fxml", stage);
     }
+
 }

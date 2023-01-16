@@ -21,38 +21,27 @@ public class BusinessGraphicChange extends GraphicChangeTemplate{
         return myInstance;
     }
 
+    private void changeScene(String fxmlFile, Stage stage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource(fxmlFile));
+            Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void toLoggedHome(Stage stage) {
-        this.catcher(new GraphicChangeAction() {
-            @Override
-            public void act() throws IOException {
-                FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("business-view.fxml"));
-                Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-                stage.setScene(scene);
-            }
-        });
+        changeScene("business-view.fxml", stage);
     }
 
     public void toUser(Stage stage){
-        this.catcher(new GraphicChangeAction() {
-            @Override
-            public void act() throws IOException {
-                FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("business-settings-view.fxml"));
-                Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-                stage.setScene(scene);
-            }
-        });
+        changeScene("business-settings-view.fxml", stage);
     }
 
     public void toMyBusiness(Stage stage) {
-        this.catcher(new GraphicChangeAction() {
-            @Override
-            public void act() throws IOException {
-                FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("mybusiness-view.fxml"));
-                Scene scene = new Scene(loader.load(), stage.getScene().getWidth(), stage.getScene().getHeight());
-                stage.setScene(scene);
-            }
-        });
+        changeScene("mybusiness-view.fxml", stage);
     }
 
 }

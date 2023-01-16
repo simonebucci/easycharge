@@ -10,9 +10,6 @@ import it.ecteam.easycharge.entity.Car;
 import it.ecteam.easycharge.entity.ChargingStation;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
-import org.w3c.dom.Text;
-
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
