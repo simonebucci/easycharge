@@ -98,96 +98,38 @@ public class RegisterViewController implements Initializable {
         stage.setScene(scene);
     }
 
-    /*@FXML
-    protected void onRegisterClick() throws IOException {
-        LoginController loginController = new LoginController();
-        boolean regResult = false;
-        String email = "";
-        String username = "";
-        String password = "";
-        String userRole = "";
-        String dataError = "Please enter all required data.";
-
-        if (Objects.equals(userType.getValue(), null) || usernameTextField.getText().isBlank() || passwordPasswordField.getText().isBlank() || emailTextField.getText().isBlank()) {
-            registerMessageLabel.setText(dataError);
-        } else {
-            username = usernameTextField.getText();
-            password = passwordPasswordField.getText();
-            email = emailTextField.getText();
-            userRole = userType.getValue();
-
-            if (userRole.equals("user") && Objects.equals(modelBox.getValue(), null)) {
-                registerMessageLabel.setText(dataError);
-            } else if (userRole.equals(B) && businessTextField.getText().isBlank()) {
-                registerMessageLabel.setText(dataError);
-            } else {
-                if (userRole.equals("user")) {
-                    UserBean u = new UserBean();
-                    u.setUsername(username);
-                    u.setPassword(password);
-                    u.setEmail(email);
-                    u.setRole(userRole);
-                    u.setCar(modelBox.getValue());
-                    regResult = loginController.createUser(u);
-                } else if (userRole.equals(B)) {
-                    BusinessBean bu = new BusinessBean();
-                    bu.setUsername(username);
-                    bu.setPassword(password);
-                    bu.setRole(userRole);
-                    bu.setBusiness(businessTextField.getText());
-                    bu.setEmail(email);
-                    bu.setAddress(baddressTextField.getText());
-                    regResult = loginController.createBusinessUser(bu);
-                }
-                if (Boolean.TRUE.equals(regResult)) {
-                    this.registerMessageLabel.setText("Registration successfull");
-                    stage = (Stage) homeBtn.getScene().getWindow();
-                    if (userRole.equals("user")) {
-                        UserGraphicChange.getInstance().toLoggedHome(stage);
-                    } else {
-                        BusinessGraphicChange.getInstance().toLoggedHome(stage);
-                    }
-                } else {
-                    this.registerMessageLabel.setText("Registration unsuccessfull! Username already in use, please choose a different one!");
-                }
-            }
-        }
-    }*/
-
     @FXML
     protected void onRegisterClick() throws IOException {
         LoginController loginController = new LoginController();
-        boolean regResult = false;
-        String userRole;
+        boolean regResult;
+        String userRole = userType.getValue();
         String dataError = "Please enter all required data.";
 
         if (UserController.isInvalidData(userType, usernameTextField, passwordPasswordField, emailTextField)) {
             registerMessageLabel.setText(dataError);
-        } else {
-            userRole = userType.getValue();
+            return;
+        }
+        if (UserController.isInvalidDataForUser(userRole, modelBox)) {
+            registerMessageLabel.setText(dataError);
+            return;
+        }
+        if (UserController.isInvalidDataForBusiness(userRole, businessTextField)) {
+            registerMessageLabel.setText(dataError);
+            return;
+        }
 
-            if (UserController.isInvalidDataForUser(userRole, modelBox)) {
-                registerMessageLabel.setText(dataError);
-            } else if (UserController.isInvalidDataForBusiness(userRole, businessTextField)) {
-                registerMessageLabel.setText(dataError);
+        regResult = userRole.equals("user") ? loginController.createUser(UserController.createUserBean(usernameTextField, passwordPasswordField, emailTextField, userType, modelBox)) : loginController.createBusinessUser(UserController.createBusinessBean(usernameTextField,passwordPasswordField, emailTextField, userType, businessTextField, baddressTextField));
+
+        if (Boolean.TRUE.equals(regResult)) {
+            this.registerMessageLabel.setText("Registration successfull");
+            stage = (Stage) homeBtn.getScene().getWindow();
+            if (userRole.equals("user")) {
+                UserGraphicChange.getInstance().toLoggedHome(stage);
             } else {
-                if (userRole.equals("user")) {
-                    regResult = loginController.createUser(UserController.createUserBean(usernameTextField, passwordPasswordField, emailTextField, userType, modelBox));
-                } else if (userRole.equals(B)) {
-                    regResult = loginController.createBusinessUser(UserController.createBusinessBean(usernameTextField,passwordPasswordField, emailTextField, userType, businessTextField, baddressTextField));
-                }
-                if (Boolean.TRUE.equals(regResult)) {
-                    this.registerMessageLabel.setText("Registration successfull");
-                    stage = (Stage) homeBtn.getScene().getWindow();
-                    if (userRole.equals("user")) {
-                        UserGraphicChange.getInstance().toLoggedHome(stage);
-                    } else {
-                        BusinessGraphicChange.getInstance().toLoggedHome(stage);
-                    }
-                } else {
-                    this.registerMessageLabel.setText("Registration unsuccessfull! Username already in use, please choose a different one!");
-                }
+                BusinessGraphicChange.getInstance().toLoggedHome(stage);
             }
+        } else {
+            this.registerMessageLabel.setText("Registration unsuccessfull! Username already in use, please choose a different one!");
         }
     }
 
