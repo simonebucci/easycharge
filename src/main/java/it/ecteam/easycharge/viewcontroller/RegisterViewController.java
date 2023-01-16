@@ -5,6 +5,7 @@ import it.ecteam.easycharge.bean.BusinessBean;
 import it.ecteam.easycharge.bean.CarBean;
 import it.ecteam.easycharge.bean.UserBean;
 import it.ecteam.easycharge.controller.LoginController;
+import it.ecteam.easycharge.controller.UserController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -97,7 +98,7 @@ public class RegisterViewController implements Initializable {
         stage.setScene(scene);
     }
 
-    @FXML
+    /*@FXML
     protected void onRegisterClick() throws IOException {
         LoginController loginController = new LoginController();
         boolean regResult = false;
@@ -137,6 +138,43 @@ public class RegisterViewController implements Initializable {
                     bu.setEmail(email);
                     bu.setAddress(baddressTextField.getText());
                     regResult = loginController.createBusinessUser(bu);
+                }
+                if (Boolean.TRUE.equals(regResult)) {
+                    this.registerMessageLabel.setText("Registration successfull");
+                    stage = (Stage) homeBtn.getScene().getWindow();
+                    if (userRole.equals("user")) {
+                        UserGraphicChange.getInstance().toLoggedHome(stage);
+                    } else {
+                        BusinessGraphicChange.getInstance().toLoggedHome(stage);
+                    }
+                } else {
+                    this.registerMessageLabel.setText("Registration unsuccessfull! Username already in use, please choose a different one!");
+                }
+            }
+        }
+    }*/
+
+    @FXML
+    protected void onRegisterClick() throws IOException {
+        LoginController loginController = new LoginController();
+        boolean regResult = false;
+        String userRole;
+        String dataError = "Please enter all required data.";
+
+        if (UserController.isInvalidData(userType, usernameTextField, passwordPasswordField, emailTextField)) {
+            registerMessageLabel.setText(dataError);
+        } else {
+            userRole = userType.getValue();
+
+            if (UserController.isInvalidDataForUser(userRole, modelBox)) {
+                registerMessageLabel.setText(dataError);
+            } else if (UserController.isInvalidDataForBusiness(userRole, businessTextField)) {
+                registerMessageLabel.setText(dataError);
+            } else {
+                if (userRole.equals("user")) {
+                    regResult = loginController.createUser(UserController.createUserBean(usernameTextField, passwordPasswordField, emailTextField, userType, modelBox));
+                } else if (userRole.equals(B)) {
+                    regResult = loginController.createBusinessUser(UserController.createBusinessBean(usernameTextField,passwordPasswordField, emailTextField, userType, businessTextField, baddressTextField));
                 }
                 if (Boolean.TRUE.equals(regResult)) {
                     this.registerMessageLabel.setText("Registration successfull");
