@@ -35,7 +35,7 @@ public class CLIRouteController {
         }
         System.out.println("Do you want to filter by your connector?(y/n)");
 
-        if(input.nextLine()=="y") {
+        if(Objects.equals(input.nextLine(), "y")) {
             try {
                 chargingStationList = RouteController.getOnRoute(startPoint, endPoint);
                 int i;
