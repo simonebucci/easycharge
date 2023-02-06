@@ -1,12 +1,9 @@
 package it.ecteam.easycharge.controller;
 
 import it.ecteam.easycharge.bean.BusinessBean;
-import it.ecteam.easycharge.bean.CarBean;
 import it.ecteam.easycharge.bean.ChargingStationBean;
 import it.ecteam.easycharge.dao.BusinessDao;
-import it.ecteam.easycharge.dao.CarDao;
 import it.ecteam.easycharge.entity.Business;
-import it.ecteam.easycharge.entity.Car;
 import it.ecteam.easycharge.entity.ChargingStation;
 
 import java.util.ArrayList;

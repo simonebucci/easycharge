@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+import static it.ecteam.easycharge.commandlineinterface.CommandLineInterface.*;
+
 public class CLIRouteController {
     private UserBean ub = SessionUser.getInstance().getSession();
     private List<ChargingStationBean> chargingStationList = new ArrayList<>();
@@ -144,7 +146,7 @@ public class CLIRouteController {
                     uhc.init();
                 }
                 case "4" -> {
-                    System.out.println("Bye bye");
+                    System.out.println(RED +"Bye bye" + RESET);
                     input.close();
                     return;
                 }

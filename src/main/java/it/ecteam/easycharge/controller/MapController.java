@@ -8,19 +8,10 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import it.ecteam.easycharge.bean.ChargingStationBean;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject; 
 import org.json.simple.parser.*;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 
 public class MapController {
 
@@ -99,8 +90,6 @@ public class MapController {
             JSONObject results = (JSONObject) resultsArray.get(0);
             JSONObject geometry = (JSONObject) results.get("geometry");
             JSONObject location = (JSONObject) geometry.get("location");
-
-            String formattedAddress = (String) results.get("formatted_address");
 
             Double lat = (Double) location.get("lat");
             Double lng = (Double) location.get("lng");

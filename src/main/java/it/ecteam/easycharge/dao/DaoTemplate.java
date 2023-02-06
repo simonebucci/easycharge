@@ -1,7 +1,5 @@
 package it.ecteam.easycharge.dao;
 
-import java.sql.SQLException;
-import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

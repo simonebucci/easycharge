@@ -1,7 +1,6 @@
 package it.ecteam.easycharge.dao;
 
 import it.ecteam.easycharge.entity.Business;
-import it.ecteam.easycharge.entity.Car;
 import it.ecteam.easycharge.entity.ChargingStation;
 import it.ecteam.easycharge.utils.DataBaseConnection;
 
