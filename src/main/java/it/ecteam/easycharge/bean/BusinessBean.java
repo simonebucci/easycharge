@@ -9,6 +9,7 @@ public class BusinessBean {
     protected String business;
     protected String address;
     protected String id;
+    protected String ad;
 
     public void setUsername(String username) {
         this.username = username;
@@ -65,4 +66,6 @@ public class BusinessBean {
     public String getId() {
         return this.id;
     }
+    public String getAd(){ return this.ad; }
+    public void setAd(String ad){ this.ad = ad;}
 }

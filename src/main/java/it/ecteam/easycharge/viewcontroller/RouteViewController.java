@@ -2,6 +2,7 @@ package it.ecteam.easycharge.viewcontroller;
 
 import it.ecteam.easycharge.bean.*;
 import it.ecteam.easycharge.controller.*;
+import it.ecteam.easycharge.controller.UserController;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 import it.ecteam.easycharge.utils.SessionUser;
@@ -79,18 +80,6 @@ public class RouteViewController extends StackPane implements Initializable {
     private final SecureRandom r = new SecureRandom();
 
     @FXML
-    protected void onLoginClick() throws IOException {
-        stage = (Stage) loginBtn.getScene().getWindow();
-        this.ugc.toLogin(stage);
-    }
-
-    @FXML
-    protected void onRegisterClick() throws IOException {
-        stage = (Stage) loginBtn.getScene().getWindow();
-        this.ugc.toRegister(stage);
-    }
-
-    @FXML
     protected void onHomeClick() throws IOException {
         stage = (Stage) mainBtn.getScene().getWindow();
         this.ugc.toHome(stage);
@@ -115,11 +104,11 @@ public class RouteViewController extends StackPane implements Initializable {
         listView.getItems().clear();
 
         try {
-            chargingStationList = MapController.getOnRoute(start, end);
+            chargingStationList = RouteController.getOnRoute(start, end);
             int i;
             for(i=0; i < chargingStationList.size(); i++){
                 listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + SPACE);
-                connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(i).getId());
+                connectorBeanList = ChargingStationController.getChargingAvailability(chargingStationList.get(i).getId());
             }
         } catch (IOException | ParseException | ChargingStationNotFoundException e) {
             e.printStackTrace();
@@ -167,11 +156,11 @@ public class RouteViewController extends StackPane implements Initializable {
         listView.getItems().clear();
         csLabel.setText("");
 
-        StationsController.filterByConnector(connectorBox, chargingStationList, listView, SPACE, cb);
+        StationsFilterController.filterByConnector(connectorBox, chargingStationList, listView, SPACE, cb);
     }
 
     @FXML
-    protected void onPerfectBox() throws LocationNotFoundException, ChargingStationNotFoundException, IOException, ParseException {
+    protected void onPerfectBox() throws LocationNotFoundException {
 
         if(!perfectBox.isSelected()){
             listView.getItems().clear();
@@ -179,13 +168,16 @@ public class RouteViewController extends StackPane implements Initializable {
             for(i=0; i < chargingStationList.size(); i++){
                 listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + SPACE);
             }
+            connectorBox.setDisable(false);
             return;
+        }else{
+            connectorBox.setDisable(true);
         }
         listView.getItems().clear();
         csLabel.setText("");
 
         try {
-            perfectRouteList = RouteController.getPerfectRoute(chargingStationList, start, end, Integer.parseInt(cb.getRange()), cb.getConnectorType());
+            perfectRouteList = RouteController.getPerfectRoute(start, end, Integer.parseInt(cb.getRange()), cb.getConnectorType(), cb.getCapacity());
             if(!perfectRouteList.isEmpty()) {
                 int i;
                 for (i = 0; i < perfectRouteList.size(); i++) {
@@ -237,11 +229,11 @@ public class RouteViewController extends StackPane implements Initializable {
         int i;
         try {
             if(!perfectBox.isSelected()) {
-                connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(id - 1).getId());
+                connectorBeanList = ChargingStationController.getChargingAvailability(chargingStationList.get(id - 1).getId());
                 csLabel.setText(chargingStationList.get(id-1).getName());
                 webMap.getEngine().load("https://www.google.it/maps/place/"+chargingStationList.get(id-1).getLatitude()+","+chargingStationList.get(id-1).getLongitude());
             }else{
-                connectorBeanList = MapController.getChargingAvailability(perfectRouteList.get(id - 1).getId());
+                connectorBeanList = ChargingStationController.getChargingAvailability(perfectRouteList.get(id - 1).getId());
                 csLabel.setText(perfectRouteList.get(id-1).getName());
                 webMap.getEngine().load("https://www.google.it/maps/place/"+perfectRouteList.get(id-1).getLatitude()+","+perfectRouteList.get(id-1).getLongitude());
             }
@@ -260,7 +252,7 @@ public class RouteViewController extends StackPane implements Initializable {
         if (!chargingStationAds.isEmpty()) {
             adsPane.setVisible(true);
             int rand = r.nextInt((chargingStationAds).size());
-            adsLabel.setText("While you are charging try "+ chargingStationAds.get(rand).getBusiness() + " located in " + chargingStationAds.get(rand).getAddress());
+            adsLabel.setText(chargingStationAds.get(rand).getAd()+" located in " + chargingStationAds.get(rand).getAddress());
         }
 
     }

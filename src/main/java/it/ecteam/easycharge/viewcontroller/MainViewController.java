@@ -2,6 +2,7 @@ package it.ecteam.easycharge.viewcontroller;
 
 import it.ecteam.easycharge.bean.*;
 import it.ecteam.easycharge.controller.*;
+import it.ecteam.easycharge.controller.UserController;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 import it.ecteam.easycharge.utils.SessionUser;
@@ -72,6 +73,8 @@ public class MainViewController extends StackPane implements Initializable  {
     private Pane adsPane;
     @FXML
     private CheckBox connectorBox;
+    @FXML
+    private CheckBox favoriteBox;
 
     private UserGraphicChange ugc;
     private UserBean ub = SessionUser.getInstance().getSession();
@@ -138,12 +141,12 @@ public class MainViewController extends StackPane implements Initializable  {
         listView.getItems().clear();
 
         try {
-            chargingStationList = MapController.getNearby((int) slider.getValue()); //radius range 1 to 50000
+            chargingStationList = ChargingStationController.getNearby((int) slider.getValue()); //radius range 1 to 50000
             if(connectorBox != null && connectorBox.isSelected()){
                 CarBean cb = uc.getCar(userMainLabel.getText());
                 int i;
                 for (i = 0; i < chargingStationList.size(); i++) {
-                    connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(i).getId());
+                    connectorBeanList = ChargingStationController.getChargingAvailability(chargingStationList.get(i).getId());
                     int k;
                     for(k = 0; k < connectorBeanList.size(); k++) {
                         if (Objects.equals(connectorBeanList.get(k).getType(), cb.getConnectorType()))
@@ -168,11 +171,11 @@ public class MainViewController extends StackPane implements Initializable  {
         UserController uc = new UserController();
         CarBean cb = uc.getCar(userMainLabel.getText());
         try {
-            chargingStationList = MapController.getNearby((int) slider.getValue()); //radius range 1 to 50000
+            chargingStationList = ChargingStationController.getNearby((int) slider.getValue()); //radius range 1 to 50000
         } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
             e.printStackTrace();
         }
-        StationsController.filterByConnector(connectorBox, chargingStationList, listView, SPACE, cb);
+        StationsFilterController.filterByConnector(connectorBox, chargingStationList, listView, SPACE, cb);
 
     }
 
@@ -216,7 +219,7 @@ public class MainViewController extends StackPane implements Initializable  {
         webMap.getEngine().load("https://www.google.it/maps/place/"+chargingStationList.get(id-1).getLatitude()+","+chargingStationList.get(id-1).getLongitude());
         int i;
         try {
-            connectorBeanList = MapController.getChargingAvailability(chargingStationList.get(id-1).getId());
+            connectorBeanList = ChargingStationController.getChargingAvailability(chargingStationList.get(id-1).getId());
 
         } catch (IOException | ChargingStationNotFoundException | ParseException e) {
             e.printStackTrace();
@@ -236,7 +239,7 @@ public class MainViewController extends StackPane implements Initializable  {
                 adsLabel.setText("While you are charging try "+ chargingStationAds.get(i).getBusiness() + " " + chargingStationAds.get(i).getAddress());
             }*/
             int rand = r.nextInt((chargingStationAds).size());
-            adsLabel.setText("While you are charging try "+ chargingStationAds.get(rand).getBusiness() + " located in " + chargingStationAds.get(rand).getAddress());
+            adsLabel.setText(chargingStationAds.get(rand).getAd()+" located in " + chargingStationAds.get(rand).getAddress());
         }
     }
 
@@ -343,6 +346,29 @@ public class MainViewController extends StackPane implements Initializable  {
         favoriteOffBtn.setVisible(true);
     }
 
+    @FXML
+    protected void onMyFavoriteClick(){
+        listView.getItems().clear();
+        List<ChargingStationBean> favoriteCSB = UserController.getFavorite(ub.getUsername());
+        ChargingStationBean csb = new ChargingStationBean();
+        int i;
+        if (!favoriteBox.isSelected()) {
+            for(i=0; i<chargingStationList.size(); i++) {
+                listView.getItems().add(i + 1 + ". " + chargingStationList.get(i).getName() + "\n" + chargingStationList.get(i).getFreeformAddress() + SPACE);
+            }
+        }else {
+            for (i = 0; i < favoriteCSB.size(); i++) {
+                try {
+                    csb = ChargingStationController.getCSInfo(favoriteCSB.get(i).getId());
+                } catch (IOException | java.text.ParseException | LocationNotFoundException | ParseException |
+                         ChargingStationNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+                listView.getItems().add(i + 1 + ". " + csb.getName() + "\n" + csb.getFreeformAddress() + SPACE);
+            }
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         issuePane.setVisible(false);
@@ -353,7 +379,7 @@ public class MainViewController extends StackPane implements Initializable  {
         rangeLabel.setText(((int) slider.getValue())/1000 + "km");
 
         try {
-            chargingStationList = MapController.getNearby((int)slider.getValue()); //radius range 1 to 50000
+            chargingStationList = ChargingStationController.getNearby((int)slider.getValue()); //radius range 1 to 50000
             int i;
             for(i=0; i < chargingStationList.size(); i++){
                 listView.getItems().add(i+1+". "+chargingStationList.get(i).getName()+"\n"+chargingStationList.get(i).getFreeformAddress()+ SPACE);

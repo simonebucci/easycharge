@@ -1,6 +1,7 @@
 package it.ecteam.easycharge.dao;
 
 import it.ecteam.easycharge.entity.Business;
+import it.ecteam.easycharge.entity.Car;
 import it.ecteam.easycharge.entity.ChargingStation;
 import it.ecteam.easycharge.utils.DataBaseConnection;
 
@@ -13,10 +14,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class BusinessDao extends DaoTemplate{
-    public Boolean createBusinessUser(String username, String password, String email, String role, String business, String address) {
+    public Boolean createBusinessUser(String username, String password, String email, String role, String business, String address, String ad) {
         return this.execute(() -> {
             Connection con = DataBaseConnection.getConnection();
-            String sql = "call easycharge.add_businessuser(?, ?, ?, ?, ?, ?);\r\n";
+            String sql = "call easycharge.add_businessuser(?, ?, ?, ?, ?, ?, ?);\r\n";
 
 
             try (PreparedStatement stm = con.prepareStatement(sql)) {
@@ -26,6 +27,7 @@ public class BusinessDao extends DaoTemplate{
                 stm.setString(4, role);
                 stm.setString(5, business);
                 stm.setString(6, address);
+                stm.setString(7, ad);
                 stm.executeUpdate();
             }
 
@@ -33,48 +35,60 @@ public class BusinessDao extends DaoTemplate{
         }) != null;
     }
 
-    public List<Business> getBusiness(String username){
-        List<Business> ret = this.execute(new DaoAction<List<Business>>() {
+    public Business getBusiness(String username){
+        return this.execute(new DaoAction<Business>() {
             @Override
-            public List<Business> act() throws ClassNotFoundException, SQLException {
+            public Business act() throws ClassNotFoundException, SQLException {
                 Connection conn = null;
-                String sql = null;
-                PreparedStatement stm = null;
-                List<Business> b = new ArrayList<>();
-                try {
-                    conn = DataBaseConnection.getConnection();
-                    sql = "call easycharge.get_business(?);\r\n";
-                    stm = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE,
-                            ResultSet.CONCUR_UPDATABLE);
+                Business business = null;
+                conn = DataBaseConnection.getConnection();
+
+                String sql = "call easycharge.get_business(?);\r\n";
+                try(PreparedStatement stm = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE,
+                        ResultSet.CONCUR_UPDATABLE)){
                     stm.setString(1, username);
                     try (ResultSet rs = stm.executeQuery()) {
 
                         if (!rs.first()) // rs not empty
-                            return Collections.emptyList();	//return empty list*/
+                            return null;
 
-                        do{
-                            String name = rs.getString("business_name");
-                            String address = rs.getString("business_address");
-                            String id = rs.getString("idbusiness");
-                            b.add(new Business(name, address, username, id));
-                        } while (rs.next());
+                        boolean moreThanOne = rs.first() && rs.next();
+                        assert !moreThanOne;
+                        rs.first();
+
+                        String name = rs.getString("business_name");
+                        String address = rs.getString("business_address");
+                        String id = rs.getString("idbusiness");
+                        String ad = rs.getString("ad");
+                        business = new Business(name, address, username, id, ad);
                     }
-                } finally {
-                    stm.close();
                 }
-                return b;
+
+                return business;
             }
         });
-        if (ret != null)
-            return ret;
-
-        return Collections.emptyList();
     }
 
     public Boolean businessAd(String business, String csID) {
         return this.execute(() -> {
             Connection con = DataBaseConnection.getConnection();
             String sql = "call easycharge.business_ad(?, ?);\r\n";
+
+
+            try (PreparedStatement stm = con.prepareStatement(sql)) {
+                stm.setString(1, business);
+                stm.setString(2, csID);
+                stm.executeUpdate();
+            }
+
+            return true;
+        }) != null;
+    }
+
+    public Boolean removeAd(String business, String csID) {
+        return this.execute(() -> {
+            Connection con = DataBaseConnection.getConnection();
+            String sql = "call easycharge.remove_ad(?, ?);\r\n";
 
 
             try (PreparedStatement stm = con.prepareStatement(sql)) {
@@ -113,6 +127,7 @@ public class BusinessDao extends DaoTemplate{
                         } while (rs.next());
                     }
                 } finally {
+                    assert stm != null;
                     stm.close();
                 }
                 return cs;
@@ -147,10 +162,12 @@ public class BusinessDao extends DaoTemplate{
                             String name = rs.getString("business_name");
                             String address = rs.getString("business_address");
                             String id = rs.getString("business_idbusiness");
-                            b.add(new Business(name, address, id));
+                            String ad = rs.getString("ad");
+                            b.add(new Business(name, address, id, ad));
                         } while (rs.next());
                     }
                 } finally {
+                    assert stm != null;
                     stm.close();
                 }
                 return b;
@@ -162,5 +179,19 @@ public class BusinessDao extends DaoTemplate{
         return Collections.emptyList();
     }
 
+    public Boolean updateAd(String username, String ad) {
+        return this.execute(() -> {
+            Connection con = DataBaseConnection.getConnection();
+            String sql = "call easycharge.update_ad(?, ?);\r\n";
+
+            try (PreparedStatement stm = con.prepareStatement(sql)) {
+                stm.setString(1, username);
+                stm.setString(2, ad);
+                stm.executeUpdate();
+            }
+
+            return true;
+        }) != null;
+    }
 
 }

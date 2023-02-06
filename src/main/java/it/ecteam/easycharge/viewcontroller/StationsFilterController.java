@@ -1,8 +1,10 @@
-package it.ecteam.easycharge.controller;
+package it.ecteam.easycharge.viewcontroller;
 
 import it.ecteam.easycharge.bean.CarBean;
 import it.ecteam.easycharge.bean.ChargingStationBean;
 import it.ecteam.easycharge.bean.ConnectorBean;
+import it.ecteam.easycharge.controller.ChargingStationController;
+import it.ecteam.easycharge.controller.MapController;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
@@ -12,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-public class StationsController {
+public class StationsFilterController {
 
     public static void filterByConnector(CheckBox connectorBox, List<ChargingStationBean> chargingStationList, ListView listView, String space, CarBean cb) throws ChargingStationNotFoundException, IOException, ParseException {
         for (int i = 0; i < chargingStationList.size(); i++) {
@@ -23,7 +25,7 @@ public class StationsController {
     }
 
     public static boolean checkConnectorAvailability(String chargingStationId, CarBean cb) throws ChargingStationNotFoundException, IOException, ParseException {
-        List<ConnectorBean> connectorBeanList = MapController.getChargingAvailability(chargingStationId);
+        List<ConnectorBean> connectorBeanList = ChargingStationController.getChargingAvailability(chargingStationId);
         for(int k = 0; k < connectorBeanList.size(); k++) {
             if (Objects.equals(connectorBeanList.get(k).getType(), "Chademo")) {
                 return Objects.equals(connectorBeanList.get(k).getType(), cb.getConnectorType());

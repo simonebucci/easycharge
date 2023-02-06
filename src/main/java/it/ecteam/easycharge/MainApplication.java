@@ -1,6 +1,5 @@
 package it.ecteam.easycharge;
 
-import it.ecteam.easycharge.viewcontroller.MainViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 public class UserBean implements Serializable {
 
-    static final long serialVersionUID = 42L;
-
     protected String username;
     protected String password;
     protected String email;
@@ -53,11 +51,4 @@ public class UserBean implements Serializable {
         return this.car;
     }
 
-    public void setProfilePicture(String name) {
-        this.profilePicture = name;
-    }
-
-    public String getProfilePicture() {
-        return this.profilePicture;
-    }
 }

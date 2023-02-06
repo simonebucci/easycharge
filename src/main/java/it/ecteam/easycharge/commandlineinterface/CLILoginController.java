@@ -1,10 +1,13 @@
 package it.ecteam.easycharge.commandlineinterface;
 
+import it.ecteam.easycharge.bean.BusinessBean;
 import it.ecteam.easycharge.bean.CarBean;
 import it.ecteam.easycharge.bean.UserBean;
 import it.ecteam.easycharge.controller.LoginController;
 import it.ecteam.easycharge.exceptions.EmptyFieldException;
 import it.ecteam.easycharge.utils.SessionUser;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -95,7 +98,10 @@ public class CLILoginController {
 
     private void register(Scanner input) {
         UserBean ub = new UserBean();
-        boolean regResult;
+        BusinessBean bb = new BusinessBean();
+        LoginController loginController = new LoginController();
+        boolean regResult = false;
+        String role = null;
 
         System.out.println("---Register a new account---");
 
@@ -114,6 +120,7 @@ public class CLILoginController {
         System.out.println("Role:");
         System.out.println("1. Normal User");
         System.out.println("2. Business User");
+
         switch (input.nextLine()) {
             case "1" -> {
                 System.out.println("Car model:");
@@ -122,10 +129,16 @@ public class CLILoginController {
                 for(i=0; i< Objects.requireNonNull(cb).size(); i++){
                     System.out.println(i+1+". "+cb.get(i).getName());
                 }
-                String car = input.nextLine();
+                int car = Integer.parseInt(input.nextLine());
+                ub.setCar(cb.get(car-1).getName());
 
                 System.out.flush();
+                role = B;
                 ub.setRole("user");
+                ub.setUsername(username);
+                ub.setPassword(password);
+                ub.setEmail(email);
+                regResult = loginController.createUser(ub);
             }
             case "2" -> {
                 System.out.println("Business name:");
@@ -134,25 +147,24 @@ public class CLILoginController {
                 System.out.println("Business address:");
                 String baddress = input.nextLine();
                 System.out.flush();
-                ub.setRole(B);
+                role = B;
+                bb.setRole(B);
+                bb.setAddress(baddress);
+                bb.setBusiness(bname);
+                bb.setEmail(email);
+                bb.setUsername(username);
+                ub.setUsername(username);
+                bb.setPassword(password);
+                regResult = loginController.createBusinessUser(bb);
             }
             default -> System.out.println("Role not found\n");
         }
         System.out.flush();
-
-
-        ub.setUsername(username);
-        ub.setPassword(password);
-        ub.setEmail(email);
-
-
-        LoginController loginController = new LoginController();
-        regResult = loginController.createUser(ub);
+        
         if (!regResult) {
             System.out.println(RED + "REGISTRATION FAILED!" + RESET);
             menu(input);
         } else {
-            String role = ub.getRole();
 
             //SET SESSION USER
             SessionUser su = SessionUser.getInstance();

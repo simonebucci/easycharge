@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -37,10 +38,10 @@ public class BusinessSettingsViewController implements Initializable {
     @FXML
     private Button logoutBtn;
     @FXML
-    private ComboBox modelComboBox;
+    private TextArea adsTextArea;
 
     private BusinessGraphicChange ugc;
-
+    BusinessBean bb = new BusinessBean();
     @FXML
     protected void onHomeLoggedClick() {
         stage = (Stage) homeBtn.getScene().getWindow();
@@ -55,20 +56,19 @@ public class BusinessSettingsViewController implements Initializable {
 
     @FXML
     protected void saveAction() {
-        UserController uc = new UserController();
+        BusinessController bc = new BusinessController();
 
         settingsVB.setVisible(false);
-        if (modelComboBox.getValue() != null) {
-            uc.changeCar(usernameLabel.getText(), modelComboBox.getValue().toString());
-        }
+        bc.modifyAd(bb.getId(), adsTextArea.getText());
         modifyBtn.setVisible(true);
-
+        adsTextArea.setVisible(false);
     }
 
     @FXML
     protected void modifyAction() {
         settingsVB.setVisible(true);
         modifyBtn.setVisible(false);
+        adsTextArea.setVisible(true);
     }
 
     @FXML
@@ -86,10 +86,11 @@ public class BusinessSettingsViewController implements Initializable {
         this.usernameLabel.setText(ub.getUsername());
 
         BusinessController businessController = new BusinessController();
-        List<BusinessBean> bb = businessController.getBusiness(ub.getUsername());
+        bb = businessController.getBusiness(ub.getUsername());
 
-        this.businessLabel.setText(bb.get(0).getBusiness());
-        this.addressLabel.setText(bb.get(0).getAddress());
+        this.businessLabel.setText(bb.getBusiness());
+        this.addressLabel.setText(bb.getAddress());
+        this.adsTextArea.setVisible(false);
     }
 }
 

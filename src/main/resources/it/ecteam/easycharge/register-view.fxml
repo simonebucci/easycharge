@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ecteam.easycharge.viewcontroller.RegisterViewController">
+<BorderPane prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ecteam.easycharge.viewcontroller.RegisterViewController">
     <top>
         <ToolBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #66ABEA;" BorderPane.alignment="CENTER">
             <items>
@@ -19,7 +19,7 @@
                     <children>
                         <Button fx:id="homeBtn" mnemonicParsing="false" onMouseClicked="#onHomeClick" style="-fx-background-color: #66ABEA;" text="Home" textFill="WHITE">
                             <HBox.margin>
-                                <Insets right="10.0" />
+                                <Insets right="10.0" top="5.0" />
                             </HBox.margin>
                      <font>
                         <Font size="16.0" />
@@ -27,7 +27,7 @@
                         </Button>
                         <Button fx:id="routeBtn" mnemonicParsing="false" onMouseClicked="#onRouteClick" style="-fx-background-color: #66ABEA;" text="Route planning" textFill="WHITE">
                             <HBox.margin>
-                                <Insets right="10.0" />
+                                <Insets right="10.0" top="5.0" />
                             </HBox.margin>
                      <font>
                         <Font size="16.0" />
@@ -69,21 +69,10 @@
                     </font></Label>
                 <VBox layoutX="293.0" layoutY="180.0" spacing="20.0">
                     <children>
-                        <VBox prefHeight="123.0" prefWidth="448.0">
+                        <VBox prefHeight="76.0" prefWidth="448.0">
                             <children>
                                 <Label prefHeight="32.0" prefWidth="144.0" style="-fx-font-weight: bold; -fx-font-size: 13; -fx-font-style: italic;" text="Type of user" />
                                 <ComboBox fx:id="userType" onAction="#onUserTypeClick" prefHeight="28.0" prefWidth="448.0" />
-                                <Label prefHeight="32.0" prefWidth="273.0" style="-fx-font-weight: bold; -fx-font-size: 13; -fx-font-style: italic;" text="Choose a profile picture:" />
-                                <HBox prefHeight="53.0" prefWidth="448.0" spacing="10.0">
-                                    <children>
-                                        <Button mnemonicParsing="false" prefHeight="18.0" prefWidth="103.0" text="Select image" />
-                                        <Label fx:id="imageLabel" prefHeight="26.0" prefWidth="318.0" text="No image selected">
-                                            <font>
-                                                <Font size="18.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                </HBox>
                             </children>
                         </VBox>
                         <TextField fx:id="emailTextField" prefHeight="26.0" prefWidth="448.0" promptText="Email" />
@@ -100,6 +89,7 @@
                         <Insets top="25.0" />
                      </VBox.margin>
                   </TextField>
+                  <TextArea fx:id="adTextArea" prefHeight="90.0" prefWidth="448.0" promptText="Ad phrase " />
                   <Label fx:id="registerMessageLabel" textFill="RED">
                      <VBox.margin>
                         <Insets top="10.0" />

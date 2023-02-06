@@ -72,6 +72,7 @@ public class CarDao extends DaoTemplate{
                         } while (rs.next());
                     }
                 } finally {
+                    assert stm != null;
                     stm.close();
                 }
                 return car;

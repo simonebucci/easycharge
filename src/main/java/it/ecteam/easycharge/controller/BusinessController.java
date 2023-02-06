@@ -1,9 +1,12 @@
 package it.ecteam.easycharge.controller;
 
 import it.ecteam.easycharge.bean.BusinessBean;
+import it.ecteam.easycharge.bean.CarBean;
 import it.ecteam.easycharge.bean.ChargingStationBean;
 import it.ecteam.easycharge.dao.BusinessDao;
+import it.ecteam.easycharge.dao.CarDao;
 import it.ecteam.easycharge.entity.Business;
+import it.ecteam.easycharge.entity.Car;
 import it.ecteam.easycharge.entity.ChargingStation;
 
 import java.util.ArrayList;
@@ -11,26 +14,20 @@ import java.util.List;
 
 public class BusinessController {
 
-    public static List<BusinessBean> getBusiness(String username){
+    public static BusinessBean getBusiness(String username) {
         BusinessDao bud = new BusinessDao();
 
-        List<Business> result = bud.getBusiness(username);
-        List<BusinessBean> bl = new ArrayList<>();
-        if(result == null){
+        Business result = bud.getBusiness(username);
+        if (result == null)	{
             return null;
-        }else{
-            int i;
-            for(i=0; i < result.size(); i++) {
-                BusinessBean bub = new BusinessBean();
-                Business r = result.get(i);
-
-                bub.setBusiness(r.getName());
-                bub.setAddress(r.getAddress());
-                bub.setUsername(r.getUsername());
-                bub.setId(r.getId());
-                bl.add(bub);
-            }
-            return bl;
+        } else {
+            BusinessBean bub = new BusinessBean();
+            bub.setBusiness(result.getName());
+            bub.setAddress(result.getAddress());
+            bub.setUsername(result.getUsername());
+            bub.setId(result.getId());
+            bub.setAd(result.getAd());
+            return bub;
         }
     }
 
@@ -38,6 +35,12 @@ public class BusinessController {
         BusinessDao businessDao = new BusinessDao();
 
         return businessDao.businessAd(business, csid);
+    }
+
+    public boolean removeAd(String business, String csid){
+        BusinessDao businessDao = new BusinessDao();
+
+        return businessDao.removeAd(business, csid);
     }
 
     public static List<BusinessBean> getCSAds(String csid){
@@ -56,6 +59,7 @@ public class BusinessController {
                 bub.setBusiness(r.getName());
                 bub.setAddress(r.getAddress());
                 bub.setId(r.getId());
+                bub.setAd(r.getAd());
                 bl.add(bub);
             }
             return bl;
@@ -82,4 +86,9 @@ public class BusinessController {
         }
     }
 
+    public boolean modifyAd(String business, String ad){
+        BusinessDao businessDao = new BusinessDao();
+
+        return businessDao.updateAd(business, ad);
+    }
 }

@@ -48,7 +48,7 @@ public class LoginController {
     public boolean createBusinessUser(BusinessBean user){
         BusinessDao businessDao = new BusinessDao();
 
-        return businessDao.createBusinessUser(user.getUsername(), user.getPassword(), user.getEmail(), user.getRole(), user.getBusiness(), user.getAddress());
+        return businessDao.createBusinessUser(user.getUsername(), user.getPassword(), user.getEmail(), user.getRole(), user.getBusiness(), user.getAddress(), user.getAd());
     }
 
     public static List<CarBean> getCar() {

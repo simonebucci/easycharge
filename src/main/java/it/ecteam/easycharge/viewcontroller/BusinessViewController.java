@@ -2,6 +2,7 @@ package it.ecteam.easycharge.viewcontroller;
 
 import it.ecteam.easycharge.bean.*;
 import it.ecteam.easycharge.controller.BusinessController;
+import it.ecteam.easycharge.controller.ChargingStationController;
 import it.ecteam.easycharge.controller.MapController;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
@@ -54,9 +55,8 @@ public class BusinessViewController implements Initializable {
 
     private BusinessGraphicChange bgc;
     private UserBean ub = SessionUser.getInstance().getSession();
-
     private List<ChargingStationBean> chargingStationList = new ArrayList<>();
-    private List<BusinessBean> businessList = new ArrayList<>();
+    private BusinessBean business = new BusinessBean();
     private String csid;
 
 
@@ -89,7 +89,7 @@ public class BusinessViewController implements Initializable {
         listView.getItems().clear();
 
         try {
-            chargingStationList = MapController.getNearby((int) slider.getValue()); //radius range 1 to 50000
+            chargingStationList = ChargingStationController.getNearby((int) slider.getValue()); //radius range 1 to 50000
                 int i;
                 for (i = 0; i < chargingStationList.size(); i++) {
                     listView.getItems().add(i+1+". "+chargingStationList.get(i).getName()+"\n"+chargingStationList.get(i).getFreeformAddress()+"\n     ");
@@ -116,13 +116,13 @@ public class BusinessViewController implements Initializable {
 
         csLabel.setText(chargingStationList.get(id-1).getName());
         webMap.getEngine().load("https://www.google.it/maps/place/"+chargingStationList.get(id-1).getLatitude()+","+chargingStationList.get(id-1).getLongitude());
-        businessList = BusinessController.getBusiness(userMainLabel.getText());
-        assert businessList != null;
-        addressLabel.setText(businessList.get(0).getAddress());
+        business = BusinessController.getBusiness(userMainLabel.getText());
+        assert business != null;
+        addressLabel.setText(business.getAddress());
         try {
-            Long distance = MapController.getDistance(MapController.getCoordinates((businessList.get(0).getAddress())), MapController.getCoordinates(chargingStationList.get(id - 1).getFreeformAddress()));
+            Long distance = MapController.getDistance(MapController.getCoordinates((business.getAddress())), MapController.getCoordinates(chargingStationList.get(id - 1).getFreeformAddress()));
             distanceLabel.setText("This charging station is "+(distance)/1000+"km from your business");
-            List<ChargingStationBean> chargingStationAds = BusinessController.getBusinessAds(businessList.get(0).getId());
+            List<ChargingStationBean> chargingStationAds = BusinessController.getBusinessAds(business.getId());
             int i;
             for(i=0; i < Objects.requireNonNull(chargingStationAds).size(); i++){
                 if(Objects.equals(chargingStationAds.get(i).getId(), csid)){
@@ -149,7 +149,7 @@ public class BusinessViewController implements Initializable {
     @FXML
     protected void onConfirmationClick(){
         BusinessController bc = new BusinessController();
-        bc.businessAd(businessList.get(0).getId(), csid);
+        bc.businessAd(business.getId(), csid);
         paymentPane.setVisible(false);
         buyBtn.setVisible(false);
         desLabel.setVisible(false);
@@ -167,7 +167,7 @@ public class BusinessViewController implements Initializable {
         bLabel.setVisible(false);
 
         try{
-            chargingStationList = MapController.getNearby((int)slider.getValue()); //radius range 1 to 50000
+            chargingStationList = ChargingStationController.getNearby((int)slider.getValue()); //radius range 1 to 50000
             int i;
             for(i=0; i < chargingStationList.size(); i++){
                 listView.getItems().add(i+1+". "+chargingStationList.get(i).getName()+"\n"+chargingStationList.get(i).getFreeformAddress()+"\n     ");

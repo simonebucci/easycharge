@@ -123,6 +123,7 @@ public class UserDao extends DaoTemplate {
                             } while (rs.next());
                         }
                 } finally {
+                    assert stm != null;
                     stm.close();
                 }
                 return cs;

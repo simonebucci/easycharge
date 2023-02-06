@@ -14,10 +14,8 @@ public abstract class DaoTemplate {
     protected final <T> T execute(DaoAction<T> da) {
         try {
             return da.act();
-        } catch (SQLException | ClassNotFoundException var3) {
-            logger.log(Level.WARNING, var3.toString());
-        } catch (Throwable throwable) {
-            logger.log(Level.WARNING, (Supplier<String>) throwable);
+        } catch (Throwable e) {
+            logger.log(Level.WARNING, e.toString());
         }
 
         return null;

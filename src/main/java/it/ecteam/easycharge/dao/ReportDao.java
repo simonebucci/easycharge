@@ -58,6 +58,7 @@ public class ReportDao extends DaoTemplate{
                         }
                     }
                 } finally {
+                    assert stm != null;
                     stm.close();
                 }
                 return r;
@@ -116,6 +117,7 @@ public class ReportDao extends DaoTemplate{
                         }
                     }
                 } finally {
+                    assert stm != null;
                     stm.close();
                 }
                 return r;
