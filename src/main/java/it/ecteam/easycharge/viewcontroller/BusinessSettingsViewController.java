@@ -3,19 +3,16 @@ package it.ecteam.easycharge.viewcontroller;
 import it.ecteam.easycharge.bean.BusinessBean;
 import it.ecteam.easycharge.bean.UserBean;
 import it.ecteam.easycharge.controller.BusinessController;
-import it.ecteam.easycharge.controller.UserController;
 import it.ecteam.easycharge.utils.SessionUser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class BusinessSettingsViewController implements Initializable {

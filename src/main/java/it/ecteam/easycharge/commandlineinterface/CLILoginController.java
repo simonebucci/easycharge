@@ -7,7 +7,6 @@ import it.ecteam.easycharge.controller.LoginController;
 import it.ecteam.easycharge.exceptions.EmptyFieldException;
 import it.ecteam.easycharge.utils.SessionUser;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;

@@ -6,7 +6,6 @@ import it.ecteam.easycharge.bean.ConnectorBean;
 import it.ecteam.easycharge.bean.ReportBean;
 import it.ecteam.easycharge.controller.BusinessController;
 import it.ecteam.easycharge.controller.ChargingStationController;
-import it.ecteam.easycharge.controller.MapController;
 import it.ecteam.easycharge.controller.ReportController;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;

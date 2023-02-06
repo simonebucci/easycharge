@@ -4,7 +4,6 @@ import it.ecteam.easycharge.bean.CarBean;
 import it.ecteam.easycharge.bean.ChargingStationBean;
 import it.ecteam.easycharge.bean.ConnectorBean;
 import it.ecteam.easycharge.controller.ChargingStationController;
-import it.ecteam.easycharge.controller.MapController;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
