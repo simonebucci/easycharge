@@ -2,12 +2,9 @@ package it.ecteam.easycharge.commandlineinterface;
 
 import it.ecteam.easycharge.bean.*;
 import it.ecteam.easycharge.controller.*;
-import it.ecteam.easycharge.entity.Report;
-import it.ecteam.easycharge.entity.User;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 import it.ecteam.easycharge.utils.SessionUser;
-import javafx.scene.paint.Color;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
