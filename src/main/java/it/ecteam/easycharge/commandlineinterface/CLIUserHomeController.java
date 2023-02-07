@@ -12,8 +12,7 @@ import java.security.SecureRandom;
 import java.sql.Date;
 import java.util.*;
 
-import static it.ecteam.easycharge.commandlineinterface.CommandLineInterface.RED;
-import static it.ecteam.easycharge.commandlineinterface.CommandLineInterface.RESET;
+import static it.ecteam.easycharge.commandlineinterface.CommandLineInterface.*;
 
 public class CLIUserHomeController {
     private UserBean ub = SessionUser.getInstance().getSession();
@@ -36,10 +35,10 @@ public class CLIUserHomeController {
         } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
             e.printStackTrace();
         }
-        System.out.println("----------EasyCharge----------");
+        System.out.println(EC);
         System.out.println("--------Welcome "+ ub.getUsername() + "!--------");
-        System.out.println("----What can I do for you?----");
-        System.out.println("1. Charging availability");
+        System.out.println(W);
+        System.out.println(CA);
         System.out.println("2. Report");
         System.out.println("3. Add to favorite");
         System.out.println("4. Filter by my connector");
@@ -48,7 +47,7 @@ public class CLIUserHomeController {
 
             switch (input.nextLine()) {
                 case "1" -> {
-                    System.out.println("Insert the charging station number: ");
+                    System.out.println(INSERT);
                     int num = Integer.parseInt(input.nextLine());
                     if(num < chargingStationList.size() && num >0){
                         csid = chargingStationList.get(num-1).getId();
@@ -59,7 +58,7 @@ public class CLIUserHomeController {
                         }
                         int k;
                         for(k=0; k < connectorBeanList.size(); k++) {
-                            System.out.println("Type:"+ connectorBeanList.get(k).getType() + "\nTotal: " + connectorBeanList.get(k).getTotal() + "\nAvailable: " + connectorBeanList.get(k).getAvailable() + "\nOccupied: " + connectorBeanList.get(k).getOccupied() + "\nReserved: " + connectorBeanList.get(k).getReserved() + "\nUnknown: " + connectorBeanList.get(k).getUnknown() + "\nOutOfService: " + connectorBeanList.get(k).getOutOfService() + "\n     ");
+                            System.out.println(TYPE+ connectorBeanList.get(k).getType() + TOTAL + connectorBeanList.get(k).getTotal() + AVAILABLE + connectorBeanList.get(k).getAvailable() + OCCUPIED + connectorBeanList.get(k).getOccupied() + RESERVED + connectorBeanList.get(k).getReserved() + UNKNOWN + connectorBeanList.get(k).getUnknown() + OOS + connectorBeanList.get(k).getOutOfService() + SPACE);
                         }
                         chargingStationAds = BusinessController.getCSAds(csid);
                         if (!chargingStationAds.isEmpty()) {
@@ -70,16 +69,16 @@ public class CLIUserHomeController {
                         System.out.println("Wrong charging station number");
                         return;
                     }
-                    System.out.println("----------EasyCharge----------");
+                    System.out.println(EC);
                     System.out.println("--------Welcome "+ ub.getUsername() + "!--------");
-                    System.out.println("----What can I do for you?----");
-                    System.out.println("1. Charging availability");
+                    System.out.println(W);
+                    System.out.println(CA);
                     System.out.println("2. Report");
                     System.out.println("3. Add to favorite");
                     System.out.println("4. Back");
                 }
                 case "2" -> {
-                    System.out.println("Insert the charging station number: ");
+                    System.out.println(INSERT);
                     int num = Integer.parseInt(input.nextLine());
                     report = ReportController.getUserReport(String.valueOf(chargingStationList.get(num - 1).getId()));
                     if(!report.isEmpty()){
@@ -124,7 +123,7 @@ public class CLIUserHomeController {
                 }
                 case "3" -> {
                     UserController uc = new UserController();
-                    System.out.println("Insert the charging station number: ");
+                    System.out.println(INSERT);
                     int num = Integer.parseInt(input.nextLine());
                     uc.setFavorite(ub.getUsername(), chargingStationList.get(num-1).getId());
                     System.out.println("Charging station added to your favorites!");
@@ -150,15 +149,15 @@ public class CLIUserHomeController {
                             }
                         }
                     }
-                    System.out.println("----------EasyCharge----------");
+                    System.out.println(EC);
                     System.out.println("--------Welcome "+ ub.getUsername() + "!--------");
-                    System.out.println("----What can I do for you?----");
-                    System.out.println("1. Charging availability");
+                    System.out.println(W);
+                    System.out.println(CA);
                     System.out.println("2. Back");
                     do {
                         switch (input.nextLine()) {
                             case "1" -> {
-                                System.out.println("Insert the charging station number: ");
+                                System.out.println(INSERT);
                                 int num = Integer.parseInt(input.nextLine());
                                 try {
                                     connectorBeanList = ChargingStationController.getChargingAvailability(favoriteCSB.get(num-1).getId());
@@ -167,14 +166,14 @@ public class CLIUserHomeController {
                                 }
                                 int k;
                                 for(k=0; k < connectorBeanList.size(); k++) {
-                                    System.out.println("Type:"+ connectorBeanList.get(k).getType() + "\nTotal: " + connectorBeanList.get(k).getTotal() + "\nAvailable: " + connectorBeanList.get(k).getAvailable() + "\nOccupied: " + connectorBeanList.get(k).getOccupied() + "\nReserved: " + connectorBeanList.get(k).getReserved() + "\nUnknown: " + connectorBeanList.get(k).getUnknown() + "\nOutOfService: " + connectorBeanList.get(k).getOutOfService() + "\n     ");
+                                    System.out.println(TYPE+ connectorBeanList.get(k).getType() + TOTAL + connectorBeanList.get(k).getTotal() + AVAILABLE + connectorBeanList.get(k).getAvailable() + OCCUPIED + connectorBeanList.get(k).getOccupied() + RESERVED + connectorBeanList.get(k).getReserved() + UNKNOWN + connectorBeanList.get(k).getUnknown() + OOS + connectorBeanList.get(k).getOutOfService() + SPACE);
                                 }
                                 return;
                             }
                             case "2" -> {
                                 return;
                             }
-                            default -> System.out.println("Command not found\n");
+                            default -> System.out.println(CNF);
                         }
                         System.out.flush();
 
@@ -185,7 +184,7 @@ public class CLIUserHomeController {
                 case "5" -> {
                     return;
                 }
-                default -> System.out.println("Command not found\n");
+                default -> System.out.println(CNF);
             }
             System.out.flush();
         }while(input.hasNext());
@@ -204,16 +203,16 @@ public class CLIUserHomeController {
             System.out.println(i+1+". "+csb.getName()+", "+csb.getFreeformAddress());
         }
 
-        System.out.println("----------EasyCharge----------");
+        System.out.println(EC);
         System.out.println("--------Welcome "+ ub.getUsername() + "!--------");
-        System.out.println("----What can I do for you?----");
-        System.out.println("1. Charging availability");
+        System.out.println(W);
+        System.out.println(CA);
         System.out.println("2. Remove favorite");
         System.out.println("3. Back");
         do {
             switch (input.nextLine()) {
                 case "1" -> {
-                    System.out.println("Insert the charging station number: ");
+                    System.out.println(INSERT);
                     int num = Integer.parseInt(input.nextLine());
                     try {
                         connectorBeanList = ChargingStationController.getChargingAvailability(favoriteCSB.get(num-1).getId());
@@ -222,13 +221,13 @@ public class CLIUserHomeController {
                     }
                     int k;
                     for(k=0; k < connectorBeanList.size(); k++) {
-                        System.out.println("Type:"+ connectorBeanList.get(k).getType() + "\nTotal: " + connectorBeanList.get(k).getTotal() + "\nAvailable: " + connectorBeanList.get(k).getAvailable() + "\nOccupied: " + connectorBeanList.get(k).getOccupied() + "\nReserved: " + connectorBeanList.get(k).getReserved() + "\nUnknown: " + connectorBeanList.get(k).getUnknown() + "\nOutOfService: " + connectorBeanList.get(k).getOutOfService() + "\n     ");
+                        System.out.println(TYPE+ connectorBeanList.get(k).getType() + TOTAL + connectorBeanList.get(k).getTotal() + AVAILABLE + connectorBeanList.get(k).getAvailable() + OCCUPIED + connectorBeanList.get(k).getOccupied() + RESERVED + connectorBeanList.get(k).getReserved() + UNKNOWN + connectorBeanList.get(k).getUnknown() + OOS + connectorBeanList.get(k).getOutOfService() + SPACE);
                     }
                     return;
                 }
                 case "2" -> {
                     UserController uc = new UserController();
-                    System.out.println("Insert the charging station number: ");
+                    System.out.println(INSERT);
                     int num = Integer.parseInt(input.nextLine());
                     uc.deleteFavorite(ub.getUsername(), favoriteCSB.get(num-1).getId());
                     System.out.println("Charging station removed from your favorites!");
@@ -238,16 +237,16 @@ public class CLIUserHomeController {
                 case "3" -> {
                     return;
                 }
-                default -> System.out.println("Command not found\n");
+                default -> System.out.println(CNF);
             }
             System.out.flush();
 
         }while(input.hasNext());
     }
     public void print(){
-        System.out.println("----------EasyCharge----------");
+        System.out.println(EC);
         System.out.println("--------Welcome "+ ub.getUsername() + "!--------");
-        System.out.println("----What can I do for you?----");
+        System.out.println(W);
         System.out.println("1. Search for Nearby Charging Stations");
         System.out.println("2. Route");
         System.out.println("3. My favorites");
@@ -288,7 +287,7 @@ public class CLIUserHomeController {
                     input.close();
                     return;
                 }
-                default -> System.out.println("Command not found\n");
+                default -> System.out.println(CNF);
             }
             System.out.flush();
 

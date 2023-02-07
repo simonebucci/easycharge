@@ -17,8 +17,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-import static it.ecteam.easycharge.commandlineinterface.CommandLineInterface.RED;
-import static it.ecteam.easycharge.commandlineinterface.CommandLineInterface.RESET;
+import static it.ecteam.easycharge.commandlineinterface.CommandLineInterface.*;
 
 public class CLIBusinessHomeController {
     private UserBean ub = SessionUser.getInstance().getSession();
@@ -42,9 +41,9 @@ public class CLIBusinessHomeController {
             e.printStackTrace();
         }
 
-        System.out.println("----------EasyCharge----------");
+        System.out.println(EC);
         System.out.println("--------"+ ub.getUsername() +"--------");
-        System.out.println("----What can I do for you?----");
+        System.out.println(W);
         System.out.println("1. Buy an ad");
         System.out.println("2. Back");
         do{
@@ -86,15 +85,15 @@ public class CLIBusinessHomeController {
                 case "2" -> {
                     return;
                 }
-                default -> System.out.println("Command not found\n");
+                default -> System.out.println(CNF);
             }
             System.out.flush();
         }while(input.hasNext());
     }
     void print(){
-        System.out.println("----------EasyCharge----------");
+        System.out.println(EC);
         System.out.println("--------Welcome "+ ub.getUsername() + "!--------");
-        System.out.println("----What can I do for you?----");
+        System.out.println(W);
         System.out.println("1. Search for Nearby Charging Stations");
         System.out.println("2. My charging stations ads");
         System.out.println("3. Business Settings");
@@ -144,7 +143,7 @@ public class CLIBusinessHomeController {
                     input.close();
                     return;
                 }
-                default -> System.out.println("Command not found\n");
+                default -> System.out.println(CNF);
             }
             System.out.flush();
 

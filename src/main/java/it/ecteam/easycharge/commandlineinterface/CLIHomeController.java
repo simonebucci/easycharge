@@ -23,6 +23,7 @@ public class CLIHomeController {
     private List<ReportBean> report = new ArrayList<>();
     private List<BusinessBean> chargingStationAds = new ArrayList<>();
     private final SecureRandom r = new SecureRandom();
+
     public void nearby(Integer range, Scanner input){
         String csid;
 
@@ -35,12 +36,7 @@ public class CLIHomeController {
         } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
             e.printStackTrace();
         }
-        System.out.println("----------EasyCharge----------");
-        System.out.println("------------Guest-------------");
-        System.out.println("----What can I do for you?----");
-        System.out.println("1. Charging availability");
-        System.out.println("2. Report");
-        System.out.println("3. Back");
+        printN();
         do{
 
             switch (input.nextLine()) {
@@ -59,7 +55,6 @@ public class CLIHomeController {
                             System.out.println("Type:"+ connectorBeanList.get(k).getType() + "\nTotal: " + connectorBeanList.get(k).getTotal() + "\nAvailable: " + connectorBeanList.get(k).getAvailable() + "\nOccupied: " + connectorBeanList.get(k).getOccupied() + "\nReserved: " + connectorBeanList.get(k).getReserved() + "\nUnknown: " + connectorBeanList.get(k).getUnknown() + "\nOutOfService: " + connectorBeanList.get(k).getOutOfService() + "\n     ");
                         }
                         chargingStationAds = BusinessController.getCSAds(csid);
-                        assert chargingStationAds != null;
                         if (!chargingStationAds.isEmpty()) {
                             int rand = r.nextInt((chargingStationAds).size());
                             System.out.println(chargingStationAds.get(rand).getAd()+" located in " + chargingStationAds.get(rand).getAddress());
@@ -68,12 +63,7 @@ public class CLIHomeController {
                         System.out.println("Wrong charging station number");
                         return;
                     }
-                    System.out.println("----------EasyCharge----------");
-                    System.out.println("------------Guest-------------");
-                    System.out.println("----What can I do for you?----");
-                    System.out.println("1. Charging availability");
-                    System.out.println("2. Report");
-                    System.out.println("3. Back");
+                    printN();
                 }
                 case "2" -> {
                     System.out.println("Insert the charging station number: ");
@@ -93,16 +83,23 @@ public class CLIHomeController {
                     return;
                 }
 
-                default -> System.out.println("Command not found\n");
+                default -> System.out.println(CNF);
             }
             System.out.flush();
         }while(input.hasNext());
     }
-
+    public void printN(){
+        System.out.println(EC);
+        System.out.println(G);
+        System.out.println(W);
+        System.out.println(CA);
+        System.out.println("2. Report");
+        System.out.println("3. Back");
+    }
     public void print(){
-        System.out.println("----------EasyCharge----------");
-        System.out.println("------------Guest-------------");
-        System.out.println("----What can I do for you?----");
+        System.out.println(EC);
+        System.out.println(G);
+        System.out.println(W);
         System.out.println("1. Search for Nearby Charging Stations");
         System.out.println("2. Login/SignUp");
         System.out.println("3. Exit");
@@ -128,7 +125,7 @@ public class CLIHomeController {
                     input.close();
                     return;
                 }
-                default -> System.out.println("Command not found\n");
+                default -> System.out.println(CNF);
             }
             System.out.flush();
 

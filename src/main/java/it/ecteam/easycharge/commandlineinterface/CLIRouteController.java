@@ -28,6 +28,7 @@ public class CLIRouteController {
     private List<Double> startPoint = new ArrayList<>();
     private List<Double> endPoint = new ArrayList<>();
     private CarBean cb = new CarBean();
+
     protected void searchRoute(String start, String end, Scanner input) {
         try {
             startPoint = MapController.getCoordinates(start);
@@ -50,7 +51,7 @@ public class CLIRouteController {
                         if(!Objects.equals(connectorBeanList.get(k).getType().substring(0, 13), cb.getConnectorType().substring(0, 13))){
                             notValid = 1;
                         }else{
-                        System.out.println("Type:"+ connectorBeanList.get(k).getType() + "\nTotal: " + connectorBeanList.get(k).getTotal() + "\nAvailable: " + connectorBeanList.get(k).getAvailable() + "\nOccupied: " + connectorBeanList.get(k).getOccupied() + "\nReserved: " + connectorBeanList.get(k).getReserved() + "\nUnknown: " + connectorBeanList.get(k).getUnknown() + "\nOutOfService: " + connectorBeanList.get(k).getOutOfService() + "\n     ");
+                        System.out.println(TYPE + connectorBeanList.get(k).getType() + TOTAL + connectorBeanList.get(k).getTotal() + AVAILABLE + connectorBeanList.get(k).getAvailable() + OCCUPIED + connectorBeanList.get(k).getOccupied() + RESERVED + connectorBeanList.get(k).getReserved() + UNKNOWN + connectorBeanList.get(k).getUnknown() + OOS + connectorBeanList.get(k).getOutOfService() + SPACE);
                         }
                     }
                     if(notValid!=1) {
@@ -70,7 +71,7 @@ public class CLIRouteController {
                     connectorBeanList = ChargingStationController.getChargingAvailability(chargingStationList.get(i).getId());
                     int k;
                     for(k=0; k < connectorBeanList.size(); k++) {
-                        System.out.println("Type:"+ connectorBeanList.get(k).getType() + "\nTotal: " + connectorBeanList.get(k).getTotal() + "\nAvailable: " + connectorBeanList.get(k).getAvailable() + "\nOccupied: " + connectorBeanList.get(k).getOccupied() + "\nReserved: " + connectorBeanList.get(k).getReserved() + "\nUnknown: " + connectorBeanList.get(k).getUnknown() + "\nOutOfService: " + connectorBeanList.get(k).getOutOfService() + "\n     ");
+                        System.out.println(TYPE+ connectorBeanList.get(k).getType() + TOTAL + connectorBeanList.get(k).getTotal() + AVAILABLE + connectorBeanList.get(k).getAvailable() + OCCUPIED + connectorBeanList.get(k).getOccupied() + RESERVED + connectorBeanList.get(k).getReserved() + UNKNOWN + connectorBeanList.get(k).getUnknown() + OOS + connectorBeanList.get(k).getOutOfService() + SPACE);
                     }
                 }
             } catch (IOException | ParseException | ChargingStationNotFoundException | LocationNotFoundException e) {
@@ -98,7 +99,7 @@ public class CLIRouteController {
                 connectorBeanList = ChargingStationController.getChargingAvailability(chargingStationList.get(i).getId());
                 int k;
                 for(k=0; k < connectorBeanList.size(); k++) {
-                    System.out.println("Type:"+ connectorBeanList.get(k).getType() + "\nTotal: " + connectorBeanList.get(k).getTotal() + "\nAvailable: " + connectorBeanList.get(k).getAvailable() + "\nOccupied: " + connectorBeanList.get(k).getOccupied() + "\nReserved: " + connectorBeanList.get(k).getReserved() + "\nUnknown: " + connectorBeanList.get(k).getUnknown() + "\nOutOfService: " + connectorBeanList.get(k).getOutOfService() + "\n     ");
+                    System.out.println(TYPE+ connectorBeanList.get(k).getType() + TOTAL + connectorBeanList.get(k).getTotal() + AVAILABLE + connectorBeanList.get(k).getAvailable() + OCCUPIED + connectorBeanList.get(k).getOccupied() + RESERVED + connectorBeanList.get(k).getReserved() + UNKNOWN + connectorBeanList.get(k).getUnknown() + OOS + connectorBeanList.get(k).getOutOfService() + SPACE);
                 }
             }
         } catch (IOException | ParseException | ChargingStationNotFoundException | LocationNotFoundException e) {
@@ -109,9 +110,9 @@ public class CLIRouteController {
 
 
     public void print(){
-        System.out.println("----------EasyCharge----------");
+        System.out.println(EC);
         System.out.println("--------Welcome "+ ub.getUsername() + "!--------");
-        System.out.println("----What can I do for you?----");
+        System.out.println(W);
         System.out.println("1. Search Charging Stations on a route");
         System.out.println("2. Search perfect route");
         System.out.println("3. Back");
@@ -150,7 +151,7 @@ public class CLIRouteController {
                     input.close();
                     return;
                 }
-                default -> System.out.println("Command not found\n");
+                default -> System.out.println(CNF);
             }
             System.out.flush();
 
