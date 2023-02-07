@@ -1,5 +1,6 @@
 package it.ecteam.easycharge.commandlineinterface;
 
+import com.sun.javafx.logging.PlatformLogger;
 import it.ecteam.easycharge.bean.BusinessBean;
 import it.ecteam.easycharge.bean.ChargingStationBean;
 import it.ecteam.easycharge.bean.UserBean;
@@ -9,6 +10,7 @@ import it.ecteam.easycharge.controller.MapController;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 import it.ecteam.easycharge.utils.SessionUser;
+import org.apache.http.ExceptionLogger;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -16,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static it.ecteam.easycharge.commandlineinterface.CommandLineInterface.*;
 
@@ -24,11 +28,11 @@ public class CLIBusinessHomeController {
     private List<ChargingStationBean> chargingStationList = new ArrayList<>();
     private List<ChargingStationBean> csAdsList = new ArrayList<>();
     private BusinessBean business = new BusinessBean();
+    protected static final Logger logger = Logger.getLogger("CLI");
 
-/*    public void nearby(Integer range, Scanner input){
+    public void nearby(Integer range, Scanner input){
         BusinessController bc = new BusinessController();
         String csid;
-
 
         try {
             chargingStationList = ChargingStationController.getNearby(range); //radius range 1 to 50000
@@ -38,7 +42,7 @@ public class CLIBusinessHomeController {
                 System.out.println(i+1+". "+chargingStationList.get(i).getName()+", "+chargingStationList.get(i).getFreeformAddress() + " distance from  your business: "+ distance);
             }
         } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, e.toString());
         }
 
         System.out.println(EC);
@@ -89,79 +93,8 @@ public class CLIBusinessHomeController {
             }
             System.out.flush();
         }while(input.hasNext());
-    }*/
-public void nearby(int range, Scanner input) {
-    BusinessController bc = new BusinessController();
-
-    try {
-        chargingStationList = ChargingStationController.getNearby(range);
-
-        int i = 0;
-        for (ChargingStationBean station : chargingStationList) {
-            Long distance = MapController.getDistance(
-                    MapController.getCoordinates(business.getAddress()),
-                    MapController.getCoordinates(station.getFreeformAddress())
-            );
-            System.out.println(++i + ". " + station.getName() + ", " + station.getFreeformAddress() + " distance from your business: " + distance);
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
     }
 
-    System.out.println("----------EasyCharge----------");
-    System.out.println("--------" + ub.getUsername() + "--------");
-    System.out.println("----What can I do for you?----");
-    System.out.println("1. Buy an ad");
-    System.out.println("2. Back");
-
-    while (input.hasNext()) {
-        String choice = input.nextLine();
-        switch (choice) {
-            case "1":
-                System.out.println("Insert the charging station number: ");
-                int num = Integer.parseInt(input.nextLine());
-
-                if (num <= 0 || num > chargingStationList.size()) {
-                    System.out.println("Wrong charging station number");
-                    return;
-                }
-
-                ChargingStationBean selectedStation = chargingStationList.get(num - 1);
-                List<ChargingStationBean> businessAds = BusinessController.getBusinessAds(business.getId());
-
-                boolean alreadyBought = false;
-                for (ChargingStationBean ad : businessAds) {
-                    if (selectedStation.getId().equals(ad.getId())) {
-                        System.out.println("You already bought an ad for this charging station.");
-                        alreadyBought = true;
-                        break;
-                    }
-                }
-
-                if (!alreadyBought) {
-                    System.out.println("---PayPal Payment---");
-                    System.out.println("username: ");
-                    input.nextLine();
-                    System.out.println("password: ");
-                    input.nextLine();
-                    System.out.println("Confirm payment? (y/n)");
-
-                    if (input.nextLine().equals("y")) {
-                        bc.businessAd(business.getId(), selectedStation.getId());
-                        System.out.println("Thank you!");
-                    } else {
-                        System.out.println("Payment cancelled!");
-                    }
-                }
-
-                return;
-            case "2":
-                return;
-            default:
-                System.out.println("Command not found\n");
-        }
-    }
-}
     void print(){
         System.out.println(EC);
         System.out.println("--------Welcome "+ ub.getUsername() + "!--------");
