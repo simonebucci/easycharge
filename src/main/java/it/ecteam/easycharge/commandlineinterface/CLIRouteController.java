@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static it.ecteam.easycharge.commandlineinterface.CommandLineInterface.*;
 
@@ -28,13 +30,13 @@ public class CLIRouteController {
     private List<Double> startPoint = new ArrayList<>();
     private List<Double> endPoint = new ArrayList<>();
     private CarBean cb = new CarBean();
-
+    protected static final Logger logger = Logger.getLogger("CLI");
     protected void searchRoute(String start, String end, Scanner input) {
         try {
             startPoint = MapController.getCoordinates(start);
             endPoint = MapController.getCoordinates(end);
         } catch (IOException | ParseException | LocationNotFoundException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.WARNING, e.toString());
         }
         System.out.println("Do you want to filter by your connector?(y/n)");
 
@@ -59,7 +61,7 @@ public class CLIRouteController {
                     }
                 }
             } catch (IOException | ParseException | ChargingStationNotFoundException | LocationNotFoundException e) {
-                e.printStackTrace();
+                logger.log(Level.WARNING, e.toString());
             }
         }else{
             try {
@@ -75,7 +77,7 @@ public class CLIRouteController {
                     }
                 }
             } catch (IOException | ParseException | ChargingStationNotFoundException | LocationNotFoundException e) {
-                e.printStackTrace();
+                logger.log(Level.WARNING, e.toString());
             }
         }
 
@@ -87,7 +89,7 @@ public class CLIRouteController {
             startPoint = MapController.getCoordinates(start);
             endPoint = MapController.getCoordinates(end);
         } catch (IOException | ParseException | LocationNotFoundException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.WARNING, e.toString());
         }
 
         try {
@@ -103,7 +105,7 @@ public class CLIRouteController {
                 }
             }
         } catch (IOException | ParseException | ChargingStationNotFoundException | LocationNotFoundException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, e.toString());
         }
         if(chargingStationList.isEmpty()){
             System.out.println("Your car can reach the destination without any recharge.");

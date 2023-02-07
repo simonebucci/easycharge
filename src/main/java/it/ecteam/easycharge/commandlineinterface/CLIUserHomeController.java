@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.security.SecureRandom;
 import java.sql.Date;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static it.ecteam.easycharge.commandlineinterface.CommandLineInterface.*;
 
@@ -25,6 +27,7 @@ public class CLIUserHomeController {
     private final SecureRandom r = new SecureRandom();
     public static final String WE = "--------Welcome ";
     public static final String WE2 = "!--------";
+    protected static final Logger logger = Logger.getLogger("CLI");
     public void nearby(Integer range, Scanner input){
         String csid;
 
@@ -35,7 +38,7 @@ public class CLIUserHomeController {
                 System.out.println(i+1+". "+chargingStationList.get(i).getName()+", "+chargingStationList.get(i).getFreeformAddress());
             }
         } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, e.toString());
         }
         System.out.println(EC);
         System.out.println(WE+ ub.getUsername() + WE2);
@@ -56,7 +59,7 @@ public class CLIUserHomeController {
                         try {
                             connectorBeanList = ChargingStationController.getChargingAvailability(csid);
                         } catch (IOException | ChargingStationNotFoundException | ParseException e) {
-                            throw new RuntimeException(e);
+                            logger.log(Level.WARNING, e.toString());
                         }
                         int k;
                         for(k=0; k < connectorBeanList.size(); k++) {
@@ -164,7 +167,7 @@ public class CLIUserHomeController {
                                 try {
                                     connectorBeanList = ChargingStationController.getChargingAvailability(favoriteCSB.get(num-1).getId());
                                 } catch (IOException | ChargingStationNotFoundException | ParseException e) {
-                                    throw new RuntimeException(e);
+                                    logger.log(Level.WARNING, e.toString());
                                 }
                                 int k;
                                 for(k=0; k < connectorBeanList.size(); k++) {
@@ -200,7 +203,7 @@ public class CLIUserHomeController {
                 csb = ChargingStationController.getCSInfo(favoriteCSB.get(i).getId());
             } catch (IOException | java.text.ParseException | LocationNotFoundException | ParseException |
                      ChargingStationNotFoundException e) {
-                throw new RuntimeException(e);
+                logger.log(Level.WARNING, e.toString());
             }
             System.out.println(i+1+". "+csb.getName()+", "+csb.getFreeformAddress());
         }
@@ -219,7 +222,7 @@ public class CLIUserHomeController {
                     try {
                         connectorBeanList = ChargingStationController.getChargingAvailability(favoriteCSB.get(num-1).getId());
                     } catch (IOException | ChargingStationNotFoundException | ParseException e) {
-                        throw new RuntimeException(e);
+                        logger.log(Level.WARNING, e.toString());
                     }
                     int k;
                     for(k=0; k < connectorBeanList.size(); k++) {

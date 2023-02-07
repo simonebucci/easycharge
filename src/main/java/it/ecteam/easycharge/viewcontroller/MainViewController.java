@@ -21,6 +21,8 @@ import java.net.URL;
 import java.security.SecureRandom;
 import java.sql.Date;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MainViewController extends StackPane implements Initializable  {
     private Stage stage = new Stage();
@@ -85,7 +87,7 @@ public class MainViewController extends StackPane implements Initializable  {
     private String csid;
     private static final  String SPACE = "\n     ";
     private final SecureRandom r = new SecureRandom();
-
+    protected static final Logger logger = Logger.getLogger("GUI");
     @FXML
     protected void onLoginClick() {
         stage = (Stage) loginBtn.getScene().getWindow();
@@ -355,7 +357,7 @@ public class MainViewController extends StackPane implements Initializable  {
                     csb = ChargingStationController.getCSInfo(favoriteCSB.get(i).getId());
                 } catch (IOException | java.text.ParseException | LocationNotFoundException | ParseException |
                          ChargingStationNotFoundException e) {
-                    throw new RuntimeException(e);
+                    logger.log(Level.WARNING, e.toString());
                 }
                 listView.getItems().add(i + 1 + ". " + csb.getName() + "\n" + csb.getFreeformAddress() + SPACE);
             }

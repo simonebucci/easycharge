@@ -17,6 +17,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MyBusinessViewController implements Initializable {
 
@@ -43,6 +45,7 @@ public class MyBusinessViewController implements Initializable {
     private BusinessBean business = new BusinessBean();
     private int csid;
     private String chargingStationID;
+    protected static final Logger logger = Logger.getLogger("GUI");
 
 
     @FXML
@@ -88,7 +91,7 @@ public class MyBusinessViewController implements Initializable {
                 cs = ChargingStationController.getCSInfo(csList.get(i).getId());
             } catch (IOException | ParseException | LocationNotFoundException | org.json.simple.parser.ParseException |
                      ChargingStationNotFoundException e) {
-                throw new RuntimeException(e);
+                logger.log(Level.WARNING, e.toString());
             }
             listView.getItems().add(i+1+". "+cs.getName()+"\n"+cs.getFreeformAddress()+"\n     ");
         }
@@ -110,7 +113,7 @@ public class MyBusinessViewController implements Initializable {
                 cs = ChargingStationController.getCSInfo(csList.get(i).getId());
             } catch (IOException | ParseException | LocationNotFoundException | org.json.simple.parser.ParseException |
                      ChargingStationNotFoundException e) {
-                throw new RuntimeException(e);
+                logger.log(Level.WARNING, e.toString());
             }
             listView.getItems().add(i+1+". "+cs.getName()+"\n"+cs.getFreeformAddress()+"\n     ");
         }

@@ -15,6 +15,9 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static it.ecteam.easycharge.commandlineinterface.CommandLineInterface.*;
 
 public class CLIHomeController {
@@ -23,7 +26,7 @@ public class CLIHomeController {
     private List<ReportBean> report = new ArrayList<>();
     private List<BusinessBean> chargingStationAds = new ArrayList<>();
     private final SecureRandom r = new SecureRandom();
-
+    protected static final Logger logger = Logger.getLogger("CLI");
     public void nearby(Integer range, Scanner input){
         String csid;
 
@@ -34,7 +37,7 @@ public class CLIHomeController {
                 System.out.println(i+1+". "+chargingStationList.get(i).getName()+", "+chargingStationList.get(i).getFreeformAddress());
             }
         } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, e.toString());
         }
         printN();
         do{
