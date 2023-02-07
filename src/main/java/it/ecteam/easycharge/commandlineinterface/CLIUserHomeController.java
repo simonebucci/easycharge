@@ -142,7 +142,7 @@ public class CLIUserHomeController {
                         try {
                             connectorBeanList = ChargingStationController.getChargingAvailability(chargingStationList.get(i).getId());
                         } catch (IOException | ParseException | ChargingStationNotFoundException e) {
-                            throw new RuntimeException(e);
+                            logger.log(Level.WARNING, e.toString());
                         }
                         for(int k = 0; k < connectorBeanList.size(); k++) {
                             if (Objects.equals(connectorBeanList.get(k).getType(), "Chademo")) {

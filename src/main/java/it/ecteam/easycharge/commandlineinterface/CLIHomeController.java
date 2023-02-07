@@ -51,7 +51,7 @@ public class CLIHomeController {
                         try {
                             connectorBeanList = ChargingStationController.getChargingAvailability(csid);
                         } catch (IOException | ChargingStationNotFoundException | ParseException e) {
-                            throw new RuntimeException(e);
+                            logger.log(Level.WARNING, e.toString());
                         }
                         int k;
                         for(k=0; k < connectorBeanList.size(); k++) {
