@@ -43,40 +43,15 @@ public class CLIRouteController {
         if(Objects.equals(input.nextLine(), "y")) {
             try {
                 chargingStationList = RouteController.getOnRoute(startPoint, endPoint);
-                int i;
-                int notValid;
-                for(i=0; i < chargingStationList.size(); i++){
-                    notValid=0;
-                    connectorBeanList = ChargingStationController.getChargingAvailability(chargingStationList.get(i).getId());
-                    int k;
-                    for(k=0; k < connectorBeanList.size(); k++) {
-                        if(!Objects.equals(connectorBeanList.get(k).getType().substring(0, 13), cb.getConnectorType().substring(0, 13))){
-                            notValid = 1;
-                        }else{
-                        System.out.println(TYPE + connectorBeanList.get(k).getType() + TOTAL + connectorBeanList.get(k).getTotal() + AVAILABLE + connectorBeanList.get(k).getAvailable() + OCCUPIED + connectorBeanList.get(k).getOccupied() + RESERVED + connectorBeanList.get(k).getReserved() + UNKNOWN + connectorBeanList.get(k).getUnknown() + OOS + connectorBeanList.get(k).getOutOfService() + SPACE);
-                        }
-                    }
-                    if(notValid!=1) {
-                        System.out.println(i + 1 + ". " + chargingStationList.get(i).getName() + ", " + chargingStationList.get(i).getFreeformAddress());
-                    }
-                }
+                printFCS(chargingStationList);
             } catch (IOException | ParseException | ChargingStationNotFoundException | LocationNotFoundException e) {
                 logger.log(Level.WARNING, e.toString());
             }
         }else{
             try {
                 chargingStationList = RouteController.getOnRoute(startPoint, endPoint);
-                int i;
-                for(i=0; i < chargingStationList.size(); i++){
-                    System.out.println(i+1+". "+chargingStationList.get(i).getName()+", "+chargingStationList.get(i).getFreeformAddress());
-
-                    connectorBeanList = ChargingStationController.getChargingAvailability(chargingStationList.get(i).getId());
-                    int k;
-                    for(k=0; k < connectorBeanList.size(); k++) {
-                        System.out.println(TYPE+ connectorBeanList.get(k).getType() + TOTAL + connectorBeanList.get(k).getTotal() + AVAILABLE + connectorBeanList.get(k).getAvailable() + OCCUPIED + connectorBeanList.get(k).getOccupied() + RESERVED + connectorBeanList.get(k).getReserved() + UNKNOWN + connectorBeanList.get(k).getUnknown() + OOS + connectorBeanList.get(k).getOutOfService() + SPACE);
-                    }
-                }
-            } catch (IOException | ParseException | ChargingStationNotFoundException | LocationNotFoundException e) {
+                printCS(chargingStationList);
+            } catch (IOException | ParseException | LocationNotFoundException | ChargingStationNotFoundException e) {
                 logger.log(Level.WARNING, e.toString());
             }
         }
@@ -114,8 +89,39 @@ public class CLIRouteController {
         }
     }
 
+    private void printFCS(List<ChargingStationBean> chargingStationList) throws ChargingStationNotFoundException, IOException, ParseException {
+        int i;
+        int notValid;
+        for(i=0; i < chargingStationList.size(); i++){
+            notValid=0;
+            connectorBeanList = ChargingStationController.getChargingAvailability(chargingStationList.get(i).getId());
+            int k;
+            for(k=0; k < connectorBeanList.size(); k++) {
+                if(!Objects.equals(connectorBeanList.get(k).getType().substring(0, 13), cb.getConnectorType().substring(0, 13))){
+                    notValid = 1;
+                }else{
+                    System.out.println(TYPE + connectorBeanList.get(k).getType() + TOTAL + connectorBeanList.get(k).getTotal() + AVAILABLE + connectorBeanList.get(k).getAvailable() + OCCUPIED + connectorBeanList.get(k).getOccupied() + RESERVED + connectorBeanList.get(k).getReserved() + UNKNOWN + connectorBeanList.get(k).getUnknown() + OOS + connectorBeanList.get(k).getOutOfService() + SPACE);
+                }
+            }
+            if(notValid!=1) {
+                System.out.println(i + 1 + ". " + chargingStationList.get(i).getName() + ", " + chargingStationList.get(i).getFreeformAddress());
+            }
+        }
+    }
 
-    public void print(){
+    private void printCS(List<ChargingStationBean> chargingStationList) throws ChargingStationNotFoundException, IOException, ParseException {
+        int i;
+        for(i=0; i < chargingStationList.size(); i++){
+            System.out.println(i+1+". "+chargingStationList.get(i).getName()+", "+chargingStationList.get(i).getFreeformAddress());
+
+            connectorBeanList = ChargingStationController.getChargingAvailability(chargingStationList.get(i).getId());
+            int k;
+            for(k=0; k < connectorBeanList.size(); k++) {
+                System.out.println(TYPE+ connectorBeanList.get(k).getType() + TOTAL + connectorBeanList.get(k).getTotal() + AVAILABLE + connectorBeanList.get(k).getAvailable() + OCCUPIED + connectorBeanList.get(k).getOccupied() + RESERVED + connectorBeanList.get(k).getReserved() + UNKNOWN + connectorBeanList.get(k).getUnknown() + OOS + connectorBeanList.get(k).getOutOfService() + SPACE);
+            }
+        }
+    }
+    private void print(){
         System.out.println(EC);
         System.out.println("--------Welcome "+ ub.getUsername() + "!--------");
         System.out.println(W);
