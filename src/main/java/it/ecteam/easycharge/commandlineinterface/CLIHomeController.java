@@ -32,10 +32,7 @@ public class CLIHomeController {
 
         try {
             chargingStationList = ChargingStationController.getNearby(range); //radius range 1 to 50000
-            int i;
-            for(i=0; i < chargingStationList.size(); i++){
-                System.out.println(i+1+". "+chargingStationList.get(i).getName()+", "+chargingStationList.get(i).getFreeformAddress());
-            }
+            chargingStationPrint(chargingStationList);
         } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
             logger.log(Level.WARNING, e.toString());
         }
@@ -53,10 +50,7 @@ public class CLIHomeController {
                         } catch (IOException | ChargingStationNotFoundException | ParseException e) {
                             logger.log(Level.WARNING, e.toString());
                         }
-                        int k;
-                        for(k=0; k < connectorBeanList.size(); k++) {
-                            System.out.println("Type:"+ connectorBeanList.get(k).getType() + "\nTotal: " + connectorBeanList.get(k).getTotal() + "\nAvailable: " + connectorBeanList.get(k).getAvailable() + "\nOccupied: " + connectorBeanList.get(k).getOccupied() + "\nReserved: " + connectorBeanList.get(k).getReserved() + "\nUnknown: " + connectorBeanList.get(k).getUnknown() + "\nOutOfService: " + connectorBeanList.get(k).getOutOfService() + "\n     ");
-                        }
+                        connectorPrint(connectorBeanList);
                         chargingStationAds = BusinessController.getCSAds(csid);
                         if (!chargingStationAds.isEmpty()) {
                             int rand = r.nextInt((chargingStationAds).size());
@@ -91,7 +85,21 @@ public class CLIHomeController {
             System.out.flush();
         }while(input.hasNext());
     }
-    public void printN(){
+
+    private void connectorPrint(List<ConnectorBean> connectorBeanList){
+        int k;
+        for(k=0; k < connectorBeanList.size(); k++) {
+            System.out.println("Type:"+ connectorBeanList.get(k).getType() + "\nTotal: " + connectorBeanList.get(k).getTotal() + "\nAvailable: " + connectorBeanList.get(k).getAvailable() + "\nOccupied: " + connectorBeanList.get(k).getOccupied() + "\nReserved: " + connectorBeanList.get(k).getReserved() + "\nUnknown: " + connectorBeanList.get(k).getUnknown() + "\nOutOfService: " + connectorBeanList.get(k).getOutOfService() + "\n     ");
+        }
+    }
+
+    private void chargingStationPrint(List<ChargingStationBean> chargingStationList){
+        int i;
+        for(i=0; i < chargingStationList.size(); i++){
+            System.out.println(i+1+". "+chargingStationList.get(i).getName()+", "+chargingStationList.get(i).getFreeformAddress());
+        }
+    }
+    private void printN(){
         System.out.println(EC);
         System.out.println(G);
         System.out.println(W);
@@ -99,7 +107,7 @@ public class CLIHomeController {
         System.out.println("2. Report");
         System.out.println("3. Back");
     }
-    public void print(){
+    private void print(){
         System.out.println(EC);
         System.out.println(G);
         System.out.println(W);
