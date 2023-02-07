@@ -74,7 +74,7 @@ public class RouteController {
             // Create a custom response handler
             ResponseHandler<String> responseHandler = response -> {
                 int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 300) {
+                if (status == 200) {
                     HttpEntity entity = response.getEntity();
                     return entity != null ? EntityUtils.toString(entity) : null;
                 } else {
