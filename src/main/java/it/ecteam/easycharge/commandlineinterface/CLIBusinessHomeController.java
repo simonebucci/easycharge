@@ -90,17 +90,19 @@ public class CLIBusinessHomeController {
             System.out.flush();
         }while(input.hasNext());
     }*/
-public void nearby(Integer range, Scanner input){
+public void nearby(int range, Scanner input) {
     BusinessController bc = new BusinessController();
-    String csid = null;
-    List<ChargingStationBean> chargingStationList = null;
-    boolean alreadyBoughtAd = false;
 
     try {
         chargingStationList = ChargingStationController.getNearby(range);
-        for (int i = 0; i < chargingStationList.size(); i++) {
-            Long distance = MapController.getDistance(MapController.getCoordinates(business.getAddress()), MapController.getCoordinates(chargingStationList.get(i).getFreeformAddress()));
-            System.out.println(i + 1 + ". " + chargingStationList.get(i).getName() + ", " + chargingStationList.get(i).getFreeformAddress() + " distance from your business: " + distance);
+
+        int i = 0;
+        for (ChargingStationBean station : chargingStationList) {
+            Long distance = MapController.getDistance(
+                    MapController.getCoordinates(business.getAddress()),
+                    MapController.getCoordinates(station.getFreeformAddress())
+            );
+            System.out.println(++i + ". " + station.getName() + ", " + station.getFreeformAddress() + " distance from your business: " + distance);
         }
     } catch (Exception e) {
         e.printStackTrace();
@@ -113,46 +115,51 @@ public void nearby(Integer range, Scanner input){
     System.out.println("2. Back");
 
     while (input.hasNext()) {
-        switch (input.nextLine()) {
+        String choice = input.nextLine();
+        switch (choice) {
             case "1":
                 System.out.println("Insert the charging station number: ");
                 int num = Integer.parseInt(input.nextLine());
-                if (num > 0 && num < chargingStationList.size()) {
-                    csid = chargingStationList.get(num - 1).getId();
-                } else {
+
+                if (num <= 0 || num > chargingStationList.size()) {
                     System.out.println("Wrong charging station number");
                     return;
                 }
-                List<ChargingStationBean> chargingStationAds = BusinessController.getBusinessAds(business.getId());
-                for (ChargingStationBean chargingStationAd : chargingStationAds) {
-                    if (chargingStationAd.getId().equals(csid)) {
+
+                ChargingStationBean selectedStation = chargingStationList.get(num - 1);
+                List<ChargingStationBean> businessAds = BusinessController.getBusinessAds(business.getId());
+
+                boolean alreadyBought = false;
+                for (ChargingStationBean ad : businessAds) {
+                    if (selectedStation.getId().equals(ad.getId())) {
                         System.out.println("You already bought an ad for this charging station.");
-                        alreadyBoughtAd = true;
+                        alreadyBought = true;
                         break;
                     }
                 }
-                if (!alreadyBoughtAd) {
+
+                if (!alreadyBought) {
                     System.out.println("---PayPal Payment---");
                     System.out.println("username: ");
                     input.nextLine();
                     System.out.println("password: ");
                     input.nextLine();
                     System.out.println("Confirm payment? (y/n)");
+
                     if (input.nextLine().equals("y")) {
-                        bc.businessAd(business.getId(), csid);
+                        bc.businessAd(business.getId(), selectedStation.getId());
                         System.out.println("Thank you!");
                     } else {
                         System.out.println("Payment cancelled!");
                     }
                 }
+
                 return;
             case "2":
                 return;
             default:
                 System.out.println("Command not found\n");
-                break;
         }
-        System.out.flush();
     }
 }
     void print(){
