@@ -33,10 +33,7 @@ public class CLIUserHomeController {
 
         try {
             chargingStationList = ChargingStationController.getNearby(range); //radius range 1 to 50000
-            int i;
-            for(i=0; i < chargingStationList.size(); i++){
-                System.out.println(i+1+". "+chargingStationList.get(i).getName()+", "+chargingStationList.get(i).getFreeformAddress());
-            }
+            printChargingStation(chargingStationList);
         } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
             logger.log(Level.WARNING, e.toString());
         }
@@ -61,10 +58,7 @@ public class CLIUserHomeController {
                         } catch (IOException | ChargingStationNotFoundException | ParseException e) {
                             logger.log(Level.WARNING, e.toString());
                         }
-                        int k;
-                        for(k=0; k < connectorBeanList.size(); k++) {
-                            System.out.println(TYPE+ connectorBeanList.get(k).getType() + TOTAL + connectorBeanList.get(k).getTotal() + AVAILABLE + connectorBeanList.get(k).getAvailable() + OCCUPIED + connectorBeanList.get(k).getOccupied() + RESERVED + connectorBeanList.get(k).getReserved() + UNKNOWN + connectorBeanList.get(k).getUnknown() + OOS + connectorBeanList.get(k).getOutOfService() + SPACE);
-                        }
+                        printConnector(connectorBeanList);
                         chargingStationAds = BusinessController.getCSAds(csid);
                         if (!chargingStationAds.isEmpty()) {
                             int rand = r.nextInt((chargingStationAds).size());
@@ -86,38 +80,7 @@ public class CLIUserHomeController {
                     System.out.println(INSERT);
                     int num = Integer.parseInt(input.nextLine());
                     report = ReportController.getUserReport(String.valueOf(chargingStationList.get(num - 1).getId()));
-                    if(!report.isEmpty()){
-                        int j;
-                        for(j=0; j < report.size(); j++) {
-                            System.out.println(j+1+". "+report.get(j).getUsername() + "\nsaid: " + report.get(j).getComment() + "\nDate: " + report.get(j).getDate()+ "\nLikes: " + report.get(j).getPoint());
-                        }
-                        System.out.println("Do you want to like a report? (y/n)");
-                        String author;
-                        if(Objects.equals(input.nextLine(), "y")){
-                            System.out.println("Insert report number: ");
-                            int repnum = Integer.parseInt(input.nextLine());
-                            List<ReportBean> rb = ReportController.getPointGiver(report.get(repnum-1).getUsername(), chargingStationList.get(num-1).getId(), (Date) report.get(repnum-1).getDate());
-                            author = report.get(repnum-1).getUsername();
-                            int k;
-                            int verify = 0;
-                            for(k=0; k<rb.size(); k++){
-                                if(Objects.equals(rb.get(k).getUsername(), ub.getUsername())){
-                                    verify = 1;
-                                }
-                            }
-                            if (Objects.equals(ub.getUsername(), author)) {
-                                System.out.println("You can't give a like to your self.");
-                            } else if(verify == 1){
-                                System.out.println("You already gave a like to this report.");
-                            }
-                            else{
-                                reportController.givePointToUser(author, chargingStationList.get(num-1).getId(), (Date) report.get(repnum-1).getDate(), ub.getUsername());
-                                System.out.println("You liked the selected report!");
-                            }
-                        }
-                    }else{
-                        System.out.println("No report found.");
-                    }
+                    printReport(input, num);
                     System.out.print("Do you want to write a report? (y/n)");
                     if(Objects.equals(input.nextLine(), "y")){
                         System.out.println("Write your report: ");
@@ -138,52 +101,13 @@ public class CLIUserHomeController {
                 case "4" -> {
                     UserController uc = new UserController();
                     CarBean cb = uc.getCar(ub.getUsername());
-                    for (int i = 0; i < chargingStationList.size(); i++) {
-                        try {
-                            connectorBeanList = ChargingStationController.getChargingAvailability(chargingStationList.get(i).getId());
-                        } catch (IOException | ParseException | ChargingStationNotFoundException e) {
-                            logger.log(Level.WARNING, e.toString());
-                        }
-                        for(int k = 0; k < connectorBeanList.size(); k++) {
-                            if (Objects.equals(connectorBeanList.get(k).getType(), "Chademo")) {
-                                System.out.println(i + 1 + ". " + chargingStationList.get(i).getName() + " " + chargingStationList.get(i).getFreeformAddress());
-                                k = connectorBeanList.size();
-                            } else if (Objects.equals(connectorBeanList.get(k).getType().substring(0, 13), cb.getConnectorType().substring(0, 13))) {
-                                System.out.println(i + 1 + ". " + chargingStationList.get(i).getName() + " " + chargingStationList.get(i).getFreeformAddress());
-                                k = connectorBeanList.size();
-                            }
-                        }
-                    }
+                    connectorFilter(cb);
                     System.out.println(EC);
                     System.out.println(WE+ ub.getUsername() + WE2);
                     System.out.println(W);
                     System.out.println(CA);
                     System.out.println("2. Back");
-                    do {
-                        switch (input.nextLine()) {
-                            case "1" -> {
-                                System.out.println(INSERT);
-                                int num = Integer.parseInt(input.nextLine());
-                                try {
-                                    connectorBeanList = ChargingStationController.getChargingAvailability(favoriteCSB.get(num-1).getId());
-                                } catch (IOException | ChargingStationNotFoundException | ParseException e) {
-                                    logger.log(Level.WARNING, e.toString());
-                                }
-                                int k;
-                                for(k=0; k < connectorBeanList.size(); k++) {
-                                    System.out.println(TYPE+ connectorBeanList.get(k).getType() + TOTAL + connectorBeanList.get(k).getTotal() + AVAILABLE + connectorBeanList.get(k).getAvailable() + OCCUPIED + connectorBeanList.get(k).getOccupied() + RESERVED + connectorBeanList.get(k).getReserved() + UNKNOWN + connectorBeanList.get(k).getUnknown() + OOS + connectorBeanList.get(k).getOutOfService() + SPACE);
-                                }
-                                return;
-                            }
-                            case "2" -> {
-                                return;
-                            }
-                            default -> System.out.println(CNF);
-                        }
-                        System.out.flush();
-
-                    }while(input.hasNext());
-
+                    filterCase(input);
                     return;
                 }
                 case "5" -> {
@@ -224,10 +148,7 @@ public class CLIUserHomeController {
                     } catch (IOException | ChargingStationNotFoundException | ParseException e) {
                         logger.log(Level.WARNING, e.toString());
                     }
-                    int k;
-                    for(k=0; k < connectorBeanList.size(); k++) {
-                        System.out.println(TYPE+ connectorBeanList.get(k).getType() + TOTAL + connectorBeanList.get(k).getTotal() + AVAILABLE + connectorBeanList.get(k).getAvailable() + OCCUPIED + connectorBeanList.get(k).getOccupied() + RESERVED + connectorBeanList.get(k).getReserved() + UNKNOWN + connectorBeanList.get(k).getUnknown() + OOS + connectorBeanList.get(k).getOutOfService() + SPACE);
-                    }
+                    printConnector(connectorBeanList);
                     return;
                 }
                 case "2" -> {
@@ -248,7 +169,103 @@ public class CLIUserHomeController {
 
         }while(input.hasNext());
     }
-    public void print(){
+
+    private void reportLike(Scanner input, int num){
+        String author;
+        if(Objects.equals(input.nextLine(), "y")){
+            System.out.println("Insert report number: ");
+            int repnum = Integer.parseInt(input.nextLine());
+            List<ReportBean> rb = ReportController.getPointGiver(report.get(repnum-1).getUsername(), chargingStationList.get(num-1).getId(), (Date) report.get(repnum-1).getDate());
+            author = report.get(repnum-1).getUsername();
+            int k;
+            int verify = 0;
+            for(k=0; k<rb.size(); k++){
+                if(Objects.equals(rb.get(k).getUsername(), ub.getUsername())){
+                    verify = 1;
+                }
+            }
+            if (Objects.equals(ub.getUsername(), author)) {
+                System.out.println("You can't give a like to your self.");
+            } else if(verify == 1){
+                System.out.println("You already gave a like to this report.");
+            }
+            else{
+                reportController.givePointToUser(author, chargingStationList.get(num-1).getId(), (Date) report.get(repnum-1).getDate(), ub.getUsername());
+                System.out.println("You liked the selected report!");
+            }
+        }
+    }
+
+    private void printConnector(List<ConnectorBean> connectorBeanList){
+        int k;
+        for(k=0; k < connectorBeanList.size(); k++) {
+            System.out.println(TYPE+ connectorBeanList.get(k).getType() + TOTAL + connectorBeanList.get(k).getTotal() + AVAILABLE + connectorBeanList.get(k).getAvailable() + OCCUPIED + connectorBeanList.get(k).getOccupied() + RESERVED + connectorBeanList.get(k).getReserved() + UNKNOWN + connectorBeanList.get(k).getUnknown() + OOS + connectorBeanList.get(k).getOutOfService() + SPACE);
+        }
+    }
+
+    private void connectorFilter(CarBean cb){
+        for (int i = 0; i < chargingStationList.size(); i++) {
+            try {
+                connectorBeanList = ChargingStationController.getChargingAvailability(chargingStationList.get(i).getId());
+            } catch (IOException | ParseException | ChargingStationNotFoundException e) {
+                logger.log(Level.WARNING, e.toString());
+            }
+            for(int k = 0; k < connectorBeanList.size(); k++) {
+                if (Objects.equals(connectorBeanList.get(k).getType(), "Chademo")) {
+                    System.out.println(i + 1 + ". " + chargingStationList.get(i).getName() + " " + chargingStationList.get(i).getFreeformAddress());
+                    k = connectorBeanList.size();
+                } else if (Objects.equals(connectorBeanList.get(k).getType().substring(0, 13), cb.getConnectorType().substring(0, 13))) {
+                    System.out.println(i + 1 + ". " + chargingStationList.get(i).getName() + " " + chargingStationList.get(i).getFreeformAddress());
+                    k = connectorBeanList.size();
+                }
+            }
+        }
+    }
+
+    private void printReport(Scanner input, int num){
+        if(!report.isEmpty()){
+            int j;
+            for(j=0; j < report.size(); j++) {
+                System.out.println(j+1+". "+report.get(j).getUsername() + "\nsaid: " + report.get(j).getComment() + "\nDate: " + report.get(j).getDate()+ "\nLikes: " + report.get(j).getPoint());
+            }
+            System.out.println("Do you want to like a report? (y/n)");
+            reportLike(input, num);
+        }else{
+            System.out.println("No report found.");
+        }
+    }
+
+    private void printChargingStation(List<ChargingStationBean> chargingStationList){
+        int i;
+        for(i=0; i < chargingStationList.size(); i++){
+            System.out.println(i+1+". "+chargingStationList.get(i).getName()+", "+chargingStationList.get(i).getFreeformAddress());
+        }
+    }
+
+    private void filterCase(Scanner input){
+        do {
+            switch (input.nextLine()) {
+                case "1" -> {
+                    System.out.println(INSERT);
+                    int num = Integer.parseInt(input.nextLine());
+                    try {
+                        connectorBeanList = ChargingStationController.getChargingAvailability(favoriteCSB.get(num-1).getId());
+                    } catch (IOException | ChargingStationNotFoundException | ParseException e) {
+                        logger.log(Level.WARNING, e.toString());
+                    }
+                    printConnector(connectorBeanList);
+                    return;
+                }
+                case "2" -> {
+                    return;
+                }
+                default -> System.out.println(CNF);
+            }
+            System.out.flush();
+
+        }while(input.hasNext());
+    }
+    private void print(){
         System.out.println(EC);
         System.out.println(WE+ ub.getUsername() + WE2);
         System.out.println(W);
