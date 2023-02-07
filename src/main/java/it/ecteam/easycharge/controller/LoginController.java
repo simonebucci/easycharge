@@ -11,6 +11,7 @@ import it.ecteam.easycharge.entity.User;
 import it.ecteam.easycharge.exceptions.LoginEmptyFieldException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class LoginController {
@@ -57,7 +58,7 @@ public class LoginController {
         List<Car> result = cd.getModel();
 
         if (result == null)	{
-            return null;
+            return Collections.emptyList();
         } else {
             List<CarBean> lcb = new ArrayList<>();
 

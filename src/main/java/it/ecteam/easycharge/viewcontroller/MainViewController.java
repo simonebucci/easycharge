@@ -197,7 +197,6 @@ public class MainViewController extends StackPane implements Initializable  {
         report = ReportController.getUserReport(String.valueOf(chargingStationList.get(id - 1).getId()));
         csid = chargingStationList.get(id-1).getId();
 
-        UserBean ub = SessionUser.getInstance().getSession();
         if (ub != null) {
             reportBtn.setVisible(true);
             reportPane.setVisible(false);
@@ -288,7 +287,6 @@ public class MainViewController extends StackPane implements Initializable  {
     @FXML
     protected void onPointBtnClick(){
         ReportController rc = new ReportController();
-        UserBean ub = SessionUser.getInstance().getSession();
 
         String selected = riView.getSelectionModel().getSelectedItems().toString();
         if(!Objects.equals(selected, "[]")) {
@@ -339,7 +337,6 @@ public class MainViewController extends StackPane implements Initializable  {
     @FXML
     protected void onFavoriteOnBtnClick(){
         UserController uc = new UserController();
-        UserBean ub = SessionUser.getInstance().getSession();
 
         uc.deleteFavorite(ub.getUsername(), csid);
         favoriteOnBtn.setVisible(false);

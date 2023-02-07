@@ -8,7 +8,7 @@ import javafx.scene.control.PasswordField;
 import java.util.Objects;
 
 public class RegistrationController {
-
+    private RegistrationController(){}
     //registrations methods
     public static boolean isInvalidData(ComboBox<String> userType, javafx.scene.control.TextField usernameTextField, PasswordField passwordPasswordField, javafx.scene.control.TextField emailTextField) {
         return Objects.equals(userType.getValue(), null) || usernameTextField.getText().isBlank() || passwordPasswordField.getText().isBlank() || emailTextField.getText().isBlank();

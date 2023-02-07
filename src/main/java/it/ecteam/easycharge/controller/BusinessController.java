@@ -7,6 +7,7 @@ import it.ecteam.easycharge.entity.Business;
 import it.ecteam.easycharge.entity.ChargingStation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class BusinessController {
@@ -46,7 +47,7 @@ public class BusinessController {
         List<Business> result = bud.getCSAds(csid);
         List<BusinessBean> bl = new ArrayList<>();
         if(result == null){
-            return null;
+            return Collections.emptyList();
         }else{
             int i;
             for(i=0; i < result.size(); i++) {
@@ -69,7 +70,7 @@ public class BusinessController {
         List<ChargingStation> result = bud.getBusinessAds(business);
         List<ChargingStationBean> csl = new ArrayList<>();
         if(result == null){
-            return null;
+            return Collections.emptyList();
         }else{
             int i;
             for(i=0; i < result.size(); i++) {

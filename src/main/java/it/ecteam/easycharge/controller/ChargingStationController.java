@@ -18,8 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChargingStationController {
-    public ChargingStationController() {
-
+    private ChargingStationController() {
     }
     private static final String APIKEY = System.getProperty("api.key");
     public static List<ChargingStationBean> getNearby(int radius) throws IOException, ParseException, LocationNotFoundException, org.json.simple.parser.ParseException, ChargingStationNotFoundException {

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class StationsFilterController {
-
+    private StationsFilterController() {}
     public static void filterByConnector(CheckBox connectorBox, List<ChargingStationBean> chargingStationList, ListView listView, String space, CarBean cb) throws ChargingStationNotFoundException, IOException, ParseException {
         for (int i = 0; i < chargingStationList.size(); i++) {
             if (!connectorBox.isSelected() || checkConnectorAvailability(chargingStationList.get(i).getId(), cb)) {

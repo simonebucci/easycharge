@@ -82,8 +82,7 @@ public class BusinessSettingsViewController implements Initializable {
 
         this.usernameLabel.setText(ub.getUsername());
 
-        BusinessController businessController = new BusinessController();
-        bb = businessController.getBusiness(ub.getUsername());
+        bb = BusinessController.getBusiness(ub.getUsername());
 
         this.businessLabel.setText(bb.getBusiness());
         this.addressLabel.setText(bb.getAddress());

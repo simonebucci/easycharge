@@ -7,6 +7,7 @@ import it.ecteam.easycharge.dao.UserDao;
 import it.ecteam.easycharge.entity.Car;
 import it.ecteam.easycharge.entity.ChargingStation;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UserController {
@@ -51,7 +52,7 @@ public class UserController {
         List<ChargingStation> result = ud.getFavorite(username);
         List<ChargingStationBean> rbl = new ArrayList<>();
         if(result == null){
-            return null;
+            return Collections.emptyList();
         }else{
             int i;
             for(i=0; i < result.size(); i++) {
