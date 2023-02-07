@@ -105,7 +105,11 @@ public class CLIRouteController {
         } catch (IOException | ParseException | ChargingStationNotFoundException | LocationNotFoundException e) {
             e.printStackTrace();
         }
-        System.out.println("Click on this link to see the route on a map: https://www.google.com/maps/dir/?api=1&origin="+ start +"&destination="+ end +"&travelmode=driving&waypoint_place_ids=ChIJ5zZx3kNjLxMRAIuXSFIRfwk%ChIJL6pCbOVhLxMRODH8uDzXLDo");
+        if(chargingStationList.isEmpty()){
+            System.out.println("Your car can reach the destination without any recharge.");
+        }else {
+            System.out.println("Click on this link to see the route on a map: https://www.google.com/maps/dir/?api=1&origin=" + start + "&destination=" + end + "&travelmode=driving&waypoint_place_ids=ChIJ5zZx3kNjLxMRAIuXSFIRfwk%ChIJL6pCbOVhLxMRODH8uDzXLDo");
+        }
     }
 
 

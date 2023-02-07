@@ -26,37 +26,39 @@ public class RouteController {
 
     private RouteController() {
     }
-
+    public static final String APP = "application/json";
+    public static final String G = "{";
+    public static final String G2 = "}";
     public static List<ChargingStationBean> getPerfectRoute(List<Double> start, List<Double> end, int range, String cType, String capacity) throws IOException, ParseException, LocationNotFoundException, ChargingStationNotFoundException {
 
         List<ChargingStationBean> chargingStationList = new ArrayList<>();
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
             HttpPost httpPost = new HttpPost("https://api.tomtom.com/routing/1/calculateLongDistanceEVRoute/"+ start.get(0)+"%2C"+start.get(1)+"%3A"+end.get(0)+"%2C"+end.get(1)+ "/json?vehicleEngineType=electric&constantSpeedConsumptionInkWhPerHundredkm=50.0%2C6.5%3A100.0%2C8.5&currentChargeInkWh="+capacity+"&maxChargeInkWh="+capacity+"&minChargeAtDestinationInkWh=5.2&minChargeAtChargingStopsInkWh=1.5&key=" + getAPI());
-            httpPost.setHeader("accept", "application/json");
-            httpPost.setHeader("Content-type", "application/json");
+            httpPost.setHeader("accept", APP);
+            httpPost.setHeader("Content-type", APP);
             String json = "{\n" +
                     "  \"chargingModes\": [\n" +
                     "    {\n" +
                     "      \"chargingConnections\": [\n" +
-                    "        {\n" +
+                    "        "+G+"\n" +
                     "          \"facilityType\": \"Charge_380_to_480V_3_Phase_at_32A\",\n" +
                     "          \"plugType\": \"IEC_62196_Type_2_Outlet\"\n" +
                     "        }\n" +
                     "      ],\n" +
                     "      \"chargingCurve\": [\n" +
-                    "        {\n" +
+                    "        "+G+"\n" +
                     "          \"chargeInkWh\": 6,\n" +
                     "          \"timeToChargeInSeconds\": 360\n" +
-                    "        },\n" +
-                    "        {\n" +
+                    "        "+G2+",\n" +
+                    "        "+G+"\n" +
                     "          \"chargeInkWh\": 12,\n" +
                     "          \"timeToChargeInSeconds\": 720\n" +
-                    "        },\n" +
-                    "        {\n" +
+                    "        "+G2+",\n" +
+                    "        "+G+"\n" +
                     "          \"chargeInkWh\": 28,\n" +
                     "          \"timeToChargeInSeconds\": 1944\n" +
-                    "        },\n" +
-                    "        {\n" +
+                    "        "+G2+",\n" +
+                    "        "+G+"\n" +
                     "          \"chargeInkWh\": "+capacity+",\n" +
                     "          \"timeToChargeInSeconds\": 4680\n" +
                     "        }\n" +
@@ -125,8 +127,8 @@ public class RouteController {
         List<ChargingStationBean> chargingStationList = new ArrayList<>();
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
             HttpPost httpPost = new HttpPost("https://api.tomtom.com/search/2/searchAlongRoute/charging%20station.json?maxDetourTime=1200&categorySet=7309&key=" + getAPI());
-            httpPost.setHeader("Accept", "application/json");
-            httpPost.setHeader("Content-type", "application/json");
+            httpPost.setHeader("Accept", APP);
+            httpPost.setHeader("Content-type", APP);
             String json = "{\r\n" +
                     "  \"route\": {\r\n" +
                     "  \"points\": [\r\n" +

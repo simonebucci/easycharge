@@ -23,6 +23,8 @@ public class CLIUserHomeController {
     private List<BusinessBean> chargingStationAds = new ArrayList<>();
     private ReportController reportController = new ReportController();
     private final SecureRandom r = new SecureRandom();
+    public static final String WE = "--------Welcome ";
+    public static final String WE2 = "!--------";
     public void nearby(Integer range, Scanner input){
         String csid;
 
@@ -36,7 +38,7 @@ public class CLIUserHomeController {
             e.printStackTrace();
         }
         System.out.println(EC);
-        System.out.println("--------Welcome "+ ub.getUsername() + "!--------");
+        System.out.println(WE+ ub.getUsername() + WE2);
         System.out.println(W);
         System.out.println(CA);
         System.out.println("2. Report");
@@ -70,7 +72,7 @@ public class CLIUserHomeController {
                         return;
                     }
                     System.out.println(EC);
-                    System.out.println("--------Welcome "+ ub.getUsername() + "!--------");
+                    System.out.println(WE+ ub.getUsername() + WE2);
                     System.out.println(W);
                     System.out.println(CA);
                     System.out.println("2. Report");
@@ -150,7 +152,7 @@ public class CLIUserHomeController {
                         }
                     }
                     System.out.println(EC);
-                    System.out.println("--------Welcome "+ ub.getUsername() + "!--------");
+                    System.out.println(WE+ ub.getUsername() + WE2);
                     System.out.println(W);
                     System.out.println(CA);
                     System.out.println("2. Back");
@@ -204,7 +206,7 @@ public class CLIUserHomeController {
         }
 
         System.out.println(EC);
-        System.out.println("--------Welcome "+ ub.getUsername() + "!--------");
+        System.out.println(WE+ ub.getUsername() + WE2);
         System.out.println(W);
         System.out.println(CA);
         System.out.println("2. Remove favorite");
@@ -245,7 +247,7 @@ public class CLIUserHomeController {
     }
     public void print(){
         System.out.println(EC);
-        System.out.println("--------Welcome "+ ub.getUsername() + "!--------");
+        System.out.println(WE+ ub.getUsername() + WE2);
         System.out.println(W);
         System.out.println("1. Search for Nearby Charging Stations");
         System.out.println("2. Route");
