@@ -30,7 +30,7 @@ public class CLIBusinessHomeController {
     BusinessController bc = new BusinessController();
     String csid;
     public void nearby(Integer range, Scanner input){
-        
+
         try {
             chargingStationList = ChargingStationController.getNearby(range); //radius range 1 to 50000
             chargingStationPrint(chargingStationList);
@@ -57,13 +57,7 @@ public class CLIBusinessHomeController {
                     }
 
                     List<ChargingStationBean> chargingStationAds = BusinessController.getBusinessAds(business.getId());
-                    int j;
-                    for(j=0; j < Objects.requireNonNull(chargingStationAds).size(); j++){
-                        if(Objects.equals(chargingStationAds.get(j).getId(), csid)){
-                            System.out.println("You already bought an ad for this charging station.");
-                            return;
-                        }
-                    }
+                    csAdCheck(chargingStationAds);
 
                     payment(input);
                     return;
@@ -77,6 +71,15 @@ public class CLIBusinessHomeController {
         }while(input.hasNext());
     }
 
+    private void csAdCheck(List<ChargingStationBean> chargingStationAds){
+        int j;
+        for(j=0; j < Objects.requireNonNull(chargingStationAds).size(); j++){
+            if(Objects.equals(chargingStationAds.get(j).getId(), csid)){
+                System.out.println("You already bought an ad for this charging station.");
+                return;
+            }
+        }
+    }
     private void payment(Scanner input){
         System.out.println("---PayPal Payment---");
         System.out.println("username: ");
