@@ -27,9 +27,6 @@ public class CLIBusinessHomeController {
     private List<ChargingStationBean> csAdsList = new ArrayList<>();
     private BusinessBean business = new BusinessBean();
     protected static final Logger logger = Logger.getLogger("CLI");
-
-
-
     public void nearby(Integer range, Scanner input){
         BusinessController bc = new BusinessController();
         String csid = null;
@@ -86,7 +83,9 @@ public class CLIBusinessHomeController {
                     }
                     return;
                 }
-                case "2" -> return;
+                case "2" -> {
+                    return;
+                }
                 default -> System.out.println(CNF);
             }
             System.out.flush();
