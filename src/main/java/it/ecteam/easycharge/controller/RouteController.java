@@ -26,9 +26,10 @@ public class RouteController {
 
     private RouteController() {
     }
-    public static final String APP = "application/json";
-    public static final String G = "{";
-    public static final String G2 = "}";
+    private static final String APP = "application/json";
+    private static final String G = "{";
+    private static final String G2 = "}";
+    private static final String SPACE = "        ";
     public static List<ChargingStationBean> getPerfectRoute(List<Double> start, List<Double> end, int range, String cType, String capacity) throws IOException, ParseException, LocationNotFoundException, ChargingStationNotFoundException {
 
         List<ChargingStationBean> chargingStationList = new ArrayList<>();
@@ -40,25 +41,25 @@ public class RouteController {
                     "  \"chargingModes\": [\n" +
                     "    {\n" +
                     "      \"chargingConnections\": [\n" +
-                    "        "+G+"\n" +
+                    SPACE+G+"\n" +
                     "          \"facilityType\": \"Charge_380_to_480V_3_Phase_at_32A\",\n" +
                     "          \"plugType\": \"IEC_62196_Type_2_Outlet\"\n" +
                     "        }\n" +
                     "      ],\n" +
                     "      \"chargingCurve\": [\n" +
-                    "        "+G+"\n" +
+                    SPACE+G+"\n" +
                     "          \"chargeInkWh\": 6,\n" +
                     "          \"timeToChargeInSeconds\": 360\n" +
-                    "        "+G2+",\n" +
-                    "        "+G+"\n" +
+                    SPACE+G2+",\n" +
+                    SPACE+G+"\n" +
                     "          \"chargeInkWh\": 12,\n" +
                     "          \"timeToChargeInSeconds\": 720\n" +
-                    "        "+G2+",\n" +
-                    "        "+G+"\n" +
+                    SPACE+G2+",\n" +
+                    SPACE+G+"\n" +
                     "          \"chargeInkWh\": 28,\n" +
                     "          \"timeToChargeInSeconds\": 1944\n" +
-                    "        "+G2+",\n" +
-                    "        "+G+"\n" +
+                    SPACE+G2+",\n" +
+                    SPACE+G+"\n" +
                     "          \"chargeInkWh\": "+capacity+",\n" +
                     "          \"timeToChargeInSeconds\": 4680\n" +
                     "        }\n" +
@@ -66,6 +67,7 @@ public class RouteController {
                     "    }\n" +
                     "  ]\n" +
                     "}";
+
             StringEntity stringEntity = new StringEntity(json);
             httpPost.setEntity(stringEntity);
 
