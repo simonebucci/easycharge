@@ -52,10 +52,7 @@ public class CLIHomeController {
                         }
                         connectorPrint(connectorBeanList);
                         chargingStationAds = BusinessController.getCSAds(csid);
-                        if (!chargingStationAds.isEmpty()) {
-                            int rand = r.nextInt((chargingStationAds).size());
-                            System.out.println(chargingStationAds.get(rand).getAd()+" located in " + chargingStationAds.get(rand).getAddress());
-                        }
+                        printAd(chargingStationAds);
                     }else{
                         System.out.println("Wrong charging station number");
                         return;
@@ -66,14 +63,7 @@ public class CLIHomeController {
                     System.out.println("Insert the charging station number: ");
                     int num = Integer.parseInt(input.nextLine());
                     report = ReportController.getUserReport(String.valueOf(chargingStationList.get(num - 1).getId()));
-                    if(!report.isEmpty()){
-                        int j;
-                        for(j=0; j < report.size(); j++) {
-                            System.out.println(report.get(j).getUsername() + "\nsaid: " + report.get(j).getComment() + "\nDate: " + report.get(j).getDate()+ "\nLikes: " + report.get(j).getPoint());
-                        }
-                    }else{
-                        System.out.println("No report found.");
-                    }
+                    printReport();
                     return;
                 }
                 case "3" -> {
@@ -84,6 +74,24 @@ public class CLIHomeController {
             }
             System.out.flush();
         }while(input.hasNext());
+    }
+
+    private void printAd(List<BusinessBean> chargingStationAds){
+        if (!chargingStationAds.isEmpty()) {
+            int rand = r.nextInt((chargingStationAds).size());
+            System.out.println(chargingStationAds.get(rand).getAd()+" located in " + chargingStationAds.get(rand).getAddress());
+        }
+    }
+
+    private void printReport(){
+        if(!report.isEmpty()){
+            int j;
+            for(j=0; j < report.size(); j++) {
+                System.out.println(report.get(j).getUsername() + "\nsaid: " + report.get(j).getComment() + "\nDate: " + report.get(j).getDate()+ "\nLikes: " + report.get(j).getPoint());
+            }
+        }else{
+            System.out.println("No report found.");
+        }
     }
 
     private void connectorPrint(List<ConnectorBean> connectorBeanList){
