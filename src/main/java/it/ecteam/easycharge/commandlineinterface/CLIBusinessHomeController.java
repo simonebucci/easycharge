@@ -27,17 +27,19 @@ public class CLIBusinessHomeController {
     private List<ChargingStationBean> csAdsList = new ArrayList<>();
     private BusinessBean business = new BusinessBean();
     protected static final Logger logger = Logger.getLogger("CLI");
+
     public void nearby(Integer range, Scanner input){
         BusinessController bc = new BusinessController();
-        String csid = null;
+        String csid;
+
         try {
-            chargingStationList = ChargingStationController.getNearby(range);
-            for(int i=0; i < chargingStationList.size(); i++){
+            chargingStationList = ChargingStationController.getNearby(range); //radius range 1 to 50000
+            int i;
+            for(i=0; i < chargingStationList.size(); i++){
                 Long distance = MapController.getDistance(MapController.getCoordinates((business.getAddress())), MapController.getCoordinates(chargingStationList.get(i).getFreeformAddress()));
                 System.out.println(i+1+". "+chargingStationList.get(i).getName()+", "+chargingStationList.get(i).getFreeformAddress() + " distance from  your business: "+ distance);
             }
-        }
-        catch (Exception e) {
+        } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
             logger.log(Level.WARNING, e.toString());
         }
 
@@ -46,29 +48,28 @@ public class CLIBusinessHomeController {
         System.out.println(W);
         System.out.println("1. Buy an ad");
         System.out.println("2. Back");
-        do {
+        do{
+
             switch (input.nextLine()) {
                 case "1" -> {
                     System.out.println("Insert the charging station number: ");
                     int num = Integer.parseInt(input.nextLine());
-                    if(num >= 1 && num <= chargingStationList.size()){
+                    if(num < chargingStationList.size() && num >0){
                         csid = chargingStationList.get(num-1).getId();
-                    } else {
+                    }else{
                         System.out.println("Wrong charging station number");
                         return;
                     }
+
                     List<ChargingStationBean> chargingStationAds = BusinessController.getBusinessAds(business.getId());
-                    boolean alreadyBought = false;
-                    for(int j=0; j < Objects.requireNonNull(chargingStationAds).size(); j++){
+                    int j;
+                    for(j=0; j < Objects.requireNonNull(chargingStationAds).size(); j++){
                         if(Objects.equals(chargingStationAds.get(j).getId(), csid)){
-                            alreadyBought = true;
-                            break;
+                            System.out.println("You already bought an ad for this charging station.");
+                            return;
                         }
                     }
-                    if(alreadyBought) {
-                        System.out.println("You already bought an ad for this charging station.");
-                        return;
-                    }
+
                     System.out.println("---PayPal Payment---");
                     System.out.println("username: ");
                     input.nextLine();
@@ -78,7 +79,7 @@ public class CLIBusinessHomeController {
                     if(Objects.equals(input.nextLine(), "y")){
                         bc.businessAd(business.getId(), csid);
                         System.out.println("Thank you!");
-                    } else {
+                    }else{
                         System.out.println("Payment cancelled!");
                     }
                     return;
@@ -89,7 +90,7 @@ public class CLIBusinessHomeController {
                 default -> System.out.println(CNF);
             }
             System.out.flush();
-        } while(input.hasNext());
+        }while(input.hasNext());
     }
 
     void print(){
