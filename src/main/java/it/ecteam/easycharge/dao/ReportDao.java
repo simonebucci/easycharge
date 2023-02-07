@@ -42,8 +42,6 @@ public class ReportDao extends DaoTemplate{
                     stm.setString(1, station);
                     try (ResultSet rs = stm.executeQuery()) {
 
-                            //if (!rs.first()) // rs not empty
-                                //return Collections.emptyList();	//return empty list
                         if(rs.next()){
                             do{
                                 String stationLoaded = rs.getString("charging_station_idcharging_station");
@@ -105,8 +103,6 @@ public class ReportDao extends DaoTemplate{
                     stm.setDate(3, date);
                     try (ResultSet rs = stm.executeQuery()) {
 
-                        //if (!rs.first()) // rs not empty
-                        //return Collections.emptyList();	//return empty list
                         if(rs.next()){
                             do{
                                 String user = rs.getString("giver_username");

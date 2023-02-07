@@ -62,7 +62,6 @@ public class CLIUserHomeController {
                             System.out.println("Type:"+ connectorBeanList.get(k).getType() + "\nTotal: " + connectorBeanList.get(k).getTotal() + "\nAvailable: " + connectorBeanList.get(k).getAvailable() + "\nOccupied: " + connectorBeanList.get(k).getOccupied() + "\nReserved: " + connectorBeanList.get(k).getReserved() + "\nUnknown: " + connectorBeanList.get(k).getUnknown() + "\nOutOfService: " + connectorBeanList.get(k).getOutOfService() + "\n     ");
                         }
                         chargingStationAds = BusinessController.getCSAds(csid);
-                        assert chargingStationAds != null;
                         if (!chargingStationAds.isEmpty()) {
                             int rand = r.nextInt((chargingStationAds).size());
                             System.out.println(chargingStationAds.get(rand).getAd()+" located in " + chargingStationAds.get(rand).getAddress());
@@ -136,7 +135,6 @@ public class CLIUserHomeController {
                     UserController uc = new UserController();
                     CarBean cb = uc.getCar(ub.getUsername());
                     for (int i = 0; i < chargingStationList.size(); i++) {
-                        List<ConnectorBean> connectorBeanList = null;
                         try {
                             connectorBeanList = ChargingStationController.getChargingAvailability(chargingStationList.get(i).getId());
                         } catch (IOException | ParseException | ChargingStationNotFoundException e) {

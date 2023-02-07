@@ -15,8 +15,7 @@ import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 
 public class MapController {
 
-    public MapController() {
-
+    private MapController() {
     }
 
     private static final String APIKEY = System.getProperty("api.key");
@@ -54,7 +53,6 @@ public class MapController {
         double lng = (double) object.get("longitude");
 
         return "lat="+lat+"&lon="+lng;
-        //return "lat=41.837870&lon=12.592929";
     }
 
     public static List<Double> getCoordinates(String string) throws IOException, org.json.simple.parser.ParseException, LocationNotFoundException {

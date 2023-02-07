@@ -231,12 +231,8 @@ public class MainViewController extends StackPane implements Initializable  {
         issueBtn.setVisible(!report.isEmpty());
 
         List<BusinessBean> chargingStationAds = BusinessController.getCSAds(csid);
-        assert chargingStationAds != null;
         if (!chargingStationAds.isEmpty()) {
             adsPane.setVisible(true);
-            /*for(i=0; i < Objects.requireNonNull(chargingStationAds).size(); i++) {
-                adsLabel.setText("While you are charging try "+ chargingStationAds.get(i).getBusiness() + " " + chargingStationAds.get(i).getAddress());
-            }*/
             int rand = r.nextInt((chargingStationAds).size());
             adsLabel.setText(chargingStationAds.get(rand).getAd()+" located in " + chargingStationAds.get(rand).getAddress());
         }
