@@ -1,6 +1,5 @@
 package it.ecteam.easycharge.commandlineinterface;
 
-import com.sun.javafx.logging.PlatformLogger;
 import it.ecteam.easycharge.bean.BusinessBean;
 import it.ecteam.easycharge.bean.ChargingStationBean;
 import it.ecteam.easycharge.bean.UserBean;
@@ -10,7 +9,6 @@ import it.ecteam.easycharge.controller.MapController;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 import it.ecteam.easycharge.utils.SessionUser;
-import org.apache.http.ExceptionLogger;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
