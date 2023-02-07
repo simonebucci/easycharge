@@ -27,18 +27,13 @@ public class CLIBusinessHomeController {
     private List<ChargingStationBean> csAdsList = new ArrayList<>();
     private BusinessBean business = new BusinessBean();
     protected static final Logger logger = Logger.getLogger("CLI");
-
+    BusinessController bc = new BusinessController();
+    String csid;
     public void nearby(Integer range, Scanner input){
-        BusinessController bc = new BusinessController();
-        String csid;
-
+        
         try {
             chargingStationList = ChargingStationController.getNearby(range); //radius range 1 to 50000
-            int i;
-            for(i=0; i < chargingStationList.size(); i++){
-                Long distance = MapController.getDistance(MapController.getCoordinates((business.getAddress())), MapController.getCoordinates(chargingStationList.get(i).getFreeformAddress()));
-                System.out.println(i+1+". "+chargingStationList.get(i).getName()+", "+chargingStationList.get(i).getFreeformAddress() + " distance from  your business: "+ distance);
-            }
+            chargingStationPrint(chargingStationList);
         } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
             logger.log(Level.WARNING, e.toString());
         }
@@ -70,18 +65,7 @@ public class CLIBusinessHomeController {
                         }
                     }
 
-                    System.out.println("---PayPal Payment---");
-                    System.out.println("username: ");
-                    input.nextLine();
-                    System.out.println("password: ");
-                    input.nextLine();
-                    System.out.println("Confirm payment? (y/n)");
-                    if(Objects.equals(input.nextLine(), "y")){
-                        bc.businessAd(business.getId(), csid);
-                        System.out.println("Thank you!");
-                    }else{
-                        System.out.println("Payment cancelled!");
-                    }
+                    payment(input);
                     return;
                 }
                 case "2" -> {
@@ -93,7 +77,28 @@ public class CLIBusinessHomeController {
         }while(input.hasNext());
     }
 
-    void print(){
+    private void payment(Scanner input){
+        System.out.println("---PayPal Payment---");
+        System.out.println("username: ");
+        input.nextLine();
+        System.out.println("password: ");
+        input.nextLine();
+        System.out.println("Confirm payment? (y/n)");
+        if(Objects.equals(input.nextLine(), "y")){
+            bc.businessAd(business.getId(), csid);
+            System.out.println("Thank you!");
+        }else{
+            System.out.println("Payment cancelled!");
+        }
+    }
+    private void chargingStationPrint(List<ChargingStationBean> chargingStationList) throws IOException, ParseException, LocationNotFoundException {
+        int i;
+        for(i=0; i < chargingStationList.size(); i++){
+            Long distance = MapController.getDistance(MapController.getCoordinates((business.getAddress())), MapController.getCoordinates(chargingStationList.get(i).getFreeformAddress()));
+            System.out.println(i+1+". "+chargingStationList.get(i).getName()+", "+chargingStationList.get(i).getFreeformAddress() + " distance from  your business: "+ distance);
+        }
+    }
+    private void print(){
         System.out.println(EC);
         System.out.println("--------Welcome "+ ub.getUsername() + "!--------");
         System.out.println(W);
