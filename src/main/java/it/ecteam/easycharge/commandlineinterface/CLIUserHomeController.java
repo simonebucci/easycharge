@@ -29,7 +29,6 @@ public class CLIUserHomeController {
     public static final String WE2 = "!--------";
     protected static final Logger logger = Logger.getLogger("CLI");
     public void nearby(Integer range, Scanner input){
-        String csid;
 
         try {
             chargingStationList = ChargingStationController.getNearby(range); //radius range 1 to 50000
@@ -50,31 +49,7 @@ public class CLIUserHomeController {
             switch (input.nextLine()) {
                 case "1" -> {
                     System.out.println(INSERT);
-                    int num = Integer.parseInt(input.nextLine());
-                    if(num < chargingStationList.size() && num >0){
-                        csid = chargingStationList.get(num-1).getId();
-                        try {
-                            connectorBeanList = ChargingStationController.getChargingAvailability(csid);
-                        } catch (IOException | ChargingStationNotFoundException | ParseException e) {
-                            logger.log(Level.WARNING, e.toString());
-                        }
-                        printConnector(connectorBeanList);
-                        chargingStationAds = BusinessController.getCSAds(csid);
-                        if (!chargingStationAds.isEmpty()) {
-                            int rand = r.nextInt((chargingStationAds).size());
-                            System.out.println(chargingStationAds.get(rand).getAd()+" located in " + chargingStationAds.get(rand).getAddress());
-                        }
-                    }else{
-                        System.out.println("Wrong charging station number");
-                        return;
-                    }
-                    System.out.println(EC);
-                    System.out.println(WE+ ub.getUsername() + WE2);
-                    System.out.println(W);
-                    System.out.println(CA);
-                    System.out.println("2. Report");
-                    System.out.println("3. Add to favorite");
-                    System.out.println("4. Back");
+                    getChargingAvailability(input);
                 }
                 case "2" -> {
                     System.out.println(INSERT);
@@ -119,7 +94,34 @@ public class CLIUserHomeController {
         }while(input.hasNext());
     }
 
-    public void favorites(Scanner input){
+    private void getChargingAvailability(Scanner input){
+        int num = Integer.parseInt(input.nextLine());
+        if(num < chargingStationList.size() && num >0){
+            String csid = chargingStationList.get(num - 1).getId();
+            try {
+                connectorBeanList = ChargingStationController.getChargingAvailability(csid);
+            } catch (IOException | ChargingStationNotFoundException | ParseException e) {
+                logger.log(Level.WARNING, e.toString());
+            }
+            printConnector(connectorBeanList);
+            chargingStationAds = BusinessController.getCSAds(csid);
+            if (!chargingStationAds.isEmpty()) {
+                int rand = r.nextInt((chargingStationAds).size());
+                System.out.println(chargingStationAds.get(rand).getAd()+" located in " + chargingStationAds.get(rand).getAddress());
+            }
+        }else{
+            System.out.println("Wrong charging station number");
+            return;
+        }
+        System.out.println(EC);
+        System.out.println(WE+ ub.getUsername() + WE2);
+        System.out.println(W);
+        System.out.println(CA);
+        System.out.println("2. Report");
+        System.out.println("3. Add to favorite");
+        System.out.println("4. Back");
+    }
+    private void favorites(Scanner input){
         ChargingStationBean csb = new ChargingStationBean();
         int i;
         for(i=0; i<favoriteCSB.size(); i++){
