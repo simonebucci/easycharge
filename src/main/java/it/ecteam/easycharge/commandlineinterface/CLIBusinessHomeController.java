@@ -125,7 +125,7 @@ public class CLIBusinessHomeController {
                             cs = ChargingStationController.getCSInfo(csAdsList.get(i).getId());
                         } catch (IOException | java.text.ParseException | LocationNotFoundException | ParseException |
                                  ChargingStationNotFoundException e) {
-                            throw new RuntimeException(e);
+                            logger.log(Level.WARNING, e.toString());
                         }
                         System.out.println(i+1+". "+cs.getName()+" "+cs.getFreeformAddress()+"\n     ");
                     }
