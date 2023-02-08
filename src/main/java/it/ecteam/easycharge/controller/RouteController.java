@@ -30,7 +30,7 @@ public class RouteController {
     private static final String G = "{";
     private static final String G2 = "}";
     private static final String SPACE = "        ";
-    public static List<ChargingStationBean> getPerfectRoute(List<Double> start, List<Double> end, int range, String cType, String capacity) throws IOException, ParseException, LocationNotFoundException, ChargingStationNotFoundException {
+    public static List<ChargingStationBean> getPerfectRoute(List<Double> start, List<Double> end, String capacity) throws IOException, ParseException, LocationNotFoundException, ChargingStationNotFoundException {
 
         List<ChargingStationBean> chargingStationList = new ArrayList<>();
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {

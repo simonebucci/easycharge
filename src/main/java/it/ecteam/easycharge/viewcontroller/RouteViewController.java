@@ -177,7 +177,7 @@ public class RouteViewController extends StackPane implements Initializable {
         csLabel.setText("");
 
         try {
-            perfectRouteList = RouteController.getPerfectRoute(start, end, Integer.parseInt(cb.getRange()), cb.getConnectorType(), cb.getCapacity());
+            perfectRouteList = RouteController.getPerfectRoute(start, end, cb.getCapacity());
             if(!perfectRouteList.isEmpty()) {
                 int i;
                 for (i = 0; i < perfectRouteList.size(); i++) {

@@ -68,7 +68,7 @@ public class CLIRouteController {
         }
 
         try {
-            chargingStationList = RouteController.getPerfectRoute(startPoint, endPoint, Integer.parseInt(cb.getRange()), cb.getConnectorType(), cb.getCapacity());
+            chargingStationList = RouteController.getPerfectRoute(startPoint, endPoint, cb.getCapacity());
             int i;
             for(i=0; i < chargingStationList.size(); i++){
                 System.out.println(i+1+". "+chargingStationList.get(i).getName()+", "+chargingStationList.get(i).getFreeformAddress());

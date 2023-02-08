@@ -123,7 +123,7 @@ public class MapController {
 
 
         if(resultsArray.isEmpty()) {
-            throw new LocationNotFoundException("No route found for this locations");
+            throw new LocationNotFoundException("No distance found for this locations");
         }
 
         JSONObject results = (JSONObject) resultsArray.get(0);
