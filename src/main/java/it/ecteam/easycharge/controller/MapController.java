@@ -14,7 +14,9 @@ import org.json.simple.parser.*;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 
 public class MapController {
-
+    private MapController(){
+        throw new IllegalStateException("MapController class");
+    }
     private static final String APIKEY = System.getProperty("api.key");
     private static final String GAPIKEY = System.getProperty("gapi.key");
     private static final String LAPIKEY = System.getProperty("lapi.key");
