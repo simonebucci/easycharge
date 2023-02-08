@@ -15,7 +15,7 @@ import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 
 public class MapController {
 
-    public MapController() {
+    private MapController() {
     }
 
     private static final String APIKEY = System.getProperty("api.key");
