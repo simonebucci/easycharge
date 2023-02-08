@@ -5,6 +5,8 @@ import it.ecteam.easycharge.controller.*;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 import it.ecteam.easycharge.utils.SessionUser;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ListView;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -28,7 +30,7 @@ public class CLIUserHomeController {
     public static final String WE = "--------Welcome ";
     public static final String WE2 = "!--------";
     protected static final Logger logger = Logger.getLogger("CLI");
-    public void nearby(Integer range, Scanner input){
+    public void nearby(Integer range, Scanner input) throws ChargingStationNotFoundException, IOException, ParseException {
 
         try {
             chargingStationList = ChargingStationController.getNearby(range); //radius range 1 to 50000
@@ -205,23 +207,24 @@ public class CLIUserHomeController {
         }
     }
 
-    private void connectorFilter(CarBean cb){
+    private void connectorFilter(CarBean cb) throws ChargingStationNotFoundException, IOException, ParseException {
         for (int i = 0; i < chargingStationList.size(); i++) {
-            try {
-                connectorBeanList = ChargingStationController.getChargingAvailability(chargingStationList.get(i).getId());
-            } catch (IOException | ParseException | ChargingStationNotFoundException e) {
-                logger.log(Level.WARNING, e.toString());
-            }
-            for(int k = 0; k < connectorBeanList.size(); k++) {
-                if (Objects.equals(connectorBeanList.get(k).getType(), "Chademo")) {
-                    System.out.println(i + 1 + ". " + chargingStationList.get(i).getName() + " " + chargingStationList.get(i).getFreeformAddress());
-                    k = connectorBeanList.size();
-                } else if (Objects.equals(connectorBeanList.get(k).getType().substring(0, 13), cb.getConnectorType().substring(0, 13))) {
-                    System.out.println(i + 1 + ". " + chargingStationList.get(i).getName() + " " + chargingStationList.get(i).getFreeformAddress());
-                    k = connectorBeanList.size();
-                }
+            if (checkConnectorAvailability(chargingStationList.get(i).getId(), cb)) {
+                System.out.println(i + 1 + ". " + chargingStationList.get(i).getName() + " " + chargingStationList.get(i).getFreeformAddress());
             }
         }
+    }
+
+    private boolean checkConnectorAvailability(String chargingStationId, CarBean cb) throws ChargingStationNotFoundException, IOException, ParseException {
+        connectorBeanList = ChargingStationController.getChargingAvailability(chargingStationId);
+        for(int k = 0; k < connectorBeanList.size(); k++) {
+            if (Objects.equals(connectorBeanList.get(k).getType(), "Chademo")) {
+                return Objects.equals(connectorBeanList.get(k).getType(), cb.getConnectorType());
+            } else if (Objects.equals(connectorBeanList.get(k).getType().substring(0, 13), cb.getConnectorType().substring(0, 13))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void printReport(Scanner input, int num){
@@ -285,7 +288,11 @@ public class CLIUserHomeController {
             switch (input.nextLine()) {
                 case "1" -> {
                     System.out.println("Insert a search range in km: ");
-                    nearby(Integer.parseInt(input.nextLine())*1000, input);
+                    try {
+                        nearby(Integer.parseInt(input.nextLine())*1000, input);
+                    } catch (ChargingStationNotFoundException | IOException | ParseException e) {
+                        logger.log(Level.WARNING, e.toString());
+                    }
                     print();
                 }
                 case "2" -> {
