@@ -380,7 +380,7 @@ public class MainViewController extends StackPane implements Initializable  {
                 listView.getItems().add(i+1+". "+chargingStationList.get(i).getName()+"\n"+chargingStationList.get(i).getFreeformAddress()+ SPACE);
             }
         } catch (IOException | ParseException | LocationNotFoundException | java.text.ParseException | ChargingStationNotFoundException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, e.toString());
         }
 
         this.ugc = UserGraphicChange.getInstance();
