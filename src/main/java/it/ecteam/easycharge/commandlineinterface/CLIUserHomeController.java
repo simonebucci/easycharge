@@ -5,8 +5,6 @@ import it.ecteam.easycharge.controller.*;
 import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 import it.ecteam.easycharge.utils.SessionUser;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ListView;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
