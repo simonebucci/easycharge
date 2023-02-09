@@ -11,9 +11,9 @@ public class ChargingStation {
         this.id = id;
     }
 
-    public String getId(){ return id; }
-    public String getName(){ return name; }
-    public String getFreeformAddress(){ return freeformAddress; }
-    public double getLatitude(){ return latitude; }
-    public double getLongitude(){ return longitude; }
+    public String getId(){ return this.id; }
+    public String getName(){ return this.name; }
+    public String getFreeformAddress(){ return this.freeformAddress; }
+    public double getLatitude(){ return this.latitude; }
+    public double getLongitude(){ return this.longitude; }
 }
