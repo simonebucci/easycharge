@@ -3,7 +3,7 @@ package report;
 import it.ecteam.easycharge.controller.ReportController;
 import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 //Author: Simone Bucci
 public class TestReportController {
@@ -22,6 +22,6 @@ public class TestReportController {
 
         boolean result = rc.reportCS(station, user, comment);
 
-        assertEquals(false, result);
+        assertFalse(result);
     }
 }

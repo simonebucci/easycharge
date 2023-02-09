@@ -7,6 +7,7 @@ import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,8 +19,8 @@ public class TestRouteController {
         RouteController rc;
         String output;
         String attended;
-        List<Double> start = null;
-        List<Double> end = null;
+        List<Double> start = new ArrayList<> (); ;
+        List<Double> end = new ArrayList<>();;
         String capacity;
 
         rc = RouteController.getInstance();
@@ -29,7 +30,7 @@ public class TestRouteController {
         start.add(0.00);
         end.add(0.00);
         end.add(0.00);
-        capacity = "200";
+        capacity = "1";
 
         try {
             rc.getPerfectRoute(start,end, capacity);
