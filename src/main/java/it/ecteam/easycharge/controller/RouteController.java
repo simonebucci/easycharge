@@ -26,6 +26,9 @@ public class RouteController {
 
     private RouteController() {
     }
+    public static RouteController getInstance() {
+        return new RouteController();
+    }
     private static final String APP = "application/json";
     private static final String G = "{";
     private static final String G2 = "}";

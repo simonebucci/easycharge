@@ -20,7 +20,7 @@ public class TestMapController {
         String attended;
 
 
-        mc=new MapController();
+        mc = MapController.getInstance();
         output="";
         attended="No location found";
 
@@ -42,7 +42,7 @@ public class TestMapController {
         List<Double> start = null;
         List<Double> end = null;
 
-        mc=new MapController();
+        mc= MapController.getInstance();
         output="";
         attended="No distance found for this locations";
         start.add(0.00);
@@ -67,7 +67,7 @@ public class TestMapController {
         String attended;
         String location;
 
-        mc=new MapController();
+        mc=MapController.getInstance();
         output="";
         attended="No coordinates found for this location";
         location = "roma";

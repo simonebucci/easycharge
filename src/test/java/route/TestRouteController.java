@@ -22,7 +22,7 @@ public class TestRouteController {
         List<Double> end = null;
         String capacity;
 
-        rc=new RouteController();
+        rc = RouteController.getInstance();
         output="";
         attended="No perfect route found";
         start.add(0.00);

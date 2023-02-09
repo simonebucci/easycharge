@@ -19,7 +19,7 @@ public class TestChargingStationController {
         String attended;
         String id;
 
-        csc=new ChargingStationController();
+        csc = ChargingStationController.getInstance();
         output="";
         attended="No EV charging station availability found";
         id = "123456789";

@@ -19,7 +19,9 @@ import java.util.List;
 
 public class ChargingStationController {
     private ChargingStationController() {
-        throw new IllegalStateException("ChargingStationController class");
+    }
+    public static ChargingStationController getInstance() {
+        return new ChargingStationController();
     }
     private static final String APIKEY = System.getProperty("api.key");
     public static List<ChargingStationBean> getNearby(int radius) throws IOException, ParseException, LocationNotFoundException, org.json.simple.parser.ParseException, ChargingStationNotFoundException {
