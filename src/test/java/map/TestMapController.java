@@ -1,6 +1,5 @@
 package map;
 
-
 import it.ecteam.easycharge.controller.MapController;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 import org.json.simple.parser.ParseException;
