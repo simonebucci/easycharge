@@ -1,6 +1,7 @@
-package distance;
+package route;
 
-import it.ecteam.easycharge.controller.MapController;
+import it.ecteam.easycharge.controller.RouteController;
+import it.ecteam.easycharge.exceptions.ChargingStationNotFoundException;
 import it.ecteam.easycharge.exceptions.LocationNotFoundException;
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
@@ -9,29 +10,30 @@ import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 //Author: Miriana Marchi
-public class TestDistance {
+public class TestRouteController {
     @Test
-    public void testNoCoordinates() {
+    public void testPerfectRoute() {
 
-        MapController mc;
+        RouteController rc;
         String output;
         String attended;
         List<Double> start = null;
         List<Double> end = null;
+        String capacity;
 
-        mc=new MapController();
+        rc=new RouteController();
         output="";
-        attended="No distance found for this locations";
+        attended="No perfect route found";
         start.add(0.00);
         start.add(0.00);
         end.add(0.00);
         end.add(0.00);
+        capacity = "200";
 
         try {
-            mc.getDistance(start,end);
-        } catch (LocationNotFoundException | IOException | ParseException e) {
+            rc.getPerfectRoute(start,end, capacity);
+        } catch (LocationNotFoundException | IOException | ParseException | ChargingStationNotFoundException e) {
             output=e.getMessage();
         } finally {
             assertEquals(attended,output);
