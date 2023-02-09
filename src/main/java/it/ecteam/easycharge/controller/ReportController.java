@@ -42,10 +42,10 @@ public class ReportController {
         }
     }
 
-    public boolean givePointToUser(String user, String station, Date date, String giver){
+    public void givePointToUser(String user, String station, Date date, String giver){
         ReportDao reportDao = new ReportDao();
 
-        return reportDao.givePoint(user, station, date, giver);
+        reportDao.givePoint(user, station, date, giver);
     }
 
     public static List<ReportBean> getPointGiver(String username, String csID, Date date){

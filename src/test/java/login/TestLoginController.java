@@ -8,7 +8,7 @@ import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //Author: Simone Bucci
-public class TestLogin {
+public class TestLoginController {
         @Test
         public void testUsernameEmptyLogin() {
 

@@ -29,16 +29,16 @@ public class BusinessController {
         }
     }
 
-    public boolean businessAd(String business, String csid){
+    public void businessAd(String business, String csid){
         BusinessDao businessDao = new BusinessDao();
 
-        return businessDao.businessAd(business, csid);
+        businessDao.businessAd(business, csid);
     }
 
-    public boolean removeAd(String business, String csid){
+    public void removeAd(String business, String csid){
         BusinessDao businessDao = new BusinessDao();
 
-        return businessDao.removeAd(business, csid);
+        businessDao.removeAd(business, csid);
     }
 
     public static List<BusinessBean> getCSAds(String csid){
@@ -84,9 +84,9 @@ public class BusinessController {
         }
     }
 
-    public boolean modifyAd(String business, String ad){
+    public void modifyAd(String business, String ad){
         BusinessDao businessDao = new BusinessDao();
 
-        return businessDao.updateAd(business, ad);
+        businessDao.updateAd(business, ad);
     }
 }

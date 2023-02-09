@@ -10,7 +10,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //Author: Simone Bucci
-public class TestChargingStation {
+public class TestChargingStationController {
     @Test
     public void testNoChargingStation() {
 

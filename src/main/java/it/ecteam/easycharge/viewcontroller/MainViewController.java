@@ -246,9 +246,13 @@ public class MainViewController extends StackPane implements Initializable  {
         String selected = listView.getSelectionModel().getSelectedItems().toString();
         int id = Integer.parseInt(String.valueOf(selected.charAt(1)));
 
-        reportController.reportCS(chargingStationList.get(id-1).getId(), userMainLabel.getText(), reportTextArea.getText());
+        boolean res = reportController.reportCS(chargingStationList.get(id-1).getId(), userMainLabel.getText(), reportTextArea.getText());
 
-        alertLabel.setText("Report sent, thank you!");
+        if(res){
+            alertLabel.setText("Report sent, thank you!");
+        }else{
+            alertLabel.setText("Something went wrong, try again!");
+        }
         alertLabel.setVisible(true);
         reportTextArea.clear();
     }

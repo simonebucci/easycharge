@@ -28,22 +28,22 @@ public class UserController {
         }
     }
 
-    public boolean changeCar(String username, String model){
+    public void changeCar(String username, String model){
         UserDao userDao = new UserDao();
 
-        return userDao.changeUserCar(username, model);
+        userDao.changeUserCar(username, model);
     }
 
-    public boolean setFavorite(String username, String csid){
+    public void setFavorite(String username, String csid){
         UserDao userDao = new UserDao();
 
-        return userDao.addFavorite(username, csid);
+        userDao.addFavorite(username, csid);
     }
 
-    public boolean deleteFavorite(String username, String csid){
+    public void deleteFavorite(String username, String csid){
         UserDao userDao = new UserDao();
 
-        return userDao.removeFavorite(username, csid);
+        userDao.removeFavorite(username, csid);
     }
 
     public static List<ChargingStationBean> getFavorite(String username){
