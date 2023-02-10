@@ -168,7 +168,7 @@ public class MainViewController extends StackPane implements Initializable  {
     }
 
     @FXML
-    protected void onCheckBox() throws ChargingStationNotFoundException, IOException, ParseException {
+    protected void onConnectorBox() throws ChargingStationNotFoundException, IOException, ParseException {
         listView.getItems().clear();
         UserController uc = new UserController();
         CarBean cb = uc.getCar(userMainLabel.getText());

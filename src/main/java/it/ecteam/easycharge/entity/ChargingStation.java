@@ -7,9 +7,7 @@ public class ChargingStation {
     private double latitude;
     private double longitude;
 
-    public ChargingStation(String id){
-        this.id = id;
-    }
+    public ChargingStation(String id){ this.id = id; }
 
     public String getId(){ return this.id; }
     public String getName(){ return this.name; }
