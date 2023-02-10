@@ -45,8 +45,6 @@ public class RouteViewController extends StackPane implements Initializable {
     @FXML
     private Button favoriteOffBtn;
     @FXML
-    private Label userMainLabel = new Label();
-    @FXML
     private ListView listView;
     @FXML
     private ListView connectorView;
@@ -120,7 +118,7 @@ public class RouteViewController extends StackPane implements Initializable {
     protected void onFavoriteOffBtnClick(){
         UserController uc = new UserController();
 
-        uc.setFavorite(userMainLabel.getText(), csid);
+        uc.setFavorite(userLabel.getText(), csid);
         favoriteOnBtn.setVisible(true);
         favoriteOffBtn.setVisible(false);
     }
@@ -267,10 +265,9 @@ public class RouteViewController extends StackPane implements Initializable {
         UserBean ub = SessionUser.getInstance().getSession();
 
         UserController uc = new UserController();
-        userMainLabel.setText(ub.getUsername());
-        cb = uc.getCar(userMainLabel.getText());
-
         userLabel.setText(ub.getUsername());
+        cb = uc.getCar(userLabel.getText());
+
         issuePane.setVisible(false);
         issueBtn.setVisible(false);
         favoriteOnBtn.setVisible(false);
