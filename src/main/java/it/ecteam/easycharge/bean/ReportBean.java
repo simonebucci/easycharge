@@ -10,9 +10,7 @@ public class ReportBean implements Serializable {
     private Date date;
     private int point;
 
-    public String getChargingStationID() {
-        return chargingStationID;
-    }
+    public String getChargingStationID() { return chargingStationID; }
     public void setChargingStationID(String chargingStationID){ this.chargingStationID = chargingStationID;}
 
     public String getUsername() { return username; }

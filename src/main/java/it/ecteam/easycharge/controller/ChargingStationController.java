@@ -24,6 +24,7 @@ public class ChargingStationController {
         return new ChargingStationController();
     }
     private static final String APIKEY = System.getProperty("api.key");
+
     public static List<ChargingStationBean> getNearby(int radius) throws IOException, ParseException, LocationNotFoundException, org.json.simple.parser.ParseException, ChargingStationNotFoundException {
 
         List<ChargingStationBean> chargingStationList = new ArrayList<>();
