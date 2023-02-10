@@ -150,7 +150,7 @@ public class RouteViewController extends StackPane implements Initializable {
     }
 
     @FXML
-    protected void onCheckBox() throws ChargingStationNotFoundException, IOException, ParseException {
+    protected void onFilterBox() throws ChargingStationNotFoundException, IOException, ParseException {
         listView.getItems().clear();
         csLabel.setText("");
 
