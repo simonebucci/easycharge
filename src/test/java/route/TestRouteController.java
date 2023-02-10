@@ -14,27 +14,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 //Author: Miriana Marchi
 public class TestRouteController {
     @Test
-    public void testPerfectRoute() {
+    public void testGetOnRoute() {
 
         RouteController rc;
         String output;
         String attended;
         List<Double> start = new ArrayList<> (); ;
         List<Double> end = new ArrayList<>();;
-        String capacity;
 
         rc = RouteController.getInstance();
         output="";
-        attended="No perfect route found";
-        start.add(0.00);
-        start.add(0.00);
-        end.add(0.00);
-        end.add(0.00);
-        capacity = "1";
+        attended="";
+        start.add(0,12.493321);
+        start.add(1,12.493321);
+        end.add(0,37.828789);
+        end.add(1,-122.485964);
 
         try {
-            rc.getPerfectRoute(start,end, capacity);
-        } catch (LocationNotFoundException | IOException | ParseException | ChargingStationNotFoundException e) {
+            rc.getOnRoute(start,end);
+        } catch (LocationNotFoundException | IOException | ParseException e) {
             output=e.getMessage();
         } finally {
             assertEquals(attended,output);

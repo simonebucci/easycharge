@@ -25,11 +25,11 @@ public class TestMapController {
 
         mc= MapController.getInstance();
         output="";
-        attended="No distance found for this locations";
-        start.add(12.00);
-        start.add(13.00);
-        end.add(24.00);
-        end.add(23.00);
+        attended="Server returned HTTP response code: 400 for URL: https://api.tomtom.com/routing/1/calculateRoute/12.493321%2C12.493321%3A37.828789%2C-122.485964/json?key=csPBICaGiqrDG1YIKGXg4alunzBPez4I";
+        start.add(0,12.493321);
+        start.add(1,12.493321);
+        end.add(0,37.828789);
+        end.add(1,-122.485964);
 
         try {
             mc.getDistance(start,end);
