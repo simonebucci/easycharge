@@ -11,6 +11,7 @@ import java.util.List;
 
 public class UserDao extends DaoTemplate {
 
+    //create a user sending data on db
     public Boolean createUser(String username, String password, String email, String role, String car) {
         return this.execute(() -> {
             Connection con = DataBaseConnection.getConnection();
@@ -30,6 +31,7 @@ public class UserDao extends DaoTemplate {
             }) != null;
             }
 
+    //search a user on db for login
     public User findUser(String username, String password) {
         return this.execute(new DaoAction<User>() {
             @Override
@@ -66,6 +68,7 @@ public class UserDao extends DaoTemplate {
         });
     }
 
+    //add a favorite cs for a user
     public Boolean addFavorite(String username, String csid) {
         return this.execute(() -> {
             Connection con = DataBaseConnection.getConnection();
@@ -82,6 +85,7 @@ public class UserDao extends DaoTemplate {
         }) != null;
     }
 
+    //remove a favorite cs for a user
     public Boolean removeFavorite(String username, String csid) {
         return this.execute(() -> {
             Connection con = DataBaseConnection.getConnection();
@@ -98,6 +102,7 @@ public class UserDao extends DaoTemplate {
         }) != null;
     }
 
+    //get the user's favorites charging stations
     public List<ChargingStation> getFavorite(String username){
         List<ChargingStation> ret = this.execute(new DaoAction<List<ChargingStation>>() {
             @Override
@@ -135,6 +140,7 @@ public class UserDao extends DaoTemplate {
         return Collections.emptyList();
     }
 
+    //change the car model of a user
     public Boolean changeUserCar(String username, String model) {
         return this.execute(() -> {
             Connection con = DataBaseConnection.getConnection();

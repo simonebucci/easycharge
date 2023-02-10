@@ -10,6 +10,7 @@ import java.util.List;
 
 public class CarDao extends DaoTemplate{
 
+    //get a user's car
     public Car getCar(String username){
         return this.execute(new DaoAction<Car>() {
             @Override
@@ -48,6 +49,7 @@ public class CarDao extends DaoTemplate{
         });
     }
 
+    //get the car models list available on the db
     public List<Car> getModel(){
         List <Car> ret = this.execute(new DaoAction<List<Car>>() {
             @Override

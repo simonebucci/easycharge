@@ -72,17 +72,18 @@ public class LoginViewController implements Initializable {
             }else {
                 String role=u.getRole();
 
-                //SET SESSION GENERAL USER
+                //SET SESSION
                 SessionUser su=SessionUser.getInstance();
                 su.setSession(u);
 
                 switch(role) {
                     case "user":
+                        //set user homepage
                         stage = (Stage) homeBtn.getScene().getWindow();
                         UserGraphicChange.getInstance().toLoggedHome(stage);
                         break;
                     case "business":
-                        //set business homepage controller
+                        //set business homepage
                         stage = (Stage) homeBtn.getScene().getWindow();
                         BusinessGraphicChange.getInstance().toLoggedHome(stage);
                         break;

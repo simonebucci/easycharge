@@ -24,7 +24,7 @@ public class User{
     public String getPassword() {
         return password;
     }
-    public String getCarModel() { return car; }
+    public String getCar() { return car; }
 
     public String getRole(){ return role; }
 

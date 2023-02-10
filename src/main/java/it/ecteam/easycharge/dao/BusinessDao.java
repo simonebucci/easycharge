@@ -13,6 +13,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class BusinessDao extends DaoTemplate{
+
+    //create a business user on the db
     public Boolean createBusinessUser(String username, String password, String email, String role, String business, String address, String ad) {
         return this.execute(() -> {
             Connection con = DataBaseConnection.getConnection();
@@ -34,6 +36,7 @@ public class BusinessDao extends DaoTemplate{
         }) != null;
     }
 
+    //get the business user's business name
     public Business getBusiness(String username){
         return this.execute(new DaoAction<Business>() {
             @Override
@@ -68,6 +71,7 @@ public class BusinessDao extends DaoTemplate{
         });
     }
 
+    //return true if a cs has an ad for that business
     public Boolean businessAd(String business, String csID) {
         return this.execute(() -> {
             Connection con = DataBaseConnection.getConnection();
@@ -84,6 +88,7 @@ public class BusinessDao extends DaoTemplate{
         }) != null;
     }
 
+    //remove a business ad assigned to a cs
     public Boolean removeAd(String business, String csID) {
         return this.execute(() -> {
             Connection con = DataBaseConnection.getConnection();
@@ -100,6 +105,7 @@ public class BusinessDao extends DaoTemplate{
         }) != null;
     }
 
+    //get the list of cs that has an ad for specified business
     public List<ChargingStation> getBusinessAds(String business){
         List<ChargingStation> ret = this.execute(new DaoAction<List<ChargingStation>>() {
             @Override
@@ -138,6 +144,7 @@ public class BusinessDao extends DaoTemplate{
         return Collections.emptyList();
     }
 
+    //get the list of businesses that has an ad to the specified charging station
     public List<Business> getCSAds(String csid){
         List<Business> ret = this.execute(new DaoAction<List<Business>>() {
             @Override
@@ -178,6 +185,7 @@ public class BusinessDao extends DaoTemplate{
         return Collections.emptyList();
     }
 
+    //modify a specified ad
     public Boolean updateAd(String username, String ad) {
         return this.execute(() -> {
             Connection con = DataBaseConnection.getConnection();

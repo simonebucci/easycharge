@@ -10,6 +10,7 @@ import java.util.List;
 
 public class ReportDao extends DaoTemplate{
 
+    //write a user report for cs to the db
     public Boolean reportCS(String username, String csID, String comment) {
         return this.execute(() -> {
             Connection con = DataBaseConnection.getConnection();
@@ -27,6 +28,7 @@ public class ReportDao extends DaoTemplate{
         }) != null;
     }
 
+    //get the charging station's report list
     public List<Report> getReport(String station){
         List<Report> ret = this.execute(new DaoAction<List<Report>>() {
             @Override
@@ -68,6 +70,7 @@ public class ReportDao extends DaoTemplate{
         return Collections.emptyList();
     }
 
+    //give a like to a user's report
     public Boolean givePoint(String username, String csID, Date date, String giver) {
         return this.execute(() -> {
             Connection con = DataBaseConnection.getConnection();
@@ -86,6 +89,7 @@ public class ReportDao extends DaoTemplate{
         }) != null;
     }
 
+    //get usernames that liked a report
     public List<Report> getPointGiver(String username, String csID, Date date){
         List<Report> ret = this.execute(new DaoAction<List<Report>>() {
             @Override

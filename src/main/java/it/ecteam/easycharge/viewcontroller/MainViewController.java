@@ -388,8 +388,8 @@ public class MainViewController extends StackPane implements Initializable  {
         }
 
         this.ugc = UserGraphicChange.getInstance();
-        //init nameBar
 
+        //init nameBar
         if (ub != null) {
             userMainLabel.setText(ub.getUsername());
             reportPane.setVisible(false);

@@ -51,7 +51,7 @@ public class TestMapController {
         mc=MapController.getInstance();
         output="";
         attended="No coordinates found for this location";
-        location = "postochenonesiste";
+        location = ".";
 
         try {
             mc.getCoordinates(location);
