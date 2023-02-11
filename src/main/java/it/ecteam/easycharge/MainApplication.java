@@ -15,7 +15,7 @@ public class MainApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
         stage.getIcons().add(new Image(Objects.requireNonNull(MainApplication.class.getResourceAsStream("/it/ecteam/easycharge/images/icon.png"))));
         stage.setTitle("EasyCharge");
-        stage.setMinWidth(1080);
+        stage.setMinWidth(1280);
         stage.setMinHeight(720);
         stage.setScene(scene);
         stage.show();
