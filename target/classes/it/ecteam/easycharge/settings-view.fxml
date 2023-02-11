@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchorPane" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ecteam.easycharge.viewcontroller.SettingsViewController">
+<AnchorPane fx:id="anchorPane" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.ecteam.easycharge.viewcontroller.SettingsViewController">
 <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
     <center>
         <AnchorPane BorderPane.alignment="CENTER">
@@ -126,22 +126,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                           <ComboBox fx:id="modelComboBox" prefWidth="150.0" promptText="Change your car model" />
-                                <VBox prefHeight="123.0" prefWidth="448.0">
-                                    <children>
-                                        <Label prefHeight="32.0" prefWidth="273.0" style="-fx-font-weight: bold; -fx-font-size: 13; -fx-font-style: italic;" text="Choose a profile picture:" />
-                                        <HBox prefHeight="53.0" prefWidth="448.0" spacing="10.0">
-                                            <children>
-                                                <Button mnemonicParsing="false" prefHeight="18.0" prefWidth="103.0" text="Select image" />
-                                                <Label fx:id="imageLabel" prefHeight="26.0" prefWidth="318.0" text="No image selected">
-                                                    <font>
-                                                        <Font size="18.0" />
-                                                    </font>
-                                                </Label>
-                                            </children>
-                                        </HBox>
-                                    </children>
-                                </VBox>
+                           <ComboBox fx:id="modelComboBox" prefHeight="25.0" prefWidth="392.0" promptText="Change your car model" />
                                 <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveAction" style="-fx-text-fill: white; -fx-background-color: #66ABEA;" text="Save">
                               <VBox.margin>
                                  <Insets />
