@@ -76,7 +76,7 @@ public class CLIRouteController {
                 connectorBeanList = ChargingStationController.getChargingAvailability(chargingStationList.get(i).getId());
                 int k;
                 for(k=0; k < connectorBeanList.size(); k++) {
-                    System.out.println(TYPE+ connectorBeanList.get(k).getType() + TOTAL + connectorBeanList.get(k).getTotal() + AVAILABLE + connectorBeanList.get(k).getAvailable() + OCCUPIED + connectorBeanList.get(k).getOccupied() + RESERVED + connectorBeanList.get(k).getReserved() + UNKNOWN + connectorBeanList.get(k).getUnknown() + OOS + connectorBeanList.get(k).getOutOfService() + SPACE);
+                    System.out.println(TYPE+ connectorBeanList.get(k).getType() + TOTAL + connectorBeanList.get(k).getTotal() + AVAILABLE + connectorBeanList.get(k).getAvailable() + OCCUPIED + connectorBeanList.get(k).getOccupied() + RESERVED + connectorBeanList.get(k).getReserved() + UNKNOWN + connectorBeanList.get(k).getUnknown() + OOS + connectorBeanList.get(k).getOutOfService() + "\nProvider: InstantEnergy 0,60€/kWh" + SPACE);
                 }
             }
         } catch (IOException | ParseException | ChargingStationNotFoundException | LocationNotFoundException e) {
