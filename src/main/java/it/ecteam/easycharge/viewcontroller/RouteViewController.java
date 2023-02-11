@@ -233,9 +233,10 @@ public class RouteViewController extends StackPane implements Initializable {
             }else{
                 connectorBeanList = ChargingStationController.getChargingAvailability(perfectRouteList.get(id - 1).getId());
                 csLabel.setText(perfectRouteList.get(id-1).getName());
-                webMap.getEngine().load("https://www.google.it/maps/place/"+perfectRouteList.get(id-1).getLatitude()+","+perfectRouteList.get(id-1).getLongitude());
+                webMap.getEngine().load("https://www.google.it/maps/place/"+ChargingStationController.getCSInfo(perfectRouteList.get(id-1).getId()).getLatitude()+","+ChargingStationController.getCSInfo(perfectRouteList.get(id-1).getId()).getLongitude());
             }
-        } catch (IOException | ChargingStationNotFoundException | ParseException e) {
+        } catch (IOException | ChargingStationNotFoundException | ParseException | java.text.ParseException |
+                 LocationNotFoundException e) {
             e.printStackTrace();
         }
 

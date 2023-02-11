@@ -168,7 +168,7 @@
                   </padding>
                </Label>
                 <Slider fx:id="slider" max="50000.0" min="1.0" onMouseDragged="#onSliderMove" onMouseReleased="#onSliderRelease" value="4000.0" />
-               <CheckBox fx:id="connectorBox" mnemonicParsing="false" onAction="#onCheckBox" text="Filter by my connector">
+               <CheckBox fx:id="connectorBox" mnemonicParsing="false" onAction="#onConnectorBox" text="Filter by my connector">
                   <VBox.margin>
                      <Insets bottom="1.0" left="5.0" />
                   </VBox.margin>
