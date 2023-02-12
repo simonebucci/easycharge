@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public  abstract class GraphicChangeTemplate {
+public abstract class GraphicChangeTemplate {
     protected final Logger logger = Logger.getLogger("GraphicChange");
 
     protected Roles whoAmI;
