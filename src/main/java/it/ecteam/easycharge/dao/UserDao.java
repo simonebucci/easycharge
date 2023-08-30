@@ -25,6 +25,7 @@ public class UserDao extends DaoTemplate {
     protected static final String PASSWORD = "password";
     protected static final String ROLE = "role";
     protected static final String CAR = "car";
+    protected static final String FAVORITE = "favorite";
 
     //create a user sending data on db
     public Boolean createUser(String username, String password, String email, String role, String car) {
@@ -91,8 +92,8 @@ public class UserDao extends DaoTemplate {
                         assert !moreThanOne;
                         rs.first();
 
-                        String role = rs.getString("role");
-                        String usernameLoaded = rs.getString("username");
+                        String role = rs.getString(ROLE);
+                        String usernameLoaded = rs.getString(USERNAME);
 
                         if(usernameLoaded.equals(username)) {
                             u = new User(usernameLoaded, role);
@@ -151,7 +152,7 @@ public class UserDao extends DaoTemplate {
 
             o = this.openFile(PATH_FAVORITE);
 
-            arr = (JSONArray) o.get("favorite");
+            arr = (JSONArray) o.get(FAVORITE);
 
             jsonMap = new HashMap<>();
             jsonMap.put(USERNAME, username);
@@ -182,7 +183,7 @@ public class UserDao extends DaoTemplate {
 
             //Remove from File System
             JSONObject o = this.openFile(PATH_FAVORITE);
-            JSONArray arr = (JSONArray) o.get("favorite");
+            JSONArray arr = (JSONArray) o.get(FAVORITE);
 
             for (int index = 0; index < arr.size(); index++) {
 
@@ -240,7 +241,7 @@ public class UserDao extends DaoTemplate {
         try (FileReader fileReader = new FileReader(PATH_FAVORITE)) {
 
             JSONObject o = (JSONObject) parser.parse(fileReader);
-            JSONArray arr = (JSONArray) o.get("favorite");
+            JSONArray arr = (JSONArray) o.get(FAVORITE);
             if (arr.isEmpty()) {
                 return Collections.emptyList();
             }
@@ -303,7 +304,7 @@ public class UserDao extends DaoTemplate {
                     fileWriter.write(o.toJSONString());
                     fileWriter.flush();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    logger.log(Level.WARNING, e.toString());
                 }
             } catch (IOException | org.json.simple.parser.ParseException e) {
                 logger.log(Level.WARNING, e.toString());

@@ -47,10 +47,10 @@ public class CarDao extends DaoTemplate{
                         rs.first();
 
                         String usernameLoaded = rs.getString("username");
-                        String name = rs.getString("car_model");
-                        String cType = rs.getString("connector_connectorType");
-                        String capacity = rs.getString("capacity");
-                        String range = rs.getString("rnge");
+                        String name = rs.getString(CAR);
+                        String cType = rs.getString(CTYPE);
+                        String capacity = rs.getString(CAP);
+                        String range = rs.getString(RANGE);
 
                         if(usernameLoaded.equals(username)) {
                             car = new Car(name, capacity, range, cType);
