@@ -279,40 +279,42 @@ public class UserDao extends DaoTemplate {
                 stm.executeUpdate();
             }
 
-            //FileSystem
-            JSONParser parser = new JSONParser();
-
-            try (FileReader fileReader = new FileReader(PATH_USER)) {
-
-                JSONObject o = (JSONObject) parser.parse(fileReader);
-                JSONArray arr = (JSONArray) o.get("user");
-                if (arr.isEmpty()) {
-                    return null;
-                }
-
-                for (int index = 0; index < arr.size(); index++) {
-
-                    JSONObject object = (JSONObject) arr.get(index);
-
-                    if (object.get(USERNAME).equals(username)) {
-
-                        object.put(CAR, model);
-                    }
-
-                }
-                try (FileWriter fileWriter = new FileWriter(PATH_USER)) {
-                    fileWriter.write(o.toJSONString());
-                    fileWriter.flush();
-                } catch (IOException e) {
-                    logger.log(Level.WARNING, e.toString());
-                }
-            } catch (IOException | org.json.simple.parser.ParseException e) {
-                logger.log(Level.WARNING, e.toString());
-            }
+            updateUserCar(username, model);
 
             return true;
         }) != null;
 
+    }
+
+    public void updateUserCar(String username, String model) {
+        JSONParser parser = new JSONParser();
+
+        try (FileReader fileReader = new FileReader(PATH_USER)) {
+            JSONObject o = (JSONObject) parser.parse(fileReader);
+            JSONArray arr = (JSONArray) o.get("user");
+
+            if (arr.isEmpty()) {
+                return;
+            }
+
+            for (int index = 0; index < arr.size(); index++) {
+                JSONObject object = (JSONObject) arr.get(index);
+
+                if (object.get(USERNAME).equals(username)) {
+                    object.put(CAR, model);
+                }
+            }
+
+            try (FileWriter fileWriter = new FileWriter(PATH_USER)) {
+                fileWriter.write(o.toJSONString());
+                fileWriter.flush();
+            } catch (IOException e) {
+                logger.log(Level.WARNING, e.toString());
+            }
+
+        } catch (IOException | org.json.simple.parser.ParseException e) {
+            logger.log(Level.WARNING, e.toString());
+        }
     }
     }
 
