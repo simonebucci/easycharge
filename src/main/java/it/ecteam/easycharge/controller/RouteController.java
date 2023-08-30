@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class RouteController {
 
     private static final String APIKEY = System.getProperty("api.key");
@@ -150,7 +151,6 @@ public class RouteController {
                     "}";
             StringEntity stringEntity = new StringEntity(json);
             httpPost.setEntity(stringEntity);
-
             // Create a custom response handler
             ResponseHandler<String> responseHandler = response -> {
                 int status = response.getStatusLine().getStatusCode();

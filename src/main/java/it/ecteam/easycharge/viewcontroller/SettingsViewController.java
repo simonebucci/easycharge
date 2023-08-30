@@ -67,8 +67,7 @@ public class SettingsViewController implements Initializable {
         }
         modifyBtn.setVisible(true);
 
-        UserBean ub = SessionUser.getInstance().getSession();
-        CarBean cb = uc.getCar(ub.getUsername());
+        CarBean cb = uc.getCar(usernameLabel.getText());
         this.carLabel.setText(cb.getName());
         this.capacityLabel.setText(cb.getCapacity()+"kWh");
         this.rangeLabel.setText(cb.getRange()+"Km");

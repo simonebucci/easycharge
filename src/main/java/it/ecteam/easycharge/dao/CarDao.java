@@ -2,13 +2,27 @@ package it.ecteam.easycharge.dao;
 
 import it.ecteam.easycharge.entity.Car;
 import it.ecteam.easycharge.utils.DataBaseConnection;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
 
 public class CarDao extends DaoTemplate{
+
+    protected static final String PATH_USER = System.getProperty("path_user");
+    protected static final String PATH_CAR = System.getProperty("path_car");
+    protected static final String USERNAME = "username";
+    protected static final String CAR = "car_model";
+    protected static final String CTYPE = "connector_connectorType";
+    protected static final String CAP = "capacity";
+    protected static final String RANGE = "rnge";
 
     //get a user's car
     public Car getCar(String username){
@@ -42,6 +56,54 @@ public class CarDao extends DaoTemplate{
                             car = new Car(name, capacity, range, cType);
                         }
                     }
+                }
+
+                //FileSystem
+                JSONParser parser = new JSONParser();
+                String model=null;
+                try (FileReader fileReader = new FileReader(PATH_USER)) {
+
+                    JSONObject o = (JSONObject) parser.parse(fileReader);
+                    JSONArray arr = (JSONArray) o.get("user");
+                    if (arr.isEmpty()) {
+                        return null;
+                    }
+
+                    for (int index = 0; index < arr.size(); index++) {
+
+                        JSONObject object = (JSONObject) arr.get(index);
+
+                        if (object.get(USERNAME).equals(username)) {
+                            model =(String) object.get(CAR);
+                        }
+
+                    }
+                } catch (IOException | org.json.simple.parser.ParseException e) {
+                    logger.log(Level.WARNING, e.toString());
+                }
+
+                try (FileReader fileReader = new FileReader(PATH_CAR)) {
+
+                    JSONObject o = (JSONObject) parser.parse(fileReader);
+                    JSONArray arr = (JSONArray) o.get("car");
+                    if (arr.isEmpty()) {
+                        return null;
+                    }
+
+                    for (int index = 0; index < arr.size(); index++) {
+
+                        JSONObject object = (JSONObject) arr.get(index);
+
+                        if (object.get(CAR).equals(model)) {
+                            //System.out.println((String) object.get(CAR));
+                            //System.out.println((String) object.get(CTYPE));
+                            //System.out.println((String) object.get(CAP));
+                            //System.out.println((String) object.get(RANGE));
+                        }
+
+                    }
+                } catch (IOException | org.json.simple.parser.ParseException e) {
+                    logger.log(Level.WARNING, e.toString());
                 }
 
                 return car;
