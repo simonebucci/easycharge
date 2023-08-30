@@ -33,6 +33,7 @@ public class UserDao extends DaoTemplate {
             Connection con = DataBaseConnection.getConnection();
             String sql = "call easycharge.add_user(?, ?, ?, ?, ?);\r\n";
 
+
                 try (PreparedStatement stm = con.prepareStatement(sql)) {
                     stm.setString(1, username);
                     stm.setString(2, email);
@@ -301,14 +302,18 @@ public class UserDao extends DaoTemplate {
                 }
             }
 
-            try (FileWriter fileWriter = new FileWriter(PATH_USER)) {
-                fileWriter.write(o.toJSONString());
-                fileWriter.flush();
-            } catch (IOException e) {
-                logger.log(Level.WARNING, e.toString());
-            }
+            writeJSONObjectToFile(o);
 
         } catch (IOException | org.json.simple.parser.ParseException e) {
+            logger.log(Level.WARNING, e.toString());
+        }
+    }
+
+    private void writeJSONObjectToFile(JSONObject jsonObject) {
+        try (FileWriter fileWriter = new FileWriter(PATH_USER)) {
+            fileWriter.write(jsonObject.toJSONString());
+            fileWriter.flush();
+        } catch (IOException e) {
             logger.log(Level.WARNING, e.toString());
         }
     }
