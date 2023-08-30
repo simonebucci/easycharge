@@ -33,7 +33,6 @@ public class UserDao extends DaoTemplate {
             Connection con = DataBaseConnection.getConnection();
             String sql = "call easycharge.add_user(?, ?, ?, ?, ?);\r\n";
 
-
                 try (PreparedStatement stm = con.prepareStatement(sql)) {
                     stm.setString(1, username);
                     stm.setString(2, email);
