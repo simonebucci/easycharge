@@ -46,7 +46,7 @@ public class CarDao extends DaoTemplate{
                         assert !moreThanOne;
                         rs.first();
 
-                        String usernameLoaded = rs.getString("username");
+                        String usernameLoaded = rs.getString(USERNAME);
                         String name = rs.getString(CAR);
                         String cType = rs.getString(CTYPE);
                         String capacity = rs.getString(CAP);
@@ -131,7 +131,7 @@ public class CarDao extends DaoTemplate{
                         if (!rs.first()) // rs not empty
                             return Collections.emptyList();	//return empty list
                         do{
-                            String model = rs.getString("car_model");
+                            String model = rs.getString(CAR);
                             car.add(new Car(model));
                         } while (rs.next());
                     }
