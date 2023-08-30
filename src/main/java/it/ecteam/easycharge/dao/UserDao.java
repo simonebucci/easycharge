@@ -118,8 +118,8 @@ public class UserDao extends DaoTemplate {
 
                         if (object.get(USERNAME).equals(username) && object.get(PASSWORD).equals(password)) {
 
-                            //System.out.println((String) object.get(USERNAME));
-                            //System.out.println((String) object.get(ROLE));
+                            /*System.out.println((String) object.get(USERNAME));
+                            System.out.println((String) object.get(ROLE));*/
                         }
 
                     }

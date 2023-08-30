@@ -103,10 +103,10 @@ public class CarDao extends DaoTemplate{
                 JSONObject object = (JSONObject) arr.get(index);
 
                 if (object.get(CAR).equals(model)) {
-                    //System.out.println((String) object.get(CAR));
-                    //System.out.println((String) object.get(CTYPE));
-                    //System.out.println((String) object.get(CAP));
-                    //System.out.println((String) object.get(RANGE));
+                    /*System.out.println((String) object.get(CAR));
+                    System.out.println((String) object.get(CTYPE));
+                    System.out.println((String) object.get(CAP));
+                    System.out.println((String) object.get(RANGE));*/
                 }
 
             }
