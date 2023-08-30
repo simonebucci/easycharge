@@ -117,9 +117,7 @@ public class UserDao extends DaoTemplate {
                         JSONObject object = (JSONObject) arr.get(index);
 
                         if (object.get(USERNAME).equals(username) && object.get(PASSWORD).equals(password)) {
-
-                            /*System.out.println((String) object.get(USERNAME));
-                            System.out.println((String) object.get(ROLE));*/
+                            //OUTPUT removed for sonarcloud
                         }
 
                     }
@@ -251,8 +249,7 @@ public class UserDao extends DaoTemplate {
                 JSONObject object = (JSONObject) arr.get(index);
 
                 if (object.get(USERNAME).equals(username)) {
-
-                    //System.out.println((String) object.get(CSID));
+                    //OUTPUT removed for sonarcloud
                 }
 
             }
